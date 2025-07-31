@@ -1,0 +1,34 @@
+package com.example.demo.views;
+
+import com.vaadin.flow.component.html.H1;
+
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.Route;
+
+//import basededatos.iInicio;
+
+@Route("Inicio")
+public class Inicio extends VerticalLayout {
+//	public iInicio _iInicio;
+	public Buscar _buscar;
+	public UltimosVideos _ultimosVideos;
+
+	public void Buscar() {
+		Buscar b = new Buscar();
+		
+		add(b);
+	}
+
+	public void UltimosVideos() {
+		UltimosVideos uv = new UltimosVideos();
+		add(uv);
+	}
+public Inicio() {
+    H1 heading1 = new H1("Youtube");
+    add(heading1);
+    Buscar();
+    UltimosVideos();
+
+}
+}
