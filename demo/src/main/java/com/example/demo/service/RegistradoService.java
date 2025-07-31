@@ -25,12 +25,12 @@ public class RegistradoService {
         return repository.save(Registrado);
     }
 
-    // Obtener un Registrado por su URL
+    // Obtener un Registrado por su id
     public Registrado getById(String login) {
         return repository.findById(login).orElse(null);
     }
 
-    // Eliminar un Registrado por su URL
+    // Eliminar un Registrado por su id
     public void delete(String login) {
         repository.deleteById(login);
     }

@@ -25,12 +25,12 @@ public class ComentarioService {
         return repository.save(Comentario);
     }
 
-    // Obtener un Comentario por su URL
+    // Obtener un Comentario por su id
     public Comentario getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    // Eliminar un Comentario por su URL
+    // Eliminar un Comentario por su id
     public void delete(Long id) {
         repository.deleteById(id);
     }

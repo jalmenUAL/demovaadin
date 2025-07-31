@@ -26,7 +26,7 @@ public class AdministradorService {
     }
 
     // Obtener un Administrador por su login
-    public Administrador getByUrl(String login) {
+    public Administrador getByLogin(String login) {
         return repository.findById(login).orElse(null);
     }
 
