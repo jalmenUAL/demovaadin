@@ -25,12 +25,12 @@ public class VideoService {
         return repository.save(video);
     }
 
-    // Obtener un video por su URL
-    public Video getByUrl(Long id) {
+    // Obtener un video por su Id
+    public Video getById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
-    // Eliminar un video por su URL
+    // Eliminar un video por su Id
     public void delete(Long id) {
         repository.deleteById(id);
     }

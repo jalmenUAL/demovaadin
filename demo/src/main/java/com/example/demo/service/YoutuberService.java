@@ -25,12 +25,12 @@ public class YoutuberService {
         return repository.save(Youtuber);
     }
 
-    // Obtener un Youtuber por su URL
+    // Obtener un Youtuber por su login
     public Youtuber getByUrl(String login) {
         return repository.findById(login).orElse(null);
     }
 
-    // Eliminar un Youtuber por su URL
+    // Eliminar un Youtuber por su login
     public void delete(String login) {
         repository.deleteById(login);
     }
