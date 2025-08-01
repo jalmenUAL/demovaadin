@@ -3,6 +3,6 @@ package com.example.demo.domain;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface RegistradoRepository extends JpaRepository<Registrado, String>, JpaSpecificationExecutor<Registrado> {
+public interface RepositorioRegistrado extends JpaRepository<Registrado, String>, JpaSpecificationExecutor<Registrado> {
 }
 

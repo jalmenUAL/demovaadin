@@ -8,20 +8,20 @@ import java.util.Vector;
 import org.hibernate.mapping.List;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.AdministradorRepository;
+import com.example.demo.domain.RepositorioAdministrador;
 import com.example.demo.domain.Video;
-import com.example.demo.domain.VideoRepository;
-import com.example.demo.domain.YoutuberRepository;
+import com.example.demo.domain.RepositorioVideo;
+import com.example.demo.domain.RepositorioYoutuber;
 
 @Service
 
 public class BD_Videos {
 	public BDPrincipal _en;
 	public Vector<Video> _videos = new Vector<Video>();
-	private VideoRepository videorepository;
-	private YoutuberRepository youtuberrepository;
+	private RepositorioVideo videorepository;
+	private RepositorioYoutuber youtuberrepository;
 	
-public BD_Videos(VideoRepository videorepository,YoutuberRepository youtuberrepository) {
+public BD_Videos(RepositorioVideo videorepository,RepositorioYoutuber youtuberrepository) {
 	this.videorepository = videorepository;
 	this.youtuberrepository = youtuberrepository;
 }

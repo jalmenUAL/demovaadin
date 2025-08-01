@@ -5,9 +5,8 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface VideoRepository extends JpaRepository<Video, Long>, JpaSpecificationExecutor<Video> {
+public interface RepositorioYoutuber extends JpaRepository<Youtuber, String>, JpaSpecificationExecutor<Youtuber> {
 
-	Optional<Video> findById(Long id);
-
-	void deleteById(Long id);
+	 
 }
+

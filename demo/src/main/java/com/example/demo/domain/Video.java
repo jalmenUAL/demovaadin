@@ -28,7 +28,7 @@ public class Video implements Serializable {
 	@org.hibernate.annotations.GenericGenerator(name="COM_EXAMPLE_DEMO_DOMAIN_VIDEO_ID_GENERATOR", strategy="native")	
 	private int id;
 	
-	@ManyToOne(targetEntity=com.example.demo.domain.Youtuber.class, fetch=FetchType.LAZY)	
+	@ManyToOne(targetEntity=com.example.demo.domain.Youtuber.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns(value={ @JoinColumn(name="RegistradoLogin", referencedColumnName="Login", nullable=false) }, foreignKey=@ForeignKey(name="FKVideo862578"))	
 	private com.example.demo.domain.Youtuber es_de;
@@ -45,12 +45,12 @@ public class Video implements Serializable {
 	
 	@OneToMany(mappedBy="sobre", targetEntity=com.example.demo.domain.Comentario.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set tiene_comentarios = new java.util.HashSet();
 	
 	@ManyToMany(mappedBy="le_gusta", targetEntity=com.example.demo.domain.Youtuber.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set le_gusta_a = new java.util.HashSet();
 	
 	public void setTitulo(String value) {

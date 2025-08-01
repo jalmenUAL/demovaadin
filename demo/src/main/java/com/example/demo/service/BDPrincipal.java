@@ -3,8 +3,8 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Video;
-import com.example.demo.domain.VideoRepository;
-import com.example.demo.domain.YoutuberRepository;
+import com.example.demo.domain.RepositorioVideo;
+import com.example.demo.domain.RepositorioYoutuber;
 
 @Service
 public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iRegistrado, iInicio {
@@ -15,7 +15,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
 	
 	 
 	
-public BDPrincipal(VideoRepository videorepository,YoutuberRepository youtuberrepository) {
+public BDPrincipal(RepositorioVideo videorepository,RepositorioYoutuber youtuberrepository) {
 	 
 	_videos = new BD_Videos(videorepository,youtuberrepository);
 }

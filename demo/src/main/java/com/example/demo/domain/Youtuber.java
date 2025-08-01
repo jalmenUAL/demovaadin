@@ -28,40 +28,40 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	
 	@OneToMany(mappedBy="es_de", targetEntity=com.example.demo.domain.Video.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set ha_publicado = new java.util.HashSet();
 	
 	@OneToMany(mappedBy="escrito_por", targetEntity=com.example.demo.domain.Comentario.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set ha_comentado = new java.util.HashSet();
 	
 	@ManyToMany(targetEntity=com.example.demo.domain.Youtuber.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinTable(name="Registrado_Registrado", joinColumns={ @JoinColumn(name="RegistradoLogin2") }, inverseJoinColumns={ @JoinColumn(name="RegistradoLogin") })	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set seguido_por = new java.util.HashSet();
 	
 	@ManyToMany(targetEntity=com.example.demo.domain.Youtuber.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinTable(name="Registrado_Registrado2", joinColumns={ @JoinColumn(name="RegistradoLogin2") }, inverseJoinColumns={ @JoinColumn(name="RegistradoLogin") })	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set bloquedado_por = new java.util.HashSet();
 	
 	@ManyToMany(targetEntity=com.example.demo.domain.Video.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinTable(name="Video_Registrado", joinColumns={ @JoinColumn(name="RegistradoLogin") }, inverseJoinColumns={ @JoinColumn(name="VideoId") })	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set le_gusta = new java.util.HashSet();
 	
 	@ManyToMany(mappedBy="seguido_por", targetEntity=com.example.demo.domain.Youtuber.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set seguidor_de = new java.util.HashSet();
 	
 	@ManyToMany(mappedBy="bloquedado_por", targetEntity=com.example.demo.domain.Youtuber.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
-	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.TRUE)	
+	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set ha_bloqueado_a = new java.util.HashSet();
 	
 	public void setBloqueado(boolean value) {
