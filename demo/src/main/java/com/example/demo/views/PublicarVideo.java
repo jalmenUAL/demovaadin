@@ -29,14 +29,14 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route("publicarVideo")
+@Route("PublicarVideo")
 
 public class PublicarVideo extends VerticalLayout{
 	public PerfilPropio _perfilPropio;
 	TextField introduzcaLaUrl = new TextField("Introduzca la url");
 	TextField introduzcaEltitulo = new TextField("Introduzca el título");
 	public  PublicarVideo(iYoutuber i
-, BDPrincipal bDPrincipal
+
 			 
 			) {
 	
@@ -68,16 +68,20 @@ introduzcaEltitulo.setWidth("100%");
 add(introduzcaEltitulo);
 add(button);
 ComboBox<Video> comboBox = new ComboBox<>("Combo Box");
-comboBox.setItems(bDPrincipal.listar());
+comboBox.setItems(i.listar());
 comboBox.setItemLabelGenerator(Video::getTitulo);
 
 add(comboBox);
+
 
  
 
 
 
 }}
+
+ 
+
  
  
  

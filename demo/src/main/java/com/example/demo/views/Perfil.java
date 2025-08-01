@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.router.Route;
+
+@Route("Perfil")
 public class Perfil {
 	public Videosgustados _videosgustados;
 	public Videospublicados _videospublicados;

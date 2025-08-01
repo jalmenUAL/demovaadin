@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.router.Route;
+
+@Route("VerVideo")
 public class VerVideo {
 	public Videosrelacionados_item _videosrelacionados;
 	public ListadeVideos_item _listadeVideos;

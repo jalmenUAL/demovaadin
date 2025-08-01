@@ -1,5 +1,9 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.router.Route;
+
+@Route("PerfilPropio")
+
 public class PerfilPropio extends Perfil {
 	public Youtuber _youtuber;
 	public PublicarVideo _publicarVideo;

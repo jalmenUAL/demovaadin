@@ -6,7 +6,9 @@ import com.vaadin.flow.router.Route;
 
 @Route("Administrador")
 public class Administrador extends Registrado {
-//	public iAdministrador _iAdministrador;
+ 
+
+	//	public iAdministrador _iAdministrador;
 	public Vertodoslosvideos _vertodoslosvideos;
 
 	public void Vertodoslosvideos() {
