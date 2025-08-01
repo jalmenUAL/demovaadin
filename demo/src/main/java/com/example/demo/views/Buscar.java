@@ -1,12 +1,8 @@
 package com.example.demo.views;
 
 
-import com.example.demo.domain.Video;
-
-import com.vaadin.flow.component.grid.Grid;
-
-import com.vaadin.flow.component.combobox.ComboBox;
-
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
@@ -20,12 +16,23 @@ public class Buscar extends VerticalLayout{
 		throw new UnsupportedOperationException();
 	}
 	
-	Buscar(
+	Buscar(){
 
-){TextField buscar = new TextField("Buscar");	
+TextField buscar = new TextField();
 buscar.setPlaceholder("Introduzca el nombre del video que quiere buscar");
-	add(buscar);
+add(buscar);
+Button button = new Button("Buscar");
+buscar(buscar.getValue());
+
+button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+add(button);
+buscar.getStyle().setWidth("100%");
  
 	}
- 
-}
+
+	private void buscar(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+};
+

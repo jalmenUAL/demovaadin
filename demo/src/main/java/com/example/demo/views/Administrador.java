@@ -1,5 +1,7 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.theme.lumo.LumoUtility;
+
 import com.vaadin.flow.router.Route;
 
 //import basededatos.iAdministrador;
@@ -14,4 +16,6 @@ public class Administrador extends Registrado {
 	public void Vertodoslosvideos() {
 		throw new UnsupportedOperationException();
 	}
+public Administrador() {
+}
 }

@@ -26,6 +26,9 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	@Column(name="Bloqueado", nullable=true, length=1)	
 	private Boolean bloqueado;
 	
+	@Column(name="Banner", nullable=true, length=255)	
+	private String banner;
+	
 	@OneToMany(mappedBy="es_de", targetEntity=com.example.demo.domain.Video.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
@@ -74,6 +77,14 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	
 	public Boolean getBloqueado() {
 		return bloqueado;
+	}
+	
+	public void setBanner(String value) {
+		this.banner = value;
+	}
+	
+	public String getBanner() {
+		return banner;
 	}
 	
 	public void setHa_publicado(java.util.Set value) {

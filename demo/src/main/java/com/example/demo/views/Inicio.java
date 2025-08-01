@@ -15,8 +15,8 @@ public class Inicio extends VerticalLayout {
 	public UltimosVideos _ultimosVideos;
 
 	public void Buscar() {
-		Buscar b = new Buscar();
-		
+		Buscar b = new Buscar();		
+
 		add(b);
 	}
 

@@ -12,4 +12,6 @@ public class Registrado extends Inicio {
 	public void Logout() {
 		throw new UnsupportedOperationException();
 	}
+	
+	public Registrado() {}
 }

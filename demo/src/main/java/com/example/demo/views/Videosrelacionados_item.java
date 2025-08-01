@@ -1,10 +1,11 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route("Videosrelacionados_item")
 
-public class Videosrelacionados_item {
+public class Videosrelacionados_item extends VerticalLayout{
 	public Videosrelacionados _videosrelacionados;
 	public VerVideo _verVideo;
 

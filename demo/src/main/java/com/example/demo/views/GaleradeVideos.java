@@ -11,7 +11,6 @@ public class GaleradeVideos extends VerticalLayout {
 	public Vector<GaleradeVideos_item> _item = new Vector<GaleradeVideos_item>();
 	
 	GaleradeVideos(){
-		GaleradeVideos_item gvi = new GaleradeVideos_item();	 
-		add(gvi);
+		
     }
 }

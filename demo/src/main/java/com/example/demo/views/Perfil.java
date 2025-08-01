@@ -1,9 +1,10 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route("Perfil")
-public class Perfil {
+public class Perfil extends VerticalLayout{
 	public Videosgustados _videosgustados;
 	public Videospublicados _videospublicados;
 	public Youtubersseguidos _youtubersseguidos;

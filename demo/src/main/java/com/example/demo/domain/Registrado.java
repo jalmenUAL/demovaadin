@@ -49,6 +49,9 @@ public class Registrado implements Serializable {
 	@Column(name="Password", nullable=true, length=255)	
 	private String password;
 	
+	@Column(name="FotoPerfil", nullable=true, length=255)	
+	private String fotoPerfil;
+	
 	public void setLogin(String value) {
 		this.login = value;
 	}
@@ -67,6 +70,14 @@ public class Registrado implements Serializable {
 	
 	public String getPassword() {
 		return password;
+	}
+	
+	public void setFotoPerfil(String value) {
+		this.fotoPerfil = value;
+	}
+	
+	public String getFotoPerfil() {
+		return fotoPerfil;
 	}
 	
 	public String toString() {
