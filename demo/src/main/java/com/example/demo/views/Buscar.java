@@ -1,6 +1,5 @@
 package com.example.demo.views;
 
-import com.example.demo.service.VideoService;
 
 import com.example.demo.domain.Video;
 
@@ -23,7 +22,8 @@ public class Buscar extends VerticalLayout{
 	
 	Buscar(
 
-){TextField buscar = new TextField("Buscar");	buscar.setPlaceholder("Introduzca el nombre del video que quiere buscar");
+){TextField buscar = new TextField("Buscar");	
+buscar.setPlaceholder("Introduzca el nombre del video que quiere buscar");
 	add(buscar);
  
 	}

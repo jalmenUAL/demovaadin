@@ -14,7 +14,11 @@
 package com.example.demo.domain;
 
 import java.io.Serializable;
-import jakarta.persistence.*;
+
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 @Entity
 @org.hibernate.annotations.Proxy(lazy=false)
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
