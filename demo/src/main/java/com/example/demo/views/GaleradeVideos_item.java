@@ -15,14 +15,12 @@ public class GaleradeVideos_item  extends VerticalLayout{
 	public VerVideo _verVideo;
 
 	public void VerVideo() {
-		UI.getCurrent().navigate(PublicarVideo.class);
+		UI.getCurrent().navigate(VerVideo.class);
 	}
 	
-	GaleradeVideos_item(){
-		Button vervideo = new Button("Ver Video");
-		vervideo.addClickListener(e -> {VerVideo();
-		});
-        // Cambia la URL por el ID del video que quieres mostrar
+	public GaleradeVideos_item(){
+		
+		// Cambia la URL por el ID del video que quieres mostrar
         String videoId = "dQw4w9WgXcQ"; // Ejemplo
         String embedUrl = "https://www.youtube.com/embed/" + videoId;
 
@@ -35,6 +33,13 @@ public class GaleradeVideos_item  extends VerticalLayout{
             "allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' " +
             "allowfullscreen></iframe>");
 
-        add(vervideo, iframeContainer);
+        add(iframeContainer);
+		
+		Button vervideo = new Button("Ver Video");
+		vervideo.addClickListener(e -> {VerVideo();
+		});
+        
+		add(vervideo);
+        
 	}
 }

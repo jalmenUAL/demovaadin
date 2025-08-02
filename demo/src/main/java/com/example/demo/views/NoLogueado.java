@@ -4,6 +4,7 @@ package com.example.demo.views;
 
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 
 @Route("NoLogueado")
@@ -20,8 +21,6 @@ public class NoLogueado extends Inicio {
 		throw new UnsupportedOperationException();
 	}
 public NoLogueado() {
-    Paragraph loremIpsumDolorSitAm = new Paragraph("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-    loremIpsumDolorSitAm.addClassNames(LumoUtility.FontSize.LARGE);
-    add(loremIpsumDolorSitAm);
+     
 }
 }
