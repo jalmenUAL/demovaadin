@@ -1,6 +1,5 @@
 package com.example.demo.views;
 
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import java.util.Vector;
 

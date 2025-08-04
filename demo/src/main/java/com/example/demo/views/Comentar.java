@@ -17,13 +17,13 @@ public class Comentar extends VerticalLayout {
 		Button comentar = new Button("Publicar Comentario");
 		comentar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		comentar.addClickListener(e -> {
-			publicar_comentario();
+			publicar_comentario(comentario.getValue());
 		});
 		add(comentar);
 		getStyle().setWidth("100%");
 	}
 
-	private void publicar_comentario() {
+	private void publicar_comentario(String string) {
 		// TODO Auto-generated method stub
 
 	}

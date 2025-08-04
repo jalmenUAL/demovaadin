@@ -14,9 +14,16 @@ public class Inicio extends VerticalLayout {
 //	public iInicio _iInicio;
 	public Buscar _buscar;
 	public UltimosVideos _ultimosVideos;
+
 	
 	public Inicio() {
 	    H1 heading1 = new H1("Youtube");
+	    heading1.getStyle()
+	        .set("background-color", "red")
+	        .set("color", "white")
+	        .set("padding", "0.5em 1em")
+	        .set("border-radius", "8px")
+	        .set("width", "fit-content");
 	    add(heading1);
 	    Buscar();
 	    UltimosVideos();
