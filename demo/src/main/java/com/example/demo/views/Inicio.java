@@ -14,6 +14,13 @@ public class Inicio extends VerticalLayout {
 //	public iInicio _iInicio;
 	public Buscar _buscar;
 	public UltimosVideos _ultimosVideos;
+	
+	public Inicio() {
+	    H1 heading1 = new H1("Youtube");
+	    add(heading1);
+	    Buscar();
+	    UltimosVideos();
+	}
 
 	public void Buscar() {
 		Buscar b = new Buscar();		
@@ -21,13 +28,8 @@ public class Inicio extends VerticalLayout {
 	}
 
 	public void UltimosVideos() {
-		 
+		_ultimosVideos = new UltimosVideos();
+		add(_ultimosVideos);
 	}
-public Inicio() {
-    H1 heading1 = new H1("Youtube");
-    add(heading1);
-    Buscar();
-     
 
-}
 }

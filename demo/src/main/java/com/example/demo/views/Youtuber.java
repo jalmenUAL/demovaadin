@@ -12,18 +12,22 @@ import jakarta.annotation.security.RolesAllowed;
 public class Youtuber extends Registrado {
     public iYoutuber _iYoutuber;
 	public PerfilPropio _perfilPropio;
-
-	public void PerfilPropio() {
-		throw new UnsupportedOperationException();
-	}
-	@Override
-	public void UltimosVideos() {
-		UltimosVideosdeYoutuber uv = new UltimosVideosdeYoutuber();
-		add(uv);
-	}
 	
 	public Youtuber() {
 		super();
 		UltimosVideos();
+		PerfilPropio();
 	}
+
+	public void PerfilPropio() {
+		_perfilPropio = new PerfilPropio();
+		add(_perfilPropio);
+	}
+	 
+	public void UltimosVideos() {
+		_ultimosVideos = new UltimosVideosdeYoutuber();
+		add(_ultimosVideos);
+	}
+	
+	
 }

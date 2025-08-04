@@ -19,12 +19,12 @@ public class Login extends VerticalLayout {
 
     public Login() {
         loginOverlay = new LoginOverlay();
-        loginOverlay.setOpened(true); // abre el modal al cargar la vista
+        loginOverlay.setOpened(true);  
         loginOverlay.setTitle("Youtube");
         loginOverlay.setDescription("Por favor inicia sesión");
-        loginOverlay.setAction("Login"); // ruta que procesa el login en Spring Security
+        loginOverlay.setAction("Login");  
 
-        // Opcional: al cerrar el modal, que no permita continuar sin login
+         
         loginOverlay.setForgotPasswordButtonVisible(false);
 
         add(loginOverlay);

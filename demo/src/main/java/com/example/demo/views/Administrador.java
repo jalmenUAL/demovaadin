@@ -15,16 +15,18 @@ public class Administrador extends Registrado {
 	public Administrador() {
 		super();
 		UltimosVideos();
+		Usuariosdenunciados();
 		
 	}
 
 	public void Usuariosdenunciados() {
-		throw new UnsupportedOperationException();
+		_usuariosdenunciados = new Usuariosdenunciados();
+		add(_usuariosdenunciados);
 	}
 	
-	@Override
+	 
 	public void UltimosVideos() {
-		UltimosVideosdeAdministrador uv = new UltimosVideosdeAdministrador();
-		add(uv);
+		_ultimosVideos = new UltimosVideosdeAdministrador();
+		add(_ultimosVideos);
 	}
 }

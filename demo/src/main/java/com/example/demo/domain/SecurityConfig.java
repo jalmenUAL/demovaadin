@@ -9,16 +9,28 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.demo.views.Login;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends VaadinWebSecurity {
 
     @Override
+     
     protected void configure(HttpSecurity http) throws Exception {
+         
+
+        http.csrf(csrf -> csrf.disable()); // opcional en desarrollo
+
+        http.authorizeHttpRequests(auth -> auth
+            .anyRequest().permitAll() // permite todo sin login
+        );
+    
+        /*
         super.configure(http);
         setLoginView(http, Login.class); 
         http.formLogin(form -> form
@@ -33,6 +45,7 @@ public class SecurityConfig extends VaadinWebSecurity {
                     }
                 })
             );
+            */
     }
 
     @Bean
@@ -52,4 +65,5 @@ public class SecurityConfig extends VaadinWebSecurity {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+    
 }
