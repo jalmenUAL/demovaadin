@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Label;
@@ -27,6 +28,7 @@ public class Registrar extends VerticalLayout{
     private TextField password;
     private Image avatar;
     private Image imagenDeFondo;
+    private String loginValue;
 
     public void EnviarCorreo() {
         throw new UnsupportedOperationException();
@@ -92,7 +94,7 @@ public class Registrar extends VerticalLayout{
         Button registrar = new Button("Registrar", new Icon(VaadinIcon.USER_CHECK));
         registrar.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         registrar.addClickListener(event -> {
-            String loginValue = login.getValue();
+            loginValue = login.getValue();
             String passwordValue = password.getValue();
             String avatarUrl = avatar.getSrc();
             String fondoUrl = imagenDeFondo.getSrc();
@@ -109,11 +111,9 @@ public class Registrar extends VerticalLayout{
     }
 
     private void registrar(String login, String password, String avatarUrl, String fondoUrl) {
-        // Aquí puedes implementar la lógica para registrar el usuario
-        System.out.println("Login: " + login);
-        System.out.println("Password: " + password);
-        System.out.println("Avatar URL: " + avatarUrl);
-        System.out.println("Imagen de fondo URL: " + fondoUrl);
-        // Lógica para enviar los datos a donde
+        UI.getCurrent().navigate(Login.class);
+         
+       
+        
 	}
 }

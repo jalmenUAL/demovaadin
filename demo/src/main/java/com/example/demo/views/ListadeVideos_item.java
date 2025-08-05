@@ -1,8 +1,11 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -14,15 +17,13 @@ public class ListadeVideos_item extends VerticalLayout {
     public VerVideo _verVideo;
 
     public void VerVideo() {
-        // Aquí puedes navegar a la vista de video real
-        // UI.getCurrent().navigate(VerVideo.class);
-        throw new UnsupportedOperationException();
+        UI.getCurrent().navigate(VerVideo.class);
     }
 
     public ListadeVideos_item() {
         // Datos de ejemplo
         String videoId = "dQw4w9WgXcQ";
-        String embedUrl = "https://www.youtube.com/embed/" + videoId;
+        String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
         String tituloVideo = "Título de ejemplo del video";
         String propietarioNombre = "Propietario Ejemplo";
         String propietarioFotoUrl = "https://randomuser.me/api/portraits/men/1.jpg";
@@ -38,28 +39,30 @@ public class ListadeVideos_item extends VerticalLayout {
 
         // Layout horizontal para avatar y título
         HorizontalLayout infoLayout = new HorizontalLayout(propietarioAvatar, tituloSpan);
-        infoLayout.setAlignItems(HorizontalLayout.Alignment.CENTER);
+        infoLayout.setAlignItems(Alignment.CENTER);
+        infoLayout.setSpacing(true);
         add(infoLayout);
 
-        // Span para me gustas y comentarios
+        // Estadísticas de me gustas y comentarios
         Span meGustasSpan = new Span("👍 " + numMeGustas);
         Span comentariosSpan = new Span("💬 " + numComentarios);
         HorizontalLayout statsLayout = new HorizontalLayout(meGustasSpan, comentariosSpan);
+        statsLayout.setSpacing(true);
         add(statsLayout);
 
-        // Iframe del video
-        Div iframeContainer = new Div();
-        iframeContainer.getElement().setProperty("innerHTML",
-            "<iframe width='560' height='315' " +
-            "src='" + embedUrl + "' " +
-            "title='YouTube video player' frameborder='0' " +
-            "allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' " +
-            "allowfullscreen></iframe>");
-        add(iframeContainer);
+        // Imagen del thumbnail en vez de iframe
+        Image thumbnail = new Image(thumbnailUrl, "Miniatura del video");
+        thumbnail.setWidth("100%");
+        thumbnail.getStyle().set("border-radius", "8px").set("cursor", "pointer");
+        thumbnail.addClickListener(e -> VerVideo());
+
+        add(thumbnail);
 
         // Botón para ver el video
-        Button vervideo = new Button("Ver Video");
-        vervideo.addClickListener(e -> VerVideo());
-        add(vervideo);
+        Button verVideoBtn = new Button("Ver Video");
+        verVideoBtn.addClickListener(e -> VerVideo());
+        verVideoBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+
+        add(verVideoBtn);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -42,12 +43,10 @@ public class PerfilPropio extends Perfil {
     }
 
     public void PublicarVideo() {
-        Notification.show("Función de publicar video no implementada", 3000, Notification.Position.MIDDLE);
-        // Aquí podrías abrir un formulario o navegar a una vista
+       UI.getCurrent().navigate(PublicarVideo.class);
     }
 
     public void Configuracion() {
-        Notification.show("Función de configuración no implementada", 3000, Notification.Position.MIDDLE);
-        // Aquí podrías navegar a Configuracion o mostrar un panel
+        UI.getCurrent().navigate(Configuracion.class);
     }
 }

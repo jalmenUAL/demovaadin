@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.Icon;
@@ -16,11 +17,10 @@ public class NoLogueado extends Inicio {
     public Registrar _registrar;
 
     public void Login() {
-        throw new UnsupportedOperationException();
+       UI.getCurrent().navigate(Login.class);
     }
-
     public void Registrar() {
-        throw new UnsupportedOperationException();
+        UI.getCurrent().navigate(Registrar.class);
     }
 
     public NoLogueado() {

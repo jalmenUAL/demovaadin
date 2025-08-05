@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
@@ -60,8 +61,6 @@ public Youtubersseguidos_item() {
     }
 
     public void PerfilAjeno() {
-        Notification.show("Abrir perfil ajeno (no implementado aún)", 3000, Notification.Position.MIDDLE);
-        // Aquí podrías navegar a otra vista o abrir un componente
-        // UI.getCurrent().navigate("perfil-ajeno");
+       UI.getCurrent().navigate(PerfilAjeno.class);
     }
 }

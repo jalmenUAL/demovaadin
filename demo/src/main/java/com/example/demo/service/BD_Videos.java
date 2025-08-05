@@ -21,11 +21,13 @@ public class BD_Videos {
 	private RepositorioVideo videorepository;
 	private RepositorioYoutuber youtuberrepository;
 	
-public BD_Videos(RepositorioVideo videorepository,RepositorioYoutuber youtuberrepository) {
+public BD_Videos(RepositorioVideo videorepository) {
 	this.videorepository = videorepository;
 	this.youtuberrepository = youtuberrepository;
 }
 	
+ 
+
 public java.util.List<Video> listar() {
     return videorepository.findAll();
 }
@@ -42,4 +44,6 @@ public void publicar(String titulo, String url) {
 	youtuberrepository.save(y);
 	videorepository.save(v);
 }
+
+
 }

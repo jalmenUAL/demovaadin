@@ -15,8 +15,8 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public BD_Youtubers _youtubers;
     public BD_Administradores _administradores;
 
-    public BDPrincipal(RepositorioVideo videorepository, RepositorioYoutuber youtuberrepository) {
-        _videos = new BD_Videos(videorepository, youtuberrepository);
+    public BDPrincipal(RepositorioVideo videorepository) {
+        _videos = new BD_Videos(videorepository);
     }
 
     // iYoutuber, iRegistrado, iInicio, iNoLogueado, iAdministrador
@@ -58,6 +58,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public List<Video> listar() {
         return _videos.listar();
     }
+
 
     // Implementa aquí los métodos de las otras interfaces según tu necesidad
 }

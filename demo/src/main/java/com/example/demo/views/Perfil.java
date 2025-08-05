@@ -13,6 +13,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.theme.lumo.LumoUtility.Margin.Minus.Horizontal;
 
 @Route("Perfil")
 public class Perfil extends VerticalLayout {
@@ -39,11 +40,11 @@ public class Perfil extends VerticalLayout {
         add(imagenDeFondo);
 
         // Datos de ejemplo
-        String nombreUsuario = "Usuario Ejemplo";
+        String nombreUsuario = "Youtuber Ejemplo";
         String avatarUrl = "https://randomuser.me/api/portraits/men/1.jpg";
 
         // Título debajo del fondo
-        H2 titulo = new H2("Perfil del Usuario");
+        H2 titulo = new H2("Perfil del Youtuber");
         titulo.getStyle().set("color", "#2c3e50").set("margin-top", "10px");
         add(titulo);
 
@@ -67,15 +68,15 @@ public class Perfil extends VerticalLayout {
             .set("padding", "8px 16px");
 
         btnYoutubersSeguidos.addClickListener(e -> {
-            getUI().ifPresent(ui -> ui.navigate("Youtuberseguidos"));
+            getUI().ifPresent(ui -> ui.navigate(Youtubersseguidos.class));
         });
 
         // Layout superior con avatar, nombre y botón
-        HorizontalLayout topLayout2 = new HorizontalLayout(avatar, nombreSpan, btnYoutubersSeguidos);
-        topLayout2.setAlignItems(Alignment.CENTER);
-        topLayout2.setSpacing(true);
-        topLayout2.setPadding(true);
-        topLayout.add(topLayout2);
+        topLayout.add(avatar, nombreSpan, btnYoutubersSeguidos);
+        topLayout.setAlignItems(Alignment.CENTER);
+        topLayout.setSpacing(true);
+        topLayout.setPadding(true);
+        add(topLayout);
 
         // Inicializar vistas de videos
         _videosgustados = new Videosgustados();
@@ -95,7 +96,7 @@ public class Perfil extends VerticalLayout {
         gustadosLayout.add(gustadosTitulo, _videosgustados);
 
         // Layout horizontal para ambas listas
-        VerticalLayout listasLayout = new VerticalLayout(publicadosLayout, gustadosLayout);
+        HorizontalLayout listasLayout = new HorizontalLayout(publicadosLayout, gustadosLayout);
         listasLayout.setJustifyContentMode(JustifyContentMode.CENTER);
         listasLayout.setSpacing(true);
         listasLayout.setWidthFull();

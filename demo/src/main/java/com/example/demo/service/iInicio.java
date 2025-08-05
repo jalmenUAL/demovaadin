@@ -1,4 +1,10 @@
 package com.example.demo.service;
 
+import java.util.List;
+
+import com.example.demo.domain.Video;
+
 public interface iInicio {
+
+    List<Video> buscarVideo(String value);
 }

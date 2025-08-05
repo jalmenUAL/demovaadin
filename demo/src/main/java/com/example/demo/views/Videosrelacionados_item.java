@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
@@ -10,17 +11,17 @@ import com.vaadin.flow.router.Route;
 
 @Route("Videosrelacionados_item")
 
-public class Videosrelacionados_item extends VerticalLayout{
-	public Videosrelacionados _videosrelacionados;
-	public VerVideo _verVideo;
-	
-	    public Videosrelacionados_item() {
+public class Videosrelacionados_item extends VerticalLayout {
+    public Videosrelacionados _videosrelacionados;
+    public VerVideo _verVideo;
+
+    public Videosrelacionados_item() {
         // === Datos de ejemplo ===
         String videoId = "dQw4w9WgXcQ";
-        String embedUrl = "https://www.youtube.com/embed/" + videoId;
+        String videoThumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
         String tituloVideo = "Never Gonna Give You Up";
         String nombreUsuario = "Rick Astley";
-        String avatarUrl = "https://randomuser.me/api/portraits/men/1.jpg"; // Cambia esta URL
+        String avatarUrl = "https://randomuser.me/api/portraits/men/1.jpg";
 
         // === Avatar del usuario ===
         Image avatar = new Image(avatarUrl, "Avatar");
@@ -30,7 +31,6 @@ public class Videosrelacionados_item extends VerticalLayout{
 
         // === Nombre del usuario ===
         Span nombre = new Span(nombreUsuario);
-
         VerticalLayout infoUsuario = new VerticalLayout(nombre);
         infoUsuario.setPadding(false);
         infoUsuario.setSpacing(false);
@@ -43,25 +43,27 @@ public class Videosrelacionados_item extends VerticalLayout{
         H4 titulo = new H4(tituloVideo);
         titulo.getStyle().set("margin", "0");
 
-        // === Video (iframe embebido) ===
-        Div iframeContainer = new Div();
-        iframeContainer.getElement().setProperty("innerHTML",
-            "<iframe width='320' height='160' " +
-            "src='" + embedUrl + "' " +
-            "title='YouTube video player' frameborder='0' " +
-            "allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' " +
-            "allowfullscreen></iframe>");
+        // === Imagen del video (miniatura) ===
+        Image miniatura = new Image(videoThumbnailUrl, "Miniatura del video");
+        miniatura.setWidth("320px");
+        miniatura.setHeight("180px");
+        miniatura.getStyle()
+                .set("cursor", "pointer")
+                .set("border-radius", "8px")
+                .set("box-shadow", "0 2px 6px rgba(0,0,0,0.2)");
 
-        // === Añadir todo en orden ===
-        add(titulo, cabecera, iframeContainer);
+        miniatura.addClickListener(e -> VerVideo());
 
-        // Opcional: Estilo del contenedor
+        // === Añadir componentes al layout ===
+        add(titulo, cabecera, miniatura);
+
+        // === Estilo general del layout ===
         setPadding(false);
         setSpacing(true);
         setWidth("100%");
     }
 
-	public void VerVideo() {
-		throw new UnsupportedOperationException();
-	}
+    public void VerVideo() {
+        UI.getCurrent().navigate(VerVideo.class);
+    }
 }

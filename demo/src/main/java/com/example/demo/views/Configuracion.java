@@ -1,6 +1,8 @@
 package com.example.demo.views;
 
 import java.io.InputStream;
+
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -11,6 +13,7 @@ import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -44,7 +47,7 @@ public Configuracion() {
         // Layout para avatar
         VerticalLayout avatarLayout = new VerticalLayout();
         avatarLayout.setAlignItems(Alignment.CENTER);
-        Label avatarLabel = new Label("Avatar");
+        Span avatarLabel = new Span("Avatar");
         Image avatar = new Image();
         avatar.setMaxWidth("300px");
         MemoryBuffer buffer = new MemoryBuffer();
@@ -60,7 +63,7 @@ public Configuracion() {
         // Layout para imagen de fondo
         VerticalLayout fondoLayout = new VerticalLayout();
         fondoLayout.setAlignItems(Alignment.CENTER);
-        Label fondoLabel = new Label("Imagen de fondo");
+       Span fondoLabel = new Span("Imagen de fondo");
         Image imagenDeFondo = new Image();
         imagenDeFondo.setMaxWidth("300px");
         MemoryBuffer buffer2 = new MemoryBuffer();
@@ -86,7 +89,7 @@ public Configuracion() {
             String passwordValue = password.getValue();
             String avatarUrl = avatar.getSrc();
             String fondoUrl = imagenDeFondo.getSrc();
-            actualizar(loginValue, passwordValue, avatarUrl, fondoUrl);
+            actualizar();
         });
 
         // Layout final
@@ -100,8 +103,8 @@ public Configuracion() {
 
 // ...existing code...
 
-	private void actualizar(String login, String password, String avatarUrl, String fondoUrl) {
-    		// Aquí puedes implementar la lógica para actualizar los datos del usuario
+	private void actualizar() {
+    		UI.getCurrent().getPage().getHistory().back();
 
     // Lógica para enviar los datos a donde corresponda
 }}

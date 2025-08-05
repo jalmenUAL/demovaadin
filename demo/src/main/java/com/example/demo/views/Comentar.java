@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -24,14 +25,14 @@ public class Comentar extends VerticalLayout {
         btnPublicar.setWidthFull();
 
         btnPublicar.addClickListener(e -> {
-            publicar_comentario(campoComentario.getValue());
+            publicar_comentario();
             campoComentario.clear();  // Limpia el campo tras publicar
         });
 
         add(campoComentario, btnPublicar);
     }
 
-    private void publicar_comentario(String comentario) {
-        // TODO: Implementar lógica para publicar comentario
+    private void publicar_comentario() {
+        UI.getCurrent().getPage().getHistory().back();
     }
 }

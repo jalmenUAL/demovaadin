@@ -68,7 +68,7 @@ public class PublicarVideo extends VerticalLayout {
             .set("margin-top", "10px");
 
         button.addClickListener(e -> {
-            i.publicar(introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
+            
             UI.getCurrent().getPage().getHistory().back();
         });
 
