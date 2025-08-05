@@ -8,23 +8,30 @@ import com.vaadin.flow.router.Route;
 
 @Route("Comentar")
 public class Comentar extends VerticalLayout {
-	public VerComentariosdeYoutuber _verComentariosdeYoutuber;
+    public VerComentariosdeYoutuber _verComentariosdeYoutuber;
 
-	public Comentar() {
-		TextField comentario = new TextField("Escribe un comentario");
-		comentario.setWidth("100%");
-		add(comentario);	
-		Button comentar = new Button("Publicar Comentario");
-		comentar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-		comentar.addClickListener(e -> {
-			publicar_comentario(comentario.getValue());
-		});
-		add(comentar);
-		getStyle().setWidth("100%");
-	}
+    public Comentar() {
+        setWidthFull();
+        setPadding(true);
+        setSpacing(true);
+        setAlignItems(Alignment.STRETCH);  // Para que el TextField y botón ocupen todo el ancho
 
-	private void publicar_comentario(String string) {
-		// TODO Auto-generated method stub
+        TextField campoComentario = new TextField("Escribe un comentario");
+        campoComentario.setWidthFull();
 
-	}
+        Button btnPublicar = new Button("Publicar Comentario");
+        btnPublicar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        btnPublicar.setWidthFull();
+
+        btnPublicar.addClickListener(e -> {
+            publicar_comentario(campoComentario.getValue());
+            campoComentario.clear();  // Limpia el campo tras publicar
+        });
+
+        add(campoComentario, btnPublicar);
+    }
+
+    private void publicar_comentario(String comentario) {
+        // TODO: Implementar lógica para publicar comentario
+    }
 }
