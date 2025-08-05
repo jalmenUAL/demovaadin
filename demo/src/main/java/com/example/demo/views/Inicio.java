@@ -1,7 +1,8 @@
 package com.example.demo.views;
 
+import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.html.H1;
-
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
@@ -14,24 +15,42 @@ public class Inicio extends VerticalLayout {
 //	public iInicio _iInicio;
 	public Buscar _buscar;
 	public UltimosVideos _ultimosVideos;
+	public HorizontalLayout header = new HorizontalLayout();
 
 	
 	public Inicio() {
-	    H1 heading1 = new H1("Youtube");
-	    heading1.getStyle()
-	        .set("background-color", "red")
-	        .set("color", "white")
-	        .set("padding", "0.5em 1em")
-	        .set("border-radius", "8px")
-	        .set("width", "fit-content");
-	    add(heading1);
-	    Buscar();
-	    UltimosVideos();
-	}
+        // Estilos generales del layout
+        setWidthFull();
+        setPadding(true);
+        setSpacing(true);
+        setAlignItems(Alignment.CENTER);
+
+        // Título principal
+        H1 heading = new H1("YouTube");
+        heading.getStyle()
+            .set("background-color", "#FF0000")   // Rojo YouTube
+            .set("color", "white")
+            .set("padding", "0.5em 1.5em")
+            .set("border-radius", "10px")
+            .set("font-size", "2.5em")
+            .set("box-shadow", "0 4px 8px rgba(0,0,0,0.2)");
+
+        // Header layout con el título centrado
+        header.setWidthFull();
+        header.setJustifyContentMode(JustifyContentMode.CENTER);
+        header.add(heading);
+
+        add(header);
+
+        // Métodos adicionales
+        Buscar();         // Agrega componente de búsqueda
+        UltimosVideos();  // Agrega sección de últimos videos
+    }
+
 
 	public void Buscar() {
 		Buscar b = new Buscar();		
-		add(b);
+		header.add(b);
 	}
 
 	public void UltimosVideos() {

@@ -1,6 +1,9 @@
 package com.example.demo.views;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
@@ -24,12 +27,19 @@ public class NoLogueado extends Inicio {
         super(); // Llama al constructor de Inicio para añadir el buscador
 
         // Botones de Login y Registrar
-        Button loginButton = new Button("Login", e -> Login());
-        Button registrarButton = new Button("Registrar", e -> Registrar());
-        HorizontalLayout botones = new HorizontalLayout(loginButton, registrarButton);
-        botones.addClassName(LumoUtility.Padding.Horizontal.MEDIUM);
+        // Botón de Login
+Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));
+loginButton.addClickListener(e -> Login());
+loginButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY); // Botón azul
 
+// Botón de Registrar
+Button registrarButton = new Button("Registrar", new Icon(VaadinIcon.USER_CARD));
+registrarButton.addClickListener(e -> Registrar());
+registrarButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS); // Botón verde
+        HorizontalLayout botones = new HorizontalLayout(loginButton, registrarButton);
+         
+		 
         // Añade los botones al final de la vista
-        add(botones);
+        header.add(botones);
     }
 }

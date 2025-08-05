@@ -2,65 +2,105 @@ package com.example.demo.views;
 
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
 @Route("Perfil")
-public class Perfil extends VerticalLayout{
+public class Perfil extends VerticalLayout {
+
     public Videosgustados _videosgustados;
     public Videospublicados _videospublicados;
-    public Youtubersseguidos _youtubersseguidos;
+    HorizontalLayout topLayout = new HorizontalLayout();
+ 
 
-    public void Videosgustados() {
-        throw new UnsupportedOperationException();
-    }
-
-    public void Videospublicados() {
-        throw new UnsupportedOperationException();
-    }
-
-    public void Youtubersseguidos() {
-        // Navega a la vista de youtubers seguidos
-        getUI().ifPresent(ui -> ui.navigate("Youtuberseguidos"));
-    }
+     
 
     public Perfil() {
+        setSizeFull();
+        setSpacing(true);
+        setPadding(false);
+        setAlignItems(Alignment.CENTER);
+
+        // Imagen de fondo (cabecera)
+        Image imagenDeFondo = new Image("https://picsum.photos/1200/300", "Imagen de fondo");
+        imagenDeFondo.setWidth("100%");
+        imagenDeFondo.setHeight("300px");
+        imagenDeFondo.getStyle().set("object-fit", "cover");
+
+        add(imagenDeFondo);
+
         // Datos de ejemplo
         String nombreUsuario = "Usuario Ejemplo";
         String avatarUrl = "https://randomuser.me/api/portraits/men/1.jpg";
 
+        // Título debajo del fondo
+        H2 titulo = new H2("Perfil del Usuario");
+        titulo.getStyle().set("color", "#2c3e50").set("margin-top", "10px");
+        add(titulo);
+
         // Avatar y nombre
         Avatar avatar = new Avatar(nombreUsuario, avatarUrl);
+        avatar.setWidth("100px");
+        avatar.setHeight("100px");
+
         Span nombreSpan = new Span(nombreUsuario);
-        nombreSpan.getStyle().set("font-weight", "bold").set("font-size", "1.2em");
+        nombreSpan.getStyle()
+            .set("font-weight", "bold")
+            .set("font-size", "1.3em")
+            .set("margin-left", "10px");
 
-        // Botón para navegar a la lista de youtubers seguidos
-        Button btnYoutubersSeguidos = new Button("Ver youtubers seguidos", e -> Youtubersseguidos());
+        // Botón para ver youtubers seguidos
+        Button btnYoutubersSeguidos = new Button("Ver Youtubers Seguidos", new Icon(VaadinIcon.USER_HEART));
+        btnYoutubersSeguidos.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        btnYoutubersSeguidos.getStyle()
+            .set("border-radius", "8px")
+            .set("font-weight", "bold")
+            .set("padding", "8px 16px");
 
-        // Layout horizontal para avatar, nombre y botón, centrados verticalmente
-        HorizontalLayout avatarBotonLayout = new HorizontalLayout(avatar, nombreSpan, btnYoutubersSeguidos);
-        avatarBotonLayout.setAlignItems(HorizontalLayout.Alignment.CENTER);
-        add(avatarBotonLayout);
+        btnYoutubersSeguidos.addClickListener(e -> {
+            getUI().ifPresent(ui -> ui.navigate("Youtuberseguidos"));
+        });
 
-        // Listas de videos con títulos
+        // Layout superior con avatar, nombre y botón
+        HorizontalLayout topLayout2 = new HorizontalLayout(avatar, nombreSpan, btnYoutubersSeguidos);
+        topLayout2.setAlignItems(Alignment.CENTER);
+        topLayout2.setSpacing(true);
+        topLayout2.setPadding(true);
+        topLayout.add(topLayout2);
+
+        // Inicializar vistas de videos
         _videosgustados = new Videosgustados();
         _videospublicados = new Videospublicados();
 
+        // Layouts para secciones
         VerticalLayout publicadosLayout = new VerticalLayout();
-        Span publicadosTitulo = new Span("Videos Publicados");
-        publicadosTitulo.getStyle().set("font-weight", "bold");
+        publicadosLayout.setWidth("45%");
+        Span publicadosTitulo = new Span("🎬 Videos Publicados");
+        publicadosTitulo.getStyle().set("font-weight", "bold").set("font-size", "1.1em");
         publicadosLayout.add(publicadosTitulo, _videospublicados);
 
         VerticalLayout gustadosLayout = new VerticalLayout();
-        Span gustadosTitulo = new Span("Videos Gustados");
-        gustadosTitulo.getStyle().set("font-weight", "bold");
+        gustadosLayout.setWidth("45%");
+        Span gustadosTitulo = new Span("❤️ Videos Gustados");
+        gustadosTitulo.getStyle().set("font-weight", "bold").set("font-size", "1.1em");
         gustadosLayout.add(gustadosTitulo, _videosgustados);
 
-        // Layout horizontal para las listas
-        HorizontalLayout listasLayout = new HorizontalLayout(publicadosLayout, gustadosLayout);
+        // Layout horizontal para ambas listas
+        VerticalLayout listasLayout = new VerticalLayout(publicadosLayout, gustadosLayout);
+        listasLayout.setJustifyContentMode(JustifyContentMode.CENTER);
+        listasLayout.setSpacing(true);
+        listasLayout.setWidthFull();
+
         add(listasLayout);
     }
-}
+
+    }

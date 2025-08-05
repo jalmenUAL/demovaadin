@@ -23,7 +23,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 
 import com.vaadin.flow.component.html.Span;
-
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -33,31 +33,48 @@ import com.vaadin.flow.router.Route;
 
 @Route("PublicarVideo")
 
-public class PublicarVideo extends VerticalLayout{
-	public PerfilPropio _perfilPropio;
-	TextField introduzcaLaUrl = new TextField("Introduzca la url");
-	TextField introduzcaEltitulo = new TextField("Introduzca el título");
-	public  PublicarVideo(iYoutuber i) {
+public class PublicarVideo extends VerticalLayout {
 
-    Button button = new Button("Publicar Video");
-    button.addThemeVariants(ButtonVariant.LUMO_PRIMARY); // Botón azul
-    button.addClickListener(e -> {
-        UI.getCurrent().getPage().getHistory().back();
-        i.publicar(introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
-    });
+    public PerfilPropio _perfilPropio;
+    TextField introduzcaLaUrl = new TextField("URL del Video");
+    TextField introduzcaEltitulo = new TextField("Título del Video");
 
-    getStyle().setWidth("100%");
+    public PublicarVideo(iYoutuber i) {
+        setWidthFull();
+        setAlignItems(Alignment.CENTER);
+        setJustifyContentMode(JustifyContentMode.CENTER);
+        setSpacing(true);
+        setPadding(true);
 
-    introduzcaLaUrl.setWidth("100%");
-    add(introduzcaLaUrl);
+        // Título
+        H2 titulo = new H2("📹 Publicar nuevo video");
+        titulo.getStyle().set("color", "#2c3e50");
+        add(titulo);
 
-    introduzcaEltitulo.setWidth("100%");
-    add(introduzcaEltitulo);
+        // Campos de texto
+        introduzcaEltitulo.setPlaceholder("Ej. Cómo cocinar arroz");
+        introduzcaLaUrl.setPlaceholder("Ej. https://youtube.com/...");
+        introduzcaEltitulo.setWidth("60%");
+        introduzcaLaUrl.setWidth("60%");
 
-    add(button);
-	}
+        add(introduzcaEltitulo, introduzcaLaUrl);
+
+        // Botón
+        Button button = new Button("Publicar Video");
+        button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        button.getStyle()
+            .set("border-radius", "8px")
+            .set("font-weight", "bold")
+            .set("margin-top", "10px");
+
+        button.addClickListener(e -> {
+            i.publicar(introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
+            UI.getCurrent().getPage().getHistory().back();
+        });
+
+        add(button);
+    }
 }
-
 
 
 

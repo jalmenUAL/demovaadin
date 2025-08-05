@@ -8,10 +8,10 @@ public class UltimosVideosdeYoutuber extends UltimosVideos {
 public UltimosVideosdeYoutuber() {
 		
 		
-		
-		UltimosVideos_item uvi = new UltimosVideos_item();
+		carrusel.removeAll();
+		UltimosVideos_item uvi = new UltimosVideosdeYoutuber_item();
 		carrusel.add(uvi);
-		UltimosVideos_item uvi2 = new UltimosVideos_item();
+		UltimosVideos_item uvi2 = new UltimosVideosdeYoutuber_item();
 		carrusel.add(uvi2);
 		 
 		

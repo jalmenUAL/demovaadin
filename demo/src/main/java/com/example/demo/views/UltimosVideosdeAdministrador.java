@@ -8,16 +8,16 @@ public class UltimosVideosdeAdministrador extends UltimosVideos {
 public UltimosVideosdeAdministrador() {
 		
 		
-		
-		UltimosVideos_item uvi = new UltimosVideos_item();
+		carrusel.removeAll();
+		UltimosVideos_item uvi = new UltimosVideosdeAdministrador_item();
 		carrusel.add(uvi);
-		UltimosVideos_item uvi2 = new UltimosVideos_item();
+		UltimosVideos_item uvi2 = new UltimosVideosdeAdministrador_item();
 		carrusel.add(uvi2);
-		UltimosVideos_item uvi3 = new UltimosVideos_item();
+		UltimosVideos_item uvi3 = new UltimosVideosdeAdministrador_item();
 		carrusel.add(uvi3);
-		UltimosVideos_item uvi4 = new UltimosVideos_item();
+		UltimosVideos_item uvi4 = new UltimosVideosdeAdministrador_item();
 		carrusel.add(uvi4);
-		UltimosVideos_item uvi5 = new UltimosVideos_item();
+		UltimosVideos_item uvi5 = new UltimosVideosdeAdministrador_item();
 		carrusel.add(uvi5);
 		
 	}
