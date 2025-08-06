@@ -8,12 +8,10 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.theme.lumo.LumoUtility.Margin.Minus.Horizontal;
+ 
 
 @Route("Perfil")
 public class Perfil extends VerticalLayout {

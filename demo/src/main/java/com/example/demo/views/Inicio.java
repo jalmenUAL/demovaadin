@@ -1,12 +1,11 @@
 package com.example.demo.views;
 
+import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 //import basededatos.iInicio;
 
@@ -18,7 +17,7 @@ public class Inicio extends VerticalLayout {
 	public HorizontalLayout header = new HorizontalLayout();
 
 	
-	public Inicio() {
+	public Inicio(iInicio inicio) {
         // Estilos generales del layout
         setWidthFull();
         setPadding(true);
@@ -43,13 +42,13 @@ public class Inicio extends VerticalLayout {
         add(header);
 
         // Métodos adicionales
-        Buscar();         // Agrega componente de búsqueda
+        Buscar(inicio);         // Agrega componente de búsqueda
         UltimosVideos();  // Agrega sección de últimos videos
     }
 
 
-	public void Buscar() {
-		Buscar b = new Buscar();		
+	public void Buscar(iInicio inicio) {
+		Buscar b = new Buscar(inicio);
 		header.add(b);
 	}
 

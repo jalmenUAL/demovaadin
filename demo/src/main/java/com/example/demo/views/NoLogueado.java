@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -7,8 +8,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
-import com.vaadin.flow.theme.lumo.LumoUtility;
+
 
 @Route("NoLogueado")
 public class NoLogueado extends Inicio {
@@ -23,8 +23,8 @@ public class NoLogueado extends Inicio {
         UI.getCurrent().navigate(Registrar.class);
     }
 
-    public NoLogueado() {
-        super(); // Llama al constructor de Inicio para añadir el buscador
+    public NoLogueado(iInicio inicio) {
+        super(inicio); // Llama al constructor de Inicio para añadir el buscador
 
         // Botones de Login y Registrar
         // Botón de Login

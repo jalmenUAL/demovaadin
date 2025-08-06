@@ -19,16 +19,5 @@ public class BD_Youtubers {
         this.repository = repository;
 
     }
-
-    public void bloquearPorLogin(String login) {
-        // Buscar el youtuber usando el repositorio JPA
-        Optional<Youtuber> y = repository.findById(login);
-        if (y.isPresent()) {
-            Youtuber youtuber = y.get();
-            youtuber.setBloqueado(true);
-            repository.save(youtuber);
-        } else {
-            throw new IllegalArgumentException("No se encontró el usuario con login: " + login);
-        }
-    }
+ 
 }

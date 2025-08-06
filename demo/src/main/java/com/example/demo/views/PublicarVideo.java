@@ -1,32 +1,18 @@
 package com.example.demo.views;
 
-import com.vaadin.flow.component.combobox.ComboBox;
-
-import com.vaadin.flow.component.listbox.ListBox;
-
-import com.vaadin.flow.component.grid.Grid;
-
-import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
+ 
 
 import com.vaadin.flow.component.textfield.TextField;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
-
-import com.example.demo.domain.Video;
-import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 
 import com.vaadin.flow.component.button.ButtonVariant;
 
-import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.html.H2;
-import com.vaadin.flow.component.html.Paragraph;
 
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.html.H2;
+
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;

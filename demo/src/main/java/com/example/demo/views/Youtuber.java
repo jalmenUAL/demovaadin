@@ -19,8 +19,8 @@ public class Youtuber extends Registrado {
     public PerfilPropio _perfilPropio;
     public UltimosVideosdeYoutuber _ultimosVideos;
 
-    public Youtuber() {
-        super();
+    public Youtuber(iYoutuber youtuber) {
+        super(youtuber);
 
         // === HEADER con botón "Mi Perfil" ===
         Button perfilBtn = new Button("Mi Perfil", new Icon(VaadinIcon.USER));

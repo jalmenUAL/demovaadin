@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.service.iRegistrado;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.H1;
@@ -13,7 +14,8 @@ import com.vaadin.flow.router.Route;
 @Route("Registrado")
 public class Registrado extends Inicio {
 
-    public Registrado() {
+    public Registrado(iRegistrado registrado) {
+        super(registrado); // Llama al constructor de Inicio para añadir el buscador
         // Botón de logout
         Button logoutButton = new Button("Cerrar sesión", new Icon(VaadinIcon.SIGN_OUT));
         logoutButton.addThemeVariants(ButtonVariant.LUMO_ERROR); // Estilo rojo

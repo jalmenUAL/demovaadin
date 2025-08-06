@@ -6,5 +6,7 @@ import com.example.demo.domain.Video;
 
 public interface iInicio {
 
-    List<Video> buscarVideo(String value);
+    List<Video> buscar(String texto);
+
+    
 }

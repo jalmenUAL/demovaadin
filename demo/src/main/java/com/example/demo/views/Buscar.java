@@ -1,8 +1,6 @@
 package com.example.demo.views;
 
-import java.util.List;
 
-import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.Video;
 import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.button.Button;
@@ -11,6 +9,8 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
+import java.util.List;
+
 
 @Route("Buscar")
 public class Buscar extends VerticalLayout {
@@ -19,12 +19,12 @@ public class Buscar extends VerticalLayout {
 	private TextField textobuscar;
 	private VerticalLayout contenido = new VerticalLayout();
 
-	public void ResultadodeBusqueda() {
+	public void ResultadodeBusqueda(List<Video> resultados) {
 		_resultadodeBusqueda = new ResultadodeBusqueda();
 		contenido.add(_resultadodeBusqueda);
 	}
 
-	Buscar() {
+	Buscar(iInicio inicio) {
 
 		textobuscar = new TextField();
 		textobuscar.setPlaceholder("Introduzca el nombre del video que quiere buscar");
@@ -33,7 +33,7 @@ public class Buscar extends VerticalLayout {
 		Button botonbuscar = new Button("Buscar");
 		botonbuscar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		botonbuscar.addClickListener(e -> {
-			buscar();
+			buscar(inicio);
 		});
 
 		HorizontalLayout buscarLayout = new HorizontalLayout(textobuscar, botonbuscar);
@@ -44,10 +44,11 @@ public class Buscar extends VerticalLayout {
 		add(contenido);
 	}
 
-	private void buscar() {
-		
+	private void buscar(iInicio inicio) {
+		String texto = textobuscar.getValue();
+		List<Video> resultados = inicio.buscar(texto);
 
-		ResultadodeBusqueda();
+		ResultadodeBusqueda(resultados);
 
 	}
 };

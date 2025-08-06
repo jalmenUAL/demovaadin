@@ -3,17 +3,12 @@ package com.example.demo.views;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.messages.MessageList;
-import com.vaadin.flow.component.messages.MessageListItem;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout.Alignment;
 
 @Route("GaleriadeVideos_item")
 public class GaleradeVideos_item extends VerticalLayout {

@@ -13,12 +13,8 @@ public class BD_Administradores {
 	public BDPrincipal _en;
 	public Vector<Administrador> _administradores = new Vector<Administrador>();
 	private RepositorioAdministrador repository;
-    public List<Object> obtenerDenuncias() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'obtenerDenuncias'");
-    }
-    public iAdministrador buscarPorLoginYPassword(String login, String password) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarPorLoginYPassword'");
+    public BD_Administradores(RepositorioAdministrador administradoresRepository) {
+        //TODO Auto-generated constructor stub
+        this.repository = administradoresRepository;
     }
 }

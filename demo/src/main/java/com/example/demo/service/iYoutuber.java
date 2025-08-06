@@ -7,7 +7,5 @@ import com.example.demo.domain.Video;
 @Service
 public interface iYoutuber extends iRegistrado {
 	
-	public void publicar(String titulo, String url);
-	
-	public java.util.List<Video> listar();
+	 
 }

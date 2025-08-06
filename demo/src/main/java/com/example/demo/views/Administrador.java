@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.router.Route;
 
 import jakarta.annotation.security.RolesAllowed;
@@ -12,8 +13,8 @@ public class Administrador extends Registrado {
 	//public iAdministrador _iAdministrador;
 	public Usuariosdenunciados _usuariosdenunciados;
 	
-	public Administrador() {
-		super();
+	public Administrador(iAdministrador administrador) {
+		super(administrador);
 		UltimosVideos();
 		Usuariosdenunciados();
 		
