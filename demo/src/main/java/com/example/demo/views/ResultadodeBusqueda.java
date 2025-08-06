@@ -10,8 +10,10 @@ import com.vaadin.flow.router.Route;
 public class ResultadodeBusqueda extends GaleradeVideos {
 	public Buscar _buscar;
 	
-	public ResultadodeBusqueda(){
-	ResultadodeBusqueda_item gvi = new ResultadodeBusqueda_item();	 
-	add(gvi);
+	public ResultadodeBusqueda(List<Video> resultados){
+	for (Video video : resultados) {
+		ResultadodeBusqueda_item gvi = new ResultadodeBusqueda_item(video);
+		add(gvi);
 	}
+}
 }

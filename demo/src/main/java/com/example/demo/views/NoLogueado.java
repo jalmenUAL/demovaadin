@@ -1,6 +1,7 @@
 package com.example.demo.views;
 
 import com.example.demo.service.iInicio;
+import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -12,7 +13,7 @@ import com.vaadin.flow.router.Route;
 
 @Route("NoLogueado")
 public class NoLogueado extends Inicio {
-    // public iNoLogueado _iNoLogueado;
+    public iNoLogueado _iNoLogueado;
     public Login _login;
     public Registrar _registrar;
 
@@ -23,9 +24,9 @@ public class NoLogueado extends Inicio {
         UI.getCurrent().navigate(Registrar.class);
     }
 
-    public NoLogueado(iInicio inicio) {
-        super(inicio); // Llama al constructor de Inicio para añadir el buscador
-
+    public NoLogueado(iNoLogueado iNoLogueado) {
+        super(iNoLogueado); // Llama al constructor de Inicio para añadir el buscador
+        _iNoLogueado = iNoLogueado;
         // Botones de Login y Registrar
         // Botón de Login
 Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));

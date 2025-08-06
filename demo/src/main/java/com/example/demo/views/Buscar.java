@@ -20,7 +20,7 @@ public class Buscar extends VerticalLayout {
 	private VerticalLayout contenido = new VerticalLayout();
 
 	public void ResultadodeBusqueda(List<Video> resultados) {
-		_resultadodeBusqueda = new ResultadodeBusqueda();
+		_resultadodeBusqueda = new ResultadodeBusqueda(resultados);
 		contenido.add(_resultadodeBusqueda);
 	}
 

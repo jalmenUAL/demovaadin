@@ -14,18 +14,19 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public class GaleradeVideos_item extends VerticalLayout {
     public GaleradeVideos _galeradeVideos;
     public VerVideo _verVideo;
+     // Datos de ejemplo
+      public String videoId = "dQw4w9WgXcQ"; // ID del video
+        public String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+        public String tituloVideo = "Título de ejemplo del video";
+        public String propietarioNombre = "Propietario Ejemplo";
+        public String propietarioFotoUrl = "https://randomuser.me/api/portraits/men/1.jpg";
 
     public void VerVideo() {
         UI.getCurrent().navigate(VerVideo.class);
     }
 
     public GaleradeVideos_item() {
-        // Datos de ejemplo
-        String videoId = "dQw4w9WgXcQ"; // ID del video
-        String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
-        String tituloVideo = "Título de ejemplo del video";
-        String propietarioNombre = "Propietario Ejemplo";
-        String propietarioFotoUrl = "https://randomuser.me/api/portraits/men/1.jpg";
+       
 
         // Título del video
         Span tituloSpan = new Span(tituloVideo);
@@ -56,5 +57,38 @@ public class GaleradeVideos_item extends VerticalLayout {
         verVideoBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
         add(verVideoBtn);
+    }
+    public String getVideoId() {
+        return videoId;
+    }
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
+    }
+    public String getTituloVideo() {
+        return tituloVideo;
+    }
+
+    public String getPropietarioNombre() {
+        return propietarioNombre;
+    }
+
+    public String getPropietarioFotoUrl() {
+        return propietarioFotoUrl;
+    }
+    public String setThumbnailUrl(String thumbnailUrl) {
+        this.thumbnailUrl = thumbnailUrl;
+        return this.thumbnailUrl;
+    }
+    public String setTituloVideo(String tituloVideo) {
+        this.tituloVideo = tituloVideo;
+        return this.tituloVideo;
+    }
+    public String setPropietarioNombre(String propietarioNombre) {
+        this.propietarioNombre = propietarioNombre;
+        return this.propietarioNombre;
+    }
+    public String setPropietarioFotoUrl(String propietarioFotoUrl) {
+        this.propietarioFotoUrl = propietarioFotoUrl;
+        return this.propietarioFotoUrl;
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.Administrador;
 import com.example.demo.domain.RepositorioAdministrador;
 
+
+
 @Service
 public class BD_Administradores {
 	public BDPrincipal _en;
@@ -16,5 +18,13 @@ public class BD_Administradores {
     public BD_Administradores(RepositorioAdministrador administradoresRepository) {
         //TODO Auto-generated constructor stub
         this.repository = administradoresRepository;
+    }
+    
+    public Administrador autenticar(String username, String password) {
+         
+    return  repository.findByLogin(username)
+            .filter(administrador -> administrador.getPassword().equals(password))
+            .orElse(null);
+
     }
 }

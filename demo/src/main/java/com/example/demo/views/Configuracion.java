@@ -2,6 +2,7 @@ package com.example.demo.views;
 
 import java.io.InputStream;
 
+import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -23,8 +24,14 @@ import com.vaadin.flow.server.StreamResource;
 @Route("Configuracion")
 public class Configuracion extends VerticalLayout{
 	public PerfilPropio _perfilPropio;
+    private iYoutuber _iYoutuber;
+    private EmailField login;   
+    private Image imagenDeFondo;
+    private Image avatar;
+    private TextField password;
 	
-public Configuracion() {
+public Configuracion(iYoutuber iYoutuber) {
+    _iYoutuber = iYoutuber;
         // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -39,15 +46,15 @@ public Configuracion() {
         // Layout para login y password
         VerticalLayout datosLayout = new VerticalLayout();
         datosLayout.setAlignItems(Alignment.CENTER);
-        EmailField login = new EmailField("Login");
-        TextField password = new TextField("Password");
+        login = new EmailField("Login");
+         password = new TextField("Password");
         datosLayout.add(login, password);
 
         // Layout para avatar
         VerticalLayout avatarLayout = new VerticalLayout();
         avatarLayout.setAlignItems(Alignment.CENTER);
         Span avatarLabel = new Span("Avatar");
-        Image avatar = new Image();
+         avatar = new Image();
         avatar.setMaxWidth("300px");
         MemoryBuffer buffer = new MemoryBuffer();
         Upload upload = new Upload(buffer);
@@ -63,7 +70,7 @@ public Configuracion() {
         VerticalLayout fondoLayout = new VerticalLayout();
         fondoLayout.setAlignItems(Alignment.CENTER);
        Span fondoLabel = new Span("Imagen de fondo");
-        Image imagenDeFondo = new Image();
+         imagenDeFondo = new Image();
         imagenDeFondo.setMaxWidth("300px");
         MemoryBuffer buffer2 = new MemoryBuffer();
         Upload upload2 = new Upload(buffer2);
@@ -84,11 +91,8 @@ public Configuracion() {
         Button actualizar = new Button("Actualizar", new Icon(VaadinIcon.REFRESH));
         actualizar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         actualizar.addClickListener(event -> {
-            String loginValue = login.getValue();
-            String passwordValue = password.getValue();
-            String avatarUrl = avatar.getSrc();
-            String fondoUrl = imagenDeFondo.getSrc();
-            actualizar();
+             
+            actualizar(_iYoutuber);
         });
 
         // Layout final
@@ -102,8 +106,15 @@ public Configuracion() {
 
 // ...existing code...
 
-	private void actualizar() {
+	private void actualizar(iYoutuber iYoutuber) {
+        iYoutuber.actualizarConfiguracion(
+            login.getValue(),
+            password.getValue(),
+            avatar.getSrc(),
+            imagenDeFondo.getSrc()
+        );
     		UI.getCurrent().getPage().getHistory().back();
 
     // Lógica para enviar los datos a donde corresponda
-}}
+}
+}
