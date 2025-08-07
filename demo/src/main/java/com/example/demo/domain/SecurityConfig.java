@@ -23,14 +23,15 @@ public class SecurityConfig extends VaadinWebSecurity {
      
     protected void configure(HttpSecurity http) throws Exception {
          
-
+        /*  Deshabilita el login
         http.csrf(csrf -> csrf.disable()); // opcional en desarrollo
 
         http.authorizeHttpRequests(auth -> auth
             .anyRequest().permitAll() // permite todo sin login
         );
-    
-        /*
+        */
+
+        
         super.configure(http);
         setLoginView(http, Login.class); 
         http.formLogin(form -> form
@@ -45,11 +46,13 @@ public class SecurityConfig extends VaadinWebSecurity {
                     }
                 })
             );
-            */
+            
+            
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
+        
         var admin = User.withUsername("admin")
                 .password(passwordEncoder().encode("admin123"))
                 .roles("ADMIN")
@@ -59,6 +62,7 @@ public class SecurityConfig extends VaadinWebSecurity {
                 .roles("USER")
                 .build();
         return new InMemoryUserDetailsManager(user,admin);
+        
     }
 
     @Bean

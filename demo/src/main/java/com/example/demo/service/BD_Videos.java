@@ -38,6 +38,16 @@ public void publicarVideo(String value, String value2) {
 	
 }
 
+
+public java.util.List<Video> getUltimosVideos() {
+	// TODO Auto-generated method stub
+	java.util.List<Video> UltimosVideos = videorepository.findAll();
+	if (UltimosVideos.size() > 10) {
+		UltimosVideos = UltimosVideos.subList(0, 10);
+	}
+	return UltimosVideos;
+}
+
  
 	
  

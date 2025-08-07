@@ -68,5 +68,12 @@ public class BD_Youtubers {
     }
         return UltimosVideos;
     }
+
+    public List<Youtuber> buscarDenunciados() {
+        List<Youtuber> denunciados = repository.findAll();
+        return denunciados.stream()
+                .filter(Youtuber::getBloqueado) // Asumiendo que hay un método getBloqueado en Youtuber
+                .toList();
+    }
  
 }

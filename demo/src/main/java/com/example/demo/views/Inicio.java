@@ -2,32 +2,48 @@ package com.example.demo.views;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+import com.example.demo.domain.RepositorioAdministrador;
+import com.example.demo.domain.RepositorioComentario;
+import com.example.demo.domain.RepositorioVideo;
+import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
+import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+
+import jakarta.annotation.security.RolesAllowed;
 
 //import basededatos.iInicio;
 
 @Route("Inicio")
+@AnonymousAllowed
+@Component
 public class Inicio extends VerticalLayout {
-//	public iInicio _iInicio;
+	public iInicio _iInicio;
 	public Buscar _buscar;
 	public UltimosVideos _ultimosVideos;
 	public HorizontalLayout header = new HorizontalLayout();
-	iInicio _iInicio;
+	
 
 	 
 
 	// Constructor que recibe el servicio iInicio
 
-	
-	public Inicio(iInicio inicio) {
-		_iInicio = inicio;
-	
+
+	public Inicio(RepositorioVideo videorepository,
+		RepositorioYoutuber youtuberRepository,
+		RepositorioComentario comentariosRepository,
+		RepositorioAdministrador administradoresRepository) {
+
+		_iInicio = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+
         // Estilos generales del layout
         setWidthFull();
         setPadding(true);
@@ -52,7 +68,7 @@ public class Inicio extends VerticalLayout {
         add(header);
 
         // Métodos adicionales
-        Buscar(inicio);         // Agrega componente de búsqueda
+        Buscar(_iInicio);         // Agrega componente de búsqueda
         UltimosVideos();  // Agrega sección de últimos videos
     }
 

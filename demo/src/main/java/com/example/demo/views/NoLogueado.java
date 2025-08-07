@@ -1,5 +1,10 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.RepositorioAdministrador;
+import com.example.demo.domain.RepositorioComentario;
+import com.example.demo.domain.RepositorioVideo;
+import com.example.demo.domain.RepositorioYoutuber;
+import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.iInicio;
 import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
@@ -24,9 +29,12 @@ public class NoLogueado extends Inicio {
         UI.getCurrent().navigate(Registrar.class);
     }
 
-    public NoLogueado(iNoLogueado iNoLogueado) {
-        super(iNoLogueado); // Llama al constructor de Inicio para añadir el buscador
-        _iNoLogueado = iNoLogueado;
+    public NoLogueado(RepositorioVideo videorepository,
+		RepositorioYoutuber youtuberRepository,
+		RepositorioComentario comentariosRepository,
+		RepositorioAdministrador administradoresRepository) {
+        super(videorepository, youtuberRepository, comentariosRepository, administradoresRepository); // Llama al constructor de Inicio para añadir el buscador
+        _iNoLogueado = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
         // Botones de Login y Registrar
         // Botón de Login
         Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));

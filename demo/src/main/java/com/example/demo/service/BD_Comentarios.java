@@ -30,4 +30,10 @@ public class BD_Comentarios {
         _comentarios.add(comentario);
         repository.save(comentario);
     }
+    public void eliminarComentario(int id) {
+        Comentario comentario = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Comentario no encontrado"));
+        repository.delete(comentario);
+         
+    }
 }

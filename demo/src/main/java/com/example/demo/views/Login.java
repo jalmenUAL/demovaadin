@@ -5,8 +5,10 @@ package com.example.demo.views;
 import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.login.LoginOverlay;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.example.demo.domain.Registrado;
 import com.example.demo.domain.Administrador;
@@ -35,11 +37,16 @@ public class Login extends VerticalLayout {
             // Por ejemplo, autenticar al usuario y redirigir a la página principal
             Registrado r = iNoLogueado.Login(event.getUsername(), event.getPassword());
             if (r instanceof Administrador) {
-                 UI.getCurrent().navigate(com.example.demo.views.Administrador.class);
+                VaadinSession.getCurrent().setAttribute(com.example.demo.domain.Registrado.class, r);
+                UI.getCurrent().navigate(com.example.demo.views.Inicio.class);
             } else if (r instanceof Youtuber) {
-                 UI.getCurrent().navigate(com.example.demo.views.Youtuber.class);
-            }
-
+                VaadinSession.getCurrent().setAttribute(com.example.demo.domain.Registrado.class, r);
+                UI.getCurrent().navigate(com.example.demo.views.Inicio.class);
+            } else 
+                {
+                Notification.show("Usuario o contraseña incorrectos", 3000, Notification.Position.MIDDLE);
+                UI.getCurrent().navigate(com.example.demo.views.Inicio.class);
+                }
         });
 
     }

@@ -3,8 +3,14 @@ package com.example.demo.views;
 import java.util.List;
 
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
+import com.example.demo.domain.RepositorioAdministrador;
+import com.example.demo.domain.RepositorioComentario;
+import com.example.demo.domain.RepositorioVideo;
+import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
+import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -12,23 +18,29 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 
 import jakarta.annotation.security.RolesAllowed;
 
 //import basededatos.iYoutuber;
 
 @Route("Youtuber")
-@RolesAllowed("USER")
+@RolesAllowed("ROLE_USER")
+@Component
+
 public class Youtuber extends Registrado {
     public iYoutuber _iYoutuber;
     public PerfilPropio _perfilPropio;
     public UltimosVideosdeYoutuber _ultimosVideos;
-    com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public com.example.demo.domain.Youtuber usuario;
 
-    public Youtuber(iYoutuber youtuber) {
-        super(youtuber);
-        _iYoutuber = youtuber;
-       
+    public Youtuber( RepositorioVideo videorepository,
+	                  RepositorioYoutuber youtuberRepository,
+	                  RepositorioComentario comentariosRepository,
+	                  RepositorioAdministrador administradoresRepository) {
+        super(videorepository, youtuberRepository, comentariosRepository, administradoresRepository); // Llama al constructor de Registrado para añadir el buscador
+        _iYoutuber = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+        usuario = (com.example.demo.domain.Youtuber) VaadinSession.getCurrent().getAttribute(com.example.demo.domain.Registrado.class);
 
         // === HEADER con botón "Mi Perfil" ===
         Button perfilBtn = new Button("Mi Perfil", new Icon(VaadinIcon.USER));

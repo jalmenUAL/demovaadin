@@ -70,7 +70,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     @Override
     public List<Video> getUltimosVideos() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUltimosVideos'");
+        return _videos.getUltimosVideos();
     }
 
     @Override
@@ -82,13 +82,13 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     @Override
     public void eliminarComentario(int id) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarComentario'");
+        _comentarios.eliminarComentario(id);
     }
 
     @Override
     public List<Youtuber> buscarDenunciados() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscarDenunciados'");
+        return _youtubers.buscarDenunciados();
     }
 
 }
