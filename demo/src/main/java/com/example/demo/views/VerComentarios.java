@@ -2,8 +2,11 @@ package com.example.demo.views;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
+import com.example.demo.domain.Comentario;
+import com.example.demo.domain.Video;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -14,20 +17,21 @@ public class VerComentarios extends VerticalLayout {
     public VerVideo _verVideo;
     public List<VerComentarios_item> _item = new ArrayList<>();
 
-    public VerComentarios() {
+    public VerComentarios(Set<Comentario>  comentarios) {
+
         setWidthFull();
         setPadding(true);
         setSpacing(false);  // Desactivamos spacing porque usaremos separadores
         setAlignItems(Alignment.STRETCH);
+        List<Comentario> comentarios2 = new ArrayList<>(comentarios);
 
-        int totalComentarios = 3;
-        for (int i = 0; i < totalComentarios; i++) {
-            VerComentarios_item comentario = new VerComentarios_item();
+        for (int i = 0; i < comentarios2.size(); i++) {
+            VerComentarios_item comentario = new VerComentarios_item(comentarios2.get(i));
             _item.add(comentario);
             add(comentario);
 
             // Añadir separador excepto después del último comentario
-            if (i < totalComentarios - 1) {
+            if (i < comentarios.size() - 1) {
                 addSeparator();
             }
         }

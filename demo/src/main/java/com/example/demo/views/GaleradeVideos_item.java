@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Video;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -25,8 +26,12 @@ public class GaleradeVideos_item extends VerticalLayout {
         UI.getCurrent().navigate(VerVideo.class);
     }
 
-    public GaleradeVideos_item() {
-       
+    public GaleradeVideos_item(Video video) {
+        
+        this.thumbnailUrl = video.getUrl();
+        this.tituloVideo = video.getTitulo();
+        this.propietarioNombre = video.getEs_de().getLogin();
+        this.propietarioFotoUrl = video.getEs_de().getFotoPerfil();
 
         // Título del video
         Span tituloSpan = new Span(tituloVideo);
@@ -58,37 +63,5 @@ public class GaleradeVideos_item extends VerticalLayout {
 
         add(verVideoBtn);
     }
-    public String getVideoId() {
-        return videoId;
-    }
-    public String getThumbnailUrl() {
-        return thumbnailUrl;
-    }
-    public String getTituloVideo() {
-        return tituloVideo;
-    }
 
-    public String getPropietarioNombre() {
-        return propietarioNombre;
-    }
-
-    public String getPropietarioFotoUrl() {
-        return propietarioFotoUrl;
-    }
-    public String setThumbnailUrl(String thumbnailUrl) {
-        this.thumbnailUrl = thumbnailUrl;
-        return this.thumbnailUrl;
-    }
-    public String setTituloVideo(String tituloVideo) {
-        this.tituloVideo = tituloVideo;
-        return this.tituloVideo;
-    }
-    public String setPropietarioNombre(String propietarioNombre) {
-        this.propietarioNombre = propietarioNombre;
-        return this.propietarioNombre;
-    }
-    public String setPropietarioFotoUrl(String propietarioFotoUrl) {
-        this.propietarioFotoUrl = propietarioFotoUrl;
-        return this.propietarioFotoUrl;
-    }
 }

@@ -11,5 +11,7 @@ import com.vaadin.flow.router.Route;
 public class UltimosVideos_item extends GaleradeVideos_item {
     public UltimosVideos_item(Video video) {
 
+        super(video);
+        // Aquí puedes agregar más lógica específica para los últimos videos si es necesario
     }
 }

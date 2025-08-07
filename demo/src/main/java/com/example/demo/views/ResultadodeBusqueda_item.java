@@ -10,10 +10,7 @@ import com.vaadin.flow.router.Route;
 public class ResultadodeBusqueda_item extends GaleradeVideos_item {
 
     public ResultadodeBusqueda_item(Video video ) {
-         this.setThumbnailUrl(video.getUrl());
-         this.setTituloVideo(video.getTitulo());
-         this.setPropietarioNombre(video.getEs_de().getLogin());
-         this.setPropietarioFotoUrl(video.getEs_de().getFotoPerfil());
+         super(video);
          
 
     }

@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import java.util.List;
 import java.util.Vector;
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -13,7 +14,7 @@ public class Usuariosdenunciados extends VerticalLayout{
     public Administrador _administrador;
     public Vector<Usuariosdenunciados_item> _item = new Vector<Usuariosdenunciados_item>();
 
-    public Usuariosdenunciados() {
+    public Usuariosdenunciados(List<com.example.demo.domain.Youtuber> youtubers) {
         // Título
         Span titulo = new Span("Usuarios denunciados");
         titulo.getStyle().set("font-weight", "bold").set("font-size", "1.5em");
@@ -23,8 +24,8 @@ public class Usuariosdenunciados extends VerticalLayout{
         HorizontalLayout cardsLayout = new HorizontalLayout();
         cardsLayout.setWidthFull();
 
-        for (int i = 0; i < 5; i++) {
-            Usuariosdenunciados_item item = new Usuariosdenunciados_item();
+        for (int i = 0; i < youtubers.size(); i++) {
+            Usuariosdenunciados_item item = new Usuariosdenunciados_item(youtubers.get(i));
             _item.add(item);
 
             Div card = new Div(item);

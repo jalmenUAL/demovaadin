@@ -5,18 +5,15 @@ import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.component.ClickEvent;
-import com.vaadin.flow.component.ComponentEventListener;
-import com.vaadin.flow.component.UI;
 
 @Route("Usuariosdenunciados_item")
 public class Usuariosdenunciados_item extends VerticalLayout {
     public Usuariosdenunciados _usuariosdenunciados;
 
-    public Usuariosdenunciados_item() {
+    public Usuariosdenunciados_item(com.example.demo.domain.Youtuber youtuber) {
         // Datos de ejemplo
-        String nombreUsuario = "Usuario Denunciado";
-        String avatarUrl = "https://randomuser.me/api/portraits/men/2.jpg";
+        String nombreUsuario = youtuber.getLogin();
+        String avatarUrl = youtuber.getFotoPerfil();
 
         Avatar avatar = new Avatar(nombreUsuario, avatarUrl);
         Span nombreSpan = new Span(nombreUsuario);
@@ -26,11 +23,5 @@ public class Usuariosdenunciados_item extends VerticalLayout {
         infoLayout.setAlignItems(Alignment.CENTER);
 
         add(infoLayout);
-
-        // Hace que todo el item sea clickable y navegue al perfil de administrador
-        this.getStyle().set("cursor", "pointer");
-        this.addClickListener((ComponentEventListener<ClickEvent<VerticalLayout>>) event ->
-            UI.getCurrent().navigate("PerfilAjenodeAdministrador")
-        );
     }
 }

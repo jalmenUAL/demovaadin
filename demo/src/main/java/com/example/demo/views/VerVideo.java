@@ -1,7 +1,8 @@
 package com.example.demo.views;
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-
+import com.example.demo.domain.Video;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
@@ -18,22 +19,22 @@ public class VerVideo extends VerticalLayout{
 	public PerfilAjeno _perfilAjeno;
 	HorizontalLayout video_y_relacionados = new HorizontalLayout();
 	VerticalLayout frame_y_comentarios = new VerticalLayout();
+	Video video;
 	
-	
-	public VerVideo() {
-
+	public VerVideo(Video video) {
+		this.video = video;
     add(video_y_relacionados);
     video_y_relacionados.add(frame_y_comentarios);    
     video_y_relacionados.getStyle().set("width", "100%");
 
     // === CABECERA DEL VIDEO ===
-    Image avatar = new Image("https://randomuser.me/api/portraits/men/1.jpg", "Avatar");
+    Image avatar = new Image(video.getEs_de().getFotoPerfil(), "Avatar");
     avatar.setWidth("50px");
     avatar.setHeight("50px");
     avatar.getStyle().set("border-radius", "50%");
 
-    String nombreUsuario = "Rick Astley";
-    String tituloVideo = "Never Gonna Give You Up";
+    String nombreUsuario = video.getEs_de().getLogin();
+    String tituloVideo = video.getTitulo();
 
     VerticalLayout infoUsuario = new VerticalLayout();
     infoUsuario.setSpacing(false);
@@ -54,7 +55,17 @@ public class VerVideo extends VerticalLayout{
     frame_y_comentarios.add(cabeceraCompleta);
 
     // === VIDEO ===
-    String videoId = "dQw4w9WgXcQ"; // Ejemplo
+    String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
+    if (videoId.contains("?")) {
+        videoId = videoId.substring(0, videoId.indexOf("?"));
+    }
+    if (videoId.contains("#")) {
+        videoId = videoId.substring(0, videoId.indexOf("#"));
+    }
+    String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+    Image thumbnail = new Image(thumbnailUrl, "Thumbnail del video");
+    thumbnail.setWidth("100%");
+    thumbnail.getStyle().set("border-radius", "8px").set("cursor", "pointer");      
     String embedUrl = "https://www.youtube.com/embed/" + videoId;
 
     Div iframeContainer = new Div();
@@ -79,11 +90,13 @@ public class VerVideo extends VerticalLayout{
 	}
 
 	public void VerComentarios() {
-		_verComentarios = new VerComentarios();
+
+		_verComentarios = new VerComentarios(video.getTiene_comentarios());
 		frame_y_comentarios.add(_verComentarios);
 	}
 
 	public void PerfilAjeno() {
-		throw new UnsupportedOperationException();
+		_perfilAjeno = new PerfilAjeno(video.getEs_de());
+		 UI.getCurrent().navigate(PerfilAjeno.class);
 	}
 }

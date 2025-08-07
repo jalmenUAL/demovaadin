@@ -1,20 +1,23 @@
 package com.example.demo.views;
 
+import java.util.List;
+import java.util.Set;
+
+import com.example.demo.domain.Comentario;
+import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.router.Route;
 
 @Route("VerComentariosdeAdministrador")
 
 public class VerComentariosdeAdministrador extends VerComentarios {
 
-    public VerComentariosdeAdministrador() {
-        super();
+    public VerComentariosdeAdministrador(iAdministrador iAdministrador,Set<Comentario> comentarios) {
+        super(comentarios);
         removeAll();
-        VerComentarios_item vci = new VerComentariosdeAdministrador_item();
-		add(vci);
-		VerComentarios_item vci2 = new VerComentariosdeAdministrador_item();
-		add(vci2);
-		VerComentarios_item vci3 = new VerComentariosdeAdministrador_item();
-		add(vci3);
+        for (Comentario comentario : comentarios) {
+            VerComentarios_item comentarioItem = new VerComentariosdeAdministrador_item(iAdministrador,comentario);
+            add(comentarioItem);
+        }
     }
  
 

@@ -1,5 +1,10 @@
 package com.example.demo.views;
 
+import java.util.List;
+import java.util.Set;
+
+import com.example.demo.domain.Comentario;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -9,7 +14,8 @@ import com.vaadin.flow.router.Route;
 @Route("VerComentariosdeYoutuber")
 public class VerComentariosdeYoutuber extends VerComentarios {
 
-    public VerComentariosdeYoutuber() {
+    public VerComentariosdeYoutuber(Set<Comentario> comentarios) {
+        super(comentarios);
         // Crear botón "Comentar"
         Button comentarButton = new Button("Comentar", event -> comentar());
 
@@ -31,9 +37,7 @@ public class VerComentariosdeYoutuber extends VerComentarios {
     }
 
     public void comentar() {
-        // Acción simulada: reemplaza esto por la lógica real
-        Notification.show("Función de comentar aún no implementada", 3000, Notification.Position.MIDDLE);
-
-        // Aquí podrías abrir un formulario de comentario o redirigir a otra vista
+       UI.getCurrent().getPage().setLocation("Comentar");
+         
     }
 }

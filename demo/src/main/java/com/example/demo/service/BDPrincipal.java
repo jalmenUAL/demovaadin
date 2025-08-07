@@ -3,6 +3,7 @@ package com.example.demo.service;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Video;
+import com.example.demo.domain.Youtuber;
 import com.example.demo.domain.Registrado;
 import com.example.demo.domain.RepositorioAdministrador;
 import com.example.demo.domain.RepositorioComentario;
@@ -76,6 +77,18 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public List<Video> cargarUltimosVideos(String login) {
         // TODO Auto-generated method stub
         return _youtubers.cargarUltimosVideos(login);
+    }
+
+    @Override
+    public void eliminarComentario(int id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'eliminarComentario'");
+    }
+
+    @Override
+    public List<Youtuber> buscarDenunciados() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buscarDenunciados'");
     }
 
 }

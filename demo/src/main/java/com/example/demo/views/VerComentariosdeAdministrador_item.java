@@ -1,5 +1,7 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Comentario;
+import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -8,7 +10,11 @@ import com.vaadin.flow.router.Route;
 @Route("VerComentariosdeAdministrador_item")
 public class VerComentariosdeAdministrador_item extends VerComentarios_item {
 
-    public VerComentariosdeAdministrador_item() {
+    public iAdministrador iAdministrador;
+
+    public VerComentariosdeAdministrador_item(iAdministrador iAdministrador, Comentario comentario) {
+        super(comentario);
+        this.iAdministrador = iAdministrador;
         // Crear botón "Eliminar"
         Button eliminarButton = new Button("Eliminar", event -> eliminar());
 
@@ -30,8 +36,6 @@ public class VerComentariosdeAdministrador_item extends VerComentarios_item {
     }
 
     public void eliminar() {
-        // Acción simulada
-        Notification.show("Comentario eliminado", 3000, Notification.Position.MIDDLE);
-        // Aquí iría la lógica real (ej: eliminar de la base de datos)
+        iAdministrador.eliminarComentario(comentario2.getORMID());
     }
 }

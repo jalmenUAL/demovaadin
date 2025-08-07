@@ -12,11 +12,12 @@ public UltimosVideosdeYoutuber(List<Video> videos) {
 	super(videos);
 	carrusel.removeAll();
 	for (Video video : videos) {
-		UltimosVideos_item gvi = new UltimosVideos_item(video);
+		UltimosVideos_item gvi = new UltimosVideosdeYoutuber_item(video);
 		carrusel.add(gvi);			
 		 
 		
 	}
+
 }
 	 
 }
