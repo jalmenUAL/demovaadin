@@ -1,19 +1,22 @@
 package com.example.demo.views;
 
+import java.util.List;
+
+import com.example.demo.domain.Video;
 import com.vaadin.flow.router.Route;
 
 @Route("UltimosVideosdeYoutuber")
 public class UltimosVideosdeYoutuber extends UltimosVideos {
-	
-public UltimosVideosdeYoutuber() {
-		
-		
-		carrusel.removeAll();
-		UltimosVideos_item uvi = new UltimosVideosdeYoutuber_item();
-		carrusel.add(uvi);
-		UltimosVideos_item uvi2 = new UltimosVideosdeYoutuber_item();
-		carrusel.add(uvi2);
+
+public UltimosVideosdeYoutuber(List<Video> videos) {
+	super(videos);
+	carrusel.removeAll();
+	for (Video video : videos) {
+		UltimosVideos_item gvi = new UltimosVideos_item(video);
+		carrusel.add(gvi);			
 		 
 		
 	}
+}
+	 
 }

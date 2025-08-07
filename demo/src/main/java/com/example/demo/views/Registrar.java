@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -29,13 +30,15 @@ public class Registrar extends VerticalLayout{
     private Image avatar;
     private Image imagenDeFondo;
     private String loginValue;
+    public iNoLogueado _iNoLogueado;
 
     public void EnviarCorreo() {
         throw new UnsupportedOperationException();
     }
 
-     public Registrar() {
+     public Registrar(iNoLogueado iNoLogueado) {
         // Estilo general centrado
+        _iNoLogueado = iNoLogueado;
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
@@ -111,6 +114,7 @@ public class Registrar extends VerticalLayout{
     }
 
     private void registrar(String login, String password, String avatarUrl, String fondoUrl) {
+        _iNoLogueado.registrar(login, password, avatarUrl, fondoUrl);
         UI.getCurrent().navigate(Login.class);
          
        

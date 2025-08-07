@@ -1,7 +1,9 @@
 package com.example.demo.views;
 
+import java.util.List;
 import java.util.Vector;
 
+import com.example.demo.domain.Video;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -14,7 +16,7 @@ public class GaleradeVideos extends VerticalLayout {
 
     HorizontalLayout carrusel = new HorizontalLayout();
 
-   public GaleradeVideos() {
+   public GaleradeVideos(List<Video> videos) {
         // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);

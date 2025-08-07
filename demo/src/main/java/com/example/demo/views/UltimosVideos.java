@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import java.util.List;
+
+import com.example.demo.domain.Video;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -7,7 +10,9 @@ import com.vaadin.flow.router.Route;
 public class UltimosVideos extends GaleradeVideos {
 	public Inicio _inicio;
 
-	public UltimosVideos() {
+	public UltimosVideos(List<Video> videos) {
+		super(videos);
+		// TODO Auto-generated constructor stub
 
 	}
 }

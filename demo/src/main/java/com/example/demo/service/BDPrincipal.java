@@ -51,4 +51,31 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
         _youtubers.actualizarConfiguracion(value, value2, src, src2);
     }
 
+    @Override
+    public void bloquearUsuario(String ormid) {
+        _youtubers.bloquearUsuario(ormid);
+    }
+
+    @Override
+    public void publicarVideo(String value, String value2) {
+        _videos.publicarVideo(value, value2);
+    }
+
+    @Override
+    public void registrar(String login, String password, String avatarUrl, String fondoUrl) {
+        _youtubers.registrar(login, password, avatarUrl, fondoUrl);
+    }
+
+    @Override
+    public List<Video> getUltimosVideos() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUltimosVideos'");
+    }
+
+    @Override
+    public List<Video> cargarUltimosVideos(String login) {
+        // TODO Auto-generated method stub
+        return _youtubers.cargarUltimosVideos(login);
+    }
+
 }

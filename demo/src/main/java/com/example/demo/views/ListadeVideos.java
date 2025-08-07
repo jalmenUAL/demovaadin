@@ -1,34 +1,39 @@
 package com.example.demo.views;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.example.demo.domain.Video;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route("ListadeVideos")
 public class ListadeVideos extends VerticalLayout {
     public Vector<ListadeVideos_item> _item = new Vector<ListadeVideos_item>();
+ 
 
-    public ListadeVideos() {
-        // Crear 6 items y mostrarlos en un grid de 2 filas x 3 columnas
-        int filas = 2;
-        int columnas = 3;
-        int total = filas * columnas;
-
-        for (int i = 0; i < total; i++) {
-            _item.add(new ListadeVideos_item());
-        }
-
+    public ListadeVideos(Set<Video> videos2) {
+        int columnas = 2;
         int index = 0;
-        for (int f = 0; f < filas; f++) {
+        List<Video> videos = new ArrayList<>(videos2);
+        while (index < videos.size()) {
             HorizontalLayout fila = new HorizontalLayout();
-            for (int c = 0; c < columnas; c++) {
-                if (index < _item.size()) {
-                    fila.add(_item.get(index));
-                    index++;
-                }
+            fila.setWidthFull();
+            fila.setSpacing(true);
+            fila.getStyle().set("justify-content", "space-between");
+
+            for (int c = 0; c < columnas && index < videos.size(); c++) {
+                Video video = videos.get(index);
+                ListadeVideos_item item = new ListadeVideos_item(video);
+                item.setWidth("48%"); // Para que entren dos en una fila con espacio
+                _item.add(item);
+                fila.add(item);
+                index++;
             }
+
             add(fila);
         }
     }

@@ -8,5 +8,7 @@ public interface iInicio {
 
     List<Video> buscar(String texto);
 
+    List<Video> getUltimosVideos();
+
     
 }

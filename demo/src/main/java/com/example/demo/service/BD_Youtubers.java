@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.Youtuber;
 
 import com.example.demo.domain.RepositorioYoutuber;
+import com.example.demo.domain.Video;
 
 @Service
 public class BD_Youtubers {
@@ -37,6 +39,34 @@ public class BD_Youtubers {
         usuario.setFotoPerfil(src);
         usuario.setBanner(src2);
         repository.save(usuario);
+    }
+
+    public void bloquearUsuario(String ormid) {
+        Youtuber usuario = repository.findById(ormid)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        usuario.setBloqueado(true); // Asumiendo que hay un campo bloqueado en Youtuber
+        repository.save(usuario);
+    }
+ 
+
+    public void registrar(String login, String password, String avatarUrl, String fondoUrl) {
+        Youtuber nuevoYoutuber = new Youtuber();
+        nuevoYoutuber.setLogin(login);
+        nuevoYoutuber.setPassword(password);
+        nuevoYoutuber.setFotoPerfil(avatarUrl);
+        nuevoYoutuber.setBanner(fondoUrl);
+        repository.save(nuevoYoutuber);
+    }
+
+    public List<Video> cargarUltimosVideos(String login) {
+        com.example.demo.domain.Youtuber usuario = repository.findByLogin(login)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Vector<Video> UltimosVideos = new Vector<Video>();
+        for (Object obj : usuario.getSeguidor_de()) {
+        Youtuber seguido = (Youtuber) obj; // Cast explícito
+        UltimosVideos.addAll(seguido.getHa_publicado());
+    }
+        return UltimosVideos;
     }
  
 }

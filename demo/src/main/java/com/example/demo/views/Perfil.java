@@ -19,18 +19,19 @@ public class Perfil extends VerticalLayout {
     public Videosgustados _videosgustados;
     public Videospublicados _videospublicados;
     HorizontalLayout topLayout = new HorizontalLayout();
- 
+    com.example.demo.domain.Youtuber _usuario;
 
      
 
-    public Perfil() {
+    public Perfil(com.example.demo.domain.Youtuber usuario) {
+        _usuario = usuario;
         setSizeFull();
         setSpacing(true);
         setPadding(false);
         setAlignItems(Alignment.CENTER);
 
         // Imagen de fondo (cabecera)
-        Image imagenDeFondo = new Image("https://picsum.photos/1200/300", "Imagen de fondo");
+        Image imagenDeFondo = new Image(usuario.getBanner(), "Imagen de fondo");
         imagenDeFondo.setWidth("100%");
         imagenDeFondo.setHeight("300px");
         imagenDeFondo.getStyle().set("object-fit", "cover");
@@ -38,9 +39,8 @@ public class Perfil extends VerticalLayout {
         add(imagenDeFondo);
 
         // Datos de ejemplo
-        String nombreUsuario = "Youtuber Ejemplo";
-        String avatarUrl = "https://randomuser.me/api/portraits/men/1.jpg";
-
+        String nombreUsuario = usuario.getLogin();
+        String avatarUrl = usuario.getFotoPerfil();
         // Título debajo del fondo
         H2 titulo = new H2("Perfil del Youtuber");
         titulo.getStyle().set("color", "#2c3e50").set("margin-top", "10px");
@@ -77,8 +77,8 @@ public class Perfil extends VerticalLayout {
         add(topLayout);
 
         // Inicializar vistas de videos
-        _videosgustados = new Videosgustados();
-        _videospublicados = new Videospublicados();
+        _videosgustados = new Videosgustados(usuario.getLe_gusta());      
+        _videospublicados = new Videospublicados(usuario.getHa_publicado());    
 
         // Layouts para secciones
         VerticalLayout publicadosLayout = new VerticalLayout();

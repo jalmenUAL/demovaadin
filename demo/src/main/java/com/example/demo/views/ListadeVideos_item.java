@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Video;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.button.Button;
@@ -19,16 +20,15 @@ public class ListadeVideos_item extends VerticalLayout {
         UI.getCurrent().navigate(VerVideo.class);
     }
 
-    public ListadeVideos_item() {
+    public ListadeVideos_item(Video video) {
         // Datos de ejemplo
-        String videoId = "dQw4w9WgXcQ";
-        String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
-        String tituloVideo = "Título de ejemplo del video";
-        String propietarioNombre = "Propietario Ejemplo";
-        String propietarioFotoUrl = "https://randomuser.me/api/portraits/men/1.jpg";
-        int numMeGustas = 123;
-        int numComentarios = 45;
-
+         
+        String thumbnailUrl =  video.getUrl();
+        String tituloVideo = video.getTitulo();
+        String propietarioNombre = video.getEs_de().getLogin();
+        String propietarioFotoUrl = video.getEs_de().getFotoPerfil();
+        int numMeGustas = video.getLe_gusta_a().size();
+        int numComentarios = video.getTiene_comentarios().size();
         // Título del video
         Span tituloSpan = new Span(tituloVideo);
         tituloSpan.getStyle().set("font-weight", "bold").set("font-size", "1.2em");

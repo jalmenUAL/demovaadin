@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import java.util.List;
+
+import com.example.demo.domain.Video;
 import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.html.H1;
@@ -15,9 +18,16 @@ public class Inicio extends VerticalLayout {
 	public Buscar _buscar;
 	public UltimosVideos _ultimosVideos;
 	public HorizontalLayout header = new HorizontalLayout();
+	iInicio _iInicio;
+
+	 
+
+	// Constructor que recibe el servicio iInicio
 
 	
 	public Inicio(iInicio inicio) {
+		_iInicio = inicio;
+	
         // Estilos generales del layout
         setWidthFull();
         setPadding(true);
@@ -53,8 +63,11 @@ public class Inicio extends VerticalLayout {
 	}
 
 	public void UltimosVideos() {
-		_ultimosVideos = new UltimosVideos();
-		add(_ultimosVideos);
+		List<Video> videos = _iInicio.getUltimosVideos();
+		if (!(videos == null || videos.isEmpty())) {
+			_ultimosVideos = new UltimosVideos(videos);
+			add(_ultimosVideos);
+		}
 	}
 
 }

@@ -1,5 +1,10 @@
 package com.example.demo.views;
 
+import java.util.List;
+
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.example.demo.domain.Video;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -18,9 +23,12 @@ public class Youtuber extends Registrado {
     public iYoutuber _iYoutuber;
     public PerfilPropio _perfilPropio;
     public UltimosVideosdeYoutuber _ultimosVideos;
+    com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
     public Youtuber(iYoutuber youtuber) {
         super(youtuber);
+        _iYoutuber = youtuber;
+       
 
         // === HEADER con botón "Mi Perfil" ===
         Button perfilBtn = new Button("Mi Perfil", new Icon(VaadinIcon.USER));
@@ -45,12 +53,14 @@ public class Youtuber extends Registrado {
     }
 
     public void PerfilPropio() {
-        _perfilPropio = new PerfilPropio();
+
+        _perfilPropio = new PerfilPropio(_iYoutuber, usuario);
         add(_perfilPropio);
     }
 
     public void UltimosVideos() {
-        _ultimosVideos = new UltimosVideosdeYoutuber();
+        List<Video> videos = _iYoutuber.cargarUltimosVideos(usuario.getLogin()); 
+        _ultimosVideos = new UltimosVideosdeYoutuber(videos);
         add(_ultimosVideos);
     }
 }

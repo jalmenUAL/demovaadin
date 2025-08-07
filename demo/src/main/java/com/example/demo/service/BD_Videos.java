@@ -27,6 +27,18 @@ public java.util.List<Video> buscar(String texto) {
 	java.util.List<Video>  videos = videorepository.findAll();
 	return videos;
 }
+
+
+public void publicarVideo(String value, String value2) {
+	// TODO Auto-generated method stub
+	Video video = new Video();
+	video.setTitulo(value);
+	video.setUrl(value2);
+	videorepository.save(video);
+	
+}
+
+ 
 	
  
  

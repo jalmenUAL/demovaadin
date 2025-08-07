@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 
@@ -10,11 +11,15 @@ import com.vaadin.flow.router.Route;
 
 public class PerfilPropio extends Perfil {
 
-    public Youtuber _youtuber;
+    public com.example.demo.domain.Youtuber _youtuber;
     public PublicarVideo _publicarVideo;
     public Configuracion _configuracion;
 
-    public PerfilPropio() {
+    public PerfilPropio(iYoutuber iYoutuber,
+                        com.example.demo.domain.Youtuber usuario) {
+        super(usuario);
+        this._publicarVideo = new PublicarVideo(iYoutuber);
+        this._configuracion = new Configuracion(iYoutuber);
         // === Crear botones ===
         Button publicarButton = new Button("📤 Publicar video", event -> PublicarVideo());
         Button configButton = new Button("⚙️ Configuración", event -> Configuracion());

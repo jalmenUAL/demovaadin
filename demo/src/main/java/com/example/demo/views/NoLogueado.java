@@ -10,7 +10,6 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 
-
 @Route("NoLogueado")
 public class NoLogueado extends Inicio {
     public iNoLogueado _iNoLogueado;
@@ -18,8 +17,9 @@ public class NoLogueado extends Inicio {
     public Registrar _registrar;
 
     public void Login() {
-       UI.getCurrent().navigate(Login.class);
+        UI.getCurrent().navigate(Login.class);
     }
+
     public void Registrar() {
         UI.getCurrent().navigate(Registrar.class);
     }
@@ -29,17 +29,16 @@ public class NoLogueado extends Inicio {
         _iNoLogueado = iNoLogueado;
         // Botones de Login y Registrar
         // Botón de Login
-Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));
-loginButton.addClickListener(e -> Login());
-loginButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY); // Botón azul
+        Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));
+        loginButton.addClickListener(e -> Login());
+        loginButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY); // Botón azul
 
-// Botón de Registrar
-Button registrarButton = new Button("Registrar", new Icon(VaadinIcon.USER_CARD));
-registrarButton.addClickListener(e -> Registrar());
-registrarButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS); // Botón verde
+        // Botón de Registrar
+        Button registrarButton = new Button("Registrar", new Icon(VaadinIcon.USER_CARD));
+        registrarButton.addClickListener(e -> Registrar());
+        registrarButton.addThemeVariants(ButtonVariant.LUMO_SUCCESS); // Botón verde
         HorizontalLayout botones = new HorizontalLayout(loginButton, registrarButton);
-         
-		 
+
         // Añade los botones al final de la vista
         header.add(botones);
     }

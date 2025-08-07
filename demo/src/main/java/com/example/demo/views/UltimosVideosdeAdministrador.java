@@ -1,24 +1,28 @@
 package com.example.demo.views;
 
+import java.util.List;
+
+import com.example.demo.domain.Video;
 import com.vaadin.flow.router.Route;
 
 @Route("UltimosVideosdeAdministrador")
 public class UltimosVideosdeAdministrador extends UltimosVideos {
-	
-public UltimosVideosdeAdministrador() {
-		
-		
+
+public UltimosVideosdeAdministrador(List<Video> videos) {
+
+		super(videos);
 		carrusel.removeAll();
-		UltimosVideos_item uvi = new UltimosVideosdeAdministrador_item();
-		carrusel.add(uvi);
-		UltimosVideos_item uvi2 = new UltimosVideosdeAdministrador_item();
-		carrusel.add(uvi2);
-		UltimosVideos_item uvi3 = new UltimosVideosdeAdministrador_item();
-		carrusel.add(uvi3);
-		UltimosVideos_item uvi4 = new UltimosVideosdeAdministrador_item();
-		carrusel.add(uvi4);
-		UltimosVideos_item uvi5 = new UltimosVideosdeAdministrador_item();
-		carrusel.add(uvi5);
+		for (Video video : videos) {
+			UltimosVideos_item gvi = new UltimosVideos_item(video);
+			carrusel.add(gvi);
+		}
+		carrusel.setJustifyContentMode(JustifyContentMode.CENTER);
+		carrusel.setAlignItems(Alignment.CENTER);
+		carrusel.setWidth("100%");
+		carrusel.setHeight("100%");
+		carrusel.setSpacing(true);
+		carrusel.setPadding(true);
+		carrusel.setMargin(true);
 		
 	}
 }
