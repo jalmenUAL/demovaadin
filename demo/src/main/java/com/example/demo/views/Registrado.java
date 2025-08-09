@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.domain.RepositorioAdministrador;
@@ -15,6 +16,9 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinServletRequest;
+import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.spring.annotation.UIScope;
 
 import jakarta.annotation.security.RolesAllowed;
 
@@ -22,6 +26,8 @@ import jakarta.annotation.security.RolesAllowed;
 @Route("Registrado")
 @RolesAllowed({"ROLE_ADMIN", "ROLE_USER"}) 
 @Component
+@UIScope  // importante
+
 public class Registrado extends Inicio {
     public iRegistrado _iRegistrado;
 
@@ -31,7 +37,7 @@ public class Registrado extends Inicio {
 	                  RepositorioAdministrador administradoresRepository) {
         super(videorepository, youtuberRepository, comentariosRepository, administradoresRepository); // Llama al constructor de Inicio para añadir el buscador
         // Inicializa el servicio iRegistrado con la base de datos principal
-		_iRegistrado = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);	
+		//_iRegistrado = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);	
 
 
         // Botón de logout
@@ -64,8 +70,16 @@ public class Registrado extends Inicio {
     }
 
     public void Logout() {
-        // Aquí va la lógica real para cerrar sesión
-        // Por ejemplo: limpiar sesión, redirigir al login...
+        new SecurityContextLogoutHandler().logout(
+        VaadinServletRequest.getCurrent().getHttpServletRequest(),
+        null,
+        null);
+        VaadinSession.getCurrent().close();
+        VaadinSession.getCurrent().setAttribute("Registrado", null);
+
         getUI().ifPresent(ui -> ui.navigate("NoLogueado"));
     }
+
+     
+
 }

@@ -19,6 +19,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.spring.annotation.UIScope;
 
 import jakarta.annotation.security.RolesAllowed;
 
@@ -27,6 +28,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route("Youtuber")
 @RolesAllowed("ROLE_USER")
 @Component
+@UIScope  // importante
 
 public class Youtuber extends Registrado {
     public iYoutuber _iYoutuber;
@@ -39,8 +41,8 @@ public class Youtuber extends Registrado {
 	                  RepositorioComentario comentariosRepository,
 	                  RepositorioAdministrador administradoresRepository) {
         super(videorepository, youtuberRepository, comentariosRepository, administradoresRepository); // Llama al constructor de Registrado para añadir el buscador
-        _iYoutuber = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
-        usuario = (com.example.demo.domain.Youtuber) VaadinSession.getCurrent().getAttribute(com.example.demo.domain.Registrado.class);
+        //_iYoutuber = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+        //usuario = (com.example.demo.domain.Youtuber) VaadinSession.getCurrent().getAttribute(com.example.demo.domain.Registrado.class);
 
         // === HEADER con botón "Mi Perfil" ===
         Button perfilBtn = new Button("Mi Perfil", new Icon(VaadinIcon.USER));
@@ -60,19 +62,19 @@ public class Youtuber extends Registrado {
         header.add(perfilBtn);
 
         // === CONTENIDO PRINCIPAL ===
-        UltimosVideos();
+        //UltimosVideos();
         // Opcional: No añadas directamente PerfilPropio aquí si es una página separada
     }
 
     public void PerfilPropio() {
 
-        _perfilPropio = new PerfilPropio(_iYoutuber, usuario);
-        add(_perfilPropio);
+        //_perfilPropio = new PerfilPropio(_iYoutuber, usuario);
+        //add(_perfilPropio);
     }
 
     public void UltimosVideos() {
-        List<Video> videos = _iYoutuber.cargarUltimosVideos(usuario.getLogin()); 
-        _ultimosVideos = new UltimosVideosdeYoutuber(videos);
-        add(_ultimosVideos);
+       //List<Video> videos = _iYoutuber.cargarUltimosVideos(usuario.getLogin()); 
+       // _ultimosVideos = new UltimosVideosdeYoutuber(videos);
+       // add(_ultimosVideos);
     }
 }

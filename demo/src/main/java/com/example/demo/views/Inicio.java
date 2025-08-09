@@ -17,14 +17,16 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
+import com.vaadin.flow.spring.annotation.UIScope;
 
 import jakarta.annotation.security.RolesAllowed;
 
 //import basededatos.iInicio;
 
 @Route("Inicio")
-@AnonymousAllowed
 @Component
+@UIScope  // importante
+
 public class Inicio extends VerticalLayout {
 	public iInicio _iInicio;
 	public Buscar _buscar;
@@ -42,7 +44,7 @@ public class Inicio extends VerticalLayout {
 		RepositorioComentario comentariosRepository,
 		RepositorioAdministrador administradoresRepository) {
 
-		_iInicio = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+		//_iInicio = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
 
         // Estilos generales del layout
         setWidthFull();
@@ -69,7 +71,7 @@ public class Inicio extends VerticalLayout {
 
         // Métodos adicionales
         Buscar(_iInicio);         // Agrega componente de búsqueda
-        UltimosVideos();  // Agrega sección de últimos videos
+        //UltimosVideos();  // Agrega sección de últimos videos
     }
 
 

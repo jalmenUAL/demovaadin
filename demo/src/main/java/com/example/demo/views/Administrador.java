@@ -13,6 +13,7 @@ import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.spring.annotation.UIScope;
 
 import jakarta.annotation.security.RolesAllowed;
 
@@ -21,6 +22,7 @@ import jakarta.annotation.security.RolesAllowed;
 @Route("Administrador")
 @RolesAllowed("ROLE_ADMIN")
 @Component
+@UIScope  // importante
 
 public class Administrador extends Registrado {
 	public iAdministrador _iAdministrador;
@@ -35,10 +37,10 @@ public class Administrador extends Registrado {
 	                  comentariosRepository,
 	                  administradoresRepository); // Llama al constructor de Registrado para añadir el buscador
 		// Inicializa el servicio iAdministrador con la base de datos principal
-		_iAdministrador = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+		//_iAdministrador = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
 
-		UltimosVideos();
-		Usuariosdenunciados();
+		//UltimosVideos();
+		//Usuariosdenunciados();
 		
 	}
 
