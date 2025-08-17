@@ -13,6 +13,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @Route("login")
 public class Login extends VerticalLayout {
@@ -22,12 +23,20 @@ public class Login extends VerticalLayout {
     public Login(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
 
+        // Limpiar sesión anterior (opcional, seguro)
+        VaadinSession.getCurrent().getSession().invalidate();
+        VaadinSession.getCurrent().setAttribute(Authentication.class, null);
+
+        // Crear LoginOverlay
         LoginOverlay loginOverlay = new LoginOverlay();
         loginOverlay.setTitle("Mi aplicación");
         loginOverlay.setDescription("Inicia sesión con tus credenciales");
         loginOverlay.setOpened(true);
+        loginOverlay.setForgotPasswordButtonVisible(false);
 
-        // 🔹 Listener del formulario de login
+        add(loginOverlay);
+
+        // Listener de login
         loginOverlay.addLoginListener(event -> {
             try {
                 Authentication auth = authenticationManager.authenticate(
@@ -36,23 +45,25 @@ public class Login extends VerticalLayout {
                                 event.getPassword()
                         )
                 );
-                
 
-                // ✅ Si autentica correctamente, guardamos el usuario en sesión
-                //VaadinSession.getCurrent().setAttribute(Authentication.class, auth);
+                // Guardar Authentication en la sesión de Vaadin
+                VaadinSession.getCurrent().setAttribute(Authentication.class, auth);
+
+                // Cerrar overlay
+                loginOverlay.close();
 
                 // Redirigir según rol
-                if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"))) {
-    UI.getCurrent().navigate(com.example.demo.views.Administrador.class);
-} else {
-    UI.getCurrent().navigate(com.example.demo.views.Youtuber.class);
-}
+                if (auth.getAuthorities().stream()
+                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"))) {
+                    UI.getCurrent().navigate(com.example.demo.views.Administrador.class);
+                } else {
+                    UI.getCurrent().navigate(com.example.demo.views.Youtuber.class);
+                }
 
             } catch (AuthenticationException e) {
-                Notification.show("Usuario o contraseña incorrectos en login", 3000, Notification.Position.MIDDLE);
+                Notification.show("Usuario o contraseña incorrectos", 3000, Notification.Position.MIDDLE);
             }
         });
-
-        add(loginOverlay);
     }
 }
+

@@ -40,7 +40,7 @@ public class Youtuber extends Registrado {
     public com.example.demo.domain.Youtuber usuario;
 
     public Youtuber( BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
-        super(youtubers, administradores, videos, comentarios); // Llama al constructor de Inicio para añadir el buscador
+        super(videos, comentarios, youtubers, administradores);
         //_iYoutuber = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
         //usuario = (com.example.demo.domain.Youtuber) VaadinSession.getCurrent().getAttribute(com.example.demo.domain.Registrado.class);
 

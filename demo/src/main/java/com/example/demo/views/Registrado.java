@@ -34,8 +34,8 @@ import jakarta.annotation.security.RolesAllowed;
 public class Registrado extends Inicio {
     public iRegistrado _iRegistrado;
 
-    public Registrado(BD_Youtubers youtubers, BD_Administradores administradores, BD_Videos videos, BD_Comentarios comentarios) {
-        super(youtubers, videos, comentarios, youtubers, administradores); // Llama al constructor de Inicio para añadir el buscador
+    public Registrado(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+        super(videos, comentarios, youtubers, administradores);
         // Inicializa el servicio iRegistrado con la base de datos principal
 		//_iRegistrado = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);	
 

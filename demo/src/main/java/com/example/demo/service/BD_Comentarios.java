@@ -16,6 +16,7 @@ import com.example.demo.domain.Youtuber;
 public class BD_Comentarios {
 	public BD_Comentarios(RepositorioComentario comentariosRepository, RepositorioYoutuber youtuberRepository) {
         repository = comentariosRepository;
+        repositorioYoutuber = youtuberRepository;
     }
     public BDPrincipal _en;
 	public Vector<Comentario> _comentarios = new Vector<Comentario>();
