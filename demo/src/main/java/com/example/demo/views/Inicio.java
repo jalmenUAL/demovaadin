@@ -10,6 +10,10 @@ import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
 import com.example.demo.service.BDPrincipal;
+import com.example.demo.service.BD_Administradores;
+import com.example.demo.service.BD_Comentarios;
+import com.example.demo.service.BD_Videos;
+import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.html.H1;
@@ -19,13 +23,14 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.spring.annotation.UIScope;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 
 //import basededatos.iInicio;
 
 @Route("Inicio")
-@Component
-@UIScope  // importante
+
+
 
 public class Inicio extends VerticalLayout {
 	public iInicio _iInicio;
@@ -39,12 +44,9 @@ public class Inicio extends VerticalLayout {
 	// Constructor que recibe el servicio iInicio
 
 
-	public Inicio(RepositorioVideo videorepository,
-		RepositorioYoutuber youtuberRepository,
-		RepositorioComentario comentariosRepository,
-		RepositorioAdministrador administradoresRepository) {
+	public Inicio(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
 
-		//_iInicio = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+		_iInicio = new BDPrincipal(videos, comentarios, youtubers, administradores);
 
         // Estilos generales del layout
         setWidthFull();
@@ -75,7 +77,13 @@ public class Inicio extends VerticalLayout {
     }
 
 
-	public void Buscar(iInicio inicio) {
+	public Inicio(BD_Youtubers youtubers, BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers2,
+            BD_Administradores administradores) {
+        //TODO Auto-generated constructor stub
+    }
+
+
+    public void Buscar(iInicio inicio) {
 		Buscar b = new Buscar(inicio);
 		header.add(b);
 	}

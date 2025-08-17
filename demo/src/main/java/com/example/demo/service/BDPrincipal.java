@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Video;
@@ -19,12 +20,14 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public BD_Youtubers _youtubers;
     public BD_Administradores _administradores;
 
-    public BDPrincipal(RepositorioVideo videorepository, RepositorioYoutuber youtuberRepository, RepositorioComentario comentariosRepository, RepositorioAdministrador administradoresRepository) {
-        _videos = new BD_Videos(videorepository);
-        _youtubers = new BD_Youtubers(youtuberRepository);
-        _comentarios = new BD_Comentarios(comentariosRepository, youtuberRepository);
-        _administradores = new BD_Administradores(administradoresRepository);
+    public BDPrincipal(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+       this._youtubers = youtubers;
+        this._administradores = administradores;
+        this._videos = videos;
+        this._comentarios = comentarios;
     }
+
+     
 
     @Override
     public List<Video> buscar(String texto) {

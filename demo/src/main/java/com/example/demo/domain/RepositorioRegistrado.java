@@ -8,6 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 
 public interface RepositorioRegistrado extends JpaRepository<Registrado, String>, JpaSpecificationExecutor<Registrado> {
 
-    Stream<? extends GrantedAuthority> findByLogin(String username);
+     
 }
 

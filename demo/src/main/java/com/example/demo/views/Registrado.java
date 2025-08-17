@@ -8,6 +8,10 @@ import com.example.demo.domain.RepositorioComentario;
 import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.service.BDPrincipal;
+import com.example.demo.service.BD_Administradores;
+import com.example.demo.service.BD_Comentarios;
+import com.example.demo.service.BD_Videos;
+import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iRegistrado;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -24,18 +28,14 @@ import jakarta.annotation.security.RolesAllowed;
 
 
 @Route("Registrado")
-@RolesAllowed({"ROLE_ADMIN", "ROLE_USER"}) 
 @Component
 @UIScope  // importante
 
 public class Registrado extends Inicio {
     public iRegistrado _iRegistrado;
 
-    public Registrado(RepositorioVideo videorepository,
-	                  RepositorioYoutuber youtuberRepository,
-	                  RepositorioComentario comentariosRepository,
-	                  RepositorioAdministrador administradoresRepository) {
-        super(videorepository, youtuberRepository, comentariosRepository, administradoresRepository); // Llama al constructor de Inicio para añadir el buscador
+    public Registrado(BD_Youtubers youtubers, BD_Administradores administradores, BD_Videos videos, BD_Comentarios comentarios) {
+        super(youtubers, videos, comentarios, youtubers, administradores); // Llama al constructor de Inicio para añadir el buscador
         // Inicializa el servicio iRegistrado con la base de datos principal
 		//_iRegistrado = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);	
 

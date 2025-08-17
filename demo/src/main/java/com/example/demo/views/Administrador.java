@@ -10,6 +10,10 @@ import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
 import com.example.demo.service.BDPrincipal;
+import com.example.demo.service.BD_Administradores;
+import com.example.demo.service.BD_Comentarios;
+import com.example.demo.service.BD_Videos;
+import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
@@ -20,23 +24,15 @@ import jakarta.annotation.security.RolesAllowed;
 //import basededatos.iAdministrador;
 
 @Route("Administrador")
-@RolesAllowed("ROLE_ADMIN")
-@Component
-@UIScope  // importante
+@RolesAllowed("ROLE_ADMINISTRADOR")
+ 
 
 public class Administrador extends Registrado {
 	public iAdministrador _iAdministrador;
 	public Usuariosdenunciados _usuariosdenunciados;
 	
-	public Administrador(RepositorioVideo videorepository,
-	                  RepositorioYoutuber youtuberRepository,
-	                  RepositorioComentario comentariosRepository,
-	                  RepositorioAdministrador administradoresRepository) {
-		super(videorepository,
-	                  youtuberRepository,
-	                  comentariosRepository,
-	                  administradoresRepository); // Llama al constructor de Registrado para añadir el buscador
-		// Inicializa el servicio iAdministrador con la base de datos principal
+	public Administrador(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+		super(youtubers, administradores, videos, comentarios);// Inicializa el servicio iAdministrador con la base de datos principal
 		//_iAdministrador = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
 
 		//UltimosVideos();

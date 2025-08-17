@@ -11,6 +11,10 @@ import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
 import com.example.demo.service.BDPrincipal;
+import com.example.demo.service.BD_Administradores;
+import com.example.demo.service.BD_Comentarios;
+import com.example.demo.service.BD_Videos;
+import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -26,9 +30,8 @@ import jakarta.annotation.security.RolesAllowed;
 //import basededatos.iYoutuber;
 
 @Route("Youtuber")
-@RolesAllowed("ROLE_USER")
-@Component
-@UIScope  // importante
+@RolesAllowed("ROLE_YOUTUBER")
+ 
 
 public class Youtuber extends Registrado {
     public iYoutuber _iYoutuber;
@@ -36,11 +39,8 @@ public class Youtuber extends Registrado {
     public UltimosVideosdeYoutuber _ultimosVideos;
     public com.example.demo.domain.Youtuber usuario;
 
-    public Youtuber( RepositorioVideo videorepository,
-	                  RepositorioYoutuber youtuberRepository,
-	                  RepositorioComentario comentariosRepository,
-	                  RepositorioAdministrador administradoresRepository) {
-        super(videorepository, youtuberRepository, comentariosRepository, administradoresRepository); // Llama al constructor de Registrado para añadir el buscador
+    public Youtuber( BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+        super(youtubers, administradores, videos, comentarios); // Llama al constructor de Inicio para añadir el buscador
         //_iYoutuber = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
         //usuario = (com.example.demo.domain.Youtuber) VaadinSession.getCurrent().getAttribute(com.example.demo.domain.Registrado.class);
 
@@ -67,7 +67,6 @@ public class Youtuber extends Registrado {
     }
 
     public void PerfilPropio() {
-
         //_perfilPropio = new PerfilPropio(_iYoutuber, usuario);
         //add(_perfilPropio);
     }
