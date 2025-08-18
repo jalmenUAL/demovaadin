@@ -18,6 +18,8 @@ public class BD_Comentarios {
         repository = comentariosRepository;
         repositorioYoutuber = youtuberRepository;
     }
+
+    
     public BDPrincipal _en;
 	public Vector<Comentario> _comentarios = new Vector<Comentario>();
 	private RepositorioComentario repository;

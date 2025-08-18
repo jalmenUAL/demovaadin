@@ -9,61 +9,38 @@ import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
+import com.vaadin.flow.spring.annotation.UIScope;
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-
 @Route("login")
 public class Login extends VerticalLayout {
 
-    private final AuthenticationManager authenticationManager;
+    public Login(AuthenticationManager authManager) {
+        LoginOverlay login = new LoginOverlay();
+        login.setOpened(true);
+        login.setAction(""); // vacío para que Vaadin gestione el login
+        add(login);
 
-    public Login(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
-
-        // Limpiar sesión anterior (opcional, seguro)
-        VaadinSession.getCurrent().getSession().invalidate();
-        VaadinSession.getCurrent().setAttribute(Authentication.class, null);
-
-        // Crear LoginOverlay
-        LoginOverlay loginOverlay = new LoginOverlay();
-        loginOverlay.setTitle("Mi aplicación");
-        loginOverlay.setDescription("Inicia sesión con tus credenciales");
-        loginOverlay.setOpened(true);
-        loginOverlay.setForgotPasswordButtonVisible(false);
-
-        add(loginOverlay);
-
-        // Listener de login
-        loginOverlay.addLoginListener(event -> {
+        login.addLoginListener(event -> {
             try {
-                Authentication auth = authenticationManager.authenticate(
-                        new UsernamePasswordAuthenticationToken(
-                                event.getUsername(),
-                                event.getPassword()
-                        )
+                Authentication auth = authManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                        event.getUsername(),
+                        event.getPassword()
+                    )
                 );
-
-                // Guardar Authentication en la sesión de Vaadin
                 VaadinSession.getCurrent().setAttribute(Authentication.class, auth);
-
-                // Cerrar overlay
-                loginOverlay.close();
-
-                // Redirigir según rol
-                if (auth.getAuthorities().stream()
-                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"))) {
-                    UI.getCurrent().navigate(com.example.demo.views.Administrador.class);
-                } else {
-                    UI.getCurrent().navigate(com.example.demo.views.Youtuber.class);
-                }
-
+                UI.getCurrent().navigate(auth.getAuthorities().stream()
+                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"))
+                        ? "administrador"
+                        : "youtuber");
             } catch (AuthenticationException e) {
-                Notification.show("Usuario o contraseña incorrectos", 3000, Notification.Position.MIDDLE);
+                login.setError(true);
             }
         });
     }
 }
-

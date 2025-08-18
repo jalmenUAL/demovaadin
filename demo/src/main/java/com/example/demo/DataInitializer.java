@@ -10,7 +10,7 @@ import com.example.demo.domain.Youtuber;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-@Component
+
 public class DataInitializer implements CommandLineRunner {
 
     private final RepositorioAdministrador adminRepo;

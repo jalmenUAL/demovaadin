@@ -20,7 +20,7 @@ public class BD_Youtubers {
     private final RepositorioYoutuber repository;
     private final PasswordEncoder passwordEncoder;
 
-    public BD_Youtubers(RepositorioYoutuber repository,@Lazy PasswordEncoder passwordEncoder) {
+    public BD_Youtubers(RepositorioYoutuber repository, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
 

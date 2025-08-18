@@ -77,11 +77,7 @@ public class Inicio extends VerticalLayout {
     }
 
 
-	public Inicio(BD_Youtubers youtubers, BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers2,
-            BD_Administradores administradores) {
-        //TODO Auto-generated constructor stub
-    }
-
+	 
 
     public void Buscar(iInicio inicio) {
 		Buscar b = new Buscar(inicio);

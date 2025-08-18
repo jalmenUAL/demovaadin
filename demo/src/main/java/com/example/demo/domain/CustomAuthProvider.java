@@ -5,6 +5,7 @@ import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.notification.Notification;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,7 +21,7 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
     private final iNoLogueado iNoLogueado;
 
-    public CustomAuthProvider(iNoLogueado iNoLogueado) {
+    public CustomAuthProvider(@Lazy iNoLogueado iNoLogueado) {
         this.iNoLogueado = iNoLogueado;
     }
 
@@ -33,7 +34,7 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
         // 🔹 Aquí usas tu método
         Registrado r = iNoLogueado.Login(username, password);
-
+         
        System.out.println("Intento login con " + username + " -> " + r);
 
         if (r == null) {

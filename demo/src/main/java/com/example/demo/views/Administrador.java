@@ -32,8 +32,8 @@ public class Administrador extends Registrado {
 	public Usuariosdenunciados _usuariosdenunciados;
 	
 	public Administrador(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
-		super(youtubers, administradores, videos, comentarios);// Inicializa el servicio iAdministrador con la base de datos principal
-		//_iAdministrador = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+		super(videos, comentarios, youtubers, administradores);
+		_iAdministrador = new BDPrincipal(videos, comentarios, youtubers, administradores);
 
 		//UltimosVideos();
 		//Usuariosdenunciados();

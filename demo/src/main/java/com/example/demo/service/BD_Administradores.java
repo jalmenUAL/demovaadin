@@ -19,7 +19,7 @@ public class BD_Administradores {
 	private RepositorioAdministrador repository;
     private PasswordEncoder passwordEncoder;
 
-    public BD_Administradores(RepositorioAdministrador administradoresRepository, @Lazy PasswordEncoder passwordEncoder) {
+    public BD_Administradores(RepositorioAdministrador administradoresRepository, PasswordEncoder passwordEncoder) {
         //TODO Auto-generated constructor stub
         this.repository = administradoresRepository;
         this.passwordEncoder = passwordEncoder;

@@ -41,7 +41,7 @@ public class Youtuber extends Registrado {
 
     public Youtuber( BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
         super(videos, comentarios, youtubers, administradores);
-        //_iYoutuber = new BDPrincipal(videorepository, youtuberRepository, comentariosRepository, administradoresRepository);
+        _iYoutuber = new BDPrincipal(videos, comentarios, youtubers, administradores);
         //usuario = (com.example.demo.domain.Youtuber) VaadinSession.getCurrent().getAttribute(com.example.demo.domain.Registrado.class);
 
         // === HEADER con botón "Mi Perfil" ===
