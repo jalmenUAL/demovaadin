@@ -33,7 +33,7 @@ public class Administrador extends Registrado {
 	
 	public Administrador(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
 		super(videos, comentarios, youtubers, administradores);
-		_iAdministrador = new BDPrincipal(videos, comentarios, youtubers, administradores);
+		//_iAdministrador = new BDPrincipal(videos, comentarios, youtubers, administradores);
 
 		//UltimosVideos();
 		//Usuariosdenunciados();

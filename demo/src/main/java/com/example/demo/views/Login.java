@@ -19,28 +19,38 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Route("login")
 public class Login extends VerticalLayout {
 
-    public Login(AuthenticationManager authManager) {
-        LoginOverlay login = new LoginOverlay();
-        login.setOpened(true);
-        login.setAction(""); // vacío para que Vaadin gestione el login
-        add(login);
+    private final AuthenticationManager authenticationManager;
 
-        login.addLoginListener(event -> {
+    public Login(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+
+        LoginOverlay loginOverlay = new LoginOverlay();
+        loginOverlay.setTitle("Mi aplicación");
+        loginOverlay.setDescription("Inicia sesión con tus credenciales");
+        loginOverlay.setOpened(true);
+
+        loginOverlay.addLoginListener(event -> {
             try {
-                Authentication auth = authManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                        event.getUsername(),
-                        event.getPassword()
-                    )
+                Authentication auth = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                event.getUsername(),
+                                event.getPassword()
+                        )
                 );
+
                 VaadinSession.getCurrent().setAttribute(Authentication.class, auth);
-                UI.getCurrent().navigate(auth.getAuthorities().stream()
-                        .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"))
-                        ? "administrador"
-                        : "youtuber");
+
+                if (auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"))) {
+                    UI.getCurrent().navigate(Administrador.class);
+                } else {
+                    UI.getCurrent().navigate(Youtuber.class);
+                }
+
             } catch (AuthenticationException e) {
-                login.setError(true);
+                loginOverlay.setError(true);
             }
         });
+
+        add(loginOverlay);
     }
 }

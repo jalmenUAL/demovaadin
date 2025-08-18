@@ -46,7 +46,7 @@ public class Inicio extends VerticalLayout {
 
 	public Inicio(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
 
-		_iInicio = new BDPrincipal(videos, comentarios, youtubers, administradores);
+		//_iInicio = new BDPrincipal(videos, comentarios, youtubers, administradores);
 
         // Estilos generales del layout
         setWidthFull();

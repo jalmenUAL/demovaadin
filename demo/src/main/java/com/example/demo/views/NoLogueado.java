@@ -39,7 +39,7 @@ public class NoLogueado extends Inicio {
 
     public NoLogueado(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
          super(videos, comentarios, youtubers, administradores);
-        _iNoLogueado =  new BDPrincipal(videos, comentarios, youtubers, administradores);
+        //_iNoLogueado =  new BDPrincipal(videos, comentarios, youtubers, administradores);
         // Botones de Login y Registrar
         // Botón de Login
         Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));

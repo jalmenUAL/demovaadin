@@ -14,21 +14,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf().disable()
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login").permitAll() // permitir que Vaadin dibuje login
-                .requestMatchers("/VAADIN/**").permitAll() // recursos Vaadin
+                .requestMatchers("/login").permitAll()
                 .anyRequest().authenticated()
             )
-            .formLogin().disable(); // Vaadin usa LoginOverlay
+            .formLogin().disable(); // usamos el LoginOverlay de Vaadin
+
         return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
