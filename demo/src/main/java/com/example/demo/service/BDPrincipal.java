@@ -1,17 +1,12 @@
 package com.example.demo.service;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.Registrado;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
-import com.example.demo.domain.Registrado;
-import com.example.demo.domain.RepositorioAdministrador;
-import com.example.demo.domain.RepositorioComentario;
-import com.example.demo.domain.RepositorioVideo;
-import com.example.demo.domain.RepositorioYoutuber;
-
-import java.util.List;
 
 @Service
 public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iRegistrado, iInicio {

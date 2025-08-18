@@ -2,29 +2,19 @@ package com.example.demo.views;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-import com.example.demo.domain.RepositorioAdministrador;
-import com.example.demo.domain.RepositorioComentario;
-import com.example.demo.domain.RepositorioVideo;
-import com.example.demo.domain.RepositorioYoutuber;
-import com.example.demo.domain.Video;
-import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.BD_Administradores;
 import com.example.demo.service.BD_Comentarios;
 import com.example.demo.service.BD_Videos;
 import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.spring.annotation.UIScope;
 
-import jakarta.annotation.security.RolesAllowed;
+ 
 
 //import basededatos.iAdministrador;
 
 @Route("Administrador")
-@RolesAllowed("ROLE_ADMINISTRADOR")
+
  
 
 public class Administrador extends Registrado {

@@ -2,29 +2,16 @@ package com.example.demo.views;
 
 import java.util.List;
 
-import org.springframework.stereotype.Component;
-
-import com.example.demo.domain.RepositorioAdministrador;
-import com.example.demo.domain.RepositorioComentario;
-import com.example.demo.domain.RepositorioVideo;
-import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
-import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.BD_Administradores;
 import com.example.demo.service.BD_Comentarios;
 import com.example.demo.service.BD_Videos;
 import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iInicio;
-import com.vaadin.flow.component.HasComponents;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.auth.AnonymousAllowed;
-import com.vaadin.flow.spring.annotation.UIScope;
-
-import jakarta.annotation.security.PermitAll;
-import jakarta.annotation.security.RolesAllowed;
 
 //import basededatos.iInicio;
 

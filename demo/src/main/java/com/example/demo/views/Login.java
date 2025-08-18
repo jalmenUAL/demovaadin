@@ -3,19 +3,17 @@ package com.example.demo.views;
 
 
 
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.login.LoginOverlay;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.spring.annotation.UIScope;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.vaadin.flow.component.UI;
+import com.vaadin.flow.component.login.LoginOverlay;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 @Route("login")
 public class Login extends VerticalLayout {
 
@@ -24,11 +22,14 @@ public class Login extends VerticalLayout {
     public Login(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
 
+        Notification.show("Holi");
+
         LoginOverlay loginOverlay = new LoginOverlay();
         loginOverlay.setTitle("Mi aplicación");
         loginOverlay.setDescription("Inicia sesión con tus credenciales");
         loginOverlay.setOpened(true);
 
+        
         loginOverlay.addLoginListener(event -> {
             try {
                 Authentication auth = authenticationManager.authenticate(
@@ -53,4 +54,6 @@ public class Login extends VerticalLayout {
 
         add(loginOverlay);
     }
+        
 }
+

@@ -3,44 +3,32 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Vector;
 
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.example.demo.domain.Youtuber;
 
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
+import com.example.demo.domain.Youtuber;
 
 @Service
 public class BD_Youtubers {
     public BDPrincipal _en;
     public Vector<Youtuber> _youtubers = new Vector<Youtuber>();
     private final RepositorioYoutuber repository;
-    private final PasswordEncoder passwordEncoder;
+    
 
-    public BD_Youtubers(RepositorioYoutuber repository, PasswordEncoder passwordEncoder) {
+    public BD_Youtubers(RepositorioYoutuber repository) {
         this.repository = repository;
-        this.passwordEncoder = passwordEncoder;
+         
 
     }
 
 public Youtuber autenticar(String username, String rawPassword) {
-        return repository.findByLogin(username)
-                .filter(youtuber -> passwordEncoder.matches(rawPassword, youtuber.getPassword()))
-                .orElse(null);
+        return repository.findByLogin(username).orElse(null);
+
     }
 
     public void actualizarConfiguracion(String value, String value2, String src, String src2) {
-        String login = SecurityContextHolder.getContext().getAuthentication().getName();
-        Youtuber usuario = repository.findByLogin(login)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        usuario.setLogin(value);
-        usuario.setPassword(value2);
-        usuario.setFotoPerfil(src);
-        usuario.setBanner(src2);
-        repository.save(usuario);
+         
     }
 
     public void bloquearUsuario(String ormid) {

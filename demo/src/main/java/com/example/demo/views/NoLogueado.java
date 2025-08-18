@@ -1,17 +1,9 @@
 package com.example.demo.views;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.example.demo.domain.RepositorioAdministrador;
-import com.example.demo.domain.RepositorioComentario;
-import com.example.demo.domain.RepositorioVideo;
-import com.example.demo.domain.RepositorioYoutuber;
-import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.BD_Administradores;
 import com.example.demo.service.BD_Comentarios;
 import com.example.demo.service.BD_Videos;
 import com.example.demo.service.BD_Youtubers;
-import com.example.demo.service.iInicio;
 import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -22,8 +14,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
-@Route("NoLogueado")
-@AnonymousAllowed
+@Route("")
+
 public class NoLogueado extends Inicio {
     public iNoLogueado _iNoLogueado;
     public Login _login;

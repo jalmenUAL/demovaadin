@@ -1,4 +1,4 @@
-package com.example.demo.domain;
+package com.example.demo.security;
 
 import com.example.demo.domain.Registrado;
 import com.example.demo.service.iNoLogueado;

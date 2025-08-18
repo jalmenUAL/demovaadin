@@ -1,16 +1,5 @@
 package com.example.demo.views;
 
-import java.util.List;
-
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
-
-import com.example.demo.domain.RepositorioAdministrador;
-import com.example.demo.domain.RepositorioComentario;
-import com.example.demo.domain.RepositorioVideo;
-import com.example.demo.domain.RepositorioYoutuber;
-import com.example.demo.domain.Video;
-import com.example.demo.service.BDPrincipal;
 import com.example.demo.service.BD_Administradores;
 import com.example.demo.service.BD_Comentarios;
 import com.example.demo.service.BD_Videos;
@@ -22,15 +11,13 @@ import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.spring.annotation.UIScope;
 
 import jakarta.annotation.security.RolesAllowed;
 
 //import basededatos.iYoutuber;
 
 @Route("Youtuber")
-@RolesAllowed("ROLE_YOUTUBER")
+
  
 
 public class Youtuber extends Registrado {
