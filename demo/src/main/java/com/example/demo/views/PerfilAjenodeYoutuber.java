@@ -29,9 +29,8 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
          
     }
 
-    public PerfilAjenodeYoutuber(iYoutuber iYoutuber,
-                                 com.example.demo.domain.Youtuber otro_usuario) {
-        super(otro_usuario);
+    public PerfilAjenodeYoutuber(iYoutuber iYoutuber) {
+        super(iYoutuber);
         this._iYoutuber = iYoutuber;
 
         // Crear botones de denunciar y seguir

@@ -7,7 +7,10 @@ import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
+import jakarta.annotation.security.RolesAllowed;
+
 @Route("Youtuberseguidos")
+@RolesAllowed("ROLE_YOUTUBER")
 
 public class Youtubersseguidos extends VerticalLayout {
 	public Perfil _perfil;

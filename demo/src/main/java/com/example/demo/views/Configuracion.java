@@ -21,7 +21,10 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 
+import jakarta.annotation.security.RolesAllowed;
+
 @Route("Configuracion")
+@RolesAllowed("ROLE_YOUTUBER")  
 public class Configuracion extends VerticalLayout{
 	public PerfilPropio _perfilPropio;
     private iYoutuber _iYoutuber;

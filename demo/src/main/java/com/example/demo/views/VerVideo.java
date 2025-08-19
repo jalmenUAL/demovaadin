@@ -96,7 +96,6 @@ public class VerVideo extends VerticalLayout{
 	}
 
 	public void PerfilAjeno() {
-		_perfilAjeno = new PerfilAjeno(video.getEs_de());
-		 UI.getCurrent().navigate(PerfilAjeno.class);
+		 UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
 	}
 }

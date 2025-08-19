@@ -29,8 +29,9 @@ public class Youtuber extends Registrado {
     public UltimosVideosdeYoutuber _ultimosVideos;
     public com.example.demo.domain.Youtuber usuario;
 
-    public Youtuber( BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
-        super(videos, comentarios, youtubers, administradores);
+    public Youtuber(){ //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+        super();
+        //super(videos, comentarios, youtubers, administradores);
        //_iYoutuber = new BDPrincipal(videos, comentarios, youtubers, administradores);
         //usuario = (com.example.demo.domain.Youtuber) VaadinSession.getCurrent().getAttribute(com.example.demo.domain.Registrado.class);
 
@@ -43,9 +44,10 @@ public class Youtuber extends Registrado {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
-        com.example.demo.domain.Youtuber usuario = _iYoutuber.findById(username);
+        
         perfilBtn.addClickListener(e -> {
-            UI.getCurrent().navigate(PerfilPropio.class, usuario.getORMID());
+           
+            UI.getCurrent().navigate(PerfilPropio.class, username);
         });
 
         

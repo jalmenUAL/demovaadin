@@ -17,9 +17,8 @@ public class PerfilPropio extends Perfil {
     public PublicarVideo _publicarVideo;
     public Configuracion _configuracion;
 
-    public PerfilPropio(iYoutuber iYoutuber,
-                        com.example.demo.domain.Youtuber usuario) {
-        super(usuario);
+    public PerfilPropio(iYoutuber iYoutuber) {
+        super(iYoutuber);
         this._publicarVideo = new PublicarVideo(iYoutuber);
         this._configuracion = new Configuracion(iYoutuber);
         // === Crear botones ===

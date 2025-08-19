@@ -12,11 +12,12 @@ import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 //import basededatos.iInicio;
 
 @Route("Inicio")
-
+@AnonymousAllowed
 
 
 public class Inicio extends VerticalLayout {
@@ -31,7 +32,7 @@ public class Inicio extends VerticalLayout {
 	// Constructor que recibe el servicio iInicio
 
 
-	public Inicio(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+	public Inicio() { //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
 
 		//_iInicio = new BDPrincipal(videos, comentarios, youtubers, administradores);
 

@@ -4,6 +4,8 @@ package com.example.demo.views;
 
 import com.vaadin.flow.component.textfield.TextField;
 
+import org.springframework.context.annotation.Role;
+
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -17,8 +19,10 @@ import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route("PublicarVideo")
+import jakarta.annotation.security.RolesAllowed;
 
+@Route("PublicarVideo")
+@RolesAllowed("ROLE_YOUTUBER")
 public class PublicarVideo extends VerticalLayout {
 
     public PerfilPropio _perfilPropio;
