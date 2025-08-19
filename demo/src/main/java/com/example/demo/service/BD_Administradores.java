@@ -1,11 +1,7 @@
 package com.example.demo.service;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.Vector;
 
-import org.springframework.context.annotation.Lazy;
-import org.springframework.security.access.method.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -11,9 +11,10 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
 
     private Button btnDenunciar;
     private Button btnSeguir;
+    iYoutuber _iYoutuber;
 
     public void Denunciar() {
-       iYoutuber.denunciarUsuario(_usuario.getORMID());
+       _iYoutuber.denunciarUsuario(_usuario.getORMID());
         btnDenunciar.setEnabled(false); // Deshabilitar el botón tras la denuncia
         btnDenunciar.setText("Denunciado"); // Cambiar el texto del botón
         btnDenunciar.addThemeVariants(ButtonVariant.LUMO_CONTRAST); // Cambiar
@@ -21,7 +22,7 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
     }
 
     public void Seguir() {
-        iYoutuber.seguirUsuario(_usuario.getORMID());
+        _iYoutuber.seguirUsuario(_usuario.getORMID());
         btnSeguir.setEnabled(false); // Deshabilitar el botón tras la denuncia
         btnSeguir.setText("Siguiendo"); // Cambiar el texto del botón
         btnSeguir.addThemeVariants(ButtonVariant.LUMO_CONTRAST); // Cambiar
@@ -29,8 +30,9 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
     }
 
     public PerfilAjenodeYoutuber(iYoutuber iYoutuber,
-                                 com.example.demo.domain.Youtuber youtuber) {
-        super(youtuber);
+                                 com.example.demo.domain.Youtuber otro_usuario) {
+        super(otro_usuario);
+        this._iYoutuber = iYoutuber;
 
         // Crear botones de denunciar y seguir
         btnDenunciar = new Button("Denunciar", e -> Denunciar());

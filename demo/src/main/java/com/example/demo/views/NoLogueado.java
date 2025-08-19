@@ -14,8 +14,8 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
-@Route("")
-
+@Route("NoLogueado")
+@AnonymousAllowed
 public class NoLogueado extends Inicio {
     public iNoLogueado _iNoLogueado;
     public Login _login;

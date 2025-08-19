@@ -89,4 +89,25 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
         return _youtubers.buscarDenunciados();
     }
 
+
+
+    @Override
+    public void denunciarUsuario(String ormid) {
+         _youtubers.denunciarUsuario(ormid);
+    }
+
+
+
+    @Override
+    public void seguirUsuario(String ormid) {
+        _youtubers.seguirUsuario(ormid);
+    }
+
+
+
+    @Override
+    public Youtuber findById(String username) {
+        return _youtubers.findById(username);
+    }
+
 }

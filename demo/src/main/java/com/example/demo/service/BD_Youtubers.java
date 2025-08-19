@@ -1,20 +1,26 @@
 package com.example.demo.service;
 
+import java.net.Authenticator;
 import java.util.List;
 import java.util.Vector;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
+import com.vaadin.flow.server.VaadinSession;
+
+import io.netty.handler.codec.mqtt.MqttReasonCodes.Auth;
 
 @Service
 public class BD_Youtubers {
     public BDPrincipal _en;
     public Vector<Youtuber> _youtubers = new Vector<Youtuber>();
-    private final RepositorioYoutuber repository;
+    final RepositorioYoutuber repository;
     private PasswordEncoder passwordEncoder;
     
 
@@ -45,7 +51,8 @@ public Youtuber autenticar(String username, String rawPassword) {
     public void registrar(String login, String password, String avatarUrl, String fondoUrl) {
         Youtuber nuevoYoutuber = new Youtuber();
         nuevoYoutuber.setLogin(login);
-        nuevoYoutuber.setPassword(password);
+        String PasswordEncoder = passwordEncoder.encode(password);
+        nuevoYoutuber.setPassword(PasswordEncoder);
         nuevoYoutuber.setFotoPerfil(avatarUrl);
         nuevoYoutuber.setBanner(fondoUrl);
         repository.save(nuevoYoutuber);
@@ -67,6 +74,33 @@ public Youtuber autenticar(String username, String rawPassword) {
         return denunciados.stream()
                 .filter(Youtuber::getBloqueado) // Asumiendo que hay un método getBloqueado en Youtuber
                 .toList();
+    }
+
+    public void denunciarUsuario(String ormid) {
+        Youtuber usuario = repository.findById(ormid)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        com.example.demo.domain.Youtuber usuarioActual = repository.findById(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        usuario.getBloquedado_por().add(usuarioActual); // Asumiendo que hay un campo denunciado en Youtuber
+        repository.save(usuario);
+    }
+
+    public void seguirUsuario(String ormid) {
+        Youtuber usuario = repository.findById(ormid)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        com.example.demo.domain.Youtuber usuarioActual = repository.findById(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        usuario.getSeguido_por().add(usuarioActual); // Asumiendo que hay un campo seguido_por en Youtuber
+        repository.save(usuario);
+    }
+
+    public Youtuber findById(String username) {
+        return repository.findById(username)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
  
 }

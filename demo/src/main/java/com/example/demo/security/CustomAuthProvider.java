@@ -32,10 +32,10 @@ public class CustomAuthProvider implements AuthenticationProvider {
         // 🔹 Aquí usas tu método
         Registrado r = iNoLogueado.Login(username, password);
          
-       System.out.println("Intento login con " + username + " -> " + r);
+       
 
         if (r == null) {
-            throw new UsernameNotFoundException("Usuario o contraseña incorrectos en auth");
+            throw new UsernameNotFoundException("Usuario o contraseña incorrectos");
         }
 
         String role;

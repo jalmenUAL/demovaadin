@@ -21,8 +21,8 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
     }
 
     public PerfilAjenodeAdministrador(iAdministrador iAdministrador,
-                                      com.example.demo.domain.Youtuber youtuber) {
-        super(youtuber);
+                                      com.example.demo.domain.Youtuber otro_usuario) {
+        super(otro_usuario);
         this.iAdministrador = iAdministrador;
          
 

@@ -6,8 +6,8 @@ import com.vaadin.flow.router.Route;
 @Route("PerfilAjeno")
 public class PerfilAjeno extends Perfil {
 	
-	public PerfilAjeno(Youtuber youtuber) {
-		super(youtuber);
+	public PerfilAjeno(Youtuber otro_usuario) {
+		super(otro_usuario);
 
 		//TODO Auto-generated constructor stub
 	}

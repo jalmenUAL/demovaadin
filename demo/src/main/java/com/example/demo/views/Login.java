@@ -38,6 +38,7 @@ public class Login extends VerticalLayout {
         loginOverlay.setDescription("Inicia sesión con tus credenciales");
         loginOverlay.setOpened(true);
 
+
         loginOverlay.addLoginListener(event -> {
             try {
                 Authentication auth = authenticationManager.authenticate(

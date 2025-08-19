@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.example.demo.domain.Video;
+import com.example.demo.domain.Youtuber;
 
 
 public interface iYoutuber extends iRegistrado {
@@ -16,15 +17,8 @@ public interface iYoutuber extends iRegistrado {
 
     List<Video> cargarUltimosVideos(String login);
 
-    static void seguirUsuario(String ormid) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'seguirUsuario'");
-    }
+    void denunciarUsuario(String ormid);
+    void seguirUsuario(String ormid);
+    Youtuber findById(String username);
 
-    static void denunciarUsuario(String ormid) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'denunciarUsuario'");
-    }
-	
-	 
 }

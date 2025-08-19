@@ -9,12 +9,14 @@ import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.router.Route;
 
+import jakarta.annotation.security.RolesAllowed;
+
  
 
 //import basededatos.iAdministrador;
 
 @Route("Administrador")
-
+@RolesAllowed("ROLE_ADMINISTRADOR")
  
 
 public class Administrador extends Registrado {

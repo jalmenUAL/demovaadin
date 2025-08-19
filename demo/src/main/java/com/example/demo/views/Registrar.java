@@ -16,11 +16,13 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.server.StreamResource;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 import com.vaadin.flow.router.Route;
 
 import java.io.InputStream;
 
 @Route("Registrar")
+@AnonymousAllowed
 public class Registrar extends VerticalLayout{
     public NoLogueado _noLogueado;
     public ServidordeCorreo _servidordeCorreo;
@@ -115,9 +117,6 @@ public class Registrar extends VerticalLayout{
 
     private void registrar(String login, String password, String avatarUrl, String fondoUrl) {
         _iNoLogueado.registrar(login, password, avatarUrl, fondoUrl);
-        UI.getCurrent().navigate(Login.class);
-         
-       
-        
-	}
+        UI.getCurrent().navigate(NoLogueado.class);
+    }
 }

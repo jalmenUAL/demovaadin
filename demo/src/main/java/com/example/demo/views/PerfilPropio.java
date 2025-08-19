@@ -7,8 +7,10 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 
-@Route("PerfilPropio")
+import jakarta.annotation.security.RolesAllowed;
 
+@Route("PerfilPropio")
+@RolesAllowed("ROLE_YOUTUBER")
 public class PerfilPropio extends Perfil {
 
     public com.example.demo.domain.Youtuber _youtuber;

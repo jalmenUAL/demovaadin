@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.service.BD_Administradores;
 import com.example.demo.service.BD_Comentarios;
 import com.example.demo.service.BD_Videos;
@@ -17,7 +20,7 @@ import jakarta.annotation.security.RolesAllowed;
 //import basededatos.iYoutuber;
 
 @Route("Youtuber")
-
+@RolesAllowed("ROLE_YOUTUBER")
  
 
 public class Youtuber extends Registrado {
@@ -38,8 +41,11 @@ public class Youtuber extends Registrado {
             .set("margin", "10px")
             .set("border-radius", "8px");
 
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        com.example.demo.domain.Youtuber usuario = _iYoutuber.findById(username);
         perfilBtn.addClickListener(e -> {
-            UI.getCurrent().navigate(PerfilPropio.class);
+            UI.getCurrent().navigate(PerfilPropio.class, usuario.getORMID());
         });
 
         
