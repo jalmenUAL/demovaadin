@@ -5,31 +5,33 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
+
+import com.vaadin.flow.spring.security.VaadinWebSecurity;
 @Configuration
-@EnableWebSecurity
-public class SecurityConfig {
+public class SecurityConfig extends VaadinWebSecurity {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-            .csrf().disable()
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login").permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin().disable(); // usamos el LoginOverlay de Vaadin
+    private final CustomAuthProvider customAuthProvider;
 
-        return http.build();
+    public SecurityConfig(CustomAuthProvider customAuthProvider) {
+        this.customAuthProvider = customAuthProvider;
     }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // Abre endpoints/recursos de Vaadin y protege el resto
+        super.configure(http);
+        // Indica que tu vista Login es la pantalla de login
+        setLoginView(http, com.example.demo.views.Login.class);
+    }
+
+    // AuthenticationManager basado en tu CustomAuthProvider
+    @Bean
+public AuthenticationManager authenticationManager(CustomAuthProvider customAuthProvider) {
+    return new ProviderManager(customAuthProvider);
+}
 
     @Bean
     public PasswordEncoder passwordEncoder() {

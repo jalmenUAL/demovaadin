@@ -25,6 +25,7 @@ public class MyUserDetailsService implements UserDetailsService {
                     .build();
         }
         throw new UsernameNotFoundException("Usuario no encontrado");
+        
     }
 }
 
