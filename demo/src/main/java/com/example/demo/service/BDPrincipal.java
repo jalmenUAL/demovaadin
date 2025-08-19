@@ -15,6 +15,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public BD_Youtubers _youtubers;
     public BD_Administradores _administradores;
 
+    /* Imprescindible pasar las BDs a BD Principal */
     public BDPrincipal(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
        this._youtubers = youtubers;
         this._administradores = administradores;
