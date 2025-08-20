@@ -2,16 +2,24 @@ package com.example.demo.views;
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.example.demo.domain.Video;
+import com.example.demo.domain.Youtuber;
+import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
+
+import jakarta.annotation.security.RolesAllowed;
 
 @Route("VerVideo")
-public class VerVideo extends VerticalLayout{
+@AnonymousAllowed
+public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 	public Videosrelacionados _videosrelacionados;
 	public ListadeVideos_item _listadeVideos;
 	public GaleradeVideos_item _galeradeVideos;
@@ -20,9 +28,30 @@ public class VerVideo extends VerticalLayout{
 	HorizontalLayout video_y_relacionados = new HorizontalLayout();
 	VerticalLayout frame_y_comentarios = new VerticalLayout();
 	Video video;
-	
-	public VerVideo(Video video) {
-		this.video = video;
+    public iInicio iInicio;
+
+	public VerVideo(iInicio iInicio) {
+        this.iInicio =  iInicio;
+		
+    
+}
+	public void Videosrelacionados() {
+		_videosrelacionados = new Videosrelacionados();
+		video_y_relacionados.add(_videosrelacionados);
+	}
+
+	public void VerComentarios() {
+
+		_verComentarios = new VerComentarios(video.getTiene_comentarios());
+		frame_y_comentarios.add(_verComentarios);
+	}
+
+	public void PerfilAjeno() {
+		 UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
+	}
+
+    public void setParameter(BeforeEvent event, Long parameter) {
+    video = iInicio.findVideoById(parameter);
     add(video_y_relacionados);
     video_y_relacionados.add(frame_y_comentarios);    
     video_y_relacionados.getStyle().set("width", "100%");
@@ -83,19 +112,7 @@ public class VerVideo extends VerticalLayout{
     Videosrelacionados();
     VerComentarios();
     getStyle().set("width", "100%");
-}
-	public void Videosrelacionados() {
-		_videosrelacionados = new Videosrelacionados();
-		video_y_relacionados.add(_videosrelacionados);
-	}
 
-	public void VerComentarios() {
-
-		_verComentarios = new VerComentarios(video.getTiene_comentarios());
-		frame_y_comentarios.add(_verComentarios);
-	}
-
-	public void PerfilAjeno() {
-		 UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
-	}
+    }
+ 
 }

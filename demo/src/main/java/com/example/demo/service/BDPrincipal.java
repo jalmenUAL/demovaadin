@@ -27,7 +27,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
 
     @Override
     public List<Video> buscar(String texto) {
-        // TODO Auto-generated method stub
+       
        return _videos.buscar(texto);
     }
 
@@ -68,25 +68,25 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
 
     @Override
     public List<Video> getUltimosVideos() {
-        // TODO Auto-generated method stub
+         
         return _videos.getUltimosVideos();
     }
 
     @Override
     public List<Video> cargarUltimosVideos(String login) {
-        // TODO Auto-generated method stub
+         
         return _youtubers.cargarUltimosVideos(login);
     }
 
     @Override
     public void eliminarComentario(int id) {
-        // TODO Auto-generated method stub
+         
         _comentarios.eliminarComentario(id);
     }
 
     @Override
     public List<Youtuber> buscarDenunciados() {
-        // TODO Auto-generated method stub
+         
         return _youtubers.buscarDenunciados();
     }
 
@@ -106,9 +106,22 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
 
 
 
+ 
+
+
+
     @Override
-    public com.example.demo.domain.Youtuber findById(String username) {
-        return _youtubers.findById(username);
+    public Video findVideoById(Long parameter) {
+        
+        return _videos.findVideoById(parameter);
+    }
+
+
+
+    @Override
+    public Youtuber findYoutuberById(String parameter) {
+         
+        return _youtubers.findYoutuberById(parameter);
     }
 
 }

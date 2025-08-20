@@ -23,10 +23,11 @@ import jakarta.annotation.security.RolesAllowed;
 public class Administrador extends Registrado {
 	public iAdministrador _iAdministrador;
 	public Usuariosdenunciados _usuariosdenunciados;
-	
-	public Administrador(){ //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+
+	public Administrador(iAdministrador iAdministrador){ //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
 		//super(videos, comentarios, youtubers, administradores);
-		super(); 
+		super(	iAdministrador);
+		_iAdministrador = iAdministrador;
 
 		UltimosVideos();
 		Usuariosdenunciados();

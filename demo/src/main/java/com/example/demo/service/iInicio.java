@@ -13,7 +13,9 @@ public interface iInicio {
 
     List<Video> getUltimosVideos();
 
-    com.example.demo.domain.Youtuber findById(String parameter);
+    Video findVideoById(Long parameter);
+
+    com.example.demo.domain.Youtuber findYoutuberById(String parameter);
 
     
 }

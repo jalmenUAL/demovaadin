@@ -37,8 +37,8 @@ public class DataInitializer implements CommandLineRunner {
             System.out.println("✅ Usuario administrador creado: admin / admin123");
         }
 
-        
-        if (youtuberRepo.findByLogin("youtuber").isEmpty()) {
+
+        if (youtuberRepo.findById("youtuber").isEmpty()) {
             Youtuber youtuber = new Youtuber();
             youtuber.setLogin("youtuber");
             youtuber.setPassword(passwordEncoder.encode("youtuber123")); // siempre cifrar

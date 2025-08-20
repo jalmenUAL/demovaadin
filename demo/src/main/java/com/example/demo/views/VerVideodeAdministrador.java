@@ -1,6 +1,5 @@
 package com.example.demo.views;
 
-import com.example.demo.domain.Video;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
@@ -9,8 +8,8 @@ import com.vaadin.flow.router.Route;
 
 public class VerVideodeAdministrador extends VerVideo {
 
-    public VerVideodeAdministrador(Video video) {
-        super(video);
+    public VerVideodeAdministrador(com.example.demo.service.iInicio iInicio) {
+        super(iInicio);
         // Crear botón de borrar
         Button borrarButton = new Button("🗑️ Borrar video", event -> borrar());
 

@@ -9,8 +9,9 @@ import com.vaadin.flow.router.Route;
 
 public class VerVideodeYoutuber extends VerVideo {
 
-    public VerVideodeYoutuber(Video video) {
-        super(video);
+    public VerVideodeYoutuber(com.example.demo.service.iInicio iInicio) {
+        super(iInicio);
+
         // Crear botón de Like
         Button likeButton = new Button("👍 Me gusta", event -> like());
 

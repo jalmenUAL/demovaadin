@@ -19,6 +19,6 @@ public interface iYoutuber extends iRegistrado {
 
     void denunciarUsuario(String ormid);
     void seguirUsuario(String ormid);
-   com.example.demo.domain.Youtuber findById(String username);
+   com.example.demo.domain.Youtuber findYoutuberById(String username);
 
 }

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface RepositorioYoutuber extends   JpaRepository<Youtuber, String>, JpaSpecificationExecutor<Youtuber> {
 
-    Optional<Youtuber> findByLogin(String username);
+    
 
     
     

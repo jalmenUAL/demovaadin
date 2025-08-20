@@ -15,15 +15,16 @@ import com.vaadin.flow.router.Route;
 public class ListadeVideos_item extends VerticalLayout {
     public ListadeVideos _listadeVideos;
     public VerVideo _verVideo;
+    Video video;
 
     public void VerVideo() {
-        UI.getCurrent().navigate(VerVideo.class);
+       UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
     }
 
     public ListadeVideos_item(Video video) {
         // Datos de ejemplo
-         
-        String thumbnailUrl =  video.getUrl();
+        this.video = video;
+
         String tituloVideo = video.getTitulo();
         String propietarioNombre = video.getEs_de().getLogin();
         String propietarioFotoUrl = video.getEs_de().getFotoPerfil();
@@ -48,6 +49,17 @@ public class ListadeVideos_item extends VerticalLayout {
         HorizontalLayout statsLayout = new HorizontalLayout(meGustasSpan, comentariosSpan);
         statsLayout.setSpacing(true);
         add(statsLayout);
+
+        String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
+    if (videoId.contains("?")) {
+        videoId = videoId.substring(0, videoId.indexOf("?"));
+    }
+    if (videoId.contains("#")) {
+        videoId = videoId.substring(0, videoId.indexOf("#"));
+    }
+        String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+        
+    
 
         // Imagen del thumbnail en vez de iframe
         Image thumbnail = new Image(thumbnailUrl, "Miniatura del video");

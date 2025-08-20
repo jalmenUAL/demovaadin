@@ -26,8 +26,8 @@ import com.vaadin.flow.spring.annotation.UIScope;
 public class Registrado extends Inicio {
     public iRegistrado _iRegistrado;
 
-    public Registrado(){ //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
-        super();
+    public Registrado(iRegistrado iRegistrado) { //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+        super(iRegistrado);
         //super(videos, comentarios, youtubers, administradores);
         // Inicializa el servicio iRegistrado con la base de datos principal
 		//_iRegistrado = new BDPrincipal(videos, comentarios, youtubers, administradores);

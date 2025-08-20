@@ -26,17 +26,17 @@ public BD_Videos(RepositorioVideo videorepository, RepositorioYoutuber youtuberr
 
 
 public java.util.List<Video> buscar(String texto) {
-	// TODO Auto-generated method stub
+	 
 	java.util.List<Video>  videos = videorepository.findAll();
 	return videos;
 }
 
 
 public void publicarVideo(String value, String value2) {
-	// TODO Auto-generated method stub
+	 
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
     String username = auth.getName();
-	com.example.demo.domain.Youtuber yt = youtuberrepository.findByLogin(username)
+	com.example.demo.domain.Youtuber yt = youtuberrepository.findById(username)
 		.orElseThrow(() -> new RuntimeException("Youtuber no encontrado"));
 	Video video = new Video();
 	video.setTitulo(value);
@@ -48,12 +48,18 @@ public void publicarVideo(String value, String value2) {
 
 
 public java.util.List<Video> getUltimosVideos() {
-	// TODO Auto-generated method stub
+	 
 	java.util.List<Video> UltimosVideos = videorepository.findAll();
 	if (UltimosVideos.size() > 10) {
 		UltimosVideos = UltimosVideos.subList(0, 10);
 	}
 	return UltimosVideos;
+}
+
+
+public Video findVideoById(Long parameter) {
+	return videorepository.findById(parameter)
+			.orElseThrow(() -> new RuntimeException("Video no encontrado"));
 }
 
  

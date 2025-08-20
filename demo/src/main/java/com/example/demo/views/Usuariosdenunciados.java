@@ -23,10 +23,16 @@ public class Usuariosdenunciados extends VerticalLayout{
         // Ejemplo: añadir 5 cards de usuarios denunciados en un layout horizontal
         HorizontalLayout cardsLayout = new HorizontalLayout();
         cardsLayout.setWidthFull();
-
-        for (int i = 0; i < youtubers.size(); i++) {
-            Usuariosdenunciados_item item = new Usuariosdenunciados_item(youtubers.get(i));
-            _item.add(item);
+        if (youtubers == null || youtubers.isEmpty()) {
+            Span noUsers = new Span("No hay usuarios denunciados.");
+            noUsers.getStyle().set("color", "red");
+            cardsLayout.add(noUsers);
+            add(cardsLayout);
+            return;
+        } else {
+            for (int i = 0; i < youtubers.size(); i++) {
+                Usuariosdenunciados_item item = new Usuariosdenunciados_item(youtubers.get(i));
+                _item.add(item);
 
             Div card = new Div(item);
             card.getStyle()
@@ -40,5 +46,6 @@ public class Usuariosdenunciados extends VerticalLayout{
             cardsLayout.add(card);
         }
         add(cardsLayout);
+    }
     }
 }

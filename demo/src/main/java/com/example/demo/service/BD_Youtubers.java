@@ -31,7 +31,7 @@ public class BD_Youtubers {
     }
 
 public Youtuber autenticar(String username, String rawPassword) {
-        return repository.findByLogin(username)
+        return repository.findById(username)
                 .filter(youtuber -> passwordEncoder.matches(rawPassword, youtuber.getPassword()))
                 .orElse(null);
     }
@@ -59,7 +59,7 @@ public Youtuber autenticar(String username, String rawPassword) {
     }
 
     public List<Video> cargarUltimosVideos(String login) {
-        com.example.demo.domain.Youtuber usuario = repository.findByLogin(login)
+        com.example.demo.domain.Youtuber usuario = repository.findById(login)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         Vector<Video> UltimosVideos = new Vector<Video>();
         for (Object obj : usuario.getSeguidor_de()) {
@@ -97,10 +97,11 @@ public Youtuber autenticar(String username, String rawPassword) {
         usuario.getSeguido_por().add(usuarioActual); // Asumiendo que hay un campo seguido_por en Youtuber
         repository.save(usuario);
     }
+ 
 
-    public Youtuber findById(String username) {
-        return repository.findById(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    public Youtuber findYoutuberById(String parameter) {
+        return repository.findById(parameter)
+                .orElseThrow(() -> new RuntimeException("Youtuber no encontrado"));
     }
  
 }

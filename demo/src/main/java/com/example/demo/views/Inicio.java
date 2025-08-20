@@ -32,8 +32,8 @@ public class Inicio extends VerticalLayout {
 	// Constructor que recibe el servicio iInicio
 
 
-	public Inicio() { //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
-
+	public Inicio(iInicio iInicio) { //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+        this._iInicio = iInicio;
 		//_iInicio = new BDPrincipal(videos, comentarios, youtubers, administradores);
 
         // Estilos generales del layout
@@ -60,15 +60,15 @@ public class Inicio extends VerticalLayout {
         add(header);
 
         // Métodos adicionales
-        Buscar(_iInicio);         // Agrega componente de búsqueda
-        //UltimosVideos();  // Agrega sección de últimos videos
+        Buscar();         // Agrega componente de búsqueda
+        UltimosVideos();  // Agrega sección de últimos videos
     }
 
 
 	 
 
-    public void Buscar(iInicio inicio) {
-		Buscar b = new Buscar(inicio);
+    public void Buscar() {
+		Buscar b = new Buscar(_iInicio);
 		header.add(b);
 	}
 

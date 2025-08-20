@@ -46,6 +46,15 @@ public class GaleradeVideos_item extends VerticalLayout {
         infoLayout.setSpacing(true);
         add(infoLayout);
 
+         String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
+    if (videoId.contains("?")) {
+        videoId = videoId.substring(0, videoId.indexOf("?"));
+    }
+    if (videoId.contains("#")) {
+        videoId = videoId.substring(0, videoId.indexOf("#"));
+    }
+        String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+
         // Imagen estática del video (thumbnail)
         Image thumbnail = new Image(thumbnailUrl, "Thumbnail del video");
         thumbnail.setWidth("100%");

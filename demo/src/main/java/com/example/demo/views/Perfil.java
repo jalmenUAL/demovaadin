@@ -39,7 +39,7 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
-        _usuario = _iInicio.findById(parameter);
+        _usuario = _iInicio.findYoutuberById(parameter);
         // Imagen de fondo (cabecera)
         if (_usuario.getBanner() == null || _usuario.getBanner().isEmpty()) {
             _usuario.setBanner("https://www.fcbarcelona.com/photo-resources/2025/07/21/ff83df3a-ba37-4603-a4b6-c09cc4f94470/16x9_ESCUDO_GENERIC_2025.jpg?width=1200&height=750"); // URL de una imagen por defecto
