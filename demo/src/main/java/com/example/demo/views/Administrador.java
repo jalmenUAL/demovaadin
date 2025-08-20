@@ -2,12 +2,17 @@ package com.example.demo.views;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.domain.Video;
 import com.example.demo.service.BD_Administradores;
 import com.example.demo.service.BD_Comentarios;
 import com.example.demo.service.BD_Videos;
 import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iAdministrador;
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
 
 import jakarta.annotation.security.RolesAllowed;
@@ -28,22 +33,32 @@ public class Administrador extends Registrado {
 		//super(videos, comentarios, youtubers, administradores);
 		super(	iAdministrador);
 		_iAdministrador = iAdministrador;
-
-		UltimosVideos();
-		Usuariosdenunciados();
+		
 		
 	}
 
 	public void Usuariosdenunciados() {
-		List<com.example.demo.domain.Youtuber> denunciados = _iAdministrador.buscarDenunciados();
-		_usuariosdenunciados = new Usuariosdenunciados(denunciados);
-		add(_usuariosdenunciados);
+		 
 	}
 	
 	 
 	public void UltimosVideos() {
-		List<Video> videos = _iAdministrador.getUltimosVideos();
+		
+	}
+
+	@Override
+protected void onAttach(AttachEvent attachEvent) {
+    super.onAttach(attachEvent);
+
+    
+
+   List<Video> videos = _iAdministrador.getUltimosVideos();
 		_ultimosVideos = new UltimosVideosdeAdministrador(videos);
 		add(_ultimosVideos);
-	}
+
+		List<com.example.demo.domain.Youtuber> denunciados = _iAdministrador.buscarDenunciados();
+		_usuariosdenunciados = new Usuariosdenunciados(denunciados);
+		add(_usuariosdenunciados);
+     
+}
 }

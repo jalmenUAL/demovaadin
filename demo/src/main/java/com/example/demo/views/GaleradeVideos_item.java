@@ -15,6 +15,7 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 public class GaleradeVideos_item extends VerticalLayout {
     public GaleradeVideos _galeradeVideos;
     public VerVideo _verVideo;
+    Video video;
      // Datos de ejemplo
       public String videoId = "dQw4w9WgXcQ"; // ID del video
         public String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
@@ -23,11 +24,11 @@ public class GaleradeVideos_item extends VerticalLayout {
         public String propietarioFotoUrl = "https://randomuser.me/api/portraits/men/1.jpg";
 
     public void VerVideo() {
-        UI.getCurrent().navigate(VerVideo.class);
+       UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
     }
 
     public GaleradeVideos_item(Video video) {
-        
+        this.video = video;
         this.thumbnailUrl = video.getUrl();
         this.tituloVideo = video.getTitulo();
         this.propietarioNombre = video.getEs_de().getLogin();

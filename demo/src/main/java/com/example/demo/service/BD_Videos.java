@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.List;
 import java.util.Vector;
 
 import org.springframework.security.core.Authentication;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
+import com.example.demo.domain.Youtuber;
+import com.example.demo.views.Videosgustados;
 
 @Service
 
@@ -26,18 +29,17 @@ public BD_Videos(RepositorioVideo videorepository, RepositorioYoutuber youtuberr
 
 
 public java.util.List<Video> buscar(String texto) {
-	 
-	java.util.List<Video>  videos = videorepository.findAll();
-	return videos;
+
+	List<Video> busqueda = videorepository.findAll();
+        return busqueda.stream()
+                .filter(video -> video.getTitulo().contains(texto))
+                .toList();
 }
 
 
 public void publicarVideo(String value, String value2) {
 	 
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    String username = auth.getName();
-	com.example.demo.domain.Youtuber yt = youtuberrepository.findById(username)
-		.orElseThrow(() -> new RuntimeException("Youtuber no encontrado"));
+	Youtuber yt = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	Video video = new Video();
 	video.setTitulo(value);
 	video.setUrl(value2);

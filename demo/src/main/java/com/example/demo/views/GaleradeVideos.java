@@ -15,7 +15,7 @@ public class GaleradeVideos extends VerticalLayout {
     public Vector<GaleradeVideos_item> _item = new Vector<GaleradeVideos_item>();
 
     HorizontalLayout carrusel = new HorizontalLayout();
-
+    public H2 tituloGaleria = new H2("Últimos Videos");
    public GaleradeVideos(List<Video> videos) {
         // Estilo general centrado
         setSizeFull();
@@ -23,7 +23,7 @@ public class GaleradeVideos extends VerticalLayout {
         setJustifyContentMode(JustifyContentMode.START);  // si quieres que el carrusel esté más arriba
 
         // Título estilizado
-        H2 tituloGaleria = new H2("🎥 Galería de Videos");
+       
         tituloGaleria.getStyle()
             .set("color", "#2c3e50")
             .set("margin-top", "20px")

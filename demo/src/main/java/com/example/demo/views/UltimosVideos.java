@@ -12,6 +12,11 @@ public class UltimosVideos extends GaleradeVideos {
 
 	public UltimosVideos(List<Video> videos) {
 		super(videos);
+		carrusel.removeAll();
+		for (Video video : videos) {
+			UltimosVideos_item item = new UltimosVideos_item(video);
+			carrusel.add(item);
+		}
 		// TODO Auto-generated constructor stub
 
 	}

@@ -47,8 +47,8 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public void actualizarConfiguracion(String value, String value2, String src, String src2) {
-        _youtubers.actualizarConfiguracion(value, value2, src, src2);
+    public void actualizarConfiguracion(String value, String src, String src2) {
+        _youtubers.actualizarConfiguracion(value, src, src2);
     }
 
     @Override

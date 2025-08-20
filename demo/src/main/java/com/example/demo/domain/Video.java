@@ -118,6 +118,5 @@ public class Video implements Serializable {
 	public String toString() {
 		return String.valueOf(getId());
 	}
-
 	
 }

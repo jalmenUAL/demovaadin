@@ -19,14 +19,17 @@ public class Buscar extends VerticalLayout {
 	private TextField textobuscar;
 	private VerticalLayout contenido = new VerticalLayout();
 	iInicio iInicio;
+	List<Video> resultados;
 
-	public void ResultadodeBusqueda(List<Video> resultados) {
+	public void ResultadodeBusqueda() {
 		_resultadodeBusqueda = new ResultadodeBusqueda(resultados);
-		contenido.add(_resultadodeBusqueda);
+		_inicio.body.removeAll();
+		_inicio.body.add(_resultadodeBusqueda);
 	}
 
-	Buscar(iInicio iInicio) {
+	Buscar(iInicio iInicio,Inicio inicio) {
 		this.iInicio = iInicio;
+		this._inicio = inicio;
 		textobuscar = new TextField();
 		textobuscar.setPlaceholder("Introduzca el nombre del video que quiere buscar");
 		textobuscar.setWidthFull(); // Ocupa todo el espacio disponible
@@ -41,14 +44,15 @@ public class Buscar extends VerticalLayout {
 		buscarLayout.setWidthFull(); // El layout ocupa todo el ancho
 		buscarLayout.setFlexGrow(1, textobuscar); // El textfield crece
 
-		contenido.add(buscarLayout);
+		add(buscarLayout);
 		add(contenido);
 	}
 
 	private void buscar() {
 		String texto = textobuscar.getValue();
-		List<Video> resultados = iInicio.buscar(texto);
-		ResultadodeBusqueda(resultados);
+		resultados = iInicio.buscar(texto);
+		ResultadodeBusqueda();
+			
 
 	}
 };

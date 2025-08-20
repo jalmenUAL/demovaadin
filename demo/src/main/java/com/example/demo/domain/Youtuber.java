@@ -49,7 +49,7 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinTable(name="Registrado_Registrado2", joinColumns={ @JoinColumn(name="RegistradoLogin2") }, inverseJoinColumns={ @JoinColumn(name="RegistradoLogin") })	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
-	private java.util.Set bloquedado_por = new java.util.HashSet();
+	private java.util.Set denunciado_por = new java.util.HashSet();
 	
 	@ManyToMany(targetEntity=com.example.demo.domain.Video.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
@@ -62,10 +62,10 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set seguidor_de = new java.util.HashSet();
 	
-	@ManyToMany(mappedBy="bloquedado_por", targetEntity=com.example.demo.domain.Youtuber.class)	
+	@ManyToMany(mappedBy="denunciado_por", targetEntity=com.example.demo.domain.Youtuber.class)	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
-	private java.util.Set ha_bloqueado_a = new java.util.HashSet();
+	private java.util.Set ha_denunciado_a = new java.util.HashSet();
 	
 	public void setBloqueado(boolean value) {
 		setBloqueado(Boolean.valueOf(value));
@@ -114,12 +114,12 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	}
 	
 	
-	public void setBloquedado_por(java.util.Set value) {
-		this.bloquedado_por = value;
+	public void setDenunciado_por(java.util.Set value) {
+		this.denunciado_por = value;
 	}
 	
-	public java.util.Set getBloquedado_por() {
-		return bloquedado_por;
+	public java.util.Set getDenunciado_por() {
+		return denunciado_por;
 	}
 	
 	
@@ -141,12 +141,12 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	}
 	
 	
-	public void setHa_bloqueado_a(java.util.Set value) {
-		this.ha_bloqueado_a = value;
+	public void setHa_denunciado_a(java.util.Set value) {
+		this.ha_denunciado_a = value;
 	}
 	
-	public java.util.Set getHa_bloqueado_a() {
-		return ha_bloqueado_a;
+	public java.util.Set getHa_denunciado_a() {
+		return ha_denunciado_a;
 	}
 	
 	

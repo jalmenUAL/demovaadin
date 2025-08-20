@@ -11,7 +11,7 @@ public interface iYoutuber extends iRegistrado {
 
     void publicarComentario(String value);
 
-    void actualizarConfiguracion(String value, String value2, String src, String src2);
+    void actualizarConfiguracion(String value, String src, String src2);
 
     void publicarVideo(String value, String value2);
 

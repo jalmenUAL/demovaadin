@@ -28,7 +28,7 @@ import jakarta.annotation.security.RolesAllowed;
 public class Configuracion extends VerticalLayout{
 	public PerfilPropio _perfilPropio;
     private iYoutuber _iYoutuber;
-    private EmailField login;   
+      
     private Image imagenDeFondo;
     private Image avatar;
     private TextField password;
@@ -49,9 +49,9 @@ public Configuracion(iYoutuber iYoutuber) {
         // Layout para login y password
         VerticalLayout datosLayout = new VerticalLayout();
         datosLayout.setAlignItems(Alignment.CENTER);
-        login = new EmailField("Login");
-         password = new TextField("Password");
-        datosLayout.add(login, password);
+        
+         password = new TextField("New Password");
+        datosLayout.add( password);
 
         // Layout para avatar
         VerticalLayout avatarLayout = new VerticalLayout();
@@ -111,7 +111,7 @@ public Configuracion(iYoutuber iYoutuber) {
 
 	private void actualizar(iYoutuber iYoutuber) {
         iYoutuber.actualizarConfiguracion(
-            login.getValue(),
+            
             password.getValue(),
             avatar.getSrc(),
             imagenDeFondo.getSrc()

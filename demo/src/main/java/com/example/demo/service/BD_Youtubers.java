@@ -36,8 +36,12 @@ public Youtuber autenticar(String username, String rawPassword) {
                 .orElse(null);
     }
 
-    public void actualizarConfiguracion(String value, String value2, String src, String src2) {
-         
+    public void actualizarConfiguracion(String value, String src, String src2) {
+        Youtuber usuario = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuario.setPassword(passwordEncoder.encode(value));
+        usuario.setFotoPerfil(src);
+        usuario.setBanner(src2);
+        repository.save(usuario);
     }
 
     public void bloquearUsuario(String ormid) {
@@ -66,34 +70,29 @@ public Youtuber autenticar(String username, String rawPassword) {
         Youtuber seguido = (Youtuber) obj; // Cast explícito
         UltimosVideos.addAll(seguido.getHa_publicado());
     }
+        UltimosVideos.addAll(usuario.getHa_publicado());
         return UltimosVideos;
     }
 
     public List<Youtuber> buscarDenunciados() {
         List<Youtuber> denunciados = repository.findAll();
         return denunciados.stream()
-                .filter(Youtuber::getBloqueado) // Asumiendo que hay un método getBloqueado en Youtuber
+                .filter(youtuber -> youtuber.getDenunciado_por().size() > 0)
                 .toList();
     }
 
     public void denunciarUsuario(String ormid) {
         Youtuber usuario = repository.findById(ormid)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        com.example.demo.domain.Youtuber usuarioActual = repository.findById(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        usuario.getBloquedado_por().add(usuarioActual); // Asumiendo que hay un campo denunciado en Youtuber
+        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuario.getDenunciado_por().add(usuarioActual); // Asumiendo que hay un campo denunciado en Youtuber
         repository.save(usuario);
     }
 
     public void seguirUsuario(String ormid) {
         Youtuber usuario = repository.findById(ormid)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        com.example.demo.domain.Youtuber usuarioActual = repository.findById(username)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         usuario.getSeguido_por().add(usuarioActual); // Asumiendo que hay un campo seguido_por en Youtuber
         repository.save(usuario);
     }

@@ -12,11 +12,12 @@ public class ResultadodeBusqueda extends GaleradeVideos {
 	
 	public ResultadodeBusqueda(List<Video> resultados){
 		super(resultados);
-		 
+		tituloGaleria.setText("Resultados de la búsqueda");
+		carrusel.removeAll();
 	
 	for (Video video : resultados) {
 		ResultadodeBusqueda_item gvi = new ResultadodeBusqueda_item(video);
-		add(gvi);
+		carrusel.add(gvi);
 	}
 }
 }
