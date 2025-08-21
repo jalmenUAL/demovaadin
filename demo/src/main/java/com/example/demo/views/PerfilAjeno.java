@@ -1,11 +1,11 @@
 package com.example.demo.views;
 
-import com.example.demo.domain.Youtuber;
 import com.example.demo.service.iInicio;
-import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route("PerfilAjeno")
+@AnonymousAllowed
 public class PerfilAjeno extends Perfil {
 
 	public PerfilAjeno(iInicio iInicio) {

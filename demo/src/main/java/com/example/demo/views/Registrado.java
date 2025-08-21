@@ -1,12 +1,7 @@
 package com.example.demo.views;
 
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.stereotype.Component;
 
-import com.example.demo.service.BD_Administradores;
-import com.example.demo.service.BD_Comentarios;
-import com.example.demo.service.BD_Videos;
-import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iRegistrado;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -17,7 +12,6 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.VaadinSession;
-import com.vaadin.flow.spring.annotation.UIScope;
 
 
 @Route("Registrado")
@@ -26,14 +20,10 @@ import com.vaadin.flow.spring.annotation.UIScope;
 public class Registrado extends Inicio {
     public iRegistrado _iRegistrado;
 
-    public Registrado(iRegistrado iRegistrado) { //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
+    public Registrado(iRegistrado iRegistrado) {  
         super(iRegistrado);
         _iRegistrado = iRegistrado;
-        //super(videos, comentarios, youtubers, administradores);
-        // Inicializa el servicio iRegistrado con la base de datos principal
-		//_iRegistrado = new BDPrincipal(videos, comentarios, youtubers, administradores);
-
-
+        
         // Botón de logout
         Button logoutButton = new Button("Cerrar sesión", new Icon(VaadinIcon.SIGN_OUT));
         logoutButton.addThemeVariants(ButtonVariant.LUMO_ERROR); // Estilo rojo
@@ -70,7 +60,6 @@ public class Registrado extends Inicio {
         null);
         VaadinSession.getCurrent().close();
         VaadinSession.getCurrent().setAttribute("Registrado", null);
-
         getUI().ifPresent(ui -> ui.navigate("NoLogueado"));
     }
 

@@ -19,8 +19,7 @@ public class PerfilPropio extends Perfil {
 
     public PerfilPropio(iYoutuber iYoutuber) {
         super(iYoutuber);
-        this._publicarVideo = new PublicarVideo(iYoutuber);
-        this._configuracion = new Configuracion(iYoutuber);
+         
         // === Crear botones ===
         Button publicarButton = new Button("📤 Publicar video", event -> PublicarVideo());
         Button configButton = new Button("⚙️ Configuración", event -> Configuracion());

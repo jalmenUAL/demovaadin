@@ -18,7 +18,9 @@ public class Buscar extends VerticalLayout {
 	public ResultadodeBusqueda _resultadodeBusqueda;
 	private TextField textobuscar;
 	private VerticalLayout contenido = new VerticalLayout();
+	//La búsqueda la realiza iInicio
 	iInicio iInicio;
+	//Lista de resultados de la búsqueda.
 	List<Video> resultados;
 
 	public void ResultadodeBusqueda() {

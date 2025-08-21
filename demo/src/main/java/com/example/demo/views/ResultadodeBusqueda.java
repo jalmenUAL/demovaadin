@@ -9,15 +9,15 @@ import com.vaadin.flow.router.Route;
 
 public class ResultadodeBusqueda extends GaleradeVideos {
 	public Buscar _buscar;
-	
-	public ResultadodeBusqueda(List<Video> resultados){
+
+	public ResultadodeBusqueda(List<Video> resultados) {
 		super(resultados);
 		tituloGaleria.setText("Resultados de la búsqueda");
 		carrusel.removeAll();
-	
-	for (Video video : resultados) {
-		ResultadodeBusqueda_item gvi = new ResultadodeBusqueda_item(video);
-		carrusel.add(gvi);
+
+		for (Video video : resultados) {
+			ResultadodeBusqueda_item gvi = new ResultadodeBusqueda_item(video);
+			carrusel.add(gvi);
+		}
 	}
-}
 }

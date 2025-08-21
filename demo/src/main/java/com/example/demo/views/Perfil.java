@@ -14,7 +14,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
- 
 
 @Route("Perfil")
 public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
@@ -32,17 +31,20 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
         setPadding(false);
         setAlignItems(Alignment.CENTER);
 
-       
     }
-
-
 
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
         _usuario = _iInicio.findYoutuberById(parameter);
         // Imagen de fondo (cabecera)
         if (_usuario.getBanner() == null || _usuario.getBanner().isEmpty()) {
-            _usuario.setBanner("https://www.fcbarcelona.com/photo-resources/2025/07/21/ff83df3a-ba37-4603-a4b6-c09cc4f94470/16x9_ESCUDO_GENERIC_2025.jpg?width=1200&height=750"); // URL de una imagen por defecto
+            _usuario.setBanner(
+                    "https://www.fcbarcelona.com/photo-resources/2025/07/21/ff83df3a-ba37-4603-a4b6-c09cc4f94470/16x9_ESCUDO_GENERIC_2025.jpg?width=1200&height=750"); // URL
+                                                                                                                                                                       // de
+                                                                                                                                                                       // una
+                                                                                                                                                                       // imagen
+                                                                                                                                                                  // por
+                                                                                                                                                             // defecto
         }
         Image imagenDeFondo = new Image(_usuario.getBanner(), "Imagen de fondo");
         imagenDeFondo.setWidth("100%");
@@ -54,6 +56,9 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
         // Datos de ejemplo
         String nombreUsuario = _usuario.getLogin();
         String avatarUrl = _usuario.getFotoPerfil();
+        if (avatarUrl == null || avatarUrl.isEmpty()) {
+            avatarUrl = "https://via.placeholder.com/100"; // URL de un avatar por defecto
+        }
         // Título debajo del fondo
         H2 titulo = new H2("Perfil del Youtuber");
         titulo.getStyle().set("color", "#2c3e50").set("margin-top", "10px");
@@ -69,17 +74,17 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
         Span nombreSpan = new Span(nombreUsuario);
         nombreSpan.getStyle()
-            .set("font-weight", "bold")
-            .set("font-size", "1.3em")
-            .set("margin-left", "10px");
+                .set("font-weight", "bold")
+                .set("font-size", "1.3em")
+                .set("margin-left", "10px");
 
         // Botón para ver youtubers seguidos
         Button btnYoutubersSeguidos = new Button("Ver Youtubers Seguidos", new Icon(VaadinIcon.USER_HEART));
         btnYoutubersSeguidos.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         btnYoutubersSeguidos.getStyle()
-            .set("border-radius", "8px")
-            .set("font-weight", "bold")
-            .set("padding", "8px 16px");
+                .set("border-radius", "8px")
+                .set("font-weight", "bold")
+                .set("padding", "8px 16px");
 
         btnYoutubersSeguidos.addClickListener(e -> {
             getUI().ifPresent(ui -> ui.navigate(Youtubersseguidos.class));
@@ -119,4 +124,4 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
     }
 
-    }
+}

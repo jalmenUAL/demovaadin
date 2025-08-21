@@ -15,7 +15,7 @@ public class GaleradeVideos extends VerticalLayout {
     public Vector<GaleradeVideos_item> _item = new Vector<GaleradeVideos_item>();
 
     HorizontalLayout carrusel = new HorizontalLayout();
-    public H2 tituloGaleria = new H2("Últimos Videos");
+    public H2 tituloGaleria = new H2("Galería de Videos");
    public GaleradeVideos(List<Video> videos) {
         // Estilo general centrado
         setSizeFull();
@@ -37,5 +37,7 @@ public class GaleradeVideos extends VerticalLayout {
 
         // Agregar al layout principal
         add(tituloGaleria, carrusel);
+
+        // Como hay distintos tipos se deja el carrusel vacío para que se llene dinámicamente
     }
 }

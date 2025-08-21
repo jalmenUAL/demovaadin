@@ -18,7 +18,7 @@ public class ListadeVideos_item extends VerticalLayout {
     Video video;
 
     public void VerVideo() {
-       UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
+        UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
     }
 
     public ListadeVideos_item(Video video) {
@@ -51,15 +51,13 @@ public class ListadeVideos_item extends VerticalLayout {
         add(statsLayout);
 
         String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
-    if (videoId.contains("?")) {
-        videoId = videoId.substring(0, videoId.indexOf("?"));
-    }
-    if (videoId.contains("#")) {
-        videoId = videoId.substring(0, videoId.indexOf("#"));
-    }
+        if (videoId.contains("?")) {
+            videoId = videoId.substring(0, videoId.indexOf("?"));
+        }
+        if (videoId.contains("#")) {
+            videoId = videoId.substring(0, videoId.indexOf("#"));
+        }
         String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
-        
-    
 
         // Imagen del thumbnail en vez de iframe
         Image thumbnail = new Image(thumbnailUrl, "Miniatura del video");

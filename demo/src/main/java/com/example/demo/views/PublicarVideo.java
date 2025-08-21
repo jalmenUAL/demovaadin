@@ -1,22 +1,12 @@
 package com.example.demo.views;
 
- 
-
-import com.vaadin.flow.component.textfield.TextField;
-
-import org.springframework.context.annotation.Role;
-
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-
 import com.vaadin.flow.component.button.ButtonVariant;
-
-
 import com.vaadin.flow.component.html.H2;
-
-
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 
 import jakarta.annotation.security.RolesAllowed;
@@ -28,7 +18,6 @@ public class PublicarVideo extends VerticalLayout {
     public PerfilPropio _perfilPropio;
     TextField introduzcaLaUrl = new TextField("URL del Video");
     TextField introduzcaEltitulo = new TextField("Título del Video");
-	
 
     public PublicarVideo(iYoutuber iYoutuber) {
         setWidthFull();
@@ -54,9 +43,9 @@ public class PublicarVideo extends VerticalLayout {
         Button button = new Button("Publicar Video");
         button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         button.getStyle()
-            .set("border-radius", "8px")
-            .set("font-weight", "bold")
-            .set("margin-top", "10px");
+                .set("border-radius", "8px")
+                .set("font-weight", "bold")
+                .set("margin-top", "10px");
 
         button.addClickListener(e -> {
             iYoutuber.publicarVideo(introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
@@ -66,16 +55,3 @@ public class PublicarVideo extends VerticalLayout {
         add(button);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

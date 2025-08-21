@@ -27,6 +27,14 @@ public class VerVideodeYoutuber extends VerVideo {
         frame_y_comentarios.add(likeButton);
     }
 
+    @Override
+      public void VerComentarios() {
+
+		_verComentarios = new VerComentariosdeYoutuber(video.getTiene_comentarios());
+        comentarios.add(_verComentarios);
+		frame_y_comentarios.add(comentarios);
+	}
+
     public void like() {
         // Evento cuando se hace clic en "Me gusta"
         Notification.show("¡Te ha gustado el video!", 3000, Notification.Position.MIDDLE);

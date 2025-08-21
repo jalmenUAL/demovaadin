@@ -1,9 +1,5 @@
 package com.example.demo.views;
 
-import com.example.demo.service.BD_Administradores;
-import com.example.demo.service.BD_Comentarios;
-import com.example.demo.service.BD_Videos;
-import com.example.demo.service.BD_Youtubers;
 import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -17,7 +13,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @Route("NoLogueado")
 @AnonymousAllowed
 public class NoLogueado extends Inicio {
-    public iNoLogueado _iNoLogueado;
+    //public iNoLogueado _iNoLogueado;
     public Login _login;
     public Registrar _registrar;
 
@@ -29,9 +25,9 @@ public class NoLogueado extends Inicio {
         UI.getCurrent().navigate(Registrar.class);
     }
 
-    public NoLogueado(iNoLogueado iNoLogueado) { //BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers, BD_Administradores administradores) {
-        super(iNoLogueado); //super(videos, comentarios, youtubers, administradores);
-        //_iNoLogueado =  new BDPrincipal(videos, comentarios, youtubers, administradores);
+    public NoLogueado(iNoLogueado iNoLogueado) {  
+        super(iNoLogueado);   
+
         // Botones de Login y Registrar
         // Botón de Login
         Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));

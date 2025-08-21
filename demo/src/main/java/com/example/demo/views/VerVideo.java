@@ -27,6 +27,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 	public PerfilAjeno _perfilAjeno;
 	HorizontalLayout video_y_relacionados = new HorizontalLayout();
 	VerticalLayout frame_y_comentarios = new VerticalLayout();
+    VerticalLayout comentarios = new VerticalLayout();
 	Video video;
     public iInicio iInicio;
 
@@ -40,11 +41,13 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 		video_y_relacionados.add(_videosrelacionados);
 	}
 
-	public void VerComentarios() {
+    public void VerComentarios() {
 
 		_verComentarios = new VerComentarios(video.getTiene_comentarios());
-		frame_y_comentarios.add(_verComentarios);
+        comentarios.add(_verComentarios);
+		frame_y_comentarios.add(comentarios);
 	}
+	 
 
 	public void PerfilAjeno() {
 		 UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
@@ -61,6 +64,8 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
     avatar.setWidth("50px");
     avatar.setHeight("50px");
     avatar.getStyle().set("border-radius", "50%");
+
+    avatar.addClickListener(e -> PerfilAjeno());
 
     String nombreUsuario = video.getEs_de().getLogin();
     String tituloVideo = video.getTitulo();

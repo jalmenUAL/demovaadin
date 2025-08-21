@@ -19,7 +19,6 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinService;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.VaadinServletResponse;
-import com.vaadin.flow.server.VaadinSession;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -62,8 +61,7 @@ public class Login extends VerticalLayout {
                 } else {
                     UI.getCurrent().navigate(Youtuber.class);
                 }
-                // Opcional: forzar recarga si tu app chequea permisos en beforeEnter
-                // UI.getCurrent().getPage().reload();
+                 
 
             } catch (AuthenticationException e) {
                 loginOverlay.setError(true);

@@ -8,7 +8,6 @@ public class UltimosVideosdeYoutuber_item extends UltimosVideos_item {
 
     public UltimosVideosdeYoutuber_item(Video video) {
         super(video);
-        //TODO Auto-generated constructor stub
     }
 	
 	

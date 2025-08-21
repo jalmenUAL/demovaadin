@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
@@ -8,8 +9,11 @@ import com.vaadin.flow.router.Route;
 
 public class VerVideodeAdministrador extends VerVideo {
 
-    public VerVideodeAdministrador(com.example.demo.service.iInicio iInicio) {
-        super(iInicio);
+    iAdministrador iAdministrador;
+
+    public VerVideodeAdministrador(com.example.demo.service.iAdministrador iAdministrador) {
+        super(iAdministrador);
+        this.iAdministrador = iAdministrador;
         // Crear botón de borrar
         Button borrarButton = new Button("🗑️ Borrar video", event -> borrar());
 
@@ -24,6 +28,14 @@ public class VerVideodeAdministrador extends VerVideo {
         // Añadir al layout del video (por ejemplo debajo del iframe)
         frame_y_comentarios.add(borrarButton);
     }
+
+@Override
+    public void VerComentarios() {
+
+		_verComentarios = new VerComentariosdeAdministrador(iAdministrador,video.getTiene_comentarios());
+        comentarios.add(_verComentarios);
+		frame_y_comentarios.add(comentarios);
+	}
 
     public void borrar() {
         // Por ahora, solo muestra una notificación

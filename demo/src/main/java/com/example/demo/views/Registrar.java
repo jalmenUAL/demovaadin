@@ -23,7 +23,7 @@ import java.io.InputStream;
 
 @Route("Registrar")
 @AnonymousAllowed
-public class Registrar extends VerticalLayout{
+public class Registrar extends VerticalLayout {
     public NoLogueado _noLogueado;
     public ServidordeCorreo _servidordeCorreo;
 
@@ -31,16 +31,15 @@ public class Registrar extends VerticalLayout{
     private TextField password;
     private Image avatar;
     private Image imagenDeFondo;
-    private String loginValue;
     public iNoLogueado _iNoLogueado;
 
     public void EnviarCorreo() {
         throw new UnsupportedOperationException();
     }
 
-     public Registrar(iNoLogueado iNoLogueado) {
-        // Estilo general centrado
+    public Registrar(iNoLogueado iNoLogueado) {
         _iNoLogueado = iNoLogueado;
+        // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
@@ -99,11 +98,7 @@ public class Registrar extends VerticalLayout{
         Button registrar = new Button("Registrar", new Icon(VaadinIcon.USER_CHECK));
         registrar.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         registrar.addClickListener(event -> {
-            loginValue = login.getValue();
-            String passwordValue = password.getValue();
-            String avatarUrl = avatar.getSrc();
-            String fondoUrl = imagenDeFondo.getSrc();
-            registrar(loginValue, passwordValue, avatarUrl, fondoUrl);
+            registrar(login.getValue(), password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
         });
 
         // Layout final agrupado
