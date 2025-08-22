@@ -11,15 +11,10 @@ public class UltimosVideosdeYoutuber extends UltimosVideos {
 public UltimosVideosdeYoutuber(List<Video> videos) {
 	super(videos);
 
-	
-	carrusel.removeAll();
+
+	 
 	tituloGaleria.setText("Videos Propios o de Youtubers que sigues");
-	for (Video video : videos) {
-		UltimosVideos_item gvi = new UltimosVideosdeYoutuber_item(video);
-		carrusel.add(gvi);			
-		 
-		
-	}
+	 
 
 }
 	 

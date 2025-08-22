@@ -13,11 +13,7 @@ public UltimosVideosdeAdministrador(List<Video> videos) {
 		super(videos);
 		
 		tituloGaleria.setText("Todos los videos");
-		carrusel.removeAll();
-		for (Video video : videos) {
-			UltimosVideos_item gvi = new UltimosVideosdeAdministrador_item(video);
-			carrusel.add(gvi);
-		}
+		 
 		
 		
 	}

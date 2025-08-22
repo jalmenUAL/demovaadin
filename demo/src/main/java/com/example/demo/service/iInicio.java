@@ -4,8 +4,7 @@ import java.util.List;
 
 
 import com.example.demo.domain.Video;
-import com.example.demo.views.Youtuber;
-
+import com.example.demo.domain.Youtuber;
 
 public interface iInicio {
 
@@ -15,7 +14,7 @@ public interface iInicio {
 
     Video findVideoById(Long parameter);
 
-    com.example.demo.domain.Youtuber findYoutuberById(String parameter);
+    Youtuber findYoutuberById(String parameter);
 
     
 }

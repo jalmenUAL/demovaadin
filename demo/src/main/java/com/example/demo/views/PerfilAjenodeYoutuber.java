@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Youtuber;
 import com.example.demo.service.iAdministrador;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.button.Button;
@@ -30,7 +31,7 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
     }
 
     public PerfilAjenodeYoutuber(iYoutuber iYoutuber) {
-        super(iYoutuber);
+       
         this._iYoutuber = iYoutuber;
 
         // Crear botones de denunciar y seguir
@@ -40,5 +41,10 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
         btnSeguir.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
         topLayout.add(btnSeguir,btnDenunciar);
+    }
+
+    @Override
+    public Youtuber getUsuario(String username) {
+       return _iYoutuber.findYoutuberById(username);
     }
 }

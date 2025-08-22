@@ -1,6 +1,10 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.domain.Video;
+import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.Route;
@@ -9,11 +13,23 @@ import com.vaadin.flow.router.Route;
 
 public class VerVideodeYoutuber extends VerVideo {
 
-    public VerVideodeYoutuber(com.example.demo.service.iInicio iInicio) {
-        super(iInicio);
+    private iYoutuber iYoutuber;
+    Button likeButton;
+    public VerVideodeYoutuber(com.example.demo.service.iYoutuber iYoutuber) {
+        super(iYoutuber);
+        this.iYoutuber = iYoutuber;
 
         // Crear botón de Like
-        Button likeButton = new Button("👍 Me gusta", event -> like());
+        likeButton = new Button("👍 Me gusta", event -> like());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+         
+            String username = auth.getName();
+            com.example.demo.domain.Youtuber usuario = iYoutuber.findYoutuberById(username);
+            if (usuario.getLe_gusta().contains(video)) {
+                likeButton.setEnabled(false);
+            } else {
+                likeButton.setEnabled(true);
+            }
 
         // Estilizar el botón (opcional)
         likeButton.getStyle()
@@ -25,20 +41,26 @@ public class VerVideodeYoutuber extends VerVideo {
 
         // Añadir el botón a donde quieras (por ejemplo, debajo del video)
         frame_y_comentarios.add(likeButton);
+         
+    }
+ 
+
+    public void like() {
+        if (!likeButton.isEnabled()) {
+            likeButton.setEnabled(true);
+             iYoutuber.likeVideo(video.getId());
+             Notification.show("Has dado like a este video.");
+            
+        } else{
+            likeButton.setEnabled(false); 
+            iYoutuber.likeVideo(video.getId());
+            Notification.show("Has quitado el like a este video.");
+        }
+
     }
 
     @Override
-      public void VerComentarios() {
-
-		_verComentarios = new VerComentariosdeYoutuber(video.getTiene_comentarios());
-        comentarios.add(_verComentarios);
-		frame_y_comentarios.add(comentarios);
-	}
-
-    public void like() {
-        // Evento cuando se hace clic en "Me gusta"
-        Notification.show("¡Te ha gustado el video!", 3000, Notification.Position.MIDDLE);
-
-        // Aquí puedes conectar lógica real (ej: sumar un like, llamar a servicio, etc.)
+    public Video findVideoById(Long id) {
+        return iYoutuber.findVideoById(id);
     }
 }

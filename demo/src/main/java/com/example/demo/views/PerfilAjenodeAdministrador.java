@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Youtuber;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -21,7 +22,7 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
     }
 
     public PerfilAjenodeAdministrador(iAdministrador iAdministrador) {
-        super(iAdministrador);
+        
         this.iAdministrador = iAdministrador;
          
 
@@ -32,5 +33,10 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
         // Buscar el layout de botones en la vista padre y añadir el nuevo botón
         // Suponiendo que el layout de botones es el primer HorizontalLayout
          topLayout.add(btnBloquear);
+    }
+
+    @Override
+    public Youtuber getUsuario(String username) {
+       return iAdministrador.findYoutuberById(username);
     }
 }

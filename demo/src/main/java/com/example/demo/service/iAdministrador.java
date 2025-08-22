@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.example.demo.domain.Video;
+import com.example.demo.domain.Youtuber;
 
 
 public interface iAdministrador extends iRegistrado {
@@ -16,5 +17,8 @@ public interface iAdministrador extends iRegistrado {
     List<com.example.demo.domain.Youtuber> buscarDenunciados();
 
     List<Video> getUltimosVideos();
-   
+
+
+    Youtuber findYoutuberById(String username);
+
 }

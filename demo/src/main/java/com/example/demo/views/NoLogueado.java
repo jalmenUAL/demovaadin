@@ -13,7 +13,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @Route("NoLogueado")
 @AnonymousAllowed
 public class NoLogueado extends Inicio {
-    //public iNoLogueado _iNoLogueado;
+    // public iNoLogueado _iNoLogueado;
     public Login _login;
     public Registrar _registrar;
 
@@ -25,8 +25,8 @@ public class NoLogueado extends Inicio {
         UI.getCurrent().navigate(Registrar.class);
     }
 
-    public NoLogueado(iNoLogueado iNoLogueado) {  
-        super(iNoLogueado);   
+    public NoLogueado(iNoLogueado iNoLogueado) {
+        super(iNoLogueado);
 
         // Botones de Login y Registrar
         // Botón de Login

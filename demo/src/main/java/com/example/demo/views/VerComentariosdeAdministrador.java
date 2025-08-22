@@ -1,6 +1,5 @@
 package com.example.demo.views;
 
-import java.util.List;
 import java.util.Set;
 
 import com.example.demo.domain.Comentario;

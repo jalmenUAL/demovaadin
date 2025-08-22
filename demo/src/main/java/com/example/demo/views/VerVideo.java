@@ -1,25 +1,28 @@
 package com.example.demo.views;
 
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.domain.Video;
-import com.example.demo.domain.Youtuber;
+import com.example.demo.service.iAdministrador;
 import com.example.demo.service.iInicio;
+import com.example.demo.service.iRegistrado;
+import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 
-import jakarta.annotation.security.RolesAllowed;
-
 @Route("VerVideo")
 @AnonymousAllowed
-public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
+public abstract class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 	public Videosrelacionados _videosrelacionados;
 	public ListadeVideos_item _listadeVideos;
 	public GaleradeVideos_item _galeradeVideos;
@@ -29,13 +32,14 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 	VerticalLayout frame_y_comentarios = new VerticalLayout();
     VerticalLayout comentarios = new VerticalLayout();
 	Video video;
-    public iInicio iInicio;
+
+    private iInicio iInicio;
+
 
 	public VerVideo(iInicio iInicio) {
-        this.iInicio =  iInicio;
-		
-    
-}
+
+		this.iInicio = iInicio;
+	}
 	public void Videosrelacionados() {
 		_videosrelacionados = new Videosrelacionados();
 		video_y_relacionados.add(_videosrelacionados);
@@ -43,18 +47,60 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 
     public void VerComentarios() {
 
-		_verComentarios = new VerComentarios(video.getTiene_comentarios());
+        
+
+
+		
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated()) {
+           
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+        
+
+        if (esAdmin) {
+            _verComentarios = new VerComentariosdeAdministrador((iAdministrador) iInicio, video.getTiene_comentarios());
         comentarios.add(_verComentarios);
-		frame_y_comentarios.add(comentarios);
+        } else if (esYoutuber) {
+            _verComentarios = new VerComentariosdeYoutuber((iYoutuber) iInicio, video.getTiene_comentarios());
+        comentarios.add(_verComentarios);
+        } else {
+            _verComentarios = new VerComentarios(video.getTiene_comentarios());
+        comentarios.add(_verComentarios);
+        }
+    }
+		
 	}
 	 
 
 	public void PerfilAjeno() {
-		 UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated()) {
+           
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+        
+
+        if (esAdmin) {
+            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, video.getEs_de().getLogin());
+        } else if (esYoutuber) {
+            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, video.getEs_de().getLogin());
+        } else {
+            UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
+        }
+    }
+    
 	}
 
     public void setParameter(BeforeEvent event, Long parameter) {
-    video = iInicio.findVideoById(parameter);
+    video = findVideoById(parameter);
     add(video_y_relacionados);
     video_y_relacionados.add(frame_y_comentarios);    
     video_y_relacionados.getStyle().set("width", "100%");
@@ -116,8 +162,11 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 
     Videosrelacionados();
     VerComentarios();
+    frame_y_comentarios.add(comentarios);
     getStyle().set("width", "100%");
 
     }
+
+    public abstract Video  findVideoById(Long id);
  
 }

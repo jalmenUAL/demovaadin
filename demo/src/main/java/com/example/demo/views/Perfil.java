@@ -16,7 +16,7 @@ import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
 @Route("Perfil")
-public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
+public abstract class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
     public Videosgustados _videosgustados;
     public Videospublicados _videospublicados;
@@ -24,8 +24,8 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
     com.example.demo.domain.Youtuber _usuario;
     iInicio _iInicio;
 
-    public Perfil(iInicio iInicio) {
-        _iInicio = iInicio;
+    public Perfil() {
+       
         setSizeFull();
         setSpacing(true);
         setPadding(false);
@@ -33,9 +33,11 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
     }
 
+    public abstract com.example.demo.domain.Youtuber getUsuario(String username);
+
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
-        _usuario = _iInicio.findYoutuberById(parameter);
+        _usuario = getUsuario(parameter);
         // Imagen de fondo (cabecera)
         if (_usuario.getBanner() == null || _usuario.getBanner().isEmpty()) {
             _usuario.setBanner(

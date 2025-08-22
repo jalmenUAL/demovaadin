@@ -1,21 +1,23 @@
 package com.example.demo.views;
 
-import java.util.List;
 import java.util.Set;
 
 import com.example.demo.domain.Comentario;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
+import com.example.demo.service.iYoutuber;
 
 
 @Route("VerComentariosdeYoutuber")
 public class VerComentariosdeYoutuber extends VerComentarios {
 
-    public VerComentariosdeYoutuber(Set<Comentario> comentarios) {
+    private iYoutuber iYoutuber;
+
+    public VerComentariosdeYoutuber(iYoutuber iYoutuber, Set<Comentario> comentarios) {
         super(comentarios);
+        this.iYoutuber = iYoutuber;
         // Crear botón "Comentar"
         Button comentarButton = new Button("Comentar", event -> comentar());
 
@@ -34,6 +36,12 @@ public class VerComentariosdeYoutuber extends VerComentarios {
 
         // Agregar botón a la vista
         add(centrarLayout);
+
+        removeAll();
+        for (Comentario comentario : comentarios) {
+            VerComentarios_item comentarioItem = new VerComentariosdeYoutuber_item(comentario);
+            add(comentarioItem);
+        }
     }
 
     public void comentar() {

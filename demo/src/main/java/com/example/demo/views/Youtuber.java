@@ -92,15 +92,13 @@ protected void onAttach(AttachEvent attachEvent) {
         return;
     }
 
-    
+    body.removeAll(); // Limpiar el contenido anterior
     // ahora sí puedes usar usuario.getLogin()
     List<Video> videos = _iYoutuber.cargarUltimosVideos(usuario.getLogin()); 
     _ultimosVideos = new UltimosVideosdeYoutuber(videos);
     body.add(_ultimosVideos);
+    
 }
 
-    
-    public void UltimosVideos() {
-       
-    }
+   
 }

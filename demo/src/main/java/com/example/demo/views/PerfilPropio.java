@@ -1,8 +1,10 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Youtuber;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+
 
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
@@ -16,10 +18,11 @@ public class PerfilPropio extends Perfil {
     public com.example.demo.domain.Youtuber _youtuber;
     public PublicarVideo _publicarVideo;
     public Configuracion _configuracion;
+    public iYoutuber _iYoutuber;
 
     public PerfilPropio(iYoutuber iYoutuber) {
-        super(iYoutuber);
-         
+
+        this._iYoutuber = iYoutuber;
         // === Crear botones ===
         Button publicarButton = new Button("📤 Publicar video", event -> PublicarVideo());
         Button configButton = new Button("⚙️ Configuración", event -> Configuracion());
@@ -53,5 +56,10 @@ public class PerfilPropio extends Perfil {
 
     public void Configuracion() {
         UI.getCurrent().navigate(Configuracion.class);
+    }
+
+    @Override
+    public Youtuber getUsuario(String username) {
+       return _iYoutuber.findYoutuberById(username);
     }
 }

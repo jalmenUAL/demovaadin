@@ -64,6 +64,28 @@ public Video findVideoById(Long parameter) {
 			.orElseThrow(() -> new RuntimeException("Video no encontrado"));
 }
 
+
+public void likeVideo(int id) {
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+		throw new RuntimeException("Usuario no autenticado");
+	}
+
+	Youtuber usuario = (Youtuber) auth.getPrincipal();
+	Video video = videorepository.findById((long) id)
+			.orElseThrow(() -> new RuntimeException("Video no encontrado"));
+
+	if (video.getLe_gusta_a().contains(usuario)) {
+		// Si ya le gusta, quitar el like
+		video.getLe_gusta_a().remove(usuario);
+	} else {
+		// Si no le gusta, añadir el like
+		video.getLe_gusta_a().add(usuario);
+	}
+
+	videorepository.save(video);
+}
+
  
 	
  

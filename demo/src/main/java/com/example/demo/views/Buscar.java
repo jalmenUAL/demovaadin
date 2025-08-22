@@ -18,25 +18,26 @@ public class Buscar extends VerticalLayout {
 	public ResultadodeBusqueda _resultadodeBusqueda;
 	private TextField textobuscar;
 	private VerticalLayout contenido = new VerticalLayout();
+	public Button botonbuscar;
 	//La búsqueda la realiza iInicio
 	iInicio iInicio;
-	//Lista de resultados de la búsqueda.
+	//Lista de resultados de la búsqueda
 	List<Video> resultados;
 
 	public void ResultadodeBusqueda() {
 		_resultadodeBusqueda = new ResultadodeBusqueda(resultados);
-		_inicio.body.removeAll();
-		_inicio.body.add(_resultadodeBusqueda);
+		
+		contenido.add(_resultadodeBusqueda);
 	}
 
-	Buscar(iInicio iInicio,Inicio inicio) {
+	Buscar(iInicio iInicio) {
 		this.iInicio = iInicio;
-		this._inicio = inicio;
+		
 		textobuscar = new TextField();
 		textobuscar.setPlaceholder("Introduzca el nombre del video que quiere buscar");
 		textobuscar.setWidthFull(); // Ocupa todo el espacio disponible
 
-		Button botonbuscar = new Button("Buscar");
+		botonbuscar = new Button("Buscar");
 		botonbuscar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		botonbuscar.addClickListener(e -> {
 			buscar();

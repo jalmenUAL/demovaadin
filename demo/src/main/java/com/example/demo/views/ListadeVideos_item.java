@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.domain.Video;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.avatar.Avatar;
@@ -18,7 +21,24 @@ public class ListadeVideos_item extends VerticalLayout {
     Video video;
 
     public void VerVideo() {
-        UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated()) {
+           
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+        
+
+        if (esAdmin) {
+            UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
+        } else if (esYoutuber) {
+            UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+        } else {
+            UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
+        }
+    }
     }
 
     public ListadeVideos_item(Video video) {

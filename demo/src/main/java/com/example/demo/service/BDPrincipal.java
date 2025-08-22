@@ -124,4 +124,11 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
         return _youtubers.findYoutuberById(parameter);
     }
 
+
+
+    @Override
+    public void likeVideo(int id) {
+        _videos.likeVideo(id);
+    }
+
 }

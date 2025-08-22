@@ -27,9 +27,7 @@ public class Administrador extends Registrado {
 		//Es necesario hacerlo después del onAttach para asegurar que _iAdministrador sea no nulo.
 	}
 
-	public void UltimosVideos() {
-		//Es necesario hacerlo después del onAttach para asegurar que _iAdministrador sea no nulo.
-	}
+
 
 	@Override
 	protected void onAttach(AttachEvent attachEvent) {

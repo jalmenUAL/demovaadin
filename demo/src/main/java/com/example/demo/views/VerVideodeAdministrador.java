@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Video;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
@@ -29,13 +30,7 @@ public class VerVideodeAdministrador extends VerVideo {
         frame_y_comentarios.add(borrarButton);
     }
 
-@Override
-    public void VerComentarios() {
-
-		_verComentarios = new VerComentariosdeAdministrador(iAdministrador,video.getTiene_comentarios());
-        comentarios.add(_verComentarios);
-		frame_y_comentarios.add(comentarios);
-	}
+ 
 
     public void borrar() {
         // Por ahora, solo muestra una notificación
@@ -45,4 +40,16 @@ public class VerVideodeAdministrador extends VerVideo {
         // videoService.borrarVideo(videoId);
         // UI.getCurrent().navigate("pagina-principal");
     }
+ 
+
+
+
+    @Override
+    public Video findVideoById(Long id) {
+        return iAdministrador.findVideoById(id);
+    }
+
+		 
+		
+	
 }

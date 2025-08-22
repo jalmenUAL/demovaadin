@@ -18,7 +18,7 @@ public class Inicio extends VerticalLayout {
     public Buscar _buscar;
     public UltimosVideos _ultimosVideos;
 
-    
+
     public HorizontalLayout header = new HorizontalLayout();
     public VerticalLayout body = new VerticalLayout();
 
@@ -54,11 +54,17 @@ public class Inicio extends VerticalLayout {
         // Métodos adicionales
         Buscar(); // Agrega componente de búsqueda
         UltimosVideos(); // Agrega sección de últimos videos
+
+
     }
 
     public void Buscar() {
-        Buscar b = new Buscar(_iInicio, this);
-        header.add(b);
+        _buscar = new Buscar(_iInicio);
+        header.add(_buscar);
+        _buscar.botonbuscar.addClickListener(e -> {
+            body.removeAll();
+           
+        });
     }
 
     public void UltimosVideos() {

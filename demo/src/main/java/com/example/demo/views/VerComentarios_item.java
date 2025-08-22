@@ -1,12 +1,10 @@
 package com.example.demo.views;
 
+import com.example.demo.domain.Comentario;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
-import com.example.demo.domain.Comentario;
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.avatar.Avatar;
-
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 

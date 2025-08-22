@@ -3,10 +3,8 @@ package com.example.demo.views;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 
 import com.example.demo.domain.Comentario;
-import com.example.demo.domain.Video;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
