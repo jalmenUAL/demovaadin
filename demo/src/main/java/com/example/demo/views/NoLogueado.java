@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import java.util.List;
+
+import com.example.demo.domain.Video;
 import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -13,10 +16,10 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @Route("NoLogueado")
 @AnonymousAllowed
 public class NoLogueado extends Inicio {
-    // public iNoLogueado _iNoLogueado;
+     public iNoLogueado _iNoLogueado;
     public Login _login;
     public Registrar _registrar;
-
+  
     public void Login() {
         UI.getCurrent().navigate(Login.class);
     }
@@ -26,7 +29,7 @@ public class NoLogueado extends Inicio {
     }
 
     public NoLogueado(iNoLogueado iNoLogueado) {
-        super(iNoLogueado);
+            this._iNoLogueado = iNoLogueado;
 
         // Botones de Login y Registrar
         // Botón de Login
@@ -42,5 +45,12 @@ public class NoLogueado extends Inicio {
 
         // Añade los botones al final de la vista
         header.add(botones);
+    }
+
+    @Override
+    public void UltimosVideos() {
+       List<Video> videos =_iNoLogueado.getUltimosVideos();
+       _ultimosVideos = new UltimosVideos(videos);
+       body.add(_ultimosVideos);
     }
 }

@@ -23,6 +23,14 @@ public class VerComentarios extends VerticalLayout {
         setAlignItems(Alignment.STRETCH);
         List<Comentario> comentarios2 = new ArrayList<>(comentarios);
 
+        if (comentarios2.isEmpty()) {
+            // Manejar el caso de no comentarios
+            Div noComments = new Div();
+            noComments.setText("No hay comentarios disponibles.");
+            add(noComments);
+        }
+        else{
+
         for (int i = 0; i < comentarios2.size(); i++) {
             VerComentarios_item comentario = new VerComentarios_item(comentarios2.get(i));
             _item.add(comentario);
@@ -33,6 +41,7 @@ public class VerComentarios extends VerticalLayout {
                 addSeparator();
             }
         }
+    }
     }
 
     private void addSeparator() {

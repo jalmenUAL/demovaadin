@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.domain.Video;
 import com.example.demo.service.iInicio;
+import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -13,7 +14,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @Route("Inicio")
 @AnonymousAllowed
 
-public class Inicio extends VerticalLayout {
+public abstract class Inicio extends VerticalLayout {
     public iInicio _iInicio;
     public Buscar _buscar;
     public UltimosVideos _ultimosVideos;
@@ -22,10 +23,10 @@ public class Inicio extends VerticalLayout {
     public HorizontalLayout header = new HorizontalLayout();
     public VerticalLayout body = new VerticalLayout();
 
-    // Constructor que recibe el servicio iInicio
+     
 
-    public Inicio(iInicio iInicio) {
-        this._iInicio = iInicio;
+    public Inicio( ) {
+       
 
         // Estilos generales del layout
         setWidthFull();
@@ -50,13 +51,16 @@ public class Inicio extends VerticalLayout {
 
         add(header);
         add(body);
-
-        // Métodos adicionales
-        Buscar(); // Agrega componente de búsqueda
-        UltimosVideos(); // Agrega sección de últimos videos
-
+        /* Agrega el componente de Buscar */
+        Buscar();  
 
     }
+
+    @Override
+	protected void onAttach(AttachEvent attachEvent) {
+		super.onAttach(attachEvent);
+		UltimosVideos();
+	}
 
     public void Buscar() {
         _buscar = new Buscar(_iInicio);
@@ -67,12 +71,6 @@ public class Inicio extends VerticalLayout {
         });
     }
 
-    public void UltimosVideos() {
-
-        List<Video> videos = _iInicio.getUltimosVideos();
-        _ultimosVideos = new UltimosVideos(videos);
-
-        body.add(_ultimosVideos);
-    }
+    public abstract void UltimosVideos(); 
 
 }

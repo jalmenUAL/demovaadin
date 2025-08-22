@@ -5,6 +5,7 @@ import java.util.Set;
 import com.example.demo.domain.Comentario;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.example.demo.service.iYoutuber;
@@ -38,10 +39,18 @@ public class VerComentariosdeYoutuber extends VerComentarios {
         add(centrarLayout);
 
         removeAll();
+         if (comentarios.isEmpty()) {
+            // Manejar el caso de no comentarios
+            Div noComments = new Div();
+            noComments.setText("No hay comentarios disponibles.");
+            add(noComments);
+        }
+        else{
         for (Comentario comentario : comentarios) {
             VerComentarios_item comentarioItem = new VerComentariosdeYoutuber_item(comentario);
             add(comentarioItem);
         }
+    }
     }
 
     public void comentar() {

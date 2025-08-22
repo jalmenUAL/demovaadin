@@ -86,6 +86,11 @@ public void likeVideo(int id) {
 	videorepository.save(video);
 }
 
+
+public List<Video> getAllVideos() {
+    return videorepository.findAll();
+}
+
  
 	
  

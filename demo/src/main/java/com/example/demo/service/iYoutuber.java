@@ -15,13 +15,15 @@ public interface iYoutuber extends iRegistrado {
 
     void publicarVideo(String value, String value2);
 
-    List<Video> cargarUltimosVideos(String login);
+   
 
     void denunciarUsuario(String ormid);
     void seguirUsuario(String ormid);
     Youtuber findYoutuberById(String username);
 
     void likeVideo(int id);
+
+    List<Video> getYoutuberVideos(String login);
 
 
 

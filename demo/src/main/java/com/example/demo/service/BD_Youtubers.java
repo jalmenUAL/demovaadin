@@ -62,7 +62,7 @@ public Youtuber autenticar(String username, String rawPassword) {
         repository.save(nuevoYoutuber);
     }
 
-    public List<Video> cargarUltimosVideos(String login) {
+    public List<Video> getYoutuberVideos(String login) {
         com.example.demo.domain.Youtuber usuario = repository.findById(login)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         Vector<Video> UltimosVideos = new Vector<Video>();

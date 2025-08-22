@@ -63,4 +63,11 @@ public class VerVideodeYoutuber extends VerVideo {
     public Video findVideoById(Long id) {
         return iYoutuber.findVideoById(id);
     }
+
+
+    @Override
+    public void VerComentarios() {
+            _verComentarios = new VerComentariosdeYoutuber( iYoutuber, video.getTiene_comentarios());
+        comentarios.add(_verComentarios);
+    }
 }

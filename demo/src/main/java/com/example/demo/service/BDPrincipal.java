@@ -73,9 +73,9 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public List<Video> cargarUltimosVideos(String login) {
-         
-        return _youtubers.cargarUltimosVideos(login);
+    public List<Video> getYoutuberVideos(String login) {
+
+        return _youtubers.getYoutuberVideos(login);
     }
 
     @Override
@@ -130,5 +130,15 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public void likeVideo(int id) {
         _videos.likeVideo(id);
     }
+
+
+
+    @Override
+    public List<Video> getAllVideos() {
+        return _videos.getAllVideos();
+    }
+
+
+ 
 
 }

@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.domain.Video;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.component.button.Button;
@@ -12,7 +15,8 @@ public class VerVideodeAdministrador extends VerVideo {
 
     iAdministrador iAdministrador;
 
-    public VerVideodeAdministrador(com.example.demo.service.iAdministrador iAdministrador) {
+    public VerVideodeAdministrador(iAdministrador iAdministrador) {
+
         super(iAdministrador);
         this.iAdministrador = iAdministrador;
         // Crear botón de borrar
@@ -49,7 +53,16 @@ public class VerVideodeAdministrador extends VerVideo {
         return iAdministrador.findVideoById(id);
     }
 
-		 
+
+
+
+    @Override
+    public void VerComentarios() {
+
+            _verComentarios = new VerComentariosdeAdministrador( iAdministrador, video.getTiene_comentarios());
+        comentarios.add(_verComentarios);
+ 
+    }
 		
-	
+    	
 }

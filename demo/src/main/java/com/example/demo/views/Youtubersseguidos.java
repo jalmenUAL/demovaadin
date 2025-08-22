@@ -1,5 +1,6 @@
 package com.example.demo.views;
 
+import java.util.List;
 import java.util.Vector;
 
 import com.vaadin.flow.component.html.H1;
@@ -12,11 +13,11 @@ import jakarta.annotation.security.RolesAllowed;
 @Route("Youtuberseguidos")
 @RolesAllowed("ROLE_YOUTUBER")
 
-public class Youtubersseguidos extends VerticalLayout {
+public class Youtubersseguidos extends VerticalLayout    {
 	public Perfil _perfil;
 	public Vector<Youtubersseguidos_item> _item = new Vector<Youtubersseguidos_item>();
 
-	public Youtubersseguidos() {
+	public Youtubersseguidos(List<com.example.demo.domain.Youtuber> youtubers) {
 		// --- 0. Configuración inicial del layout ---
 		setPadding(true); // Añadir padding para que no esté pegado al borde
 		setSpacing(true); // Añadir espacio entre los componentes
@@ -39,9 +40,9 @@ public class Youtubersseguidos extends VerticalLayout {
         // --- 2. Crear y añadir los 3 items ---
         // En una aplicación real, estos datos vendrían de tu base de datos o de un servicio.
         // Aquí usamos datos de ejemplo.
-        for (int i = 1; i <= 3; i++) {
+        for (com.example.demo.domain.Youtuber youtuber : youtubers) {
             // Creamos una nueva instancia del item con datos de ejemplo
-            Youtubersseguidos_item youtuberItem = new Youtubersseguidos_item(
+            Youtubersseguidos_item youtuberItem = new Youtubersseguidos_item(youtuber
             );
 
             // Añadimos el item a nuestro vector de referencias
@@ -60,3 +61,5 @@ public class Youtubersseguidos extends VerticalLayout {
         setHorizontalComponentAlignment(Alignment.CENTER, gridContainer);
 }
 }
+
+ 

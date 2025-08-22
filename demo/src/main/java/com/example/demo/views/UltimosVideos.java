@@ -6,9 +6,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.demo.domain.Video;
-import com.example.demo.service.iAdministrador;
-import com.example.demo.service.iYoutuber;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route("UltimosVideos")

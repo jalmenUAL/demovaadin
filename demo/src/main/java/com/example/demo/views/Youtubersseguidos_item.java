@@ -3,9 +3,7 @@ package com.example.demo.views;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
@@ -15,11 +13,13 @@ import com.vaadin.flow.router.Route;
 public class Youtubersseguidos_item extends VerticalLayout{
 	public Youtubersseguidos _youtubersseguidos;
 	public PerfilAjeno _perfilAjeno;
-public Youtubersseguidos_item() {
+    com.example.demo.domain.Youtuber youtuber;
+public Youtubersseguidos_item(com.example.demo.domain.Youtuber youtuber) {
+    this.youtuber = youtuber;
         // Datos de ejemplo (puedes pasarlos por el constructor si deseas)
-        String nombreUsuario = "CanalGenial";
-        int seguidores = 25400;
-        String avatarUrl = "https://randomuser.me/api/portraits/men/1.jpg"; // Reemplaza por URL real
+        String nombreUsuario = youtuber.getLogin();
+        int seguidores = youtuber.getSeguido_por().size();
+        String avatarUrl = youtuber.getFotoPerfil();
 
         // Avatar del usuario
         Image avatar = new Image(avatarUrl, "Avatar");
@@ -61,6 +61,6 @@ public Youtubersseguidos_item() {
     }
 
     public void PerfilAjeno() {
-       UI.getCurrent().navigate(PerfilAjeno.class);
+       UI.getCurrent().navigate(PerfilAjeno.class, youtuber.getLogin());
     }
 }

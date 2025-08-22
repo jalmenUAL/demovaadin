@@ -17,14 +17,17 @@ public class Administrador extends Registrado {
 	public Usuariosdenunciados _usuariosdenunciados;
 
 	public Administrador(iAdministrador iAdministrador) {
-		super(iAdministrador);
-		// Es necesario para que _iAdministrador no sea nulo
+		 
+		 
 		_iAdministrador = iAdministrador;
 
 	}
 
 	public void Usuariosdenunciados() {
-		//Es necesario hacerlo después del onAttach para asegurar que _iAdministrador sea no nulo.
+		 
+		List<com.example.demo.domain.Youtuber> denunciados = _iAdministrador.buscarDenunciados();
+		_usuariosdenunciados = new Usuariosdenunciados(denunciados);
+		body.add(_usuariosdenunciados);
 	}
 
 
@@ -33,13 +36,19 @@ public class Administrador extends Registrado {
 	protected void onAttach(AttachEvent attachEvent) {
 		super.onAttach(attachEvent);
 
-		List<Video> videos = _iAdministrador.getUltimosVideos();
-		_ultimosVideos = new UltimosVideosdeAdministrador(videos);
+		/* Es necesario hacer aquí la llamada para que _usuariosdenunciados no sea nulo */
+		Usuariosdenunciados();
+
+		 
+
+		
+
+	}
+
+	@Override
+	public void UltimosVideos() {
+		List<Video> ultimosVideos = _iAdministrador.getAllVideos();
+		_ultimosVideos = new UltimosVideos(ultimosVideos);
 		body.add(_ultimosVideos);
-
-		List<com.example.demo.domain.Youtuber> denunciados = _iAdministrador.buscarDenunciados();
-		_usuariosdenunciados = new Usuariosdenunciados(denunciados);
-		body.add(_usuariosdenunciados);
-
 	}
 }

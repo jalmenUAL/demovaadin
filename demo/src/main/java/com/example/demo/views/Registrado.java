@@ -17,12 +17,12 @@ import com.vaadin.flow.server.VaadinSession;
 @Route("Registrado")
 
 
-public class Registrado extends Inicio {
-    public iRegistrado _iRegistrado;
+public abstract class Registrado extends Inicio {
+    //public iRegistrado _iRegistrado;
 
-    public Registrado(iRegistrado iRegistrado) {  
-        super(iRegistrado);
-        _iRegistrado = iRegistrado;
+    public Registrado() {  
+        super( );
+        
         
         // Botón de logout
         Button logoutButton = new Button("Cerrar sesión", new Icon(VaadinIcon.SIGN_OUT));

@@ -38,6 +38,6 @@ public class GaleradeVideos extends VerticalLayout {
         // Agregar al layout principal
         add(tituloGaleria, carrusel);
 
-        // Como hay distintos tipos se deja el carrusel vacío para que se llene dinámicamente
+       
     }
 }

@@ -1,6 +1,6 @@
 package com.example.demo.views;
 
-import com.vaadin.flow.component.avatar.Avatar;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -15,7 +15,15 @@ public class Usuariosdenunciados_item extends VerticalLayout {
         String nombreUsuario = youtuber.getLogin();
         String avatarUrl = youtuber.getFotoPerfil();
 
-        Avatar avatar = new Avatar(nombreUsuario, avatarUrl);
+        Image avatar = new Image(avatarUrl, nombreUsuario);
+        avatar.setWidth("50px");
+        avatar.setHeight("50px");
+        avatar.getStyle().set("border-radius", "50%");
+        avatar.addClickListener(event -> {
+            // Navegar al perfil del usuario al hacer clic en el avatar
+            getUI().ifPresent(ui -> ui.navigate("PerfilAjenodeAdministrador/" + youtuber.getLogin()));
+        });
+
         Span nombreSpan = new Span(nombreUsuario);
         nombreSpan.getStyle().set("font-weight", "bold").set("font-size", "1.1em");
 
@@ -23,5 +31,7 @@ public class Usuariosdenunciados_item extends VerticalLayout {
         infoLayout.setAlignItems(Alignment.CENTER);
 
         add(infoLayout);
+
+
     }
 }

@@ -16,7 +16,7 @@ public interface iAdministrador extends iRegistrado {
 
     List<com.example.demo.domain.Youtuber> buscarDenunciados();
 
-    List<Video> getUltimosVideos();
+    List<Video> getAllVideos();
 
 
     Youtuber findYoutuberById(String username);

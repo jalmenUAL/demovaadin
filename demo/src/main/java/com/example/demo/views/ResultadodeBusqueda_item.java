@@ -1,8 +1,5 @@
 package com.example.demo.views;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-
 import com.example.demo.domain.Video;
 import com.vaadin.flow.router.Route;
 

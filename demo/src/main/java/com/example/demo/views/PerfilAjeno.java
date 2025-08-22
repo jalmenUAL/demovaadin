@@ -8,8 +8,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 public abstract class PerfilAjeno extends Perfil {
 
 	public PerfilAjeno() {
-		
-
+		super();
 	}
 	public VerVideo _verVideo;
 	public VerComentarios_item _verComentarios;
