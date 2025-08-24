@@ -17,7 +17,7 @@ public class Buscar extends VerticalLayout {
 	public Inicio _inicio;
 	public ResultadodeBusqueda _resultadodeBusqueda;
 	private TextField textobuscar;
-	private VerticalLayout contenido = new VerticalLayout();
+	//private VerticalLayout contenido = new VerticalLayout();
 	public Button botonbuscar;
 	//La búsqueda la realiza iInicio
 	iInicio iInicio;
@@ -27,7 +27,7 @@ public class Buscar extends VerticalLayout {
 	public void ResultadodeBusqueda() {
 		_resultadodeBusqueda = new ResultadodeBusqueda(resultados);
 		
-		contenido.add(_resultadodeBusqueda);
+		//contenido.add(_resultadodeBusqueda);
 	}
 
 	Buscar(iInicio iInicio) {
@@ -48,7 +48,7 @@ public class Buscar extends VerticalLayout {
 		buscarLayout.setFlexGrow(1, textobuscar); // El textfield crece
 
 		add(buscarLayout);
-		add(contenido);
+		//add(contenido);
 	}
 
 	private void buscar() {

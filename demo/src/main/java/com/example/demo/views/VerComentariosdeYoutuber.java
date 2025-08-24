@@ -15,10 +15,15 @@ import com.example.demo.service.iYoutuber;
 public class VerComentariosdeYoutuber extends VerComentarios {
 
     private iYoutuber iYoutuber;
+    private String id;
 
-    public VerComentariosdeYoutuber(iYoutuber iYoutuber, Set<Comentario> comentarios) {
-        super(comentarios);
+    public VerComentariosdeYoutuber(iYoutuber iYoutuber, Set<Comentario> comentarios, int j) {
+        super(comentarios,j);
         this.iYoutuber = iYoutuber;
+        this.id = Integer.toString(j);
+
+
+        removeAll();
         // Crear botón "Comentar"
         Button comentarButton = new Button("Comentar", event -> comentar());
 
@@ -38,7 +43,7 @@ public class VerComentariosdeYoutuber extends VerComentarios {
         // Agregar botón a la vista
         add(centrarLayout);
 
-        removeAll();
+        
          if (comentarios.isEmpty()) {
             // Manejar el caso de no comentarios
             Div noComments = new Div();
@@ -54,7 +59,8 @@ public class VerComentariosdeYoutuber extends VerComentarios {
     }
 
     public void comentar() {
-       UI.getCurrent().getPage().setLocation("Comentar");
+       UI.getCurrent().navigate(Comentar.class,id);
+        
          
     }
 }

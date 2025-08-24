@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
@@ -61,6 +64,23 @@ public Youtubersseguidos_item(com.example.demo.domain.Youtuber youtuber) {
     }
 
     public void PerfilAjeno() {
-       UI.getCurrent().navigate(PerfilAjeno.class, youtuber.getLogin());
+      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated()) {
+           
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+        
+
+        if (esAdmin) {
+            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, youtuber.getLogin());
+        } else if (esYoutuber) {
+            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, youtuber.getLogin());
+        } else {
+            UI.getCurrent().navigate(PerfilAjeno.class, youtuber.getLogin());
+        }
+    }
     }
 }

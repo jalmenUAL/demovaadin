@@ -47,11 +47,7 @@ public class VerVideodeAdministrador extends VerVideo {
  
 
 
-
-    @Override
-    public Video findVideoById(Long id) {
-        return iAdministrador.findVideoById(id);
-    }
+ 
 
 
 
@@ -59,7 +55,7 @@ public class VerVideodeAdministrador extends VerVideo {
     @Override
     public void VerComentarios() {
 
-            _verComentarios = new VerComentariosdeAdministrador( iAdministrador, video.getTiene_comentarios());
+            _verComentarios = new VerComentariosdeAdministrador( iAdministrador, video.getTiene_comentarios(),video.getId());
         comentarios.add(_verComentarios);
  
     }

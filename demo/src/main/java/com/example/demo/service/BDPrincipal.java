@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
@@ -42,8 +43,8 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public void publicarComentario(String value) {
-        _comentarios.publicarComentario(value);
+    public void publicarComentario(String value,int i) {
+        _comentarios.publicarComentario(value,i);
     }
 
     @Override
@@ -136,6 +137,13 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     @Override
     public List<Video> getAllVideos() {
         return _videos.getAllVideos();
+    }
+
+
+
+    @Override
+    public Set<Youtuber> getYoutubersSeguidos(String parameter) {
+        return _youtubers.getYoutubersSeguidos(parameter);
     }
 
 

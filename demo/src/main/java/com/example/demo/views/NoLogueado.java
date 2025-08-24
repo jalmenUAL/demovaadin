@@ -29,6 +29,7 @@ public class NoLogueado extends Inicio {
     }
 
     public NoLogueado(iNoLogueado iNoLogueado) {
+        super(iNoLogueado);
             this._iNoLogueado = iNoLogueado;
 
         // Botones de Login y Registrar

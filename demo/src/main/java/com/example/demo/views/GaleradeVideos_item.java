@@ -79,12 +79,9 @@ public class GaleradeVideos_item extends VerticalLayout {
 
         add(thumbnail);
 
-        // Botón para ver el video
-        Button verVideoBtn = new Button("Ver Video");
-        verVideoBtn.addClickListener(e -> VerVideo());
-        verVideoBtn.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        
 
-        add(verVideoBtn);
+       
     }
 
 }

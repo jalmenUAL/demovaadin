@@ -14,7 +14,11 @@ public class ResultadodeBusqueda extends GaleradeVideos {
 		super(resultados);
 		tituloGaleria.setText("Resultados de la búsqueda");
 		carrusel.removeAll();
-
+		if (resultados == null || resultados.isEmpty()) {
+			// Si no hay resultados, mostrar un mensaje
+			carrusel.add(new com.vaadin.flow.component.html.Span("No se han encontrado resultados."));
+			return;
+		}
 		for (Video video : resultados) {
 			ResultadodeBusqueda_item gvi = new ResultadodeBusqueda_item(video);
 			carrusel.add(gvi);

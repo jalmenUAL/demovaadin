@@ -18,12 +18,12 @@ import com.vaadin.flow.server.VaadinSession;
 
 
 public abstract class Registrado extends Inicio {
-    //public iRegistrado _iRegistrado;
+    public iRegistrado _iRegistrado;
 
-    public Registrado() {  
-        super( );
-        
-        
+    public Registrado(iRegistrado iRegistrado) {
+        super(iRegistrado);
+        this._iRegistrado = iRegistrado;
+
         // Botón de logout
         Button logoutButton = new Button("Cerrar sesión", new Icon(VaadinIcon.SIGN_OUT));
         logoutButton.addThemeVariants(ButtonVariant.LUMO_ERROR); // Estilo rojo

@@ -89,7 +89,7 @@ public abstract class Perfil extends VerticalLayout implements HasUrlParameter<S
                 .set("padding", "8px 16px");
 
         btnYoutubersSeguidos.addClickListener(e -> {
-            getUI().ifPresent(ui -> ui.navigate(Youtubersseguidos.class));
+            getUI().ifPresent(ui -> ui.navigate(Youtubersseguidos.class, _usuario.getLogin()));
         });
 
         // Layout superior con avatar, nombre y botón

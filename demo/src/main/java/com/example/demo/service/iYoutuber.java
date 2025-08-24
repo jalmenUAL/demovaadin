@@ -9,7 +9,7 @@ import com.example.demo.domain.Youtuber;
 
 public interface iYoutuber extends iRegistrado {
 
-    void publicarComentario(String value);
+    void publicarComentario(String value, int id);
 
     void actualizarConfiguracion(String value, String src, String src2);
 

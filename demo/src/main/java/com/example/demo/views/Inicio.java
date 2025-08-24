@@ -25,8 +25,8 @@ public abstract class Inicio extends VerticalLayout {
 
      
 
-    public Inicio( ) {
-       
+    public Inicio( iInicio iInicio) {
+        this._iInicio = iInicio;
 
         // Estilos generales del layout
         setWidthFull();
@@ -67,7 +67,7 @@ public abstract class Inicio extends VerticalLayout {
         header.add(_buscar);
         _buscar.botonbuscar.addClickListener(e -> {
             body.removeAll();
-           
+            body.add(_buscar._resultadodeBusqueda);
         });
     }
 

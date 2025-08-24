@@ -4,10 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.demo.domain.Video;
-import com.example.demo.service.iAdministrador;
 import com.example.demo.service.iInicio;
-import com.example.demo.service.iRegistrado;
-import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
@@ -47,7 +44,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 	}
 
     public void VerComentarios(){
-            _verComentarios = new VerComentarios(video.getTiene_comentarios());
+            _verComentarios = new VerComentarios(video.getTiene_comentarios(),video.getId());
         comentarios.add(_verComentarios);
 
     }
@@ -83,7 +80,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 	}
 
     public void setParameter(BeforeEvent event, Long parameter) {
-    video = findVideoById(parameter);
+    video = iInicio.findVideoById(parameter);
     add(video_y_relacionados);
     video_y_relacionados.add(frame_y_comentarios);    
     video_y_relacionados.getStyle().set("width", "100%");
@@ -150,8 +147,6 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
 
     }
 
-    public Video  findVideoById(Long id){
-        return iInicio.findVideoById(id);
-    }
+ 
  
 }

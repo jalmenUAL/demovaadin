@@ -17,8 +17,7 @@ public class Administrador extends Registrado {
 	public Usuariosdenunciados _usuariosdenunciados;
 
 	public Administrador(iAdministrador iAdministrador) {
-		 
-		 
+		super(iAdministrador);
 		_iAdministrador = iAdministrador;
 
 	}

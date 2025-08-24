@@ -6,14 +6,22 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.router.BeforeEvent;
+import com.vaadin.flow.router.HasUrlParameter;
 import com.vaadin.flow.router.Route;
 
+import jakarta.annotation.security.RolesAllowed;
+
 @Route("Comentar")
-public class Comentar extends VerticalLayout {
+@RolesAllowed("ROLE_YOUTUBER")
+public class Comentar extends VerticalLayout implements HasUrlParameter<String> {
     public VerComentariosdeYoutuber _verComentariosdeYoutuber;
     private TextField campoComentario;
+    public iYoutuber _iYoutuber;
+    public int id;
 
     public Comentar(iYoutuber iYoutuber) {
+        this._iYoutuber = iYoutuber;
         setWidthFull();
         setPadding(true);
         setSpacing(true);
@@ -27,15 +35,20 @@ public class Comentar extends VerticalLayout {
         btnPublicar.setWidthFull();
 
         btnPublicar.addClickListener(e -> {
-            publicar_comentario(iYoutuber);
+            publicar_comentario();
             campoComentario.clear();  // Limpia el campo tras publicar
         });
 
         add(campoComentario, btnPublicar);
     }
 
-    private void publicar_comentario(iYoutuber iYoutuber) {
-        iYoutuber.publicarComentario(campoComentario.getValue());
+    private void publicar_comentario() {
+        _iYoutuber.publicarComentario(campoComentario.getValue(),id);
         UI.getCurrent().getPage().getHistory().back();
+    }
+
+    @Override
+    public void setParameter(BeforeEvent event, String parameter) {
+         id = Integer.valueOf(parameter);
     }
 }

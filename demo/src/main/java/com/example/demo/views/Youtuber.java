@@ -29,6 +29,7 @@ public class Youtuber extends Registrado {
     String username;
 
     public Youtuber(iYoutuber iYoutuber) {
+        super(iYoutuber);
 
         _iYoutuber = iYoutuber;
 

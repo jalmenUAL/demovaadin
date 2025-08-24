@@ -15,7 +15,7 @@ public class VerComentarios extends VerticalLayout {
     public VerVideo _verVideo;
     public List<VerComentarios_item> _item = new ArrayList<>();
 
-    public VerComentarios(Set<Comentario>  comentarios) {
+    public VerComentarios(Set<Comentario>  comentarios, int j) {
 
         setWidthFull();
         setPadding(true);
@@ -43,6 +43,8 @@ public class VerComentarios extends VerticalLayout {
         }
     }
     }
+
+    
 
     private void addSeparator() {
         Div separator = new Div();

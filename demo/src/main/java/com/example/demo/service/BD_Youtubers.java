@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.net.Authenticator;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import org.springframework.security.core.Authentication;
@@ -101,6 +102,12 @@ public Youtuber autenticar(String username, String rawPassword) {
     public Youtuber findYoutuberById(String parameter) {
         return repository.findById(parameter)
                 .orElseThrow(() -> new RuntimeException("Youtuber no encontrado"));
+    }
+
+    public Set<Youtuber> getYoutubersSeguidos(String parameter) {
+        Youtuber usuario = repository.findById(parameter)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        return usuario.getSeguidor_de();
     }
  
 }
