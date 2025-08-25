@@ -48,7 +48,8 @@ public class GaleradeVideos_item extends VerticalLayout {
         // Título del video
         Span tituloSpan = new Span(video.getTitulo());
         tituloSpan.getStyle().set("font-weight", "bold").set("font-size", "1.2em");
-
+        int numMeGustas = video.getLe_gusta_a().size();
+        int numComentarios = video.getTiene_comentarios().size();
         // Avatar del propietario
         Avatar propietarioAvatar = new Avatar(video.getEs_de().getLogin(), video.getEs_de().getFotoPerfil());
 
@@ -57,6 +58,12 @@ public class GaleradeVideos_item extends VerticalLayout {
         infoLayout.setAlignItems(Alignment.CENTER);
         infoLayout.setSpacing(true);
         add(infoLayout);
+
+        Span meGustasSpan = new Span("👍 " + numMeGustas);
+        Span comentariosSpan = new Span("💬 " + numComentarios);
+        HorizontalLayout statsLayout = new HorizontalLayout(meGustasSpan, comentariosSpan);
+        statsLayout.setSpacing(true);
+        add(statsLayout);
 
         String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
         if (videoId.contains("?")) {
