@@ -21,4 +21,7 @@ public interface iAdministrador extends iRegistrado {
 
     Youtuber findYoutuberById(String username);
 
+
+    void borrarVideo(int id);
+
 }

@@ -31,6 +31,7 @@ public class Comentar extends VerticalLayout implements HasUrlParameter<String> 
         campoComentario.setWidthFull();
 
         Button btnPublicar = new Button("Publicar Comentario");
+        
         btnPublicar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         btnPublicar.setWidthFull();
 

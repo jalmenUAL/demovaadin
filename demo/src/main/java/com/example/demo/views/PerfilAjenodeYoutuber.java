@@ -1,10 +1,14 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.domain.Youtuber;
 import com.example.demo.service.iAdministrador;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.router.BeforeEvent;
 import com.vaadin.flow.router.Route;
 
 @Route("PerfilAjenodeYoutuber")
@@ -37,14 +41,34 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
         // Crear botones de denunciar y seguir
         btnDenunciar = new Button("Denunciar", e -> Denunciar());
         btnSeguir = new Button("Seguir", e -> Seguir());
+       
+       
+
         btnDenunciar.addThemeVariants(ButtonVariant.LUMO_ERROR);
         btnSeguir.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
+        
+        
+
         topLayout.add(btnSeguir,btnDenunciar);
     }
+@Override
+public void setParameter(BeforeEvent event, String parameter) {
+    // 👇 ejecuta la lógica de la clase padre
+    super.setParameter(event, parameter);
+     Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	    Youtuber youtuber = (Youtuber) auth.getPrincipal();
+         if (_usuario.getSeguido_por().contains(youtuber)) {btnSeguir.setEnabled(false);}
+        if (_usuario.getDenunciado_por().contains(youtuber)) {btnDenunciar.setEnabled(false);}
+         if (_usuario.getLogin().equals(youtuber.getLogin())) {btnSeguir.setVisible(false);btnDenunciar.setVisible(false);}
+        
+    }
+
 
     @Override
     public Youtuber getUsuario(String username) {
        return _iYoutuber.findYoutuberById(username);
     }
+
+ 
 }

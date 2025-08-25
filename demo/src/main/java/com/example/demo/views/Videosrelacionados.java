@@ -1,9 +1,12 @@
 package com.example.demo.views;
 
 
+import java.util.List;
 import java.util.Vector;
 
+import com.example.demo.domain.Video;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
@@ -14,13 +17,16 @@ public class Videosrelacionados extends VerticalLayout{
 	public Vector<Videosrelacionados_item> _item = new Vector<Videosrelacionados_item>();
  
 
-    public Videosrelacionados() {
+    public Videosrelacionados(List<Video> videosrelacionados) {
         setWidthFull();
         setPadding(true);
         setSpacing(false); // Usamos separadores en lugar de spacing
+        H2 titulo = new H2("Videos Relacionados");
+        add(titulo);
 
-        for (int i = 0; i < 6; i++) {
-            Videosrelacionados_item item = new Videosrelacionados_item();
+        for (int i = 0; i < videosrelacionados.size(); i++) {
+
+            Videosrelacionados_item item = new Videosrelacionados_item(videosrelacionados.get(i));
             item.getStyle()
                 .set("padding", "10px")
                 .set("background-color", "#f9f9f9")
@@ -29,11 +35,9 @@ public class Videosrelacionados extends VerticalLayout{
 
             add(item);
 
-            // Añadir línea separadora excepto después del último item
-            if (i < 5) {
-                addSeparator();
-            }
+            
         }
+       
     }
 
     private void addSeparator() {

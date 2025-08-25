@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.domain.Comentario;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Image;
@@ -16,7 +19,25 @@ public class VerComentarios_item extends VerticalLayout {
     Comentario comentario;
 
     public void PerfilAjeno() {
-        UI.getCurrent().navigate(PerfilAjeno.class, comentario.getEscrito_por().getLogin());
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated()) {
+
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+
+            if (esAdmin) {
+                UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, comentario.getEscrito_por().getLogin());
+            } else if (esYoutuber) {
+                UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, comentario.getEscrito_por().getLogin());
+            } else {
+                UI.getCurrent().navigate(PerfilAjeno.class, comentario.getEscrito_por().getLogin());
+            }
+        }
+        
     }
 
     public VerComentarios_item(Comentario comentario) {

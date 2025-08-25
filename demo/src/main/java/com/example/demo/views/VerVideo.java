@@ -1,5 +1,7 @@
 package com.example.demo.views;
 
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -19,134 +21,135 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route("VerVideo")
 @AnonymousAllowed
-public class VerVideo extends VerticalLayout implements HasUrlParameter<Long>{
-	public Videosrelacionados _videosrelacionados;
-	public ListadeVideos_item _listadeVideos;
-	public GaleradeVideos_item _galeradeVideos;
-	public VerComentarios _verComentarios;
-	public PerfilAjeno _perfilAjeno;
-	HorizontalLayout video_y_relacionados = new HorizontalLayout();
-	VerticalLayout frame_y_comentarios = new VerticalLayout();
+public class VerVideo extends VerticalLayout implements HasUrlParameter<Long> {
+    public Videosrelacionados _videosrelacionados;
+    public ListadeVideos_item _listadeVideos;
+    public GaleradeVideos_item _galeradeVideos;
+    public VerComentarios _verComentarios;
+    public PerfilAjeno _perfilAjeno;
+    HorizontalLayout video_y_relacionados = new HorizontalLayout();
+    VerticalLayout frame_y_comentarios = new VerticalLayout();
     VerticalLayout comentarios = new VerticalLayout();
-	Video video;
+    VerticalLayout relacionados = new VerticalLayout();
+    Video video;
     iInicio iInicio;
 
-     
-
-
-	public VerVideo(iInicio iInicio) {
+    public VerVideo(iInicio iInicio) {
         this.iInicio = iInicio;
+        
+       
+         
+    }
 
-	}
-	public void Videosrelacionados() {
-		_videosrelacionados = new Videosrelacionados();
-		video_y_relacionados.add(_videosrelacionados);
-	}
+    public void Videosrelacionados() {
+        relacionados.removeAll();
+        List<Video> videosrelacionados = iInicio.getVideosRelacionados(video.getId());
+        _videosrelacionados = new Videosrelacionados(videosrelacionados);
+       relacionados.add(_videosrelacionados);
+    }
 
-    public void VerComentarios(){
-            _verComentarios = new VerComentarios(video.getTiene_comentarios(),video.getId());
+    public void VerComentarios() {
+        comentarios.removeAll();
+        _verComentarios = new VerComentarios(video.getTiene_comentarios(), video.getId());
         comentarios.add(_verComentarios);
 
     }
 
-        
-
-
-		
-
-      
-	 
-
-	public void PerfilAjeno() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    public void PerfilAjeno() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null && auth.isAuthenticated()) {
-           
+
             boolean esAdmin = auth.getAuthorities().stream()
                     .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
             boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-        
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
-        if (esAdmin) {
-            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, video.getEs_de().getLogin());
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, video.getEs_de().getLogin());
-        } else {
-            UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
+            if (esAdmin) {
+                UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, video.getEs_de().getLogin());
+            } else if (esYoutuber) {
+                UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, video.getEs_de().getLogin());
+            } else {
+                UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
+            }
         }
+
     }
-    
-	}
 
     public void setParameter(BeforeEvent event, Long parameter) {
-    video = iInicio.findVideoById(parameter);
-    add(video_y_relacionados);
-    video_y_relacionados.add(frame_y_comentarios);    
-    video_y_relacionados.getStyle().set("width", "100%");
 
-    // === CABECERA DEL VIDEO ===
-    Image avatar = new Image(video.getEs_de().getFotoPerfil(), "Avatar");
-    avatar.setWidth("50px");
-    avatar.setHeight("50px");
-    avatar.getStyle().set("border-radius", "50%");
+     removeAll();  // 🔹 Evita que se acumulen los elementos
+    video_y_relacionados.removeAll();
+    frame_y_comentarios.removeAll();
+    relacionados.removeAll();
+    comentarios.removeAll();
 
-    avatar.addClickListener(e -> PerfilAjeno());
+        video = iInicio.findVideoById(parameter);
+        add(video_y_relacionados);
+        video_y_relacionados.add(frame_y_comentarios);
+        video_y_relacionados.getStyle().set("width", "100%");
 
-    String nombreUsuario = video.getEs_de().getLogin();
-    String tituloVideo = video.getTitulo();
+        // === CABECERA DEL VIDEO ===
+        Image avatar = new Image(video.getEs_de().getFotoPerfil(), "Avatar");
+        avatar.setWidth("50px");
+        avatar.setHeight("50px");
+        avatar.getStyle().set("border-radius", "50%");
 
-    VerticalLayout infoUsuario = new VerticalLayout();
-    infoUsuario.setSpacing(false);
-    infoUsuario.setPadding(false);
-    infoUsuario.add(new Span(nombreUsuario));
+        avatar.addClickListener(e -> PerfilAjeno());
 
-    H2 titulo = new H2(tituloVideo);
+        String nombreUsuario = video.getEs_de().getLogin();
+        String tituloVideo = video.getTitulo();
 
-    HorizontalLayout cabecera = new HorizontalLayout(avatar, infoUsuario);
-    cabecera.setAlignItems(Alignment.CENTER);
-    cabecera.setSpacing(true);
-    cabecera.setWidthFull();
+        VerticalLayout infoUsuario = new VerticalLayout();
+        infoUsuario.setSpacing(false);
+        infoUsuario.setPadding(false);
+        infoUsuario.add(new Span(nombreUsuario));
 
-    VerticalLayout cabeceraCompleta = new VerticalLayout(titulo, cabecera);
-    cabeceraCompleta.setSpacing(false);
-    cabeceraCompleta.setPadding(false);
+        H2 titulo = new H2(tituloVideo);
 
-    frame_y_comentarios.add(cabeceraCompleta);
+        HorizontalLayout cabecera = new HorizontalLayout(avatar, infoUsuario);
+        cabecera.setAlignItems(Alignment.CENTER);
+        cabecera.setSpacing(true);
+        cabecera.setWidthFull();
 
-    // === VIDEO ===
-    String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
-    if (videoId.contains("?")) {
-        videoId = videoId.substring(0, videoId.indexOf("?"));
+        VerticalLayout cabeceraCompleta = new VerticalLayout(titulo, cabecera);
+        cabeceraCompleta.setSpacing(false);
+        cabeceraCompleta.setPadding(false);
+
+        frame_y_comentarios.add(cabeceraCompleta);
+
+        // === VIDEO ===
+        String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
+        if (videoId.contains("?")) {
+            videoId = videoId.substring(0, videoId.indexOf("?"));
+        }
+        if (videoId.contains("#")) {
+            videoId = videoId.substring(0, videoId.indexOf("#"));
+        }
+        String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
+        Image thumbnail = new Image(thumbnailUrl, "Thumbnail del video");
+        thumbnail.setWidth("100%");
+        thumbnail.getStyle().set("border-radius", "8px").set("cursor", "pointer");
+        String embedUrl = "https://www.youtube.com/embed/" + videoId;
+
+        Div iframeContainer = new Div();
+        iframeContainer.getElement().setProperty("innerHTML",
+                "<iframe width='100%' height='600' " +
+                        "src='" + embedUrl + "' " +
+                        "title='YouTube video player' frameborder='0' " +
+                        "allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' "
+                        +
+                        "allowfullscreen></iframe>");
+        iframeContainer.setWidth("100%");
+
+        frame_y_comentarios.add(iframeContainer);
+        frame_y_comentarios.getStyle().set("width", "350%");
+        Videosrelacionados();
+        VerComentarios();
+         frame_y_comentarios.add(comentarios);
+        video_y_relacionados.add(relacionados);
+        getStyle().set("width", "100%");
+
     }
-    if (videoId.contains("#")) {
-        videoId = videoId.substring(0, videoId.indexOf("#"));
-    }
-    String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
-    Image thumbnail = new Image(thumbnailUrl, "Thumbnail del video");
-    thumbnail.setWidth("100%");
-    thumbnail.getStyle().set("border-radius", "8px").set("cursor", "pointer");      
-    String embedUrl = "https://www.youtube.com/embed/" + videoId;
 
-    Div iframeContainer = new Div();
-    iframeContainer.getElement().setProperty("innerHTML",
-        "<iframe width='100%' height='600' " +
-        "src='" + embedUrl + "' " +
-        "title='YouTube video player' frameborder='0' " +
-        "allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' " +
-        "allowfullscreen></iframe>");
-    iframeContainer.setWidth("100%");
-
-    frame_y_comentarios.add(iframeContainer);
-    frame_y_comentarios.getStyle().set("width", "350%");
-
-    Videosrelacionados();
-    VerComentarios();
-    frame_y_comentarios.add(comentarios);
-    getStyle().set("width", "100%");
-
-    }
-
- 
- 
 }

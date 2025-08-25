@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -66,12 +67,7 @@ public Video findVideoById(Long parameter) {
 
 
 public void likeVideo(int id) {
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
-		throw new RuntimeException("Usuario no autenticado");
-	}
-
-	Youtuber usuario = (Youtuber) auth.getPrincipal();
+	 Youtuber usuario = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 	Video video = videorepository.findById((long) id)
 			.orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
@@ -89,6 +85,36 @@ public void likeVideo(int id) {
 
 public List<Video> getAllVideos() {
     return videorepository.findAll();
+}
+
+
+public List<Video> getVideosRelacionados(int id) {
+    Video videob = videorepository.findById((long) id)
+        .orElseThrow(() -> new RuntimeException("Video no encontrado"));
+
+    // Dividir en palabras y pasarlas a minúsculas
+    List<String> palabras = Arrays.stream(videob.getTitulo().split("\\s+"))
+                                  .map(String::toLowerCase)
+                                  .toList();
+
+    List<Video> busqueda = videorepository.findAll();
+
+    return busqueda.stream()
+            // Excluir el propio video
+            .filter(video -> !(video.getId()==videob.getId()))
+            // Comparar títulos ignorando mayúsculas
+            .filter(video -> {
+                String titulo = video.getTitulo().toLowerCase();
+                return palabras.stream().anyMatch(titulo::contains);
+            })
+            .toList();
+}
+
+
+public void borrarVideo(int id) {
+	 Video videob = videorepository.findById((long) id)
+        .orElseThrow(() -> new RuntimeException("Video no encontrado"));
+	videorepository.delete(videob);
 }
 
  
