@@ -66,20 +66,26 @@ public Video findVideoById(Long parameter) {
 }
 
 
+
 public void likeVideo(int id) {
-	 Youtuber usuario = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-	Video video = videorepository.findById((long) id)
-			.orElseThrow(() -> new RuntimeException("Video no encontrado"));
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+        throw new RuntimeException("Usuario no autenticado");
+    }
 
-	if (video.getLe_gusta_a().contains(usuario)) {
-		// Si ya le gusta, quitar el like
-		video.getLe_gusta_a().remove(usuario);
-	} else {
-		// Si no le gusta, añadir el like
-		video.getLe_gusta_a().add(usuario);
-	}
+    String login = auth.getName();
+    Youtuber usuario = youtuberrepository.findById(login)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-	videorepository.save(video);
+    Video video = videorepository.findById((long) id)
+        .orElseThrow(() -> new RuntimeException("Video no encontrado"));
+
+    
+        usuario.getLe_gusta().add(video);
+    
+
+
+    youtuberrepository.save(usuario); // 💡 guardamos el dueño, no el inverso
 }
 
 
@@ -115,6 +121,28 @@ public void borrarVideo(int id) {
 	 Video videob = videorepository.findById((long) id)
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 	videorepository.delete(videob);
+}
+
+
+public void dislikeVideo(int id) {
+    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+        throw new RuntimeException("Usuario no autenticado");
+    }
+
+    String login = auth.getName();
+    Youtuber usuario = youtuberrepository.findById(login)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+    Video video = videorepository.findById((long) id)
+        .orElseThrow(() -> new RuntimeException("Video no encontrado"));
+
+    
+        usuario.getLe_gusta().remove(video);
+    
+
+
+    youtuberrepository.save(usuario); // 💡 guardamos el dueño, no el inverso
 }
 
  

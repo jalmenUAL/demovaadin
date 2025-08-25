@@ -26,14 +26,14 @@ public class VerVideodeYoutuber extends VerVideo {
  
 
     public void like() {
-        if (likeButton.isEnabled()) {
-            likeButton.setEnabled(false);
+        if (likeButton.getText().equals("No Me Gusta")) {
+            likeButton.setText("Me Gusta");
              iYoutuber.likeVideo(video.getId());
              Notification.show("Has dado like a este video.");
             
         } else{
-            likeButton.setEnabled(true); 
-            iYoutuber.likeVideo(video.getId());
+            likeButton.setText("No Me Gusta");
+            iYoutuber.dislikeVideo(video.getId());
             Notification.show("Has quitado el like a este video.");
         }
 
@@ -48,15 +48,16 @@ public class VerVideodeYoutuber extends VerVideo {
     public void setParameter(BeforeEvent event, Long parameter) {
          super.setParameter(event,parameter);
          // Crear botón de Like
-        likeButton = new Button("👍 Me gusta", event2 -> like());
+        likeButton = new Button("",event2 -> like());
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
          
             String username = auth.getName();
             com.example.demo.domain.Youtuber usuario = iYoutuber.findYoutuberById(username);
-            if (usuario.getLe_gusta().contains(video)) {
-                likeButton.setEnabled(false);
+            if (video.getLe_gusta_a().contains(usuario)) {
+                likeButton.setText("Me Gusta");
             } else {
-                likeButton.setEnabled(true);
+                Notification.show(video.getTitulo());
+                likeButton.setText("No Me Gusta");
             }
 
         // Estilizar el botón (opcional)

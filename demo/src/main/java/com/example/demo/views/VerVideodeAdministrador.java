@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.demo.domain.Video;
 import com.example.demo.service.iAdministrador;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.router.BeforeEvent;
@@ -27,6 +28,8 @@ public class VerVideodeAdministrador extends VerVideo {
 
     public void borrar() {
        iAdministrador.borrarVideo(video.getId());
+        UI.getCurrent().getPage().reload();
+       
     }
 
      public void setParameter(BeforeEvent event, Long parameter) {

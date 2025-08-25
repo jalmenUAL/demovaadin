@@ -25,6 +25,8 @@ public interface iYoutuber extends iRegistrado {
 
     List<Video> getYoutuberVideos(String login);
 
+    void dislikeVideo(int id);
+
 
 
 }

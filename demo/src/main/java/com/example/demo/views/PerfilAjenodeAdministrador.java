@@ -14,6 +14,7 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
 
 
     public void Bloquear() {
+        iAdministrador.bloquear(_usuario.getLogin());
         btnBloquear.setEnabled(false); // Deshabilitar el botón tras bloquear
         btnBloquear.setText("Usuario bloqueado"); // Cambiar el texto del botón
         btnBloquear.addThemeVariants(ButtonVariant.LUMO_CONTRAST); // Cambiar a variante de contraste
