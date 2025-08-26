@@ -153,5 +153,6 @@ public class Youtuber extends com.example.demo.domain.Registrado implements Seri
 	public String toString() {
 		return super.toString();
 	}
+
 	
 }
