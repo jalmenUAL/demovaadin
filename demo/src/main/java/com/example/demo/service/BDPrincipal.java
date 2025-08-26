@@ -118,12 +118,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
 
-
-    @Override
-    public Youtuber findYoutuberById(String parameter) {
-         
-        return _youtubers.findYoutuberById(parameter);
-    }
+ 
 
 
 
@@ -165,6 +160,20 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     @Override
     public void dislikeVideo(int id) {
         _videos.dislikeVideo(id);
+    }
+
+
+
+    @Override
+    public Youtuber findYoutuberById(String username) {
+        return _youtubers.findYoutuberById(username);
+    }
+
+
+
+    @Override
+    public void bloquear(String login) {
+         _youtubers.bloquearUsuario(login);
     }
 
 

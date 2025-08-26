@@ -25,6 +25,9 @@ public interface iAdministrador extends iRegistrado {
     void borrarVideo(int id);
 
 
+    void bloquear(String login);
+
+
     
 
 }

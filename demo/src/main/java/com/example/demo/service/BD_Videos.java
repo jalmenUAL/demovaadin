@@ -12,7 +12,7 @@ import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
-import com.example.demo.views.Videosgustados;
+
 
 @Service
 
@@ -139,9 +139,10 @@ public void dislikeVideo(int id) {
 
     
         usuario.getLe_gusta().remove(video);
+        video.getLe_gusta_a().remove(usuario);
     
 
-
+    videorepository.save(video);
     youtuberrepository.save(usuario); // 💡 guardamos el dueño, no el inverso
 }
 
