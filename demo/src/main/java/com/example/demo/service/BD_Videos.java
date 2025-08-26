@@ -12,6 +12,7 @@ import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
+import com.vaadin.flow.component.notification.Notification;
 
 
 @Service
@@ -120,6 +121,7 @@ public List<Video> getVideosRelacionados(int id) {
 public void borrarVideo(int id) {
 	 Video videob = videorepository.findById((long) id)
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
+        
 	videorepository.delete(videob);
 }
 
@@ -138,12 +140,13 @@ public void dislikeVideo(int id) {
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
     
-        usuario.getLe_gusta().remove(video);
-        video.getLe_gusta_a().remove(usuario);
+        usuario.getLe_gusta()
+    .removeIf(v -> ((Video) v).getId() == video.getId());
+        
     
 
-    videorepository.save(video);
-    youtuberrepository.save(usuario); // 💡 guardamos el dueño, no el inverso
+    youtuberrepository.save(usuario);
+    
 }
 
  
