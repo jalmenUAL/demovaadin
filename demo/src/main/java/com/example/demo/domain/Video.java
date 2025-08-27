@@ -29,7 +29,7 @@ public class Video implements Serializable {
 	private int id;
 	
 	@ManyToOne(targetEntity=com.example.demo.domain.Youtuber.class)	
-	//@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns(value={ @JoinColumn(name="RegistradoLogin", referencedColumnName="Login", nullable=false) }, foreignKey=@ForeignKey(name="FKVideo862578"))	
 	private com.example.demo.domain.Youtuber es_de;
 	
@@ -43,15 +43,15 @@ public class Video implements Serializable {
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date fecha;
 	
-	@OneToMany(mappedBy="sobre", targetEntity=com.example.demo.domain.Comentario.class,cascade = CascadeType.ALL, orphanRemoval = true)	
-	//@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@OneToMany(mappedBy="sobre", targetEntity=com.example.demo.domain.Comentario.class,orphanRemoval = true  )	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
-	private java.util.Set<Comentario> tiene_comentarios = new java.util.HashSet();
+	private java.util.Set tiene_comentarios = new java.util.HashSet();
 	
-	@ManyToMany(mappedBy="le_gusta", targetEntity=com.example.demo.domain.Youtuber.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})	
-	//@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
+	@ManyToMany(mappedBy="le_gusta", targetEntity=com.example.demo.domain.Youtuber.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
-	private java.util.Set<Youtuber> le_gusta_a = new java.util.HashSet();
+	private java.util.Set le_gusta_a = new java.util.HashSet();
 	
 	public void setTitulo(String value) {
 		this.titulo = value;
@@ -97,20 +97,20 @@ public class Video implements Serializable {
 		return es_de;
 	}
 	
-	public void setTiene_comentarios(java.util.Set<Comentario> value) {
+	public void setTiene_comentarios(java.util.Set value) {
 		this.tiene_comentarios = value;
 	}
 	
-	public java.util.Set<Comentario> getTiene_comentarios() {
+	public java.util.Set getTiene_comentarios() {
 		return tiene_comentarios;
 	}
 	
 	
-	public void setLe_gusta_a(java.util.Set<Youtuber> value) {
+	public void setLe_gusta_a(java.util.Set value) {
 		this.le_gusta_a = value;
 	}
 	
-	public java.util.Set<Youtuber> getLe_gusta_a() {
+	public java.util.Set getLe_gusta_a() {
 		return le_gusta_a;
 	}
 	
@@ -118,7 +118,5 @@ public class Video implements Serializable {
 	public String toString() {
 		return String.valueOf(getId());
 	}
- 
- 
 	
 }

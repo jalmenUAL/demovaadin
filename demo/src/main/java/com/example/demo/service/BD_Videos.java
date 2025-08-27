@@ -2,12 +2,15 @@ package com.example.demo.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.domain.Comentario;
 import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
@@ -100,7 +103,7 @@ public List<Video> getVideosRelacionados(int id) {
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
     // Dividir en palabras y pasarlas a minúsculas
-    List<String> palabras = Arrays.stream(videob.getTitulo().split("\\s+"))
+    List<String> palabras = Arrays.stream(videob.getTitulo().split("\s+"))
                                   .map(String::toLowerCase)
                                   .toList();
 
@@ -117,12 +120,20 @@ public List<Video> getVideosRelacionados(int id) {
             .toList();
 }
 
+/* Los OneToMany no hay que borrarlos manualmente, solo hay que poner orphanremoval = true */
+/* Los ManyToMany hay que borrarlos manualmente como se hace aquí */
 
 public void borrarVideo(int id) {
-	 Video videob = videorepository.findById((long) id)
+    Video video = videorepository.findById((long) id)
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
-        
-	videorepository.delete(videob);
+
+
+    for (Object y : video.getLe_gusta_a()) {
+    ((Youtuber) y).getLe_gusta().remove(video); // quita el video de la lista del usuario
+}
+    video.getLe_gusta_a().clear(); 
+    
+    videorepository.delete(video);
 }
 
 
@@ -139,7 +150,7 @@ public void dislikeVideo(int id) {
     Video video = videorepository.findById((long) id)
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
-    
+    /* No tiene equals! */
         usuario.getLe_gusta()
     .removeIf(v -> ((Video) v).getId() == video.getId());
         

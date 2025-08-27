@@ -28,13 +28,13 @@ public class Comentario implements Serializable {
 	@org.hibernate.annotations.GenericGenerator(name="COM_EXAMPLE_DEMO_DOMAIN_COMENTARIO_ID_GENERATOR", strategy="native")	
 	private int id;
 	
-	@ManyToOne(targetEntity=com.example.demo.domain.Youtuber.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})	
-	//@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@ManyToOne(targetEntity=com.example.demo.domain.Youtuber.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns(value={ @JoinColumn(name="RegistradoLogin", referencedColumnName="Login", nullable=false) }, foreignKey=@ForeignKey(name="FKComentario549922"))	
 	private com.example.demo.domain.Youtuber escrito_por;
 	
-	@ManyToOne(targetEntity=com.example.demo.domain.Video.class, cascade = {CascadeType.PERSIST, CascadeType.MERGE})	
-	//@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
+	@ManyToOne(targetEntity=com.example.demo.domain.Video.class)	
+	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.LOCK})	
 	@JoinColumns(value={ @JoinColumn(name="VideoId", referencedColumnName="Id", nullable=false) }, foreignKey=@ForeignKey(name="FKComentario671331"))	
 	private com.example.demo.domain.Video sobre;
 	

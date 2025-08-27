@@ -152,7 +152,9 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
 
     @Override
     public void borrarVideo(int id) {
-        _videos.borrarVideo(id);
+        
+         _videos.borrarVideo(id);
+         
     }
 
 
