@@ -129,7 +129,7 @@ public void borrarVideo(int id) {
 
 
     for (Object y : video.getLe_gusta_a()) {
-    ((Youtuber) y).getLe_gusta().remove(video); // quita el video de la lista del usuario
+    video.getLe_gusta_a().remove(((Youtuber) y)); // quita el video de la lista del usuario
 }
     video.getLe_gusta_a().clear(); 
     
