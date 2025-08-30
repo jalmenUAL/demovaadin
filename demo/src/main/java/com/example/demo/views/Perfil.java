@@ -55,6 +55,13 @@ public abstract class Perfil extends VerticalLayout implements HasUrlParameter<S
 
         add(imagenDeFondo);
 
+        if (_usuario.getBloqueado())
+        {
+            H2 Bloqueado = new H2("Este Usuario ha sido Bloqueado");
+            Bloqueado.getStyle().set("color", "red");
+             add(Bloqueado);
+        }
+       
         // Datos de ejemplo
         String nombreUsuario = _usuario.getLogin();
         String avatarUrl = _usuario.getFotoPerfil();
