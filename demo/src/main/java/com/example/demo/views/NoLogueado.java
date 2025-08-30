@@ -9,6 +9,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
@@ -46,11 +47,13 @@ public class NoLogueado extends Inicio {
 
         // Añade los botones al final de la vista
         header.add(botones);
+        
     }
 
     @Override
     public void UltimosVideos() {
        List<Video> videos =_iNoLogueado.getUltimosVideos();
+        
        _ultimosVideos = new UltimosVideos(videos);
        body.add(_ultimosVideos);
     }

@@ -15,7 +15,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route("Youtuberseguidos")
-@RolesAllowed("ROLE_YOUTUBER")
+@RolesAllowed({"ROLE_YOUTUBER","ROLE_ADMINISTRADOR"})
 
 public class Youtubersseguidos extends VerticalLayout  implements HasUrlParameter<String>  {
 	public Perfil _perfil;

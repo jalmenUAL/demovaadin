@@ -168,11 +168,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
 
-
-    @Override
-    public void bloquear(String login) {
-         _youtubers.bloquearUsuario(login);
-    }
+ 
 
 
 
@@ -186,6 +182,20 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     @Override
     public void dejardeseguirUsuario(String ormid) {
         _youtubers.dejardeseguirUsuario(ormid);
+    }
+
+
+
+    @Override
+    public void quitardenunciaUsuario(String ormid) {
+        _youtubers.quitardenunciaUsuario(ormid);
+    }
+
+
+
+    @Override
+    public void desbloquearUsuario(String ormid) {
+         _youtubers.desbloquearUsuario(ormid);
     }
 
 

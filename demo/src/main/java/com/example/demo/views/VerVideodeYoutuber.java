@@ -32,10 +32,11 @@ public class VerVideodeYoutuber extends VerVideo {
          
             
              
-              if (!legusta) {
+              if (likeButton.getText().equals("Me Gusta")) {
+                likeButton.setText("Quitar Me Gusta");
                   iYoutuber.likeVideo(video.getId());
                 likeButton.getStyle()
-            .set("background-color", "grey") // negro
+            .set("background-color", "#0d6efd") // negro
             .set("color", "white")
             .set("border-radius", "8px")
             .set("padding", "10px 20px")
@@ -44,7 +45,8 @@ public class VerVideodeYoutuber extends VerVideo {
                
 
             }  else
-            {  iYoutuber.dislikeVideo(video.getId());
+            {  likeButton.setText("Me Gusta");
+                iYoutuber.dislikeVideo(video.getId());
                 likeButton.getStyle()
             .set("background-color", "#0d6efd") // azul
             .set("color", "white")
@@ -69,7 +71,7 @@ public class VerVideodeYoutuber extends VerVideo {
     public void setParameter(BeforeEvent event, Long parameter) {
          super.setParameter(event,parameter);
          // Crear botón de Like
-        likeButton = new Button("Me Gusta", event2 -> like());
+        likeButton = new Button("", event2 -> like());
         likeButton.setIcon(new Icon(VaadinIcon.THUMBS_UP));
          
         
@@ -89,7 +91,7 @@ public class VerVideodeYoutuber extends VerVideo {
             
 
             if (!legusta) {
-                 
+                likeButton.setText("Me Gusta");
                 likeButton.getStyle()
             .set("background-color", "#0d6efd") // azul
             .set("color", "white")
@@ -98,8 +100,9 @@ public class VerVideodeYoutuber extends VerVideo {
             .set("font-weight", "bold");
             }  else
             {
+                likeButton.setText("Quitar Me Gusta");
                 likeButton.getStyle()
-            .set("background-color", "grey") // azul
+            .set("background-color", "#0d6efd") // azul
             .set("color", "white")
             .set("border-radius", "8px")
             .set("padding", "10px 20px")

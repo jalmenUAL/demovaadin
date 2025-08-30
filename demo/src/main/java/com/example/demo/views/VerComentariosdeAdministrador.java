@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.example.demo.domain.Comentario;
 import com.example.demo.service.iAdministrador;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.router.Route;
 
@@ -24,7 +25,8 @@ public class VerComentariosdeAdministrador extends VerComentarios {
         }
         else{
         for (Comentario comentario : comentarios) {
-            VerComentarios_item comentarioItem = new VerComentariosdeAdministrador_item(_iAdministrador,comentario);
+            VerComentariosdeAdministrador_item comentarioItem = new VerComentariosdeAdministrador_item(_iAdministrador,comentario);
+             comentarioItem.eliminarButton.addClickListener(e->UI.getCurrent().getPage().reload());
             add(comentarioItem);
         }
     }

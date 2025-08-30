@@ -29,6 +29,8 @@ public interface iYoutuber extends iRegistrado {
 
     void dejardeseguirUsuario(String ormid);
 
+    void quitardenunciaUsuario(String ormid);
+
     
 
 

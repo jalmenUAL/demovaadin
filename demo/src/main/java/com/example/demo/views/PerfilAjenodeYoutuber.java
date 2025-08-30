@@ -19,10 +19,18 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
     iYoutuber _iYoutuber;
 
     public void Denunciar() {
+        if (btnDenunciar.getText().equals("Denunciar"))
+        {
        _iYoutuber.denunciarUsuario(_usuario.getORMID());
-        btnDenunciar.setEnabled(false); // Deshabilitar el botón tras la denuncia
-        btnDenunciar.setText("Denunciado"); // Cambiar el texto del botón
         
+        btnDenunciar.setText("Quitar denuncia"); // Cambiar el texto del botón
+        }
+        else 
+        {
+         _iYoutuber.quitardenunciaUsuario(_usuario.getORMID());
+        
+        btnDenunciar.setText("Denunciar"); // Cambiar el texto del botón
+        }
         
     }
 
@@ -31,7 +39,7 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
         {
         _iYoutuber.seguirUsuario(_usuario.getORMID());
         
-        btnSeguir.setText("Siguiendo"); // Cambiar el texto del botón
+        btnSeguir.setText("Dejar de seguir"); // Cambiar el texto del botón
          
         } else
         {
@@ -62,9 +70,9 @@ public void setParameter(BeforeEvent event, String parameter) {
         btnSeguir.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         btnDenunciar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
          if (_usuario.getSeguido_por().contains(youtuber)) 
-         { btnSeguir.setText("Siguiendo"); }
+         { btnSeguir.setText("Dejar de seguir"); }
          else { btnSeguir.setText("Seguir"); }
-        if (_usuario.getDenunciado_por().contains(youtuber)) {  btnDenunciar.setEnabled(false); btnDenunciar.setText("Denunciado");}
+        if (_usuario.getDenunciado_por().contains(youtuber)) {  btnDenunciar.setText("Quitar denuncia");} else {btnDenunciar.setText("Denunciar");}
          if (_usuario.getLogin().equals(youtuber.getLogin())) {btnSeguir.setVisible(false);btnDenunciar.setVisible(false);}
         
     }

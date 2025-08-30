@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -36,7 +37,14 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
 
         if (r == null) {
-            throw new UsernameNotFoundException("Usuario o contraseña incorrectos");
+            throw new UsernameNotFoundException("Usuario o contraseña incorrectos o Tu cuenta está bloqueada, contacta con el administrador");
+        }
+
+        // 🚨 Bloquear si es un Youtuber y está marcado como bloqueado
+        if (r instanceof com.example.demo.domain.Youtuber youtuber) {
+            if (Boolean.TRUE.equals(youtuber.getBloqueado())) {
+                throw new DisabledException("Usuario o contraseña incorrectos o Tu cuenta está bloqueada, contacta con el administrador");
+            }
         }
 
         String role;

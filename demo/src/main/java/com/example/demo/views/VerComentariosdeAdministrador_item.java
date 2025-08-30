@@ -10,12 +10,13 @@ import com.vaadin.flow.router.Route;
 public class VerComentariosdeAdministrador_item extends VerComentarios_item {
 
     public iAdministrador iAdministrador;
+    public Button eliminarButton;
 
     public VerComentariosdeAdministrador_item(iAdministrador iAdministrador, Comentario comentario) {
         super(comentario);
         this.iAdministrador = iAdministrador;
         // Crear botón "Eliminar"
-        Button eliminarButton = new Button("Eliminar", event -> eliminar());
+        eliminarButton = new Button("Eliminar", event -> eliminar());
 
         // Estilo: color azul, texto blanco, bordes redondeados
         eliminarButton.getStyle()

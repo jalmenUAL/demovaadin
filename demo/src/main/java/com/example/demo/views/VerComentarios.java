@@ -33,6 +33,8 @@ public class VerComentarios extends VerticalLayout {
 
         for (int i = 0; i < comentarios2.size(); i++) {
             VerComentarios_item comentario = new VerComentarios_item(comentarios2.get(i));
+           
+
             _item.add(comentario);
             add(comentario);
 

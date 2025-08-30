@@ -64,6 +64,7 @@ public Youtuber autenticar(String username, String rawPassword) {
         nuevoYoutuber.setPassword(PasswordEncoder);
         nuevoYoutuber.setFotoPerfil(avatarUrl);
         nuevoYoutuber.setBanner(fondoUrl);
+        nuevoYoutuber.setBloqueado(false);
         repository.save(nuevoYoutuber);
     }
 
@@ -94,6 +95,15 @@ public Youtuber autenticar(String username, String rawPassword) {
         repository.save(usuario);
     }
 
+
+    public void quitardenunciaUsuario(String ormid) {
+        Youtuber usuario = repository.findById(ormid)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuario.getDenunciado_por().remove(usuarioActual); // Asumiendo que hay un campo denunciado en Youtuber
+        repository.save(usuario);
+    }
+
     public void seguirUsuario(String ormid) {
         Youtuber usuario = repository.findById(ormid)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -121,6 +131,14 @@ public Youtuber autenticar(String username, String rawPassword) {
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         return usuario.getSeguidor_de();
     }
+
+    public void desbloquearUsuario(String ormid) {
+          Youtuber usuario = repository.findById(ormid)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        usuario.setBloqueado(false); // Asumiendo que hay un campo bloqueado en Youtuber
+        repository.save(usuario);
+    }
+
  
  
 }
