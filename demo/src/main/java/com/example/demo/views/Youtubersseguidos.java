@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.BeforeEvent;
@@ -52,6 +53,8 @@ public class Youtubersseguidos extends VerticalLayout  implements HasUrlParamete
         // Por ejemplo, podrías buscar el usuario correspondiente al nombre de usuario
         // proporcionado en el parámetro y luego cargar su información en la vista.
         youtubers = _iInicio.getYoutubersSeguidos(parameter);
+
+        Notification.show(Integer.toString(youtubers.size()));
         // --- 2. Crear y añadir los 3 items ---
         // En una aplicación real, estos datos vendrían de tu base de datos o de un servicio.
         // Aquí usamos datos de ejemplo.

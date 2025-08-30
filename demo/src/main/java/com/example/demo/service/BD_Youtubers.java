@@ -101,6 +101,14 @@ public Youtuber autenticar(String username, String rawPassword) {
         usuario.getSeguido_por().add(usuarioActual); // Asumiendo que hay un campo seguido_por en Youtuber
         repository.save(usuario);
     }
+
+     public void dejardeseguirUsuario(String ormid) {
+        Youtuber usuario = repository.findById(ormid)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        usuario.getSeguido_por().remove(usuarioActual); // Asumiendo que hay un campo seguido_por en Youtuber
+        repository.save(usuario);
+    }
  
 
     public Youtuber findYoutuberById(String parameter) {

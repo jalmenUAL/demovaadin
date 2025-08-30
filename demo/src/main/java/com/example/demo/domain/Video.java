@@ -43,7 +43,7 @@ public class Video implements Serializable {
 	@Temporal(TemporalType.DATE)	
 	private java.util.Date fecha;
 	
-	@OneToMany(mappedBy="sobre", targetEntity=com.example.demo.domain.Comentario.class,orphanRemoval = true  )	
+	@OneToMany(mappedBy="sobre", targetEntity=com.example.demo.domain.Comentario.class  )	
 	@org.hibernate.annotations.Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.LOCK})	
 	@org.hibernate.annotations.LazyCollection(org.hibernate.annotations.LazyCollectionOption.FALSE)	
 	private java.util.Set tiene_comentarios = new java.util.HashSet();

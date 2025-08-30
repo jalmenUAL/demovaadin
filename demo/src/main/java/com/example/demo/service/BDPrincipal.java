@@ -182,6 +182,13 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
 
+
+    @Override
+    public void dejardeseguirUsuario(String ormid) {
+        _youtubers.dejardeseguirUsuario(ormid);
+    }
+
+
  
  
 

@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.Comentario;
+import com.example.demo.domain.RepositorioComentario;
 import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
-import com.vaadin.flow.component.notification.Notification;
 
 
 @Service
@@ -25,11 +25,13 @@ public class BD_Videos {
 	public Vector<Video> _videos = new Vector<Video>();
 	private RepositorioVideo videorepository;
 	private RepositorioYoutuber youtuberrepository;
+    private RepositorioComentario comentariorepository;
 
 
-public BD_Videos(RepositorioVideo videorepository, RepositorioYoutuber youtuberrepository) {
+public BD_Videos(RepositorioVideo videorepository, RepositorioYoutuber youtuberrepository,RepositorioComentario comentariorepository) {
 	this.videorepository = videorepository;
 	this.youtuberrepository = youtuberrepository;
+    this.comentariorepository = comentariorepository;
 }
 
 
@@ -84,7 +86,7 @@ public void likeVideo(int id) {
     Video video = videorepository.findById((long) id)
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
-    
+        /* pone el me gusta, usuario es el propiterio de la relación le gusta, al revés no funciona */
         usuario.getLe_gusta().add(video);
     
 
@@ -123,15 +125,21 @@ public List<Video> getVideosRelacionados(int id) {
 /* Los OneToMany no hay que borrarlos manualmente, solo hay que poner orphanremoval = true */
 /* Los ManyToMany hay que borrarlos manualmente como se hace aquí */
 
+@Transactional
+/* El transactional es imprescindible! */
 public void borrarVideo(int id) {
     Video video = videorepository.findById((long) id)
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
-
+    /* Quita los me gusta desde usuario que es el propietario  */
     for (Object y : video.getLe_gusta_a()) {
-    video.getLe_gusta_a().remove(((Youtuber) y)); // quita el video de la lista del usuario
+    ((Youtuber) y).getLe_gusta().removeIf(v -> ((Video) v).getId() == video.getId()); // quita el video de la lista del usuario
 }
-    video.getLe_gusta_a().clear(); 
+    /*Borra los comentarios */
+ for (Object y : video.getTiene_comentarios()) {
+    comentariorepository.delete((Comentario) y);
+}
+    
     
     videorepository.delete(video);
 }
@@ -150,10 +158,9 @@ public void dislikeVideo(int id) {
     Video video = videorepository.findById((long) id)
         .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
-    /* No tiene equals! */
-        usuario.getLe_gusta()
-    .removeIf(v -> ((Video) v).getId() == video.getId());
-        
+    /* Al no tener equals hay que utilizar el removeIf, además no funcional al revés porque usuario es el propietario */
+        usuario.getLe_gusta().removeIf(v -> ((Video) v).getId() == video.getId());
+     
     
 
     youtuberrepository.save(usuario);
