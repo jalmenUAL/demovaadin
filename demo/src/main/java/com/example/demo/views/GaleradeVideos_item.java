@@ -19,28 +19,7 @@ public class GaleradeVideos_item extends VerticalLayout {
 
     Video video;
 
-    public void VerVideo() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth != null && auth.isAuthenticated()) {
-           
-            boolean esAdmin = auth.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-            boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-        
-
-        if (esAdmin) {
-            UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
-        } else {
-            UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
-        }
-    }
-
-         
-    }
+    /* Tiene como parámetro el video */
 
     public GaleradeVideos_item(Video video) {
         this.video = video;
@@ -87,6 +66,31 @@ public class GaleradeVideos_item extends VerticalLayout {
         
 
        
+    }
+
+
+    public void VerVideo() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        if (auth != null && auth.isAuthenticated()) {
+           
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+        
+
+        if (esAdmin) {
+            UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
+        } else if (esYoutuber) {
+            UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+        }
+        } else {
+            UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
+        }
+    
+
+         
     }
 
 }

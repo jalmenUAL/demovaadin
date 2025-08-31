@@ -10,11 +10,7 @@ public class UltimosVideosdeAdministrador extends UltimosVideos {
 
 public UltimosVideosdeAdministrador(List<Video> videos) {
 
-		super(videos);
-		
-		tituloGaleria.setText("Todos los videos");
-		 
-		
-		
+		super(videos);	
+		tituloGaleria.setText("Todos los videos");		
 	}
 }

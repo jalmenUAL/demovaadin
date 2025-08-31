@@ -16,38 +16,21 @@ import com.vaadin.flow.router.Route;
 public class ListadeVideos_item extends VerticalLayout {
     public ListadeVideos _listadeVideos;
     public VerVideo _verVideo;
+
     Video video;
 
-    public void VerVideo() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth != null && auth.isAuthenticated()) {
-           
-            boolean esAdmin = auth.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-            boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-        
-
-        if (esAdmin) {
-            UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
-        } else {
-            UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
-        }
-    }
-    }
+    /* Tiene como parámetro el objeto que muestra */
 
     public ListadeVideos_item(Video video) {
-        // Datos de ejemplo
         this.video = video;
 
+        /* Rellena los componentes gráficos con los datos del objeto */
         String tituloVideo = video.getTitulo();
         String propietarioNombre = video.getEs_de().getLogin();
         String propietarioFotoUrl = video.getEs_de().getFotoPerfil();
         int numMeGustas = video.getLe_gusta_a().size();
         int numComentarios = video.getTiene_comentarios().size();
+
         // Título del video
         Span tituloSpan = new Span(tituloVideo);
         tituloSpan.getStyle().set("font-weight", "bold").set("font-size", "1.2em");
@@ -81,10 +64,30 @@ public class ListadeVideos_item extends VerticalLayout {
         Image thumbnail = new Image(thumbnailUrl, "Miniatura del video");
         thumbnail.setWidth("100%");
         thumbnail.getStyle().set("border-radius", "8px").set("cursor", "pointer");
+
+        /* Event que muestra el video */
         thumbnail.addClickListener(e -> VerVideo());
 
         add(thumbnail);
 
-         
+    }
+
+    /* Ver video es el mismo para todos los usuarios pero cada uno es distinto */
+    public void VerVideo() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean esAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+        boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+
+        if (esAdmin) {
+            UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
+        } else if (esYoutuber) {
+            UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+        } else {
+            UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
+        }
+
     }
 }

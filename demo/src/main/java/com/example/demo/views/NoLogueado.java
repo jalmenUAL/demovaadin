@@ -9,7 +9,6 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
@@ -17,23 +16,17 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 @Route("NoLogueado")
 @AnonymousAllowed
 public class NoLogueado extends Inicio {
-     public iNoLogueado _iNoLogueado;
+    public iNoLogueado _iNoLogueado;
     public Login _login;
     public Registrar _registrar;
-  
-    public void Login() {
-        UI.getCurrent().navigate(Login.class);
-    }
 
-    public void Registrar() {
-        UI.getCurrent().navigate(Registrar.class);
-    }
+     /* Accede a la base de datos a través de iNoLogueado */
 
     public NoLogueado(iNoLogueado iNoLogueado) {
         super(iNoLogueado);
-            this._iNoLogueado = iNoLogueado;
+        this._iNoLogueado = iNoLogueado;
 
-        // Botones de Login y Registrar
+         
         // Botón de Login
         Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));
         loginButton.addClickListener(e -> Login());
@@ -47,14 +40,22 @@ public class NoLogueado extends Inicio {
 
         // Añade los botones al final de la vista
         header.add(botones);
-        
+
     }
 
+    /* Reescribe Ultimos Videos en el caso del No Logueado */
     @Override
     public void UltimosVideos() {
-       List<Video> videos =_iNoLogueado.getUltimosVideos();
-        
-       _ultimosVideos = new UltimosVideos(videos);
-       body.add(_ultimosVideos);
+        List<Video> videos = _iNoLogueado.getUltimosVideos();
+        _ultimosVideos = new UltimosVideos(videos);
+        body.add(_ultimosVideos);
+    }
+
+    public void Login() {
+        UI.getCurrent().navigate(Login.class);
+    }
+
+    public void Registrar() {
+        UI.getCurrent().navigate(Registrar.class);
     }
 }

@@ -33,7 +33,7 @@ public abstract class Registrado extends Inicio {
 
         logoutButton.addClickListener(e -> Logout());
 
-        // Asegúrate de que el header esté inicializado y se use un HorizontalLayout
+         
         if (header != null) {
             header.add(logoutButton);
         } else {
@@ -61,6 +61,7 @@ public abstract class Registrado extends Inicio {
         VaadinSession.getCurrent().close();
         VaadinSession.getCurrent().setAttribute("Registrado", null);
         getUI().ifPresent(ui -> ui.navigate("NoLogueado"));
+        /* Cierra la sesión  */
     }
 
      

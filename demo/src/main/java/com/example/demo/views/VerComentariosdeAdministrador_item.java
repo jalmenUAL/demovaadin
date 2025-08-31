@@ -12,19 +12,23 @@ public class VerComentariosdeAdministrador_item extends VerComentarios_item {
     public iAdministrador iAdministrador;
     public Button eliminarButton;
 
+        /* Se añade el iAdministrador porque accede a la base de datos */
+
+
     public VerComentariosdeAdministrador_item(iAdministrador iAdministrador, Comentario comentario) {
         super(comentario);
         this.iAdministrador = iAdministrador;
+
         // Crear botón "Eliminar"
         eliminarButton = new Button("Eliminar", event -> eliminar());
 
         // Estilo: color azul, texto blanco, bordes redondeados
         eliminarButton.getStyle()
-            .set("background-color", "#007BFF")  // azul
-            .set("color", "white")              // texto blanco
-            .set("border-radius", "8px")        // bordes redondeados
-            .set("padding", "10px 20px")        // espaciado interno
-            .set("font-weight", "bold");
+                .set("background-color", "#007BFF") // azul
+                .set("color", "white") // texto blanco
+                .set("border-radius", "8px") // bordes redondeados
+                .set("padding", "10px 20px") // espaciado interno
+                .set("font-weight", "bold");
 
         // Contenedor centrado
         HorizontalLayout centrarLayout = new HorizontalLayout(eliminarButton);

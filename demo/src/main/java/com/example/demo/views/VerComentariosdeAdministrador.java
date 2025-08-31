@@ -13,8 +13,10 @@ import com.vaadin.flow.router.Route;
 public class VerComentariosdeAdministrador extends VerComentarios {
     iAdministrador _iAdministrador;
 
-    public VerComentariosdeAdministrador(iAdministrador iAdministrador, Set<Comentario> comentarios, int j) {
-        super(comentarios,j);
+    /* Se añade el iAdministrador porque accede a la base de datos */
+
+    public VerComentariosdeAdministrador(iAdministrador iAdministrador, Set<Comentario> comentarios,int idvideo) {
+        super(comentarios,idvideo);
         this._iAdministrador = iAdministrador;
         removeAll();
          if (comentarios.isEmpty()) {

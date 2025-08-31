@@ -10,8 +10,11 @@ import com.vaadin.flow.router.Route;
 public class Usuariosdenunciados_item extends VerticalLayout {
     public Usuariosdenunciados _usuariosdenunciados;
 
+
+    /* Muestra el usuario denunciado */
+    
     public Usuariosdenunciados_item(com.example.demo.domain.Youtuber youtuber) {
-        // Datos de ejemplo
+        
         String nombreUsuario = youtuber.getLogin();
         String avatarUrl = youtuber.getFotoPerfil();
 

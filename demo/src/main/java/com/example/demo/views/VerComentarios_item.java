@@ -18,30 +18,11 @@ public class VerComentarios_item extends VerticalLayout {
     public PerfilAjeno _perfilAjeno;
     Comentario comentario;
 
-    public void PerfilAjeno() {
-
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth != null && auth.isAuthenticated()) {
-
-            boolean esAdmin = auth.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-            boolean esYoutuber = auth.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-
-            if (esAdmin) {
-                UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, comentario.getEscrito_por().getLogin());
-            } else if (esYoutuber) {
-                UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, comentario.getEscrito_por().getLogin());
-            } else {
-                UI.getCurrent().navigate(PerfilAjeno.class, comentario.getEscrito_por().getLogin());
-            }
-        }
-        
-    }
+    /* Muestra el comentario */
 
     public VerComentarios_item(Comentario comentario) {
         this.comentario = comentario;
+
         setPadding(true);
         setSpacing(true);
         setWidthFull();
@@ -52,14 +33,11 @@ public class VerComentarios_item extends VerticalLayout {
         avatar.setWidth("50px");
         avatar.setHeight("50px");
         avatar.getStyle().set("border-radius", "50%");
-        
-        
 
         avatar.addClickListener(e -> PerfilAjeno());
 
         Span nombreUsuario = new Span(comentario.getEscrito_por().getLogin());
 
-        // Comentario en un layout vertical para mejor estructura
         VerticalLayout comentarioLayout = new VerticalLayout();
         comentarioLayout.setPadding(false);
         comentarioLayout.setSpacing(false);
@@ -75,5 +53,25 @@ public class VerComentarios_item extends VerticalLayout {
 
         // Añadir avatar y comentario al layout horizontal
         add(avatar, nombreUsuario, comentarioLayout);
+    }
+
+    /* Dependiendo del tipo de usuario envía a una vista distinta */
+    public void PerfilAjeno() {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean esAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+        boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+
+        if (esAdmin) {
+            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, comentario.getEscrito_por().getLogin());
+        } else if (esYoutuber) {
+            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, comentario.getEscrito_por().getLogin());
+        } else {
+            UI.getCurrent().navigate(PerfilAjeno.class, comentario.getEscrito_por().getLogin());
+        }
+
     }
 }

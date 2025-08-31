@@ -7,8 +7,8 @@ import com.vaadin.flow.router.Route;
 
 public class VerComentariosdeYoutuber_item extends VerComentarios_item {
 
-    public VerComentariosdeYoutuber_item(Comentario comentario2) {
-        super(comentario2);
+    public VerComentariosdeYoutuber_item(Comentario comentario) {
+        super(comentario);
          
     }
 }

@@ -16,6 +16,9 @@ public class GaleradeVideos extends VerticalLayout {
 
     HorizontalLayout carrusel = new HorizontalLayout();
     public H2 tituloGaleria = new H2("Galería de Videos");
+
+
+    
    public GaleradeVideos(List<Video> videos) {
         // Estilo general centrado
         setSizeFull();

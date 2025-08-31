@@ -64,7 +64,7 @@ public class VerVideodeYoutuber extends VerVideo {
  
     @Override
     public void VerComentarios() {
-            _verComentarios = new VerComentariosdeYoutuber( iYoutuber, video.getTiene_comentarios(),video.getId());
+            _verComentarios = new VerComentariosdeYoutuber(video.getTiene_comentarios(),video.getId());
         comentarios.add(_verComentarios);
     }
 

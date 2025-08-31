@@ -10,9 +10,13 @@ import com.vaadin.flow.router.Route;
 public class ResultadodeBusqueda extends GaleradeVideos {
 	public Buscar _buscar;
 
+	/* Tiene como parámetro la lista de resultados */
+
 	public ResultadodeBusqueda(List<Video> resultados) {
 		super(resultados);
+		
 		tituloGaleria.setText("Resultados de la búsqueda");
+
 		carrusel.removeAll();
 		if (resultados == null || resultados.isEmpty()) {
 			// Si no hay resultados, mostrar un mensaje

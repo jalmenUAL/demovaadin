@@ -1,8 +1,5 @@
 package com.example.demo.views;
 
-import java.util.List;
-
-import com.example.demo.domain.Video;
 import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.html.H1;
@@ -19,13 +16,13 @@ public abstract class Inicio extends VerticalLayout {
     public Buscar _buscar;
     public UltimosVideos _ultimosVideos;
 
-
+    /* header y body */
     public HorizontalLayout header = new HorizontalLayout();
     public VerticalLayout body = new VerticalLayout();
 
+     /* Accede a la base de datos a través de iInicio */
      
-
-    public Inicio( iInicio iInicio) {
+    public Inicio(iInicio iInicio) {
         this._iInicio = iInicio;
 
         // Estilos generales del layout
@@ -51,16 +48,20 @@ public abstract class Inicio extends VerticalLayout {
 
         add(header);
         add(body);
-        /* Agrega el componente de Buscar */
-        Buscar();  
+
+        /* Agrega el componente estático de Buscar */
+        Buscar();
 
     }
 
+    /* Ultimos Videos es dinámico y se llama en el onAttach */
     @Override
-	protected void onAttach(AttachEvent attachEvent) {
-		super.onAttach(attachEvent);
-		UltimosVideos();
-	}
+    protected void onAttach(AttachEvent attachEvent) {
+        super.onAttach(attachEvent);
+        UltimosVideos();
+    }
+
+    /* Buscar también tiene como parámetro el interfaz */
 
     public void Buscar() {
         _buscar = new Buscar(_iInicio);
@@ -71,6 +72,6 @@ public abstract class Inicio extends VerticalLayout {
         });
     }
 
-    public abstract void UltimosVideos(); 
+    public abstract void UltimosVideos();
 
 }

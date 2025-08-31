@@ -1,25 +1,26 @@
 package com.example.demo.views;
 
+import java.io.InputStream;
+
 import com.example.demo.service.iNoLogueado;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
-import com.vaadin.flow.router.Route;
-
-import java.io.InputStream;
 
 @Route("Registrar")
 @AnonymousAllowed
@@ -33,12 +34,12 @@ public class Registrar extends VerticalLayout {
     private Image imagenDeFondo;
     public iNoLogueado _iNoLogueado;
 
-    public void EnviarCorreo() {
-        throw new UnsupportedOperationException();
-    }
+    /* Accede a la base de datos a través de INologueado */
 
     public Registrar(iNoLogueado iNoLogueado) {
         _iNoLogueado = iNoLogueado;
+
+
         // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -113,5 +114,11 @@ public class Registrar extends VerticalLayout {
     private void registrar(String login, String password, String avatarUrl, String fondoUrl) {
         _iNoLogueado.registrar(login, password, avatarUrl, fondoUrl);
         UI.getCurrent().navigate(NoLogueado.class);
+    }
+
+    public void EnviarCorreo() {
+       Notification.show("El envío de correo está deshabilitado");
+       //ServidordeCorreo _servidordeCorreo = new ServidordeCorreo();
+       //_servidordeCorreo.EnviarCorreo(login.getValue(),"Registro en Youtube","Bienvenido a Youtube","administration@youtube.com","123");
     }
 }

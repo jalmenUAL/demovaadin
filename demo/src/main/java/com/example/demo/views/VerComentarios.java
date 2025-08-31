@@ -15,12 +15,17 @@ public class VerComentarios extends VerticalLayout {
     public VerVideo _verVideo;
     public List<VerComentarios_item> _item = new ArrayList<>();
 
-    public VerComentarios(Set<Comentario>  comentarios, int j) {
+    /*
+     * Tiene como parámetro el conjunto de comentarios de un video y el id del video
+     */
+
+    public VerComentarios(Set<Comentario> comentarios,int idvideo) {
 
         setWidthFull();
         setPadding(true);
-        setSpacing(false);  // Desactivamos spacing porque usaremos separadores
+        setSpacing(false); // Desactivamos spacing porque usaremos separadores
         setAlignItems(Alignment.STRETCH);
+
         List<Comentario> comentarios2 = new ArrayList<>(comentarios);
 
         if (comentarios2.isEmpty()) {
@@ -28,35 +33,29 @@ public class VerComentarios extends VerticalLayout {
             Div noComments = new Div();
             noComments.setText("No hay comentarios disponibles.");
             add(noComments);
-        }
-        else{
+        } else {
 
-        for (int i = 0; i < comentarios2.size(); i++) {
-            VerComentarios_item comentario = new VerComentarios_item(comentarios2.get(i));
-           
+            for (int i = 0; i < comentarios2.size(); i++) {
+                VerComentarios_item comentario = new VerComentarios_item(comentarios2.get(i));
+                _item.add(comentario);
+                add(comentario);
 
-            _item.add(comentario);
-            add(comentario);
-
-            // Añadir separador excepto después del último comentario
-            if (i < comentarios.size() - 1) {
-                addSeparator();
+                // Añadir separador excepto después del último comentario
+                if (i < comentarios.size() - 1) {
+                    addSeparator();
+                }
             }
         }
     }
-    }
-
-    
 
     private void addSeparator() {
         Div separator = new Div();
         separator.getStyle()
-            .set("height", "1px")
-            .set("background-color", "#ddd")
-            .set("width", "100%")
-            .set("margin", "8px 0");
+                .set("height", "1px")
+                .set("background-color", "#ddd")
+                .set("width", "100%")
+                .set("margin", "8px 0");
         add(separator);
     }
 
-    
 }

@@ -19,6 +19,8 @@ public class PublicarVideo extends VerticalLayout {
     TextField introduzcaLaUrl = new TextField("URL del Video");
     TextField introduzcaEltitulo = new TextField("Título del Video");
 
+    /* Accede a la base de datos a través de iYoutuber */
+
     public PublicarVideo(iYoutuber iYoutuber) {
         setWidthFull();
         setAlignItems(Alignment.CENTER);
@@ -49,6 +51,7 @@ public class PublicarVideo extends VerticalLayout {
 
         button.addClickListener(e -> {
             iYoutuber.publicarVideo(introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
+            /* Vuelve a la vista anterior */
             UI.getCurrent().getPage().getHistory().back();
         });
 

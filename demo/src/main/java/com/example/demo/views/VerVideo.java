@@ -34,55 +34,20 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long> {
     Video video;
     iInicio iInicio;
 
+    /* Tiene como parámetro el interfaz iInicio y el id del video en la url */
+
     public VerVideo(iInicio iInicio) {
         this.iInicio = iInicio;
-        
-       
-         
-    }
-
-    public void Videosrelacionados() {
-        relacionados.removeAll();
-        List<Video> videosrelacionados = iInicio.getVideosRelacionados(video.getId());
-        _videosrelacionados = new Videosrelacionados(videosrelacionados);
-       relacionados.add(_videosrelacionados);
-    }
-
-    public void VerComentarios() {
-        comentarios.removeAll();
-        _verComentarios = new VerComentarios(video.getTiene_comentarios(), video.getId());
-        comentarios.add(_verComentarios);
-
-    }
-
-    public void PerfilAjeno() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth != null && auth.isAuthenticated()) {
-
-            boolean esAdmin = auth.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-            boolean esYoutuber = auth.getAuthorities().stream()
-                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-
-            if (esAdmin) {
-                UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, video.getEs_de().getLogin());
-            } else if (esYoutuber) {
-                UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, video.getEs_de().getLogin());
-            } else {
-                UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
-            }
-        }
 
     }
 
     public void setParameter(BeforeEvent event, Long parameter) {
 
-     removeAll();  // 🔹 Evita que se acumulen los elementos
-    video_y_relacionados.removeAll();
-    frame_y_comentarios.removeAll();
-    relacionados.removeAll();
-    comentarios.removeAll();
+        removeAll(); // 🔹 Evita que se acumulen los elementos
+        video_y_relacionados.removeAll();
+        frame_y_comentarios.removeAll();
+        relacionados.removeAll();
+        comentarios.removeAll();
 
         video = iInicio.findVideoById(parameter);
         add(video_y_relacionados);
@@ -146,9 +111,44 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long> {
         frame_y_comentarios.getStyle().set("width", "350%");
         Videosrelacionados();
         VerComentarios();
-         frame_y_comentarios.add(comentarios);
+        frame_y_comentarios.add(comentarios);
         video_y_relacionados.add(relacionados);
         getStyle().set("width", "100%");
+
+    }
+
+    public void Videosrelacionados() {
+        relacionados.removeAll();
+        List<Video> videosrelacionados = iInicio.getVideosRelacionados(video.getId());
+        _videosrelacionados = new Videosrelacionados(videosrelacionados);
+        relacionados.add(_videosrelacionados);
+    }
+
+    public void VerComentarios() {
+        comentarios.removeAll();
+        _verComentarios = new VerComentarios(video.getTiene_comentarios(), video.getId());
+        comentarios.add(_verComentarios);
+
+    }
+
+    public void PerfilAjeno() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        	if (auth != null && auth.isAuthenticated()) {
+
+        boolean esAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+        boolean esYoutuber = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+
+        if (esAdmin) {
+            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, video.getEs_de().getLogin());
+        } else if (esYoutuber) {
+            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, video.getEs_de().getLogin());
+        } else {
+            UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
+        }
+    }
 
     }
 

@@ -10,48 +10,46 @@ import com.vaadin.flow.router.Route;
 @Route("PerfilAjenodeAdministrador")
 public class PerfilAjenodeAdministrador extends PerfilAjeno {
     private Button btnBloquear;
-    private iAdministrador iAdministrador;
-     
+    
+    iAdministrador iAdministrador;
 
-
-    public void Bloquear() {
-        if (btnBloquear.getText().equals("Bloquear")) 
-         {  btnBloquear.setText("Quitar Bloqueo"); 
-         iAdministrador.bloquearUsuario(_usuario.getORMID());}
-         else {  btnBloquear.setText("Bloquear"); 
-         iAdministrador.desbloquearUsuario(_usuario.getORMID());}
-        
-         
-
-    }
+    /* Accede a la base de datos a través de iAdministrador */
 
     public PerfilAjenodeAdministrador(iAdministrador iAdministrador) {
-        
+        super(iAdministrador);
         this.iAdministrador = iAdministrador;
-         
 
         // Crear botón de bloquear usuario
         btnBloquear = new Button("", e -> Bloquear());
-        btnBloquear.addThemeVariants(ButtonVariant.LUMO_ERROR); // Botón rojo
-       
-        // Buscar el layout de botones en la vista padre y añadir el nuevo botón
-        // Suponiendo que el layout de botones es el primer HorizontalLayout
-         topLayout.add(btnBloquear);
-
+        btnBloquear.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        topLayout.add(btnBloquear);
 
     }
 
-    @Override
-public void setParameter(BeforeEvent event, String parameter) {
-    // 👇 ejecuta la lógica de la clase padre
-    super.setParameter(event, parameter);
-    if (_usuario.getBloqueado()) 
-         {  btnBloquear.setText("Quitar bloqueo"); }
-         else {  btnBloquear.setText("Bloquear"); }
-}
+    /* Con el parámetro de la url accede al usuario y comprueba si está boqueado o no */
 
     @Override
-    public Youtuber getUsuario(String username) {
-       return iAdministrador.findYoutuberById(username);
+    public void setParameter(BeforeEvent event, String parameter) {
+        // 👇 ejecuta la lógica de la clase padre
+        super.setParameter(event, parameter);
+        if (_usuario.getBloqueado()) {
+            btnBloquear.setText("Quitar bloqueo");
+        } else {
+            btnBloquear.setText("Bloquear");
+        }
+    }
+
+    
+
+    
+    public void Bloquear() {
+        if (btnBloquear.getText().equals("Bloquear")) {
+            btnBloquear.setText("Quitar Bloqueo");
+            iAdministrador.bloquearUsuario(_usuario.getORMID());
+        } else {
+            btnBloquear.setText("Bloquear");
+            iAdministrador.desbloquearUsuario(_usuario.getORMID());
+        }
+
     }
 }

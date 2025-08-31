@@ -8,19 +8,16 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.Route;
-import com.example.demo.service.iYoutuber;
 
 
 @Route("VerComentariosdeYoutuber")
 public class VerComentariosdeYoutuber extends VerComentarios {
-
-    private iYoutuber iYoutuber;
+  
     private String id;
 
-    public VerComentariosdeYoutuber(iYoutuber iYoutuber, Set<Comentario> comentarios, int j) {
-        super(comentarios,j);
-        this.iYoutuber = iYoutuber;
-        this.id = Integer.toString(j);
+    public VerComentariosdeYoutuber(Set<Comentario> comentarios, int idvideo) {
+        super(comentarios,idvideo);      
+        this.id = Integer.toString(idvideo);
 
 
         removeAll();
@@ -52,11 +49,13 @@ public class VerComentariosdeYoutuber extends VerComentarios {
         }
         else{
         for (Comentario comentario : comentarios) {
-            VerComentarios_item comentarioItem = new VerComentariosdeYoutuber_item(comentario);
+            VerComentariosdeYoutuber_item comentarioItem = new VerComentariosdeYoutuber_item(comentario);
             add(comentarioItem);
         }
     }
     }
+
+    /* El id es necesario para poder comentar el video */
 
     public void comentar() {
        UI.getCurrent().navigate(Comentar.class,id);

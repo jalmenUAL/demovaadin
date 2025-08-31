@@ -14,19 +14,20 @@ import com.vaadin.flow.router.Route;
 public class ListadeVideos extends VerticalLayout {
     public Vector<ListadeVideos_item> _item = new Vector<ListadeVideos_item>();
  
+    /* Tiene como parámetro un conjunto de videos */
 
-    public ListadeVideos(Set<Video> videos2) {
+    public ListadeVideos(Set<Video> videos) {
         int columnas = 2;
         int index = 0;
-        List<Video> videos = new ArrayList<>(videos2);
-        while (index < videos.size()) {
+        List<Video> listavideos = new ArrayList<>(videos);
+        while (index < listavideos.size()) {
             HorizontalLayout fila = new HorizontalLayout();
             fila.setWidthFull();
             fila.setSpacing(true);
             fila.getStyle().set("justify-content", "space-between");
 
-            for (int c = 0; c < columnas && index < videos.size(); c++) {
-                Video video = videos.get(index);
+            for (int c = 0; c < columnas && index < listavideos.size(); c++) {
+                Video video = listavideos.get(index);
                 ListadeVideos_item item = new ListadeVideos_item(video);
                 item.setWidth("48%"); // Para que entren dos en una fila con espacio
                 _item.add(item);
