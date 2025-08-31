@@ -3,6 +3,9 @@ package com.example.demo.views;
 import java.util.Set;
 import java.util.Vector;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.service.iInicio;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.notification.Notification;
@@ -42,7 +45,9 @@ public class Youtubersseguidos extends VerticalLayout implements HasUrlParameter
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
         
-        youtubers = _iInicio.getYoutubersSeguidos(parameter);
+        /* Esto se hace para refrescar el usuario. Si no, se quedan los valores anteriores  */
+        com.example.demo.domain.Youtuber usuario = _iInicio.findYoutuberById(parameter);
+        youtubers = usuario.getSeguidor_de();
 
         Notification.show(Integer.toString(youtubers.size()));
          

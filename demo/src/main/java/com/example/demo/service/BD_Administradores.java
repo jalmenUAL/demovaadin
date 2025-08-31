@@ -12,6 +12,8 @@ import com.example.demo.domain.RepositorioAdministrador;
 public class BD_Administradores {
     public BDPrincipal _en;
     public Vector<Administrador> _administradores = new Vector<Administrador>();
+
+    
     private RepositorioAdministrador repository;
     private PasswordEncoder passwordEncoder;
 

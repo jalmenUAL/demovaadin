@@ -25,6 +25,8 @@ public class BD_Comentarios {
 
     public BDPrincipal _en;
     public Vector<Comentario> _comentarios = new Vector<Comentario>();
+
+
     private RepositorioComentario repository;
     private RepositorioVideo repositoryvideo;
 
@@ -48,7 +50,6 @@ public class BD_Comentarios {
     public void eliminarComentario(int id) {
         Comentario comentario = repository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new RuntimeException("Comentario no encontrado"));
-
         repository.delete(comentario);
 
     }

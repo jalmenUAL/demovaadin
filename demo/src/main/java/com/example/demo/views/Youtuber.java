@@ -1,10 +1,13 @@
 package com.example.demo.views;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.example.demo.domain.Comentario;
 import com.example.demo.domain.Video;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
@@ -66,9 +69,8 @@ public class Youtuber extends Registrado {
     public void UltimosVideos() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
-        List<Video> videos = _iYoutuber.getYoutuberVideos(usuario.getLogin());
-        _ultimosVideos = new UltimosVideosdeYoutuber(videos);
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal(); 
+        _ultimosVideos = new UltimosVideosdeYoutuber(_iYoutuber.getYoutuberVideos(usuario.getLogin()));
         body.add(_ultimosVideos);
     }
 

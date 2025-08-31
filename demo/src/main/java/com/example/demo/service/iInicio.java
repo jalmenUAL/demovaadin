@@ -16,9 +16,6 @@ public interface iInicio {
 
     Youtuber findYoutuberById(String parameter);
 
-    Set<Youtuber> getYoutubersSeguidos(String parameter);
-
     List<Video> getVideosRelacionados(int id);
 
-    
 }

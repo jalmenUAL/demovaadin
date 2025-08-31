@@ -67,7 +67,10 @@ public class VerVideodeYoutuber extends VerVideo {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
-
+        
+        /* OJO. He tenido que recargar al usuario! */
+        usuario = iYoutuber.findYoutuberById(usuario.getLogin());
+         
         legusta = usuario.getLe_gusta().stream().anyMatch(v -> ((Video) v).getId() == video.getId());
 
         if (!legusta) {
