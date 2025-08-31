@@ -48,6 +48,8 @@ public class NoLogueado extends Inicio {
         List<Video> videos = _iNoLogueado.getUltimosVideos();
         _ultimosVideos = new UltimosVideos(videos);
         body.add(_ultimosVideos);
+         body.add(_ultimosVideos);
+         /* Lo hago dos veces porque se me borran... */
     }
 
     public void Login() {
