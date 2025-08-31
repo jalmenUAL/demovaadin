@@ -32,36 +32,35 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
     /* Usa el parámetro url */
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
-       
+
         super.setParameter(event, parameter);
 
         /* recupera el usuario logueado */
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Youtuber youtuber = (Youtuber) auth.getPrincipal();
 
+        if (auth != null && auth.isAuthenticated()) {
+            Youtuber youtuber = (Youtuber) auth.getPrincipal();
 
-        btnSeguir.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        btnDenunciar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+            btnSeguir.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+            btnDenunciar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        if (_usuario.getSeguido_por().contains(youtuber)) {
-            btnSeguir.setText("Dejar de seguir");
-        } else {
-            btnSeguir.setText("Seguir");
-        }
-        if (_usuario.getDenunciado_por().contains(youtuber)) {
-            btnDenunciar.setText("Quitar denuncia");
-        } else {
-            btnDenunciar.setText("Denunciar");
-        }
-        if (_usuario.getLogin().equals(youtuber.getLogin())) {
-            btnSeguir.setVisible(false);
-            btnDenunciar.setVisible(false);
+            if (_usuario.getSeguido_por().contains(youtuber)) {
+                btnSeguir.setText("Dejar de seguir");
+            } else {
+                btnSeguir.setText("Seguir");
+            }
+            if (_usuario.getDenunciado_por().contains(youtuber)) {
+                btnDenunciar.setText("Quitar denuncia");
+            } else {
+                btnDenunciar.setText("Denunciar");
+            }
+            if (_usuario.getLogin().equals(youtuber.getLogin())) {
+                btnSeguir.setVisible(false);
+                btnDenunciar.setVisible(false);
+            }
         }
 
     }
-
-    
-
 
     public void Seguir() {
         if (btnSeguir.getText().equals("Seguir")) {
@@ -71,11 +70,10 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
         } else {
             _iYoutuber.dejardeseguirUsuario(_usuario.getORMID());
             btnSeguir.setText("Seguir"); // Cambiar el texto del botón
-             
+
         }
 
     }
-
 
     public void Denunciar() {
         if (btnDenunciar.getText().equals("Denunciar")) {

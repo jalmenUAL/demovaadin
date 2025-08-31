@@ -14,7 +14,7 @@ public class ResultadodeBusqueda extends GaleradeVideos {
 
 	public ResultadodeBusqueda(List<Video> resultados) {
 		super(resultados);
-		
+
 		tituloGaleria.setText("Resultados de la búsqueda");
 
 		carrusel.removeAll();

@@ -13,9 +13,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinServletRequest;
 import com.vaadin.flow.server.VaadinSession;
 
-
 @Route("Registrado")
-
 
 public abstract class Registrado extends Inicio {
     public iRegistrado _iRegistrado;
@@ -28,12 +26,11 @@ public abstract class Registrado extends Inicio {
         Button logoutButton = new Button("Cerrar sesión", new Icon(VaadinIcon.SIGN_OUT));
         logoutButton.addThemeVariants(ButtonVariant.LUMO_ERROR); // Estilo rojo
         logoutButton.getStyle()
-            .set("margin-left", "auto") // Lo empuja a la derecha
-            .set("font-weight", "bold");
+                .set("margin-left", "auto") // Lo empuja a la derecha
+                .set("font-weight", "bold");
 
         logoutButton.addClickListener(e -> Logout());
 
-         
         if (header != null) {
             header.add(logoutButton);
         } else {
@@ -43,10 +40,10 @@ public abstract class Registrado extends Inicio {
 
             H1 titulo = new H1("Youtube");
             titulo.getStyle()
-                .set("color", "white")
-                .set("background-color", "red")
-                .set("padding", "0.5em 1em")
-                .set("border-radius", "8px");
+                    .set("color", "white")
+                    .set("background-color", "red")
+                    .set("padding", "0.5em 1em")
+                    .set("border-radius", "8px");
 
             headerConLogout.add(titulo, logoutButton);
             add(headerConLogout);
@@ -55,15 +52,13 @@ public abstract class Registrado extends Inicio {
 
     public void Logout() {
         new SecurityContextLogoutHandler().logout(
-        VaadinServletRequest.getCurrent().getHttpServletRequest(),
-        null,
-        null);
+                VaadinServletRequest.getCurrent().getHttpServletRequest(),
+                null,
+                null);
         VaadinSession.getCurrent().close();
         VaadinSession.getCurrent().setAttribute("Registrado", null);
         getUI().ifPresent(ui -> ui.navigate("NoLogueado"));
-        /* Cierra la sesión  */
+        /* Cierra la sesión */
     }
-
-     
 
 }

@@ -23,30 +23,31 @@ public class UltimosVideos extends GaleradeVideos {
 
 		if (auth != null && auth.isAuthenticated()) {
 
-		boolean esAdmin = auth.getAuthorities().stream()
-				.anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-		boolean esYoutuber = auth.getAuthorities().stream()
-				.anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+			boolean esAdmin = auth.getAuthorities().stream()
+					.anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+			boolean esYoutuber = auth.getAuthorities().stream()
+					.anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
-		/* Dependiendo del usuario muestra unos items u otros */
+			/* Dependiendo del usuario muestra unos items u otros */
 
-		if (esAdmin) {
-			for (Video video : videos) {
-				UltimosVideos_item item = new UltimosVideosdeAdministrador_item(video);
-				carrusel.add(item);
-			}
-		} else if (esYoutuber) {
-			for (Video video : videos) {
-				UltimosVideos_item item = new UltimosVideosdeYoutuber_item(video);
-				carrusel.add(item);
+			if (esAdmin) {
+				for (Video video : videos) {
+					UltimosVideos_item item = new UltimosVideosdeAdministrador_item(video);
+					carrusel.add(item);
+				}
+			} else if (esYoutuber) {
+				for (Video video : videos) {
+					UltimosVideos_item item = new UltimosVideosdeYoutuber_item(video);
+					carrusel.add(item);
+				}
 			}
 		} else {
 			for (Video video : videos) {
 				UltimosVideos_item item = new UltimosVideos_item(video);
 				carrusel.add(item);
 			}
+
 		}
-	}
 
 	}
 }

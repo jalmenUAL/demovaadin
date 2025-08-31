@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface RepositorioVideo extends JpaRepository<Video, Long>, JpaSpecificationExecutor<Video> {
 
-   
-
 }

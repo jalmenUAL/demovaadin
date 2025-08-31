@@ -16,7 +16,7 @@ import com.vaadin.flow.router.Route;
 
 import jakarta.annotation.security.RolesAllowed;
 
-//import basededatos.iYoutuber;
+
 
 @Route("Youtuber")
 @RolesAllowed("ROLE_YOUTUBER")
@@ -26,7 +26,8 @@ public class Youtuber extends Registrado {
     public PerfilPropio _perfilPropio;
     public UltimosVideosdeYoutuber _ultimosVideos;
     public com.example.demo.domain.Youtuber usuario;
-    String username;
+
+    /* Accede a la base de datos a través de iYoutuber */
 
     public Youtuber(iYoutuber iYoutuber) {
         super(iYoutuber);
@@ -53,15 +54,19 @@ public class Youtuber extends Registrado {
     }
 
     public void PerfilPropio() {
-        UI.getCurrent().navigate(PerfilPropio.class, username);
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
+        UI.getCurrent().navigate(PerfilPropio.class, usuario.getLogin());
     }
+
+    /* La lista de videos es distinta en este caso */
+    /* Necesita saber qué usuario está logueado */
 
     @Override
     public void UltimosVideos() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        username = auth.getName();
-        usuario = _iYoutuber.findYoutuberById(username);
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
         List<Video> videos = _iYoutuber.getYoutuberVideos(usuario.getLogin());
         _ultimosVideos = new UltimosVideosdeYoutuber(videos);
         body.add(_ultimosVideos);

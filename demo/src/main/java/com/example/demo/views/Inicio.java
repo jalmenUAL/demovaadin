@@ -20,8 +20,8 @@ public abstract class Inicio extends VerticalLayout {
     public HorizontalLayout header = new HorizontalLayout();
     public VerticalLayout body = new VerticalLayout();
 
-     /* Accede a la base de datos a través de iInicio */
-     
+    /* Accede a la base de datos a través de iInicio */
+
     public Inicio(iInicio iInicio) {
         this._iInicio = iInicio;
 

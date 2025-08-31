@@ -12,8 +12,7 @@ public class VerComentariosdeAdministrador_item extends VerComentarios_item {
     public iAdministrador iAdministrador;
     public Button eliminarButton;
 
-        /* Se añade el iAdministrador porque accede a la base de datos */
-
+    /* Se añade el iAdministrador porque accede a la base de datos */
 
     public VerComentariosdeAdministrador_item(iAdministrador iAdministrador, Comentario comentario) {
         super(comentario);

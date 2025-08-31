@@ -39,7 +39,6 @@ public class Registrar extends VerticalLayout {
     public Registrar(iNoLogueado iNoLogueado) {
         _iNoLogueado = iNoLogueado;
 
-
         // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -117,8 +116,9 @@ public class Registrar extends VerticalLayout {
     }
 
     public void EnviarCorreo() {
-       Notification.show("El envío de correo está deshabilitado");
-       //ServidordeCorreo _servidordeCorreo = new ServidordeCorreo();
-       //_servidordeCorreo.EnviarCorreo(login.getValue(),"Registro en Youtube","Bienvenido a Youtube","administration@youtube.com","123");
+        Notification.show("El envío de correo está deshabilitado");
+        // ServidordeCorreo _servidordeCorreo = new ServidordeCorreo();
+        // _servidordeCorreo.EnviarCorreo(login.getValue(),"Registro en
+        // Youtube","Bienvenido a Youtube","administration@youtube.com","123");
     }
 }

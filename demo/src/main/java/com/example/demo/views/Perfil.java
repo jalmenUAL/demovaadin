@@ -19,18 +19,17 @@ import com.vaadin.flow.router.Route;
 public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
     /* Es una clase abstracta porque es usada por administrador y youtuber */
-   
+
     public Videosgustados _videosgustados;
     public Videospublicados _videospublicados;
 
     HorizontalLayout topLayout = new HorizontalLayout();
     com.example.demo.domain.Youtuber _usuario;
     iInicio _iInicio;
-     
 
     /* El usuario se obtiene a través de la url */
 
-    public Perfil(iInicio iInicio) {     
+    public Perfil(iInicio iInicio) {
         this._iInicio = iInicio;
         setSizeFull();
         setSpacing(true);
@@ -38,7 +37,6 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
         setAlignItems(Alignment.CENTER);
     }
 
-   
     /* Recepción del parámetro de la url */
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
@@ -52,8 +50,8 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
                                                                                                                                                                        // de
                                                                                                                                                                        // una
                                                                                                                                                                        // imagen
-                                                                                                                                                                  // por
-                                                                                                                                                             // defecto
+            // por
+            // defecto
         }
         Image imagenDeFondo = new Image(_usuario.getBanner(), "Imagen de fondo");
         imagenDeFondo.setWidth("100%");
@@ -63,14 +61,13 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
         add(imagenDeFondo);
 
         /* Si el usuario está bloqueado lo muestra en la parta superior */
-        if (_usuario.getBloqueado())
-        {
+        if (_usuario.getBloqueado()) {
             H2 Bloqueado = new H2("Este Usuario ha sido Bloqueado");
             Bloqueado.getStyle().set("color", "red");
-             add(Bloqueado);
+            add(Bloqueado);
         }
-       
-       /* Nombre y avatar */
+
+        /* Nombre y avatar */
         String nombreUsuario = _usuario.getLogin();
         String avatarUrl = _usuario.getFotoPerfil();
         if (avatarUrl == null || avatarUrl.isEmpty()) {

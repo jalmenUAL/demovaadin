@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.demo.domain.Registrado;
 import com.example.demo.service.iNoLogueado;
-import com.vaadin.flow.component.notification.Notification;
 
 @Component
 public class CustomAuthProvider implements AuthenticationProvider {
@@ -29,43 +28,37 @@ public class CustomAuthProvider implements AuthenticationProvider {
         String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-         
-
         // 🔹 Aquí usas tu método
         Registrado r = iNoLogueado.Login(username, password);
-        
-
 
         if (r == null) {
-            throw new UsernameNotFoundException("Usuario o contraseña incorrectos o Tu cuenta está bloqueada, contacta con el administrador");
+            throw new UsernameNotFoundException(
+                    "Usuario o contraseña incorrectos o Tu cuenta está bloqueada, contacta con el administrador");
         }
 
         // 🚨 Bloquear si es un Youtuber y está marcado como bloqueado
         if (r instanceof com.example.demo.domain.Youtuber youtuber) {
             if (Boolean.TRUE.equals(youtuber.getBloqueado())) {
-                throw new DisabledException("Usuario o contraseña incorrectos o Tu cuenta está bloqueada, contacta con el administrador");
+                throw new DisabledException(
+                        "Usuario o contraseña incorrectos o Tu cuenta está bloqueada, contacta con el administrador");
             }
         }
 
         String role;
-    if (r instanceof com.example.demo.domain.Administrador) {
-        role = "ROLE_ADMINISTRADOR";
+        if (r instanceof com.example.demo.domain.Administrador) {
+            role = "ROLE_ADMINISTRADOR";
 
-    } else if (r instanceof com.example.demo.domain.Youtuber) {
-        role = "ROLE_YOUTUBER";
-         
+        } else if (r instanceof com.example.demo.domain.Youtuber) {
+            role = "ROLE_YOUTUBER";
 
-    } else {
-        role = "ROLE_REGISTRADO"; // fallback genérico
-    }
+        } else {
+            role = "ROLE_REGISTRADO"; // fallback genérico
+        }
 
-    
-
-    return new UsernamePasswordAuthenticationToken(
-            r, // principal = tu entidad de dominio
-            r.getPassword(),
-            Collections.singletonList(() -> role)
-    );
+        return new UsernamePasswordAuthenticationToken(
+                r, // principal = tu entidad de dominio
+                r.getPassword(),
+                Collections.singletonList(() -> role));
     }
 
     @Override
@@ -73,4 +66,3 @@ public class CustomAuthProvider implements AuthenticationProvider {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
-

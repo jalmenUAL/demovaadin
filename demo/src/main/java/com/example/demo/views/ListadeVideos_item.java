@@ -76,18 +76,20 @@ public class ListadeVideos_item extends VerticalLayout {
     public void VerVideo() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        boolean esAdmin = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-        boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+        if (auth != null && auth.isAuthenticated()) {
 
-        if (esAdmin) {
-            UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+
+            if (esAdmin) {
+                UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
+            } else if (esYoutuber) {
+                UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+            }
         } else {
             UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
         }
-
     }
 }

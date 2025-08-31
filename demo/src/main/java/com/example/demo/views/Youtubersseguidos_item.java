@@ -13,12 +13,13 @@ import com.vaadin.flow.router.Route;
 
 @Route("Youtuberseguidos_item")
 
-public class Youtubersseguidos_item extends VerticalLayout{
-	public Youtubersseguidos _youtubersseguidos;
-	public PerfilAjeno _perfilAjeno;
+public class Youtubersseguidos_item extends VerticalLayout {
+    public Youtubersseguidos _youtubersseguidos;
+    public PerfilAjeno _perfilAjeno;
     com.example.demo.domain.Youtuber youtuber;
-public Youtubersseguidos_item(com.example.demo.domain.Youtuber youtuber) {
-    this.youtuber = youtuber;
+
+    public Youtubersseguidos_item(com.example.demo.domain.Youtuber youtuber) {
+        this.youtuber = youtuber;
         // Datos de ejemplo (puedes pasarlos por el constructor si deseas)
         String nombreUsuario = youtuber.getLogin();
         int seguidores = youtuber.getSeguido_por().size();
@@ -40,10 +41,10 @@ public Youtubersseguidos_item(com.example.demo.domain.Youtuber youtuber) {
         // Botón para ver perfil ajeno
         Button verPerfilButton = new Button("Ver perfil", e -> PerfilAjeno());
         verPerfilButton.getStyle()
-            .set("background-color", "#0d6efd")
-            .set("color", "white")
-            .set("border-radius", "8px")
-            .set("font-weight", "bold");
+                .set("background-color", "#0d6efd")
+                .set("color", "white")
+                .set("border-radius", "8px")
+                .set("font-weight", "bold");
 
         // Layout vertical para los datos del usuario
         VerticalLayout info = new VerticalLayout(nombre, seguidoresLabel, verPerfilButton);
@@ -64,23 +65,23 @@ public Youtubersseguidos_item(com.example.demo.domain.Youtuber youtuber) {
     }
 
     public void PerfilAjeno() {
-      Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null && auth.isAuthenticated()) {
-           
+
             boolean esAdmin = auth.getAuthorities().stream()
                     .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
             boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-        
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
-        if (esAdmin) {
-            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, youtuber.getLogin());
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, youtuber.getLogin());
+            if (esAdmin) {
+                UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, youtuber.getLogin());
+            } else if (esYoutuber) {
+                UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, youtuber.getLogin());
+            }
         } else {
             UI.getCurrent().navigate(PerfilAjeno.class, youtuber.getLogin());
         }
-    }
+
     }
 }

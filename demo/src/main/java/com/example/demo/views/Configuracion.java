@@ -22,17 +22,19 @@ import com.vaadin.flow.server.StreamResource;
 import jakarta.annotation.security.RolesAllowed;
 
 @Route("Configuracion")
-@RolesAllowed("ROLE_YOUTUBER")  
-public class Configuracion extends VerticalLayout{
-	public PerfilPropio _perfilPropio;
+@RolesAllowed("ROLE_YOUTUBER")
+public class Configuracion extends VerticalLayout {
+    public PerfilPropio _perfilPropio;
     private iYoutuber _iYoutuber;
-      
+
     private Image imagenDeFondo;
     private Image avatar;
     private TextField password;
-	
-public Configuracion(iYoutuber iYoutuber) {
-    _iYoutuber = iYoutuber;
+
+    /* Accede a la base de datos con iYoutuber */
+
+    public Configuracion(iYoutuber iYoutuber) {
+        _iYoutuber = iYoutuber;
         // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -47,15 +49,15 @@ public Configuracion(iYoutuber iYoutuber) {
         // Layout para login y password
         VerticalLayout datosLayout = new VerticalLayout();
         datosLayout.setAlignItems(Alignment.CENTER);
-        
-         password = new TextField("New Password");
-        datosLayout.add( password);
+
+        password = new TextField("New Password");
+        datosLayout.add(password);
 
         // Layout para avatar
         VerticalLayout avatarLayout = new VerticalLayout();
         avatarLayout.setAlignItems(Alignment.CENTER);
         Span avatarLabel = new Span("Avatar");
-         avatar = new Image();
+        avatar = new Image();
         avatar.setMaxWidth("300px");
         MemoryBuffer buffer = new MemoryBuffer();
         Upload upload = new Upload(buffer);
@@ -70,8 +72,8 @@ public Configuracion(iYoutuber iYoutuber) {
         // Layout para imagen de fondo
         VerticalLayout fondoLayout = new VerticalLayout();
         fondoLayout.setAlignItems(Alignment.CENTER);
-       Span fondoLabel = new Span("Imagen de fondo");
-         imagenDeFondo = new Image();
+        Span fondoLabel = new Span("Imagen de fondo");
+        imagenDeFondo = new Image();
         imagenDeFondo.setMaxWidth("300px");
         MemoryBuffer buffer2 = new MemoryBuffer();
         Upload upload2 = new Upload(buffer2);
@@ -92,7 +94,7 @@ public Configuracion(iYoutuber iYoutuber) {
         Button actualizar = new Button("Actualizar", new Icon(VaadinIcon.REFRESH));
         actualizar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         actualizar.addClickListener(event -> {
-             
+
             actualizar(_iYoutuber);
         });
 
@@ -105,17 +107,10 @@ public Configuracion(iYoutuber iYoutuber) {
         add(contenido);
     }
 
-// ...existing code...
+    private void actualizar(iYoutuber iYoutuber) {
+        iYoutuber.actualizarConfiguracion(password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
+        // Vuelve a la página anterior
+        UI.getCurrent().getPage().getHistory().back();
 
-	private void actualizar(iYoutuber iYoutuber) {
-        iYoutuber.actualizarConfiguracion(
-            
-            password.getValue(),
-            avatar.getSrc(),
-            imagenDeFondo.getSrc()
-        );
-    		UI.getCurrent().getPage().getHistory().back();
-
-    // Lógica para enviar los datos a donde corresponda
-}
+    }
 }

@@ -9,6 +9,6 @@ public class Videosgustados_item extends ListadeVideos_item {
 
     public Videosgustados_item(Video video) {
         super(video);
-        //TODO Auto-generated constructor stub
+         
     }
 }

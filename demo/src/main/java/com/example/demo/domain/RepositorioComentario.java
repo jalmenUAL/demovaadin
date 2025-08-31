@@ -7,6 +7,4 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 public interface RepositorioComentario extends JpaRepository<Comentario, Long>, JpaSpecificationExecutor<Comentario> {
 
-    Optional<Comentario> findById(int id);
 }
-

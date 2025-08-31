@@ -20,13 +20,12 @@ public class NoLogueado extends Inicio {
     public Login _login;
     public Registrar _registrar;
 
-     /* Accede a la base de datos a través de iNoLogueado */
+    /* Accede a la base de datos a través de iNoLogueado */
 
     public NoLogueado(iNoLogueado iNoLogueado) {
         super(iNoLogueado);
         this._iNoLogueado = iNoLogueado;
 
-         
         // Botón de Login
         Button loginButton = new Button("Login", new Icon(VaadinIcon.SIGN_IN));
         loginButton.addClickListener(e -> Login());

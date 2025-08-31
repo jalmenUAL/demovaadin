@@ -1,6 +1,5 @@
 package com.example.demo.views;
 
-import java.util.List;
 import java.util.Set;
 
 import com.example.demo.domain.Video;
@@ -11,8 +10,7 @@ import com.vaadin.flow.router.Route;
 public class Videosgustados extends ListadeVideos {
 	public Videosgustados(Set<Video> videos) {
 		super(videos);
-		//TODO Auto-generated constructor stub
-	}
+ 	}
 
 	public Perfil _perfil;
 }

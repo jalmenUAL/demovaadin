@@ -59,16 +59,21 @@ public class VerComentarios_item extends VerticalLayout {
     public void PerfilAjeno() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
+        if (auth != null && auth.isAuthenticated()) {
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
-        boolean esAdmin = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-        boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
+            if (esAdmin) {
+                UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, comentario.getEscrito_por().getLogin());
+            } else if (esYoutuber) {
 
-        if (esAdmin) {
-            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, comentario.getEscrito_por().getLogin());
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, comentario.getEscrito_por().getLogin());
+                if (comentario.getEscrito_por().getLogin().equals(usuario.getLogin())) {
+                UI.getCurrent().navigate(PerfilPropio.class, comentario.getEscrito_por().getLogin());}
+                else { UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, comentario.getEscrito_por().getLogin());  }
+            }
         } else {
             UI.getCurrent().navigate(PerfilAjeno.class, comentario.getEscrito_por().getLogin());
         }

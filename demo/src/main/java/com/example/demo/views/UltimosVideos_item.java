@@ -9,6 +9,6 @@ public class UltimosVideos_item extends GaleradeVideos_item {
     public UltimosVideos_item(Video video) {
 
         super(video);
-         
+
     }
 }

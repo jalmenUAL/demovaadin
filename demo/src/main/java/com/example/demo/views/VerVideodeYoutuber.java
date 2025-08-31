@@ -17,101 +17,79 @@ public class VerVideodeYoutuber extends VerVideo {
 
     private iYoutuber iYoutuber;
     Button likeButton;
-     
+
     Boolean legusta;
+
     public VerVideodeYoutuber(com.example.demo.service.iYoutuber iYoutuber) {
         super(iYoutuber);
         this.iYoutuber = iYoutuber;
 
-       
-         
     }
- 
 
     public void like() {
-         
-            
-             
-              if (likeButton.getText().equals("Me Gusta")) {
-                likeButton.setText("Quitar Me Gusta");
-                  iYoutuber.likeVideo(video.getId());
-                likeButton.getStyle()
-            .set("background-color", "#0d6efd") // negro
-            .set("color", "white")
-            .set("border-radius", "8px")
-            .set("padding", "10px 20px")
-            .set("font-weight", "bold");
 
-               
+        if (likeButton.getText().equals("Me Gusta")) {
+            likeButton.setText("Quitar Me Gusta");
+            iYoutuber.likeVideo(video.getId());
+            likeButton.getStyle()
+                    .set("background-color", "#0d6efd") // negro
+                    .set("color", "white")
+                    .set("border-radius", "8px")
+                    .set("padding", "10px 20px")
+                    .set("font-weight", "bold");
 
-            }  else
-            {  likeButton.setText("Me Gusta");
-                iYoutuber.dislikeVideo(video.getId());
-                likeButton.getStyle()
-            .set("background-color", "#0d6efd") // azul
-            .set("color", "white")
-            .set("border-radius", "8px")
-            .set("padding", "10px 20px")
-            .set("font-weight", "bold");
+        } else {
+            likeButton.setText("Me Gusta");
+            iYoutuber.dislikeVideo(video.getId());
+            likeButton.getStyle()
+                    .set("background-color", "#0d6efd") // azul
+                    .set("color", "white")
+                    .set("border-radius", "8px")
+                    .set("padding", "10px 20px")
+                    .set("font-weight", "bold");
 
-            
-            }
-              
-         
+        }
 
     }
- 
- 
+
     @Override
     public void VerComentarios() {
-            _verComentarios = new VerComentariosdeYoutuber(video.getTiene_comentarios(),video.getId());
+        _verComentarios = new VerComentariosdeYoutuber(video.getTiene_comentarios(), video.getId());
         comentarios.add(_verComentarios);
     }
 
     public void setParameter(BeforeEvent event, Long parameter) {
-         super.setParameter(event,parameter);
-         // Crear botón de Like
+        super.setParameter(event, parameter);
+        // Crear botón de Like
         likeButton = new Button("", event2 -> like());
         likeButton.setIcon(new Icon(VaadinIcon.THUMBS_UP));
-         
-        
-
-        
-
-       
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-         
-            String username = auth.getName();
-            com.example.demo.domain.Youtuber usuario = iYoutuber.findYoutuberById(username);
-            
-             
 
-            legusta = usuario.getLe_gusta().stream().anyMatch(v -> ((Video) v).getId() == video.getId());
-            
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
 
-            if (!legusta) {
-                likeButton.setText("Me Gusta");
-                likeButton.getStyle()
-            .set("background-color", "#0d6efd") // azul
-            .set("color", "white")
-            .set("border-radius", "8px")
-            .set("padding", "10px 20px")
-            .set("font-weight", "bold");
-            }  else
-            {
-                likeButton.setText("Quitar Me Gusta");
-                likeButton.getStyle()
-            .set("background-color", "#0d6efd") // azul
-            .set("color", "white")
-            .set("border-radius", "8px")
-            .set("padding", "10px 20px")
-            .set("font-weight", "bold");
-            }
+        legusta = usuario.getLe_gusta().stream().anyMatch(v -> ((Video) v).getId() == video.getId());
+
+        if (!legusta) {
+            likeButton.setText("Me Gusta");
+            likeButton.getStyle()
+                    .set("background-color", "#0d6efd") // azul
+                    .set("color", "white")
+                    .set("border-radius", "8px")
+                    .set("padding", "10px 20px")
+                    .set("font-weight", "bold");
+        } else {
+            likeButton.setText("Quitar Me Gusta");
+            likeButton.getStyle()
+                    .set("background-color", "#0d6efd") // azul
+                    .set("color", "white")
+                    .set("border-radius", "8px")
+                    .set("padding", "10px 20px")
+                    .set("font-weight", "bold");
+        }
 
         // Añadir el botón a donde quieras (por ejemplo, debajo del video)
         frame_y_comentarios.add(likeButton);
-          
-       
 
-}}
+    }
+}

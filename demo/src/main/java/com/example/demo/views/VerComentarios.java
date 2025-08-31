@@ -19,7 +19,7 @@ public class VerComentarios extends VerticalLayout {
      * Tiene como parámetro el conjunto de comentarios de un video y el id del video
      */
 
-    public VerComentarios(Set<Comentario> comentarios,int idvideo) {
+    public VerComentarios(Set<Comentario> comentarios) {
 
         setWidthFull();
         setPadding(true);

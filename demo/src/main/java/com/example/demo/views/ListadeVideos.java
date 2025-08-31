@@ -13,7 +13,7 @@ import com.vaadin.flow.router.Route;
 @Route("ListadeVideos")
 public class ListadeVideos extends VerticalLayout {
     public Vector<ListadeVideos_item> _item = new Vector<ListadeVideos_item>();
- 
+
     /* Tiene como parámetro un conjunto de videos */
 
     public ListadeVideos(Set<Video> videos) {

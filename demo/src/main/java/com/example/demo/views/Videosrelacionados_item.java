@@ -6,8 +6,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import com.example.demo.domain.Video;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.avatar.Avatar;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -23,7 +21,6 @@ public class Videosrelacionados_item extends VerticalLayout {
 
     public Videosrelacionados_item(Video video) {
 
-        
         this.video = video;
 
         String tituloVideo = video.getTitulo();
@@ -68,27 +65,26 @@ public class Videosrelacionados_item extends VerticalLayout {
 
         add(thumbnail);
 
-         
     }
 
     public void VerVideo() {
-       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth != null && auth.isAuthenticated()) {
-           
+
             boolean esAdmin = auth.getAuthorities().stream()
                     .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
             boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-        
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
-        if (esAdmin) {
-            UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+            if (esAdmin) {
+                UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
+            } else if (esYoutuber) {
+                UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+            }
         } else {
             UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
         }
+
     }
-}
 }

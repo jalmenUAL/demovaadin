@@ -126,7 +126,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long> {
 
     public void VerComentarios() {
         comentarios.removeAll();
-        _verComentarios = new VerComentarios(video.getTiene_comentarios(), video.getId());
+        _verComentarios = new VerComentarios(video.getTiene_comentarios());
         comentarios.add(_verComentarios);
 
     }
@@ -134,21 +134,26 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long> {
     public void PerfilAjeno() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        	if (auth != null && auth.isAuthenticated()) {
+        if (auth != null && auth.isAuthenticated()) {
+            com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
+            boolean esAdmin = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
+            boolean esYoutuber = auth.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
-        boolean esAdmin = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRADOR"));
-        boolean esYoutuber = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
-
-        if (esAdmin) {
-            UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, video.getEs_de().getLogin());
-        } else if (esYoutuber) {
-            UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, video.getEs_de().getLogin());
+            if (esAdmin) {
+                UI.getCurrent().navigate(PerfilAjenodeAdministrador.class, video.getEs_de().getLogin());
+            } else if (esYoutuber) {
+                if (video.getEs_de().getLogin().equals(usuario.getLogin())) {
+                    UI.getCurrent().navigate(PerfilPropio.class, video.getEs_de().getLogin());
+                } else {
+                    UI.getCurrent().navigate(PerfilAjenodeYoutuber.class, video.getEs_de().getLogin());
+                }
+            }
         } else {
             UI.getCurrent().navigate(PerfilAjeno.class, video.getEs_de().getLogin());
+
         }
-    }
 
     }
 

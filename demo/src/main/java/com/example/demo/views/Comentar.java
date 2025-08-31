@@ -20,36 +20,42 @@ public class Comentar extends VerticalLayout implements HasUrlParameter<String> 
     public iYoutuber _iYoutuber;
     public int id;
 
+    /*
+     * Accede a la base de datos con iYoutuber. Tiene como parámetro el id del video
+     */
+
     public Comentar(iYoutuber iYoutuber) {
         this._iYoutuber = iYoutuber;
         setWidthFull();
         setPadding(true);
         setSpacing(true);
-        setAlignItems(Alignment.STRETCH);  // Para que el TextField y botón ocupen todo el ancho
+        setAlignItems(Alignment.STRETCH); // Para que el TextField y botón ocupen todo el ancho
 
-       campoComentario = new TextField("Escribe un comentario");
+        campoComentario = new TextField("Escribe un comentario");
         campoComentario.setWidthFull();
 
         Button btnPublicar = new Button("Publicar Comentario");
-        
+
         btnPublicar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         btnPublicar.setWidthFull();
 
         btnPublicar.addClickListener(e -> {
             publicar_comentario();
-            campoComentario.clear();  // Limpia el campo tras publicar
+            campoComentario.clear(); // Limpia el campo tras publicar
         });
 
         add(campoComentario, btnPublicar);
     }
 
+    @Override
+    public void setParameter(BeforeEvent event, String parameter) {
+        id = Integer.valueOf(parameter);
+    }
+
     private void publicar_comentario() {
-        _iYoutuber.publicarComentario(campoComentario.getValue(),id);
+        _iYoutuber.publicarComentario(campoComentario.getValue(), id);
+        // Vuelve a la página anterior
         UI.getCurrent().getPage().getHistory().back();
     }
 
-    @Override
-    public void setParameter(BeforeEvent event, String parameter) {
-         id = Integer.valueOf(parameter);
-    }
 }

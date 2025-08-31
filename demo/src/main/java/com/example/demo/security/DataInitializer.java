@@ -18,7 +18,8 @@ public class DataInitializer implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
     private final RepositorioYoutuber youtuberRepo;
 
-    public DataInitializer(RepositorioAdministrador adminRepo, RepositorioYoutuber youtuberRepo, PasswordEncoder passwordEncoder) {
+    public DataInitializer(RepositorioAdministrador adminRepo, RepositorioYoutuber youtuberRepo,
+            PasswordEncoder passwordEncoder) {
         this.adminRepo = adminRepo;
         this.passwordEncoder = passwordEncoder;
         this.youtuberRepo = youtuberRepo;
@@ -27,16 +28,15 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Verificar si existe un admin
-        if (adminRepo.findByLogin("admin").isEmpty()) {
+        if (adminRepo.findById("admin").isEmpty()) {
             Administrador admin = new Administrador();
             admin.setLogin("admin");
             admin.setPassword(passwordEncoder.encode("admin123")); // siempre cifrar
-            
+
             adminRepo.save(admin);
 
             System.out.println("✅ Usuario administrador creado: admin / admin123");
         }
-
 
         if (youtuberRepo.findById("youtuber").isEmpty()) {
             Youtuber youtuber = new Youtuber();
@@ -49,4 +49,3 @@ public class DataInitializer implements CommandLineRunner {
         }
     }
 }
-

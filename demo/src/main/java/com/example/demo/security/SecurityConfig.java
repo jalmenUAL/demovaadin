@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
+
 @Configuration
 public class SecurityConfig extends VaadinWebSecurity {
 
@@ -29,9 +30,9 @@ public class SecurityConfig extends VaadinWebSecurity {
 
     // AuthenticationManager basado en tu CustomAuthProvider
     @Bean
-public AuthenticationManager authenticationManager(CustomAuthProvider customAuthProvider) {
-    return new ProviderManager(customAuthProvider);
-}
+    public AuthenticationManager authenticationManager(CustomAuthProvider customAuthProvider) {
+        return new ProviderManager(customAuthProvider);
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

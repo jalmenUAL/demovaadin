@@ -1,14 +1,12 @@
 package com.example.demo;
 
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.domain.Administrador;
 import com.example.demo.domain.RepositorioAdministrador;
 import com.example.demo.domain.RepositorioYoutuber;
 import com.example.demo.domain.Youtuber;
-
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 public class DataInitializer implements CommandLineRunner {
@@ -26,7 +24,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Verificar si existe un admin
-        if (adminRepo.findByLogin("admin").isEmpty()) {
+        if (adminRepo.findById("admin").isEmpty()) {
             Administrador admin = new Administrador();
             admin.setLogin("admin");
             admin.setPassword(passwordEncoder.encode("admin123")); // siempre cifrar

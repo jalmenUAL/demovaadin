@@ -1,6 +1,5 @@
 package com.example.demo.views;
 
-import com.example.demo.domain.Youtuber;
 import com.example.demo.service.iAdministrador;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -10,7 +9,7 @@ import com.vaadin.flow.router.Route;
 @Route("PerfilAjenodeAdministrador")
 public class PerfilAjenodeAdministrador extends PerfilAjeno {
     private Button btnBloquear;
-    
+
     iAdministrador iAdministrador;
 
     /* Accede a la base de datos a través de iAdministrador */
@@ -26,7 +25,10 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
 
     }
 
-    /* Con el parámetro de la url accede al usuario y comprueba si está boqueado o no */
+    /*
+     * Con el parámetro de la url accede al usuario y comprueba si está boqueado o
+     * no
+     */
 
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
@@ -39,9 +41,6 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
         }
     }
 
-    
-
-    
     public void Bloquear() {
         if (btnBloquear.getText().equals("Bloquear")) {
             btnBloquear.setText("Quitar Bloqueo");

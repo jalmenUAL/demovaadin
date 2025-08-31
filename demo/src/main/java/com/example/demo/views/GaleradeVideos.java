@@ -17,20 +17,20 @@ public class GaleradeVideos extends VerticalLayout {
     HorizontalLayout carrusel = new HorizontalLayout();
     public H2 tituloGaleria = new H2("Galería de Videos");
 
+    /* Tiene como parámetro una lista de videos */
 
-    
-   public GaleradeVideos(List<Video> videos) {
+    public GaleradeVideos(List<Video> videos) {
         // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);
-        setJustifyContentMode(JustifyContentMode.START);  // si quieres que el carrusel esté más arriba
+        setJustifyContentMode(JustifyContentMode.START); // si quieres que el carrusel esté más arriba
 
         // Título estilizado
-       
+
         tituloGaleria.getStyle()
-            .set("color", "#2c3e50")
-            .set("margin-top", "20px")
-            .set("margin-bottom", "10px");
+                .set("color", "#2c3e50")
+                .set("margin-top", "20px")
+                .set("margin-bottom", "10px");
 
         // Estilo del carrusel
         carrusel.setSpacing(true);
@@ -41,6 +41,5 @@ public class GaleradeVideos extends VerticalLayout {
         // Agregar al layout principal
         add(tituloGaleria, carrusel);
 
-       
     }
 }
