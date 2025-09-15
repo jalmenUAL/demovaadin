@@ -145,10 +145,7 @@ mvn test
 
 ---
 
-```plantuml
-@startuml
-Alice -> Bob: Hola
-@enduml
+
 
 ## 📄 Licencia
 
