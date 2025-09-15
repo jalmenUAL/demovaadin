@@ -145,6 +145,11 @@ mvn test
 
 ---
 
+```plantuml
+@startuml
+Alice -> Bob: Hola
+@enduml
+
 ## 📄 Licencia
 
 Este proyecto se distribuye bajo la licencia **MIT**.  
