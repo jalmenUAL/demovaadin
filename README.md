@@ -1,22 +1,29 @@
-@startuml
-object Usuario
-object LoginOverlay
-object LoginUI
-object AuthenticationManager
-object SecurityContextHolder
-object HttpSessionSecurityContextRepository
-object UI
+```mermaid
+sequenceDiagram
+    participant Usuario
+    participant LoginOverlay
+    participant LoginUI
+    participant AuthMgr as AuthenticationManager
+    participant SecCtx as SecurityContextHolder
+    participant SessRepo as HttpSessionSecurityContextRepository
+    participant UI
 
-Usuario -> LoginOverlay : 1. ingresar credenciales
-LoginOverlay -> LoginUI : 2. onLogin(event)
-LoginUI -> AuthenticationManager : 3. authenticate(username, password)
-AuthenticationManager --> LoginUI : 4. Authentication
+    Usuario->>LoginOverlay: ingresar credenciales
+    LoginOverlay->>LoginUI: onLogin(event)
+    LoginUI->>AuthMgr: authenticate(username, password)
+    AuthMgr-->>LoginUI: Authentication
 
-LoginUI -> SecurityContextHolder : 5. createEmptyContext()\n6. setAuthentication(auth)
-LoginUI -> HttpSessionSecurityContextRepository : 7. saveContext(context, req, res)
+    LoginUI->>SecCtx: createEmptyContext()\nsetAuthentication(auth)
+    LoginUI->>SessRepo: saveContext(context, req, res)
 
-LoginUI -> UI : 8. navigate(Administrador/Youtuber)
+    alt Rol Administrador
+        LoginUI->>UI: navigate(Administrador)
+    else Otro rol
+        LoginUI->>UI: navigate(Youtuber)
+    end
 
-LoginUI -> LoginOverlay : 9. setError(true)\n[si falla]
-LoginUI -> LoginOverlay : 10. show("Usuario o contraseña incorrectos")
-@enduml
+    alt Error de autenticación
+        LoginUI-->>LoginOverlay: setError(true)
+        LoginUI-->>LoginOverlay: show("Usuario o contraseña incorrectos")
+    end
+```
