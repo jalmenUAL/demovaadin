@@ -3,11 +3,6 @@
 Una aplicación web inspirada en **YouTube**, desarrollada como proyecto académico/personal, que permite a los usuarios registrarse, subir vídeos, interactuar con otros y gestionar su propia comunidad.
 
 ---
-
-[![Diagrama UML](https://raw.githubusercontent.com/jalmenUAL/demovaadin/master/uml/com.example.demo.views.jpg)](https://raw.githubusercontent.com/jalmenUAL/demovaadin/master/uml/com.example.demo.views.jpg)
- 
-
-
 ## 🚀 Funcionalidades
 
 ### 👤 Usuarios
