@@ -8,37 +8,23 @@
 ## 🎭 Casos de Uso
 
 ```mermaid
-%% Diagrama de casos de uso en Mermaid
-usecaseDiagram
-    actor "Usuario no registrado" as U0
-    actor "Usuario registrado" as U
-    actor "Administrador" as A
+flowchart TB
+    U0(["👤 Usuario no registrado"]) --> |"Explora catálogo"| Cat[(Catálogo)]
+    U0 --> |"Buscar artículos"| Cat
 
-    U0 --> (Explorar catálogo)
-    U0 --> (Buscar artículos)
+    U(["👥 Usuario registrado"]) --> |"Publicar artículo"| Cat
+    U --> |"Editar/Borrar artículo"| Cat
+    U --> |"Marcar favorito"| Cat
+    U --> |"Comprar / Hacer oferta"| Cat
+    U --> |"Confirmar recepción"| Pago[(Pagos)]
+    U --> |"Escribir reseña"| Perfil[(Perfil vendedor)]
+    U --> |"Denunciar compra fallida"| Admin[(Administradores)]
 
-    U --> (Registrarse)
-    U --> (Publicar artículo)
-    U --> (Editar artículo)
-    U --> (Borrar artículo)
-    U --> (Marcar favorito)
-    U --> (Hacer oferta)
-    U --> (Comprar artículo)
-    U --> (Anotar envío)
-    U --> (Confirmar recepción)
-    U --> (Escribir reseña)
-    U --> (Denunciar compra fallida)
-    U --> (Ver perfil propio)
-    U --> (Ver perfil de otro usuario)
-
-    A --> (Crear categoría)
-    A --> (Borrar categoría)
-    A --> (Gestionar denuncias)
-    A --> (Bloquear usuarios)
-    A --> (Borrar artículos)
-    A --> (Borrar reseñas inadecuadas)
-    A --> (Acceder a información de usuarios)
-```
+    A(["🛡️ Administrador"]) --> |"Gestionar denuncias"| Admin
+    A --> |"Bloquear usuarios"| Admin
+    A --> |"Borrar artículos"| Cat
+    A --> |"Crear/Borrar categorías"| Cat
+    A --> |"Borrar reseñas inadecuadas"| Perfil
 
 
 ## 1. Catálogo y Búsquedas
