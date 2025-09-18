@@ -63,26 +63,7 @@ Este proyecto utiliza el siguiente stack tecnológico:
 - **Base de datos**: MySQL o PostgreSQL.  
 - **Autenticación**: Spring Security (con sesiones o JWT).  
 
----
 
-## 📌 Próximos pasos
-- [ ] Configurar proyecto con Spring Boot + Vaadin.  
-- [ ] Diseñar entidades JPA (Usuarios, Vídeos, Comentarios, Likes, Seguimientos).  
-- [ ] Implementar repositorios JPA.  
-- [ ] Implementar lógica de negocio en servicios.  
-- [ ] Crear vistas con Vaadin (registro, login, perfil, inicio, etc.).  
-- [ ] Implementar funcionalidades sociales (likes, follows, comentarios).  
-- [ ] Desarrollar panel de administración.  
-
----
-
-## 🤝 Contribución
-Las contribuciones son bienvenidas. Para colaborar:
-1. Haz un **fork** del repositorio.  
-2. Crea una rama con tu feature: `git checkout -b feature/nueva-funcionalidad`.  
-3. Haz commit de tus cambios: `git commit -m 'Agrego nueva funcionalidad'`.  
-4. Sube la rama: `git push origin feature/nueva-funcionalidad`.  
-5. Crea un **Pull Request**.  
 
 ---
 
