@@ -7,32 +7,6 @@
 
 ## 🎭 Casos de Uso
 
-```plantuml
-@startuml
-actor "Usuario registrado" as U
-actor "Usuario no registrado" as U0
-actor "Administrador" as A
-
-U0 --> (Explorar catálogo)
-U0 --> (Buscar artículos)
-
-U --> (Publicar artículo)
-U --> (Editar/Borrar artículo)
-U --> (Marcar favorito)
-U --> (Comprar / Hacer oferta)
-U --> (Confirmar recepción)
-U --> (Escribir reseña)
-U --> (Denunciar compra fallida)
-
-A --> (Gestionar denuncias)
-A --> (Bloquear usuarios)
-A --> (Borrar artículos)
-A --> (Crear/Borrar categorías)
-A --> (Borrar reseñas inadecuadas)
-@enduml
-
- 
-
 ## 1. Catálogo y Búsquedas
 
 * **RF-1**: El catálogo estará organizado por categorías.
