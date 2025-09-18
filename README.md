@@ -18,22 +18,6 @@ Permite a cualquier persona explorar un catálogo de productos, vender, comprar,
 
 ---
 
-## 🏗️ Arquitectura (visión C4 - nivel de contexto)
-
-```mermaid
-C4Context
-    title Sistema de compra-venta
-    Person(usuario, "Usuario", "Comprador/Vendedor")
-    Person(admin, "Administrador", "Gestiona la aplicación")
-    System(app, "Aplicación Compra-Venta", "Web para explorar, vender y comprar artículos")
-    System_Ext(pasarela, "Pasarela de Pago", "Gestión de cobros y pagos")
-    usuario -> app : Explora, compra, vende
-    admin -> app : Gestiona denuncias, categorías, usuarios
-    app -> pasarela : Retiene y libera dinero
-```
-
----
-
 ## 📂 Estructura del repositorio
 
 ```plaintext
