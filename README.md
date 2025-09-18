@@ -40,31 +40,38 @@ Una aplicación web inspirada en **YouTube**, desarrollada como proyecto académ
 ## 🗂️ Estructura general del proyecto
 ```bash
 📂 youtube-like-app
- ├── 📂 src/              # Código fuente de la aplicación
- ├── 📂 public/           # Recursos estáticos
- ├── 📂 docs/             # Documentación
- ├── README.md            # Este archivo
- └── package.json         # Configuración del proyecto (ejemplo si es JS/Node)
+ ├── 📂 src/main/java/       # Código fuente Java (Spring Boot + Vaadin)
+ │    ├── 📂 domain/         # Entidades JPA
+ │    ├── 📂 repository/     # Repositorios JPA
+ │    ├── 📂 service/        # Lógica de negocio
+ │    ├── 📂 ui/             # Vistas Vaadin
+ │    └── Application.java   # Clase principal Spring Boot
+ ├── 📂 src/main/resources/  # Configuración (application.properties, plantillas, etc.)
+ ├── 📂 src/test/java/       # Pruebas unitarias/integración
+ ├── 📂 docs/                # Documentación
+ ├── README.md               # Este archivo
+ └── pom.xml                 # Configuración del proyecto Maven
 ```
 
 ---
 
-## ⚙️ Tecnologías sugeridas
-Dependiendo del stack elegido, el proyecto podría desarrollarse con tecnologías como:
-- **Frontend**: React, Vue o Angular.  
-- **Backend**: Node.js (Express), Django o Spring Boot.  
-- **Base de datos**: MySQL, PostgreSQL o MongoDB.  
-- **Autenticación**: JWT, OAuth2 o sistema propio.  
-- **Gestión de archivos**: almacenamiento local o servicios en la nube (ej. AWS S3).  
+## ⚙️ Tecnologías utilizadas
+Este proyecto utiliza el siguiente stack tecnológico:
+- **Frontend**: [Vaadin](https://vaadin.com/) (UI en Java).  
+- **Backend**: [Spring Boot](https://spring.io/projects/spring-boot).  
+- **Persistencia**: [JPA/Hibernate](https://hibernate.org/) como ORM.  
+- **Base de datos**: MySQL o PostgreSQL.  
+- **Autenticación**: Spring Security (con sesiones o JWT).  
 
 ---
 
 ## 📌 Próximos pasos
-- [ ] Definir stack tecnológico.  
-- [ ] Diseñar la base de datos.  
-- [ ] Implementar autenticación de usuarios.  
-- [ ] Implementar CRUD de vídeos.  
-- [ ] Añadir funcionalidades sociales (likes, follows, comentarios).  
+- [ ] Configurar proyecto con Spring Boot + Vaadin.  
+- [ ] Diseñar entidades JPA (Usuarios, Vídeos, Comentarios, Likes, Seguimientos).  
+- [ ] Implementar repositorios JPA.  
+- [ ] Implementar lógica de negocio en servicios.  
+- [ ] Crear vistas con Vaadin (registro, login, perfil, inicio, etc.).  
+- [ ] Implementar funcionalidades sociales (likes, follows, comentarios).  
 - [ ] Desarrollar panel de administración.  
 
 ---
