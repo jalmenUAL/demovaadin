@@ -1,89 +1,83 @@
-# 🛍️ Proyecto Compra-Venta Online (tipo Wallapop/Vinted)
+# YouTube-like App 🎥
 
-Aplicación web para compra-venta de artículos de segunda mano, inspirada en **Wallapop** y **Vinted**.  
-Permite a cualquier persona explorar un catálogo de productos, vender, comprar, negociar precios y dejar reseñas, todo dentro de un entorno seguro y administrado.
-
----
-
-## 🚀 Características principales
-- Catálogo organizado por categorías.
-- Búsqueda de artículos por nombre o sub-cadena.
-- Usuarios registrados pueden ser **compradores** y **vendedores** a la vez.
-- Publicación de artículos con fotos, descripción, precio y categorías.
-- Sistema de favoritos y ofertas.
-- Pagos retenidos hasta confirmación de recepción del artículo.
-- Reseñas con valoración numérica y texto.
-- Denuncias gestionadas por administradores.
-- Perfiles de usuario con historial de ventas/compras y reputación.
+Una aplicación web inspirada en **YouTube**, desarrollada como proyecto académico/personal, que permite a los usuarios registrarse, subir vídeos, interactuar con otros y gestionar su propia comunidad.
 
 ---
 
-## 📂 Estructura del repositorio
+## 🚀 Funcionalidades
 
-```plaintext
-.
-├── backend/         # Lógica de negocio y API REST
-├── frontend/        # Aplicación web (UI)
-├── docs/            # Documentación (Markdown, UML, diagramas)
-├── tests/           # Pruebas unitarias y de integración
-└── README.md        # Este archivo
-```
+### 👤 Usuarios
+- Registro de usuarios con **apodo, correo electrónico y contraseña**.  
+- Perfil personal con:
+  - Lista de **vídeos propios**.
+  - Lista de **vídeos con "me gusta"**.
+  - Lista de **usuarios seguidos**.  
+- Posibilidad de **seguir/dejar de seguir** a otros usuarios.  
+- Opción de **denunciar usuarios**.
+
+### 🎬 Vídeos
+- Subida de vídeos con **título**.  
+- Cada vídeo muestra:
+  - Información detallada (autor, título, comentarios, likes).  
+  - Lista de comentarios asociados.  
+- Acciones disponibles:
+  - **Dar y quitar "me gusta"**.  
+  - **Comentar** vídeos propios o de otros usuarios.  
+
+### 🏠 Página de inicio
+- **Usuarios registrados**: últimos vídeos subidos por ellos y por los usuarios que siguen.  
+- **Usuarios no registrados**: últimos vídeos públicos.  
+- **Administradores**: listado completo de todos los vídeos.
+
+### 🛡️ Administración
+- El administrador puede:
+  - **Eliminar vídeos**.  
+  - **Eliminar comentarios**.  
+  - **Bloquear usuarios denunciados**.  
 
 ---
 
-## ⚙️ Requisitos
-- **Java 21** + **Spring Boot** (backend)
-- **Vaadin / React** (frontend)
-- **PostgreSQL** (base de datos)
-- **Docker** (para despliegue opcional)
-
----
-
-## ▶️ Ejecución local
-
+## 🗂️ Estructura general del proyecto
 ```bash
-# Clonar el repositorio
-git clone https://github.com/tu-org/compra-venta.git
-cd compra-venta
-
-# Levantar con Docker
-docker-compose up
+📂 youtube-like-app
+ ├── 📂 src/              # Código fuente de la aplicación
+ ├── 📂 public/           # Recursos estáticos
+ ├── 📂 docs/             # Documentación
+ ├── README.md            # Este archivo
+ └── package.json         # Configuración del proyecto (ejemplo si es JS/Node)
 ```
 
-La aplicación quedará disponible en `http://localhost:8080`.
+---
+
+## ⚙️ Tecnologías sugeridas
+Dependiendo del stack elegido, el proyecto podría desarrollarse con tecnologías como:
+- **Frontend**: React, Vue o Angular.  
+- **Backend**: Node.js (Express), Django o Spring Boot.  
+- **Base de datos**: MySQL, PostgreSQL o MongoDB.  
+- **Autenticación**: JWT, OAuth2 o sistema propio.  
+- **Gestión de archivos**: almacenamiento local o servicios en la nube (ej. AWS S3).  
 
 ---
 
-## ✅ Requisitos Funcionales principales
-
-- [x] Explorar catálogo sin registro
-- [x] Registro de usuarios con correo, nick, avatar, cuenta bancaria y tarjeta
-- [x] Publicación y edición de artículos
-- [x] Favoritos y ofertas
-- [x] Proceso de compra con retención de dinero
-- [x] Reseñas tras confirmar recepción
-- [x] Denuncias y gestión administrativa
+## 📌 Próximos pasos
+- [ ] Definir stack tecnológico.  
+- [ ] Diseñar la base de datos.  
+- [ ] Implementar autenticación de usuarios.  
+- [ ] Implementar CRUD de vídeos.  
+- [ ] Añadir funcionalidades sociales (likes, follows, comentarios).  
+- [ ] Desarrollar panel de administración.  
 
 ---
 
-## 🧩 Próximos pasos
-- [ ] Implementar recomendaciones personalizadas según favoritos
-- [ ] Notificaciones en tiempo real (WebSockets)
-- [ ] Integración con sistemas externos de transporte
-- [ ] Tests de carga y seguridad
+## 🤝 Contribución
+Las contribuciones son bienvenidas. Para colaborar:
+1. Haz un **fork** del repositorio.  
+2. Crea una rama con tu feature: `git checkout -b feature/nueva-funcionalidad`.  
+3. Haz commit de tus cambios: `git commit -m 'Agrego nueva funcionalidad'`.  
+4. Sube la rama: `git push origin feature/nueva-funcionalidad`.  
+5. Crea un **Pull Request**.  
 
 ---
 
-## 👥 Roles en el sistema
-- **Usuario no registrado** → Explora el catálogo.
-- **Usuario registrado** → Compra, vende, oferta, reseña.
-- **Administrador** → Gestiona categorías, denuncias, usuarios y reseñas.
-
----
-
-## 📜 Licencia
-Este proyecto se distribuye bajo la licencia **MIT**.  
-Puedes usarlo, modificarlo y distribuirlo libremente respetando los términos de la licencia.
-
-Este proyecto se distribuye bajo la licencia **MIT**.  
-Consulta el archivo [LICENSE](LICENSE) para más información.
+## 📄 Licencia
+Este proyecto está bajo la licencia **MIT**.  
