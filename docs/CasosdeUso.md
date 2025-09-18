@@ -7,25 +7,31 @@
 
 ## 🎭 Casos de Uso
 
-```mermaid
-flowchart TB
-    U0(["👤 Usuario no registrado"]) --> |"Explora catálogo"| Cat[(Catálogo)]
-    U0 --> |"Buscar artículos"| Cat
+```plantuml
+@startuml
+actor "Usuario registrado" as U
+actor "Usuario no registrado" as U0
+actor "Administrador" as A
 
-    U(["👥 Usuario registrado"]) --> |"Publicar artículo"| Cat
-    U --> |"Editar/Borrar artículo"| Cat
-    U --> |"Marcar favorito"| Cat
-    U --> |"Comprar / Hacer oferta"| Cat
-    U --> |"Confirmar recepción"| Pago[(Pagos)]
-    U --> |"Escribir reseña"| Perfil[(Perfil vendedor)]
-    U --> |"Denunciar compra fallida"| Admin[(Administradores)]
+U0 --> (Explorar catálogo)
+U0 --> (Buscar artículos)
 
-    A(["🛡️ Administrador"]) --> |"Gestionar denuncias"| Admin
-    A --> |"Bloquear usuarios"| Admin
-    A --> |"Borrar artículos"| Cat
-    A --> |"Crear/Borrar categorías"| Cat
-    A --> |"Borrar reseñas inadecuadas"| Perfil
+U --> (Publicar artículo)
+U --> (Editar/Borrar artículo)
+U --> (Marcar favorito)
+U --> (Comprar / Hacer oferta)
+U --> (Confirmar recepción)
+U --> (Escribir reseña)
+U --> (Denunciar compra fallida)
 
+A --> (Gestionar denuncias)
+A --> (Bloquear usuarios)
+A --> (Borrar artículos)
+A --> (Crear/Borrar categorías)
+A --> (Borrar reseñas inadecuadas)
+@enduml
+
+ 
 
 ## 1. Catálogo y Búsquedas
 
