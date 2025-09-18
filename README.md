@@ -1,153 +1,105 @@
-# 🐦 Proyecto X (Twitter en castellano)
+# 🛍️ Proyecto Compra-Venta Online (tipo Wallapop/Vinted)
 
-[![Java](https://img.shields.io/badge/Java-17-blue?logo=openjdk)](https://adoptium.net/)
-[![Vaadin](https://img.shields.io/badge/Vaadin-Flow%2024-00b4f0?logo=vaadin)](https://vaadin.com/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3-green?logo=springboot)](https://spring.io/projects/spring-boot)
-[![Database](https://img.shields.io/badge/PostgreSQL-15-blue?logo=postgresql)](https://www.postgresql.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+Aplicación web para compra-venta de artículos de segunda mano, inspirada en **Wallapop** y **Vinted**.  
+Permite a cualquier persona explorar un catálogo de productos, vender, comprar, negociar precios y dejar reseñas, todo dentro de un entorno seguro y administrado.
 
 ---
 
-## 📌 Descripción
-
-Aplicación de escritorio desarrollada con **Vaadin Flow** que replica las funcionalidades principales de **X (antes Twitter)**, íntegramente en **castellano**.  
-Se priorizó la funcionalidad esencial sobre las características avanzadas, para cumplir los plazos del proyecto.  
-
-✅ Tweets con texto, imágenes y vídeos  
-✅ Likes, comentarios y retweets  
-✅ Hashtags y menciones  
-✅ Perfiles con muro personal  
-✅ Seguimiento entre usuarios y bloqueos  
-✅ Notificaciones  
-✅ Panel de administración  
+## 🚀 Características principales
+- Catálogo organizado por categorías.
+- Búsqueda de artículos por nombre o sub-cadena.
+- Usuarios registrados pueden ser **compradores** y **vendedores** a la vez.
+- Publicación de artículos con fotos, descripción, precio y categorías.
+- Sistema de favoritos y ofertas.
+- Pagos retenidos hasta confirmación de recepción del artículo.
+- Reseñas con valoración numérica y texto.
+- Denuncias gestionadas por administradores.
+- Perfiles de usuario con historial de ventas/compras y reputación.
 
 ---
 
-## 🛠️ Tecnologías utilizadas
+## 🏗️ Arquitectura (visión C4 - nivel de contexto)
 
-- ☕ **Java 17+**
-- ⚡ **Vaadin Flow 24+**
-- 🍃 **Spring Boot 3**
-- 🗄️ **PostgreSQL** (puede usarse MySQL)
-- 🐳 **Docker** (opcional, para la BD)
-- 📦 **Maven**
-- 🧪 **JUnit 5**
-
----
-
-## 📂 Estructura del proyecto
-
-```
-src/main/java/com/miapp/
- ├── views/          # Vistas Vaadin (Login, Registro, Perfil, Muro, Admin...)
- ├── models/         # Entidades (Usuario, Tweet, Comentario, Hashtag...)
- ├── services/       # Lógica de negocio (TweetService, UserService...)
- ├── repositories/   # Interfaces JPA
- └── security/       # Configuración de login y OAuth
+```mermaid
+C4Context
+    title Sistema de compra-venta
+    Person(usuario, "Usuario", "Comprador/Vendedor")
+    Person(admin, "Administrador", "Gestiona la aplicación")
+    System(app, "Aplicación Compra-Venta", "Web para explorar, vender y comprar artículos")
+    System_Ext(pasarela, "Pasarela de Pago", "Gestión de cobros y pagos")
+    usuario -> app : Explora, compra, vende
+    admin -> app : Gestiona denuncias, categorías, usuarios
+    app -> pasarela : Retiene y libera dinero
 ```
 
 ---
 
-## ⚙️ Instalación y ejecución
+## 📂 Estructura del repositorio
 
-1. **Clonar repositorio**
-   ```bash
-   git clone https://github.com/usuario/proyecto-x.git
-   cd proyecto-x
-   ```
-
-2. **Configurar base de datos** en `application.properties`:
-   ```properties
-   spring.datasource.url=jdbc:postgresql://localhost:5432/proyecto_x
-   spring.datasource.username=postgres
-   spring.datasource.password=tu_password
-   ```
-
-3. **Levantar PostgreSQL con Docker** (opcional):
-   ```bash
-   docker run --name proyecto-x-db -e POSTGRES_PASSWORD=tu_password -p 5432:5432 -d postgres
-   ```
-
-4. **Compilar y ejecutar**
-   ```bash
-   mvn clean install
-   mvn spring-boot:run
-   ```
-
-5. **Acceder en navegador**
-   ```
-   http://localhost:8080/login
-   ```
+```plaintext
+.
+├── backend/         # Lógica de negocio y API REST
+├── frontend/        # Aplicación web (UI)
+├── docs/            # Documentación (Markdown, UML, diagramas)
+├── tests/           # Pruebas unitarias y de integración
+└── README.md        # Este archivo
+```
 
 ---
 
-## 👤 Roles y funcionalidades
-
-### 🧑‍💻 Cibernauta no registrado
-- Ver perfiles y tweets públicos
-- No puede interactuar (likes, comentarios, retweets, seguir)
-
-### 👥 Usuario registrado
-- Crear tweets, dar like, comentar, retweetear
-- Seguir/bloquear usuarios
-- Recibir notificaciones
-- Editar perfil
-- Borrar cuenta
-
-### 🛡️ Administrador
-- Ver todos los tweets en un feed global
-- Eliminar tweets o comentarios
-- Banear usuarios (soft-delete)
-- No reciben notificaciones ni tienen perfiles privados
+## ⚙️ Requisitos
+- **Java 21** + **Spring Boot** (backend)
+- **Vaadin / React** (frontend)
+- **PostgreSQL** (base de datos)
+- **Docker** (para despliegue opcional)
 
 ---
 
-## 🗄️ Modelo de datos
+## ▶️ Ejecución local
 
-📊 El esquema de la base de datos se encuentra en [`/docs/diagrama-bd.puml`](docs/diagrama-bd.puml).  
-Incluye entidades como `User`, `Tweet`, `Comment`, `Media`, `Hashtag`, `Follow`, `Block`, `Like`, `Notification`, `AdminLog`.  
-
----
-
-## 🔒 Seguridad
-
-- Validación de contraseñas: **8-14 caracteres, 1 mayúscula, 1 carácter especial**  
-- Login tradicional o vía **Google OAuth**  
-- Usuarios eliminados/baneados **no pueden volver a registrarse** con el mismo correo  
-- **Perfiles bloqueados** no permiten interacción  
-
----
-
-## 📸 Capturas de pantalla
-
-*(Incluir imágenes de la UI: login, muro, perfil, panel admin…)*
-
----
-
-## ✅ Tests
-
-Se incluyen pruebas unitarias y de integración para:  
-- Servicios de usuarios y tweets  
-- Validación de login/registro  
-- Restricciones de negocio (likes, bloqueos, follows)  
-
-Ejecutar tests:  
 ```bash
-mvn test
+# Clonar el repositorio
+git clone https://github.com/tu-org/compra-venta.git
+cd compra-venta
+
+# Levantar con Docker
+docker-compose up
 ```
 
----
-
-## 👥 Equipo
-
-- ✨ Nombre Apellido – [GitHub](#) – [LinkedIn](#)  
-- ✨ Nombre Apellido – [GitHub](#) – [LinkedIn](#)  
+La aplicación quedará disponible en `http://localhost:8080`.
 
 ---
 
+## ✅ Requisitos Funcionales principales
 
+- [x] Explorar catálogo sin registro
+- [x] Registro de usuarios con correo, nick, avatar, cuenta bancaria y tarjeta
+- [x] Publicación y edición de artículos
+- [x] Favoritos y ofertas
+- [x] Proceso de compra con retención de dinero
+- [x] Reseñas tras confirmar recepción
+- [x] Denuncias y gestión administrativa
 
-## 📄 Licencia
+---
+
+## 🧩 Próximos pasos
+- [ ] Implementar recomendaciones personalizadas según favoritos
+- [ ] Notificaciones en tiempo real (WebSockets)
+- [ ] Integración con sistemas externos de transporte
+- [ ] Tests de carga y seguridad
+
+---
+
+## 👥 Roles en el sistema
+- **Usuario no registrado** → Explora el catálogo.
+- **Usuario registrado** → Compra, vende, oferta, reseña.
+- **Administrador** → Gestiona categorías, denuncias, usuarios y reseñas.
+
+---
+
+## 📜 Licencia
+Este proyecto se distribuye bajo la licencia **MIT**.  
+Puedes usarlo, modificarlo y distribuirlo libremente respetando los términos de la licencia.
 
 Este proyecto se distribuye bajo la licencia **MIT**.  
 Consulta el archivo [LICENSE](LICENSE) para más información.
