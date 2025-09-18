@@ -38,7 +38,7 @@ usecaseDiagram
     A --> (Borrar artículos)
     A --> (Borrar reseñas inadecuadas)
     A --> (Acceder a información de usuarios)
-
+```
 
 ## 1. Catálogo y Búsquedas
 
