@@ -4,7 +4,7 @@ Una aplicación web inspirada en **YouTube**, desarrollada como proyecto académ
 
 ---
 
-![Diagrama UML](https://raw.githubusercontent.com/jalmenUAL/demovaadin/master/uml/com.example.demo.views.jpg)
+[![Diagrama UML](https://raw.githubusercontent.com/jalmenUAL/demovaadin/master/uml/com.example.demo.views.jpg)](https://raw.githubusercontent.com/jalmenUAL/demovaadin/master/uml/com.example.demo.views.jpg)
  
 
 
