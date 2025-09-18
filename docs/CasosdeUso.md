@@ -5,6 +5,41 @@
 
 ---
 
+## 🎭 Casos de Uso
+
+```mermaid
+%% Diagrama de casos de uso en Mermaid
+usecaseDiagram
+    actor "Usuario no registrado" as U0
+    actor "Usuario registrado" as U
+    actor "Administrador" as A
+
+    U0 --> (Explorar catálogo)
+    U0 --> (Buscar artículos)
+
+    U --> (Registrarse)
+    U --> (Publicar artículo)
+    U --> (Editar artículo)
+    U --> (Borrar artículo)
+    U --> (Marcar favorito)
+    U --> (Hacer oferta)
+    U --> (Comprar artículo)
+    U --> (Anotar envío)
+    U --> (Confirmar recepción)
+    U --> (Escribir reseña)
+    U --> (Denunciar compra fallida)
+    U --> (Ver perfil propio)
+    U --> (Ver perfil de otro usuario)
+
+    A --> (Crear categoría)
+    A --> (Borrar categoría)
+    A --> (Gestionar denuncias)
+    A --> (Bloquear usuarios)
+    A --> (Borrar artículos)
+    A --> (Borrar reseñas inadecuadas)
+    A --> (Acceder a información de usuarios)
+
+
 ## 1. Catálogo y Búsquedas
 
 * **RF-1**: El catálogo estará organizado por categorías.
