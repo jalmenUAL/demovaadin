@@ -4,6 +4,11 @@ Una aplicación web inspirada en **YouTube**, desarrollada como proyecto académ
 
 ---
 
+# Diagrama de casos de uso
+
+[Ver diagrama completo]([https://raw.githubusercontent.com/](https://github.com/jalmenUAL/demovaadin/blob/master/uml/DCU.jpg))
+
+
 ## 🚀 Funcionalidades
 
 ### 👤 Usuarios
