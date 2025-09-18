@@ -40,6 +40,7 @@ usecaseDiagram
     A --> (Acceder a información de usuarios)
 ```
 
+
 ## 1. Catálogo y Búsquedas
 
 * **RF-1**: El catálogo estará organizado por categorías.
