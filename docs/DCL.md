@@ -95,6 +95,6 @@ classDiagram
     Registrado <|-- Youtuber
     Registrado <|-- Administrador
     NoLogueado --> Login
-```
     NoLogueado --> Registrar
     Registrar --> ServidordeCorreo
+```
