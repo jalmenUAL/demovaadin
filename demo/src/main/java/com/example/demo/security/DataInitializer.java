@@ -41,6 +41,7 @@ public class DataInitializer implements CommandLineRunner {
         if (youtuberRepo.findById("youtuber").isEmpty()) {
             Youtuber youtuber = new Youtuber();
             youtuber.setLogin("youtuber");
+            youtuber.setBloqueado(false);
             youtuber.setPassword(passwordEncoder.encode("youtuber123")); // siempre cifrar
 
             youtuberRepo.save(youtuber);
