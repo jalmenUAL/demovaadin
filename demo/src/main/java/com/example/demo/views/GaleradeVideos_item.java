@@ -76,12 +76,12 @@ public class GaleradeVideos_item extends VerticalLayout {
                     .anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
             if (esAdmin) {
-                UI.getCurrent().navigate(VerVideodeAdministrador.class, Long.valueOf(video.getId()));
+                UI.getCurrent().navigate(VerVideodeAdministrador.class, video.getId());
             } else if (esYoutuber) {
-                UI.getCurrent().navigate(VerVideodeYoutuber.class, Long.valueOf(video.getId()));
+                UI.getCurrent().navigate(VerVideodeYoutuber.class, video.getId());
             }
         } else {
-            UI.getCurrent().navigate(VerVideo.class, Long.valueOf(video.getId()));
+            UI.getCurrent().navigate(VerVideo.class, video.getId());
         }
 
     }

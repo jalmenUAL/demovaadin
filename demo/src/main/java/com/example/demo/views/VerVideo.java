@@ -21,7 +21,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route("VerVideo")
 @AnonymousAllowed
-public class VerVideo extends VerticalLayout implements HasUrlParameter<Long> {
+public class VerVideo extends VerticalLayout implements HasUrlParameter<Integer> {
     public Videosrelacionados _videosrelacionados;
     public ListadeVideos_item _listadeVideos;
     public GaleradeVideos_item _galeradeVideos;
