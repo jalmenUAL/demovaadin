@@ -65,7 +65,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public Video findVideoById(Long parameter) {
+    public Video findVideoById(Integer parameter) {
 
         return _videos.findVideoById(parameter);
     }

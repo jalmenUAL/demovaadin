@@ -41,7 +41,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Long> {
 
     }
 
-    public void setParameter(BeforeEvent event, Long parameter) {
+    public void setParameter(BeforeEvent event, Integer parameter) {
 
         removeAll(); // 🔹 Evita que se acumulen los elementos
         video_y_relacionados.removeAll();

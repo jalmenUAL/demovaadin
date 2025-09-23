@@ -35,7 +35,7 @@ public class BD_Videos {
         this.comentariorepository = comentariorepository;
     }
 
-    public Video findVideoById(Long parameter) {
+    public Video findVideoById(Integer parameter) {
         return videorepository.findById(parameter)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
     }
@@ -70,7 +70,7 @@ public class BD_Videos {
     }
 
     public List<Video> getVideosRelacionados(int id) {
-        Video videob = videorepository.findById((long) id)
+        Video videob = videorepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
         // Dividir en palabras y pasarlas a minúsculas
@@ -101,7 +101,7 @@ public class BD_Videos {
         Youtuber usuario = youtuberrepository.findById(login)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        Video video = videorepository.findById((long) id)
+        Video video = videorepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
         /*
@@ -123,7 +123,7 @@ public class BD_Videos {
         Youtuber usuario = youtuberrepository.findById(login)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        Video video = videorepository.findById((long) id)
+        Video video = videorepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
         /*
@@ -141,7 +141,7 @@ public class BD_Videos {
     @Transactional
     /* El transactional es imprescindible! */
     public void borrarVideo(int id) {
-        Video video = videorepository.findById((long) id)
+        Video video = videorepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
         /* Quita los me gusta desde usuario que es el propietario */

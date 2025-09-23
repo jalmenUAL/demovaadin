@@ -26,7 +26,7 @@ public class VerVideodeAdministrador extends VerVideo {
 
     }
 
-    public void setParameter(BeforeEvent event, Long parameter) {
+    public void setParameter(BeforeEvent event, Integer parameter) {
         super.setParameter(event, parameter);
         // Crear botón de borrar
         Button borrarButton = new Button("🗑️ Borrar video", event2 -> borrar());

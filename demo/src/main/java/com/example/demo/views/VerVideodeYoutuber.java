@@ -58,7 +58,7 @@ public class VerVideodeYoutuber extends VerVideo {
         comentarios.add(_verComentarios);
     }
 
-    public void setParameter(BeforeEvent event, Long parameter) {
+    public void setParameter(BeforeEvent event, Integer parameter) {
         super.setParameter(event, parameter);
         // Crear botón de Like
         likeButton = new Button("", event2 -> like());

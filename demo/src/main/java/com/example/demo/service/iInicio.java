@@ -12,7 +12,7 @@ public interface iInicio {
 
     List<Video> getUltimosVideos();
 
-    Video findVideoById(Long parameter);
+    Video findVideoById(Integer parameter);
 
     Youtuber findYoutuberById(String parameter);
 

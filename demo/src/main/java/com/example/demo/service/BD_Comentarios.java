@@ -40,7 +40,7 @@ public class BD_Comentarios {
         Comentario c = new Comentario();
         c.setEscrito_por(usuario);
         c.setTexto(value);
-        Video v = repositoryvideo.findById(Long.valueOf(i))
+        Video v = repositoryvideo.findById(i)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
         c.setSobre(v);
         repository.save(c);
@@ -48,7 +48,7 @@ public class BD_Comentarios {
     }
 
     public void eliminarComentario(int id) {
-        Comentario comentario = repository.findById(Long.valueOf(id))
+        Comentario comentario = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Comentario no encontrado"));
         repository.delete(comentario);
 
