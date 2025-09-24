@@ -98,7 +98,7 @@ public class Registrar extends VerticalLayout {
         Button registrar = new Button("Registrar", new Icon(VaadinIcon.USER_CHECK));
         registrar.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         registrar.addClickListener(event -> {
-            registrar(login.getValue(), password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
+            registrar();
         });
 
         // Layout final agrupado
@@ -110,8 +110,8 @@ public class Registrar extends VerticalLayout {
         add(contenido);
     }
 
-    private void registrar(String login, String password, String avatarUrl, String fondoUrl) {
-        _iNoLogueado.registrar(login, password, avatarUrl, fondoUrl);
+    private void registrar() {
+        _iNoLogueado.registrar(login.getValue(), password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
         UI.getCurrent().navigate(NoLogueado.class);
     }
 
