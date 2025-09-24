@@ -18,8 +18,7 @@ import com.vaadin.flow.router.Route;
 @Route("Perfil")
 public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
-    /* Es una clase abstracta porque es usada por administrador y youtuber */
-
+ 
     public Videosgustados _videosgustados;
     public Videospublicados _videospublicados;
 

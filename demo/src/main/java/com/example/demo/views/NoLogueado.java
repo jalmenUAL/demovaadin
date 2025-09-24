@@ -57,14 +57,7 @@ public class NoLogueado extends Inicio {
     }
 
     public void Registrar() {
-
-
-
-
-
         UI.getCurrent().navigate(Registrar.class);
-            
-        
     }
 }
 

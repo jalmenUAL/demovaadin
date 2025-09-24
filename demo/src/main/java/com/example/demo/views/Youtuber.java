@@ -34,8 +34,7 @@ public class Youtuber extends Registrado {
 
     public Youtuber(iYoutuber iYoutuber) {
         super(iYoutuber);
-
-        _iYoutuber = iYoutuber;
+        this._iYoutuber = iYoutuber;
 
         // === HEADER con botón "Mi Perfil" ===
         Button perfilBtn = new Button("Mi Perfil", new Icon(VaadinIcon.USER));
