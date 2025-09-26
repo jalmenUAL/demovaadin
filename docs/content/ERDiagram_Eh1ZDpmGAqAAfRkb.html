@@ -1,0 +1,155 @@
+<html>
+<head>
+	<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link rel="stylesheet" href="report.css" type="text/css"/>
+	<title>diagrama entidad relacion</title>
+	<script type="text/javascript" src="report.js"></script>
+	<script type="text/javascript" src="link_popup.js"></script>
+	<script type="text/javascript" src="tooltip.js"></script>
+</head>
+<body style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px;" onload="initPage();initDiagram();initGridDiagram();">
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_top">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-top: 2px #FF0000 solid;" id="spotlight_bottom">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_left">
+	</div>
+	<div style="position:absolute; z-index:2; visibility:hidden;border-left: 2px #FF0000 solid;" id="spotlight_right">
+	</div>
+	<canvas width="100" style="position:absolute; z-index:2; visibility:hidden" id="spotlight_c" height="100">
+	</canvas>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesTop">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; width:100px; height:100px; z-index:1; visibility:hidden" id="spotLightResourcesRight">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+<a href="#top"><img style="border:none" src="../images/icons/BackToTop.gif" alt="Back to top"/></a>				</td>
+			</tr>
+			<tr>
+				<td>
+<a href="javascript:clearSpotLightFromOpenSpecButton();"><img style="border:none" src="../images/icons/OpenSpecification.gif" alt="Open specification"/></a>				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute;z-index:4;visibility:hidden" id="linkPopupMenuLayer">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="linkPopupMenuTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="referenceIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Ref.gif" style="border:none" onclick="movePopupPositionToReferenceIconPosition();resetPopupForReference();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="subdiagramIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Subdiagram.gif" style="border:none" onclick="movePopupPositionToSubdiagramIconPosition();resetPopupForSubdiagram();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="transitorIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Transitor.gif" style="border:none" onclick="movePopupPositionToTransitorIconPosition();resetPopupForTransitor();switchPopupShowHideStatus();" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:1; visibility:hidden; " id="documentationIconLayer">
+		<table border="0" cellpadding="3" cellspacing="0" style="font-size:1;">
+			<tr>
+				<td>
+					<img src="../images/icons/Documentation.png" style="border:none" />				</td>
+			</tr>
+		</table>
+	</div>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="referencedBys">
+		<table border="0" width="100%" style="border-style:solid; border-width:1px; border-color:#000000; background:#FFFFFF; width:250px" id="referencedBysTable">
+		</table>
+	</div>
+	<div style="position:absolute; z-index:21; visibility:hidden" id="vplink">
+		<table border="1" cellpadding="0" cellspacing="0" bordercolor="#A9BFD3">
+			<tr>
+				<td>
+					<table border="0" cellpadding="0" width="100%" cellspacing="0">
+						<tr style="background:#DDDDDD">
+							<td style="font-size: 12px;" align="left">
+								<select onchange="vpLinkToggleName()" id="vplink-linkType">
+	<option value="Project Link">Project Link</option>
+	<option value="Page URL">Page URL</option>
+</select>
+							</td>
+							<td style="font-size: 12px;" align="right">
+								<input onclick="javascript: vpLinkToggleName()" id="vplink-checkbox" type="checkbox" />
+								<label for="vplink-checkbox">with Name</label>							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<textarea id="vplink-text" style="width: 348px; height: 60px; border-color: #7EADD9; outline: none;"></textarea>				</td>
+			</tr>
+		</table>
+	</div>
+	<p class="PageTitle">
+		<span id="PageTitleText">
+			diagrama entidad relacion		</span>
+<a onclick="javascript: showVpLink('MDS2-2026.vpp://diagram/Eh1ZDpmGAqAAfRkb', 'diagrama entidad relacion\nMDS2-2026.vpp://diagram/Eh1ZDpmGAqAAfRkb', 'diagrama entidad relacion', this); return false;" style="padding-left: 16px; font-size: 12px" href="#"><img src="../images/icons/link.png" border="0"> link</a>	</p>
+	<div style="position: relative; padding-bottom: 20px;">
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: absolute; top: 0; left: 0; z-index: 20;" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon(),hideLinkPopup(),hideReferencedBys();">
+			<tr>
+				<td>
+<span class="TableContent">Jump to:</span>					<select id="SelectShape" class="TableContent" onChange="scrollWin('diagram', this.value);hideLinkPopup();showSpotLight('diagram', this.value)">
+<option value="">Please select a model element</option>
+<option value="shape|992.0|208.0|210.0|58.0|DBTable_bUZZDpmGAqAAfRkS.html|DBTable_bUZZDpmGAqAAfRkS.html|RJ1ZDpmGAqAAfRky" id="optionRJ1ZDpmGAqAAfRky">Video_Registrado : Entity</option>
+<option value="shape|478.0|15.0|217.0|58.0|DBTable_dUZZDpmGAqAAfRkL.html|DBTable_dUZZDpmGAqAAfRkL.html|uJ1ZDpmGAqAAfRkv" id="optionuJ1ZDpmGAqAAfRkv">Registrado_Registrado2 : Entity</option>
+<option value="shape|478.0|94.0|217.0|58.0|DBTable_pUZZDpmGAqAAfRkE.html|DBTable_pUZZDpmGAqAAfRkE.html|qJ1ZDpmGAqAAfRks" id="optionqJ1ZDpmGAqAAfRks">Registrado_Registrado : Entity</option>
+<option value="shape|986.0|292.0|222.0|94.0|DBTable_iUZZDpmGAqAAfRj4.html|DBTable_iUZZDpmGAqAAfRj4.html|iJ1ZDpmGAqAAfRkp" id="optioniJ1ZDpmGAqAAfRkp">Comentario : Entity</option>
+<option value="shape|476.0|236.0|222.0|112.0|DBTable_EUZZDpmGAqAAfRjz.html|DBTable_EUZZDpmGAqAAfRjz.html|MJ1ZDpmGAqAAfRkm" id="optionMJ1ZDpmGAqAAfRkm">Video : Entity</option>
+<option value="shape|2.0|79.0|212.0|130.0|DBTable_7kZZDpmGAqAAfRjs.html|DBTable_7kZZDpmGAqAAfRjs.html|AJ1ZDpmGAqAAfRkj" id="optionAJ1ZDpmGAqAAfRkj">Registrado : Entity</option>
+</select>				</td>
+			</tr>
+		</table>
+		<table border="0" cellpadding="0" width="100%" cellspacing="0" style="position: relative; top: 24;">
+			<tr>
+				<td>
+					<img id="diagram" src="../images/diagrama_entidad_relacion.png" usemap="#diagram_map" class="Image" width="1212" height="390"/>
+					<map name="diagram_map">
+<area imageId="diagram" coords="214.0, 201.0, 214.0, 209.0, 199.0, 209.0, 199.0, 215.0, 992.0, 215.0, 992.0, 208.0, 1011.0, 208.0, 1011.0, 201.0" coords2="214.0, 201.0, 214.0, 209.0, 199.0, 209.0, 199.0, 215.0, 992.0, 215.0, 992.0, 208.0, 1011.0, 208.0, 1011.0, 201.0" shape="poly" alt=":Relationship" id="areadiagram_map_lJ1ZDpmGAqAAfRk1_default" href="DBForeignKey_3UZZDpmGAqAAfRkU.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="698.0, 259.0, 698.0, 273.0, 1002.0, 273.0, 1002.0, 266.0, 992.0, 266.0, 992.0, 259.0" coords2="698.0, 259.0, 698.0, 273.0, 1002.0, 273.0, 1002.0, 266.0, 992.0, 266.0, 992.0, 259.0" shape="poly" alt=":Relationship" id="areadiagram_map_dJ1ZDpmGAqAAfRk7_default" href="DBForeignKey_nUZZDpmGAqAAfRkT.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="275.0, 12.0, 269.6479, 17.0, 264.0, 17.0, 264.0, 22.276316, 203.2817, 79.0, 214.0, 79.0, 214.0, 88.32895, 275.3662, 31.0, 478.0, 31.0, 478.0, 17.0, 280.0, 17.0, 275.0, 12.0" coords2="275.0, 12.0, 269.6479, 17.0, 264.0, 17.0, 264.0, 22.276316, 203.2817, 79.0, 214.0, 79.0, 214.0, 88.32895, 275.3662, 31.0, 478.0, 31.0, 478.0, 17.0, 280.0, 17.0, 275.0, 12.0" shape="poly" alt=":Relationship" id="areadiagram_map_TJ1ZDpmGAqAAfRk__default" href="DBForeignKey_TUZZDpmGAqAAfRkN.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="290.0, 55.0, 280.42105, 57.0, 273.0, 57.0, 273.0, 58.54945, 199.0, 74.0, 199.71428, 79.0, 214.0, 79.0, 214.0, 85.28571, 214.0, 85.28571, 282.42105, 71.0, 478.0, 71.0, 478.0, 57.0, 290.2857, 57.0, 290.0, 55.0" coords2="290.0, 55.0, 280.42105, 57.0, 273.0, 57.0, 273.0, 58.54945, 199.0, 74.0, 199.71428, 79.0, 214.0, 79.0, 214.0, 85.28571, 214.0, 85.28571, 282.42105, 71.0, 478.0, 71.0, 478.0, 57.0, 290.2857, 57.0, 290.0, 55.0" shape="poly" alt=":Relationship" id="areadiagram_map_bJ1ZDpmGAqAAfRlD_default" href="DBForeignKey_jUZZDpmGAqAAfRkM.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="214.0, 97.0, 214.0, 111.0, 478.0, 111.0, 478.0, 97.0" coords2="214.0, 97.0, 214.0, 111.0, 478.0, 111.0, 478.0, 97.0" shape="poly" alt=":Relationship" id="areadiagram_map_gp1ZDpmGAqAAfRlH_default" href="DBForeignKey_VUZZDpmGAqAAfRkG.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="214.0, 137.0, 214.0, 151.0, 478.0, 151.0, 478.0, 137.0" coords2="214.0, 137.0, 214.0, 151.0, 478.0, 151.0, 478.0, 137.0" shape="poly" alt=":Relationship" id="areadiagram_map_Yp1ZDpmGAqAAfRlL_default" href="DBForeignKey_FUZZDpmGAqAAfRkF.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="217.0, 194.0, 214.0, 194.85715, 214.0, 209.0, 206.80104, 209.0, 264.0, 374.5303, 264.0, 386.0, 267.96335, 386.0, 269.0, 389.0, 283.0, 386.0, 986.0, 386.0, 986.0, 372.0, 278.1875, 372.0, 217.0, 194.0" coords2="217.0, 194.0, 214.0, 194.85715, 214.0, 209.0, 206.80104, 209.0, 264.0, 374.5303, 264.0, 386.0, 267.96335, 386.0, 269.0, 389.0, 283.0, 386.0, 986.0, 386.0, 986.0, 372.0, 278.1875, 372.0, 217.0, 194.0" shape="poly" alt=":Relationship" id="areadiagram_map_Up1ZDpmGAqAAfRlP_default" href="DBForeignKey_hUZZDpmGAqAAfRkB.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="698.0, 303.0, 698.0, 317.0, 986.0, 317.0, 986.0, 303.0" coords2="698.0, 303.0, 698.0, 317.0, 986.0, 317.0, 986.0, 303.0" shape="poly" alt=":Relationship" id="areadiagram_map_Cp1ZDpmGAqAAfRlU_default" href="DBForeignKey_uUZZDpmGAqAAfRj_.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="214.0, 196.80556, 214.0, 209.0, 205.9901, 209.0, 264.0, 290.375, 264.0, 299.0, 270.14853, 299.0, 273.0, 303.0, 278.5, 299.0, 476.0, 299.0, 476.0, 285.0, 276.87128, 285.0, 214.0, 196.80556" coords2="214.0, 196.80556, 214.0, 209.0, 205.9901, 209.0, 264.0, 290.375, 264.0, 299.0, 270.14853, 299.0, 273.0, 303.0, 278.5, 299.0, 476.0, 299.0, 476.0, 285.0, 276.87128, 285.0, 214.0, 196.80556" shape="poly" alt=":Relationship" id="areadiagram_map_Gp1ZDpmGAqAAfRlZ_default" href="DBForeignKey_mUZZDpmGAqAAfRj7.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="992, 208, 1202, 266" coords2="992, 208, 1202, 266" shape="rect" alt="Video_Registrado:Entity" id="areadiagram_map_RJ1ZDpmGAqAAfRky_default" href="DBTable_bUZZDpmGAqAAfRkS.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="478, 15, 695, 73" coords2="478, 15, 695, 73" shape="rect" alt="Registrado_Registrado2:Entity" id="areadiagram_map_uJ1ZDpmGAqAAfRkv_default" href="DBTable_dUZZDpmGAqAAfRkL.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="478, 94, 695, 152" coords2="478, 94, 695, 152" shape="rect" alt="Registrado_Registrado:Entity" id="areadiagram_map_qJ1ZDpmGAqAAfRks_default" href="DBTable_pUZZDpmGAqAAfRkE.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="986, 292, 1208, 386" coords2="986, 292, 1208, 386" shape="rect" alt="Comentario:Entity" id="areadiagram_map_iJ1ZDpmGAqAAfRkp_default" href="DBTable_iUZZDpmGAqAAfRj4.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="476, 236, 698, 348" coords2="476, 236, 698, 348" shape="rect" alt="Video:Entity" id="areadiagram_map_MJ1ZDpmGAqAAfRkm_default" href="DBTable_EUZZDpmGAqAAfRjz.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+<area imageId="diagram" coords="2, 79, 214, 209" coords2="2, 79, 214, 209" shape="rect" alt="Registrado:Entity" id="areadiagram_map_AJ1ZDpmGAqAAfRkj_default" href="DBTable_7kZZDpmGAqAAfRjs.html" onmouseover="hideReferenceIcon(),hideSubdiagramIcon(),hideTransitorIcon()" onmousedown="clearSpotLight();"/>
+</map>
+				</td>
+			</tr>
+		</table>
+		<p>
+		</p>
+	</div>
+</body>
+</html>
