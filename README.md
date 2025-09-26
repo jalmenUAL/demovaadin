@@ -2,9 +2,9 @@
 
 Una aplicación web inspirada en **YouTube**, desarrollada como proyecto académico/personal, que permite a los usuarios registrarse, subir vídeos, interactuar con otros y gestionar su propia comunidad.
 
-# Visual Paradigm documentation
+# Documentación en Visual Paradigm
 
-[Visual Paradigm](https://jalmenual.github.io/demovaadin/)
+Enlace a la documentación de Visual Paradigm [Documentación](https://jalmenual.github.io/demovaadin/)
 
 ---
 ## 🚀 Funcionalidades
