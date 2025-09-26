@@ -41,4 +41,3 @@ Use Case;78;Ultimos Videos;com.example.demo.views.UltimosVideos_item, com.exampl
 Actor;80;Administrador;com.example.demo.service.iAdministrador, com.example.demo.views.Administrador
 Actor;82;Youtuber;com.example.demo.service.iYoutuber, com.example.demo.views.Youtuber
 Actor;84;NoLogueado;com.example.demo.service.iNoLogueado, com.example.demo.views.NoLogueado
-
