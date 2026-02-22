@@ -20,7 +20,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.StreamResource;
 
 import jakarta.annotation.security.RolesAllowed;
-
+//Configuracion
 @Route("Configuracion")
 @RolesAllowed("ROLE_YOUTUBER")
 public class Configuracion extends VerticalLayout {
