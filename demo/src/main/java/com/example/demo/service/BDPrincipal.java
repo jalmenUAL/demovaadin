@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.domain.Comentario;
 import com.example.demo.domain.Registrado;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
@@ -40,13 +41,13 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public void publicarVideo(String value, String value2) {
-        _videos.publicarVideo(value, value2);
+    public void publicarVideo(Youtuber usuario, String titulo, String url) {
+        _videos.publicarVideo(usuario, titulo, url);
     }
 
     @Override
-    public void publicarComentario(String value, int i) {
-        _comentarios.publicarComentario(value, i);
+    public void publicarComentario(Youtuber usuario, Video video, String value) {
+        _comentarios.publicarComentario(usuario, video, value);
     }
 
     @Override
@@ -55,8 +56,8 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public void actualizarConfiguracion(String value, String src, String src2) {
-        _youtubers.actualizarConfiguracion(value, src, src2);
+    public void actualizarConfiguracion(Youtuber usuario, String password, String avatar, String imagenFondo) {
+        _youtubers.actualizarConfiguracion(usuario, password, avatar, imagenFondo);
     }
 
     @Override
@@ -66,7 +67,6 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
 
     @Override
     public Video findVideoById(Integer parameter) {
-
         return _videos.findVideoById(parameter);
     }
 
@@ -77,78 +77,75 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
 
     @Override
     public List<Video> getUltimosVideos() {
-
         return _videos.getUltimosVideos();
     }
+ 
 
     @Override
-    public List<Video> getYoutuberVideos(String login) {
-
-        return _youtubers.getYoutuberVideos(login);
+    public List<Video> getVideosRelacionados(Video videob) {
+        return _videos.getVideosRelacionados(videob);
     }
 
     @Override
-    public List<Video> getVideosRelacionados(int id) {
-        return _videos.getVideosRelacionados(id);
+    public void borrarVideo(Video video) {
+        _youtubers.borrarMeGustaDeTodosLosUsuarios(video);
+        _comentarios.borrarComentariosDeVideo(video);
+        _videos.borrarVideo(video);
     }
 
     @Override
-    public void borrarVideo(int id) {
-
-        _videos.borrarVideo(id);
-
-    }
-
-    @Override
-    public void eliminarComentario(int id) {
-
-        _comentarios.eliminarComentario(id);
+    public void eliminarComentario(Comentario comentario) {
+        _comentarios.eliminarComentario(comentario);
     }
 
     @Override
     public List<Youtuber> buscarDenunciados() {
-
         return _youtubers.buscarDenunciados();
     }
 
     @Override
-    public void denunciarUsuario(String ormid) {
-        _youtubers.denunciarUsuario(ormid);
+    public void denunciarUsuario(Youtuber denunciante, Youtuber denunciado) {
+        _youtubers.denunciarUsuario(denunciante, denunciado);
     }
 
     @Override
-    public void quitardenunciaUsuario(String ormid) {
-        _youtubers.quitardenunciaUsuario(ormid);
+    public void quitardenunciaUsuario(Youtuber denunciante, Youtuber denunciado) {
+        _youtubers.quitardenunciaUsuario(denunciante, denunciado);
     }
 
     @Override
-    public void seguirUsuario(String ormid) {
-        _youtubers.seguirUsuario(ormid);
+    public void seguirUsuario(Youtuber seguidor, Youtuber seguido) {
+        _youtubers.seguirUsuario(seguidor, seguido);
     }
 
     @Override
-    public void dejardeseguirUsuario(String ormid) {
-        _youtubers.dejardeseguirUsuario(ormid);
+    public void dejardeseguirUsuario(Youtuber seguidor, Youtuber seguido) {
+        _youtubers.dejardeseguirUsuario(seguidor, seguido);
     }
 
     @Override
-    public void likeVideo(int id) {
-        _videos.likeVideo(id);
+    public void likeVideo(Youtuber usuario, Video video) {
+        _youtubers.likeVideo(usuario, video);
     }
 
     @Override
-    public void dislikeVideo(int id) {
-        _videos.dislikeVideo(id);
+    public void dislikeVideo(Youtuber usuario, Video video) {
+        _youtubers.dislikeVideo(usuario, video);
     }
 
     @Override
-    public void bloquearUsuario(String ormid) {
-        _youtubers.bloquearUsuario(ormid);
+    public void bloquearUsuario(Youtuber usuario) {
+        _youtubers.bloquearUsuario(usuario);
     }
 
     @Override
-    public void desbloquearUsuario(String ormid) {
-        _youtubers.desbloquearUsuario(ormid);
+    public void desbloquearUsuario(Youtuber usuario) {
+        _youtubers.desbloquearUsuario(usuario);
+    }
+
+    @Override
+    public Video findVideoById(int id) {
+        return _videos.findVideoById(id);
     }
 
 }

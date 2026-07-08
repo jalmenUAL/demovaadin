@@ -2,6 +2,10 @@ package com.example.demo.views;
 
 import java.io.InputStream;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.example.demo.domain.Video;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -108,7 +112,15 @@ public class Configuracion extends VerticalLayout {
     }
 
     private void actualizar(iYoutuber iYoutuber) {
-        iYoutuber.actualizarConfiguracion(password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
+        
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+            throw new RuntimeException("Usuario no autenticado");
+        }
+
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
+
+        iYoutuber.actualizarConfiguracion(usuario,password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
         // Vuelve a la página anterior
         UI.getCurrent().getPage().getHistory().back();
 

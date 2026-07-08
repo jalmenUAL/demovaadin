@@ -27,10 +27,16 @@ public class VerVideodeYoutuber extends VerVideo {
     }
 
     public void like() {
+Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+            throw new RuntimeException("Usuario no autenticado");
+        }
 
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
         if (likeButton.getText().equals("Me Gusta")) {
             likeButton.setText("Quitar Me Gusta");
-            iYoutuber.likeVideo(video.getId());
+             
+            iYoutuber.likeVideo(usuario, video);
             likeButton.getStyle()
                     .set("background-color", "#0d6efd") // negro
                     .set("color", "white")
@@ -40,7 +46,7 @@ public class VerVideodeYoutuber extends VerVideo {
 
         } else {
             likeButton.setText("Me Gusta");
-            iYoutuber.dislikeVideo(video.getId());
+            iYoutuber.dislikeVideo(usuario, video);
             likeButton.getStyle()
                     .set("background-color", "#0d6efd") // azul
                     .set("color", "white")

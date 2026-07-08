@@ -1,57 +1,49 @@
 package com.example.demo.service;
 
+import java.util.Set;
 import java.util.Vector;
 
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Comentario;
 import com.example.demo.domain.RepositorioComentario;
-import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
 
 @Service
 
-/* Le hace falta acceder al repositorio de comentarios y de video */
-
 public class BD_Comentarios {
-    public BD_Comentarios(RepositorioComentario comentariosRepository, RepositorioVideo videosRepository) {
-        repository = comentariosRepository;
-        repositoryvideo = videosRepository;
-
-    }
 
     public BDPrincipal _en;
     public Vector<Comentario> _comentarios = new Vector<Comentario>();
-
-
     private RepositorioComentario repository;
-    private RepositorioVideo repositoryvideo;
 
-    public void publicarComentario(String value, int i) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
-            throw new RuntimeException("Usuario no autenticado");
-        }
+    public BD_Comentarios(RepositorioComentario comentariosRepository) {
+        repository = comentariosRepository;
 
-        Youtuber usuario = (Youtuber) auth.getPrincipal();
+    }
+
+    public void publicarComentario(Youtuber usuario, Video video, String value) {
         Comentario c = new Comentario();
         c.setEscrito_por(usuario);
         c.setTexto(value);
-        Video v = repositoryvideo.findById(i)
-                .orElseThrow(() -> new RuntimeException("Video no encontrado"));
-        c.setSobre(v);
+        c.setSobre(video);
         repository.save(c);
 
     }
 
-    public void eliminarComentario(int id) {
-        Comentario comentario = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Comentario no encontrado"));
+    public void eliminarComentario(Comentario comentario) {
         repository.delete(comentario);
+    }
 
+    public void borrarComentariosDeVideo(Video video) {
+        // Obtener todos los comentarios del video
+        Set<Comentario> comentarios = video.getTiene_comentarios();
+
+        // Eliminar cada comentario
+        for (Comentario comentario : comentarios) {
+            repository.delete(comentario);
+        }
     }
 
 }

@@ -34,8 +34,8 @@ public class BD_Youtubers {
                 .orElse(null);
     }
 
-    public Youtuber findYoutuberById(String parameter) {
-        return repository.findById(parameter)
+    public Youtuber findYoutuberById(String id) {
+        return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Youtuber no encontrado"));
     }
 
@@ -50,25 +50,14 @@ public class BD_Youtubers {
         repository.save(nuevoYoutuber);
     }
 
-    public void actualizarConfiguracion(String value, String src, String src2) {
-        Youtuber usuario = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        usuario.setPassword(passwordEncoder.encode(value));
-        usuario.setFotoPerfil(src);
-        usuario.setBanner(src2);
+    public void actualizarConfiguracion(Youtuber usuario,String password, String avatar, String fondo) {
+        usuario.setPassword(passwordEncoder.encode(password));
+        usuario.setFotoPerfil(avatar);
+        usuario.setBanner(fondo);
         repository.save(usuario);
     }
 
-    public List<Video> getYoutuberVideos(String login) {
-        com.example.demo.domain.Youtuber usuario = repository.findById(login)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        Vector<Video> UltimosVideos = new Vector<Video>();
-        for (Object obj : usuario.getSeguidor_de()) {
-            Youtuber seguido = (Youtuber) obj; // Cast explícito
-            UltimosVideos.addAll(seguido.getHa_publicado());
-        }
-        UltimosVideos.addAll(usuario.getHa_publicado());
-        return UltimosVideos;
-    }
+    
 
     public List<Youtuber> buscarDenunciados() {
         List<Youtuber> denunciados = repository.findAll();
@@ -77,50 +66,61 @@ public class BD_Youtubers {
                 .toList();
     }
 
-    public void seguirUsuario(String ormid) {
-        Youtuber usuario = repository.findById(ormid)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        usuario.getSeguido_por().add(usuarioActual); // Asumiendo que hay un campo seguido_por en Youtuber
-        repository.save(usuario);
+    public void seguirUsuario(Youtuber seguidor, Youtuber seguido) {
+        seguido.getSeguido_por().add(seguidor); // Asumiendo que hay un campo seguido_por en Youtuber
+        repository.save(seguido);
     }
 
-    public void dejardeseguirUsuario(String ormid) {
-        Youtuber usuario = repository.findById(ormid)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        usuario.getSeguido_por().remove(usuarioActual); // Asumiendo que hay un campo seguido_por en Youtuber
-        repository.save(usuario);
+    public void dejardeseguirUsuario(Youtuber seguidor, Youtuber seguido) {
+        seguido.getSeguido_por().remove(seguidor); // Asumiendo que hay un campo seguido_por en Youtuber
+        repository.save(seguido);
     }
 
-    public void bloquearUsuario(String ormid) {
-        Youtuber usuario = repository.findById(ormid)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    public void bloquearUsuario(Youtuber usuario) {
         usuario.setBloqueado(true); // Asumiendo que hay un campo bloqueado en Youtuber
         repository.save(usuario);
     }
 
-    public void desbloquearUsuario(String ormid) {
-        Youtuber usuario = repository.findById(ormid)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    public void desbloquearUsuario(Youtuber usuario) {
+        
         usuario.setBloqueado(false); // Asumiendo que hay un campo bloqueado en Youtuber
         repository.save(usuario);
     }
 
-    public void denunciarUsuario(String ormid) {
-        Youtuber usuario = repository.findById(ormid)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        usuario.getDenunciado_por().add(usuarioActual); // Asumiendo que hay un campo denunciado en Youtuber
+    public void denunciarUsuario(Youtuber denunciante, Youtuber denunciado) {
+        denunciante.getDenunciado_por().add(denunciado);
+        repository.save(denunciante);
+    }
+
+    public void quitardenunciaUsuario(Youtuber denunciante, Youtuber denunciado) {
+        denunciante.getDenunciado_por().remove(denunciado);
+        repository.save(denunciante);
+    }
+  
+
+        public void likeVideo(Youtuber usuario, Video video) { 
+        usuario.getLe_gusta().add(video);
+        repository.save(usuario); // 💡 guardamos el dueño, no el inverso
+    }
+
+        public void dislikeVideo(Youtuber usuario, Video video) {
+        usuario.getLe_gusta().remove(video);
         repository.save(usuario);
     }
 
-    public void quitardenunciaUsuario(String ormid) {
-        Youtuber usuario = repository.findById(ormid)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        Youtuber usuarioActual = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        usuario.getDenunciado_por().remove(usuarioActual); // Asumiendo que hay un campo denunciado en Youtuber
-        repository.save(usuario);
+        public void borrarMeGustaDeTodosLosUsuarios(Video video) {
+           repository.findAll().forEach(usuario -> {
+                if (usuario.getLe_gusta().contains(video)) {
+                    usuario.getLe_gusta().remove(video);
+                    repository.save(usuario);
+                }
+            });
+        }
+ 
+      
+
     }
 
-}
+ 
+ 
+ 

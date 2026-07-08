@@ -1,5 +1,9 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import com.example.demo.domain.Video;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -53,7 +57,15 @@ public class Comentar extends VerticalLayout implements HasUrlParameter<String> 
     }
 
     private void publicar_comentario() {
-        _iYoutuber.publicarComentario(campoComentario.getValue(), id);
+        Video video = _iYoutuber.findVideoById(id); // Asegúrate de que el video
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+            throw new RuntimeException("Usuario no autenticado");
+        }
+
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
+
+        _iYoutuber.publicarComentario(usuario, video, campoComentario.getValue());
         // Vuelve a la página anterior
         UI.getCurrent().getPage().getHistory().back();
     }

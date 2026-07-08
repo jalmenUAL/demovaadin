@@ -23,20 +23,16 @@ public class BD_Videos {
     public Vector<Video> _videos = new Vector<Video>();
 
     private RepositorioVideo videorepository;
-    private RepositorioYoutuber youtuberrepository;
-    private RepositorioComentario comentariorepository;
 
     /* Necesita el repositorio de videos, de youtubers y de comentarios */
 
-    public BD_Videos(RepositorioVideo videorepository, RepositorioYoutuber youtuberrepository,
-            RepositorioComentario comentariorepository) {
+    public BD_Videos(RepositorioVideo videorepository) {
         this.videorepository = videorepository;
-        this.youtuberrepository = youtuberrepository;
-        this.comentariorepository = comentariorepository;
+
     }
 
-    public Video findVideoById(Integer parameter) {
-        return videorepository.findById(parameter)
+    public Video findVideoById(Integer id) {
+        return videorepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
     }
 
@@ -47,16 +43,14 @@ public class BD_Videos {
                 .toList();
     }
 
-    public void publicarVideo(String value, String value2) {
-        Youtuber yt = (Youtuber) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    public void publicarVideo(Youtuber usuario, String titulo, String url) {
         Video video = new Video();
-        video.setTitulo(value);
-        video.setUrl(value2);
-        video.setEs_de(yt);
+        video.setTitulo(titulo);
+        video.setUrl(url);
+        video.setEs_de(usuario);
         videorepository.save(video);
 
     }
-    
 
     public List<Video> getAllVideos() {
         return videorepository.findAll();
@@ -70,11 +64,8 @@ public class BD_Videos {
         return UltimosVideos;
     }
 
-    public List<Video> getVideosRelacionados(int id) {
-        Video videob = videorepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Video no encontrado"));
+    public List<Video> getVideosRelacionados(Video videob) {
 
-        // Dividir en palabras y pasarlas a minúsculas
         List<String> palabras = Arrays.stream(videob.getTitulo().split("\s+"))
                 .map(String::toLowerCase)
                 .toList();
@@ -92,68 +83,11 @@ public class BD_Videos {
                 .toList();
     }
 
-    public void likeVideo(int id) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
-            throw new RuntimeException("Usuario no autenticado");
-        }
-
-        String login = auth.getName();
-        Youtuber usuario = youtuberrepository.findById(login)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        Video video = videorepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Video no encontrado"));
-
-        /*
-         * pone el me gusta, usuario es el propiterio de la relación le gusta, al revés
-         * no funciona
-         */
-        usuario.getLe_gusta().add(video);
-
-        youtuberrepository.save(usuario); // 💡 guardamos el dueño, no el inverso
-    }
-
-    public void dislikeVideo(int id) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
-            throw new RuntimeException("Usuario no autenticado");
-        }
-
-        String login = auth.getName();
-        Youtuber usuario = youtuberrepository.findById(login)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        Video video = videorepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Video no encontrado"));
-
-        /*
-         * Al no tener equals hay que utilizar el removeIf, además no funcional al revés
-         * porque usuario es el propietario
-         */
-        usuario.getLe_gusta().removeIf(v -> ((Video) v).getId() == video.getId());
-
-        youtuberrepository.save(usuario);
-
-    }
-
     /* Los ManyToMany hay que borrarlos manualmente como se hace aquí */
 
     @Transactional
-    /* El transactional es imprescindible! */
-    public void borrarVideo(int id) {
-        Video video = videorepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Video no encontrado"));
 
-        /* Quita los me gusta desde usuario que es el propietario */
-        for (Object y : video.getLe_gusta_a()) {
-            ((Youtuber) y).getLe_gusta().removeIf(v -> ((Video) v).getId() == video.getId()); // quita el video de la
-                                                                                              // lista del usuario
-        }
-        /* Borra los comentarios */
-        for (Object y : video.getTiene_comentarios()) {
-            comentariorepository.delete((Comentario) y);
-        }
+    public void borrarVideo(Video video) {
         videorepository.delete(video);
     }
 

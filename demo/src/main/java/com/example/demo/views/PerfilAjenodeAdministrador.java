@@ -44,10 +44,10 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
     public void Bloquear() {
         if (btnBloquear.getText().equals("Bloquear")) {
             btnBloquear.setText("Quitar Bloqueo");
-            iAdministrador.bloquearUsuario(_usuario.getORMID());
+            iAdministrador.bloquearUsuario(_usuario);
         } else {
             btnBloquear.setText("Bloquear");
-            iAdministrador.desbloquearUsuario(_usuario.getORMID());
+            iAdministrador.desbloquearUsuario(_usuario);
         }
 
     }

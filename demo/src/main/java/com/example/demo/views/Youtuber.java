@@ -3,6 +3,7 @@ package com.example.demo.views;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -66,11 +67,19 @@ public class Youtuber extends Registrado {
 
     @Override
     public void UltimosVideos() {
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal(); 
-        _ultimosVideos = new UltimosVideosdeYoutuber(_iYoutuber.getYoutuberVideos(usuario.getLogin()));
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();   
+        Vector<Video> UltimosVideos = new Vector<Video>();
+        for (Object obj : usuario.getSeguidor_de()) {
+            com.example.demo.domain.Youtuber seguido = (com.example.demo.domain.Youtuber) obj; // Cast explícito
+            UltimosVideos.addAll(seguido.getHa_publicado());
+        }
+        UltimosVideos.addAll(usuario.getHa_publicado());
+        _ultimosVideos = new UltimosVideosdeYoutuber(UltimosVideos);
         body.add(_ultimosVideos);
     }
+
+
+ 
 
 }

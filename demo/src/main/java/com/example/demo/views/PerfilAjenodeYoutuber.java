@@ -63,12 +63,18 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
     }
 
     public void Seguir() {
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+            throw new RuntimeException("Usuario no autenticado");
+        }
+
+        com.example.demo.domain.Youtuber seguidor = (com.example.demo.domain.Youtuber) auth.getPrincipal();
         if (btnSeguir.getText().equals("Seguir")) {
-            _iYoutuber.seguirUsuario(_usuario.getORMID());
+            _iYoutuber.seguirUsuario(_usuario, seguidor);
             btnSeguir.setText("Dejar de seguir"); // Cambiar el texto del botón
 
         } else {
-            _iYoutuber.dejardeseguirUsuario(_usuario.getORMID());
+            _iYoutuber.dejardeseguirUsuario(_usuario, seguidor);
             btnSeguir.setText("Seguir"); // Cambiar el texto del botón
 
         }
@@ -76,11 +82,18 @@ public class PerfilAjenodeYoutuber extends PerfilAjeno {
     }
 
     public void Denunciar() {
+
+         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+            throw new RuntimeException("Usuario no autenticado");
+        }
+
+        com.example.demo.domain.Youtuber seguidor = (com.example.demo.domain.Youtuber) auth.getPrincipal();
         if (btnDenunciar.getText().equals("Denunciar")) {
-            _iYoutuber.denunciarUsuario(_usuario.getORMID());
+            _iYoutuber.denunciarUsuario(_usuario, seguidor);
             btnDenunciar.setText("Quitar denuncia"); // Cambiar el texto del botón
         } else {
-            _iYoutuber.quitardenunciaUsuario(_usuario.getORMID());
+            _iYoutuber.quitardenunciaUsuario(_usuario, seguidor);
             btnDenunciar.setText("Denunciar"); // Cambiar el texto del botón
         }
 

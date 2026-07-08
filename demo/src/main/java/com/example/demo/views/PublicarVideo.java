@@ -1,5 +1,8 @@
 package com.example.demo.views;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -22,6 +25,7 @@ public class PublicarVideo extends VerticalLayout {
     /* Accede a la base de datos a través de iYoutuber */
 
     public PublicarVideo(iYoutuber iYoutuber) {
+        iYoutuber _iYoutuber = iYoutuber;
         setWidthFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
@@ -50,8 +54,13 @@ public class PublicarVideo extends VerticalLayout {
                 .set("margin-top", "10px");
 
         button.addClickListener(e -> {
-            iYoutuber.publicarVideo(introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
-            /* Vuelve a la vista anterior */
+            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+            throw new RuntimeException("Usuario no autenticado");
+        }
+        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
+            _iYoutuber.publicarVideo(usuario, introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
+           
             UI.getCurrent().getPage().getHistory().back();
         });
 

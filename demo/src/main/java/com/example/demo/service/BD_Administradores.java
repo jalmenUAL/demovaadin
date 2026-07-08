@@ -13,14 +13,15 @@ public class BD_Administradores {
     public BDPrincipal _en;
     public Vector<Administrador> _administradores = new Vector<Administrador>();
 
-    
     private RepositorioAdministrador repository;
     private PasswordEncoder passwordEncoder;
 
-    /* Le hace falta acceder al repositorio de administradores y al password encoder */
+    /*
+     * Le hace falta acceder al repositorio de administradores y al password encoder
+     */
 
-
-    public BD_Administradores(RepositorioAdministrador administradoresRepository, PasswordEncoder passwordEncoder) {
+    public BD_Administradores(RepositorioAdministrador administradoresRepository,
+            PasswordEncoder passwordEncoder) {
 
         this.repository = administradoresRepository;
         this.passwordEncoder = passwordEncoder;

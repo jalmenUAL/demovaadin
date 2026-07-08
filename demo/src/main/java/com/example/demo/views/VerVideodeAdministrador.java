@@ -21,7 +21,7 @@ public class VerVideodeAdministrador extends VerVideo {
 
     public void borrar() {
 
-        iAdministrador.borrarVideo(video.getId());
+        iAdministrador.borrarVideo(video);
         UI.getCurrent().getPage().getHistory().back();
 
     }

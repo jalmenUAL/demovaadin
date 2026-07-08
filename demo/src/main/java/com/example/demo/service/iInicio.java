@@ -10,12 +10,12 @@ public interface iInicio {
 
     List<Video> buscar(String texto);
 
-    List<Video> getUltimosVideos();
+    Video findVideoById(Integer id);
 
-    Video findVideoById(Integer parameter);
+    Youtuber findYoutuberById(String id);
 
-    Youtuber findYoutuberById(String parameter);
+     List<Video> getUltimosVideos();
 
-    List<Video> getVideosRelacionados(int id);
+    List<Video> getVideosRelacionados(Video videob);
 
 }
