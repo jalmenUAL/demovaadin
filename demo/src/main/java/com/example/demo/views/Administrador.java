@@ -15,6 +15,7 @@ import jakarta.annotation.security.RolesAllowed;
 public class Administrador extends Registrado {
 	public iAdministrador _iAdministrador;
 	public Usuariosdenunciados _usuariosdenunciados;
+	
 
 	/* Accede a la base de datos a través de iAdministrador */
 
