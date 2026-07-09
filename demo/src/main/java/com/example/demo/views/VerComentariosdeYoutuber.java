@@ -19,10 +19,9 @@ public class VerComentariosdeYoutuber extends VerComentarios {
         this.id = Integer.toString(idvideo);
 
         removeAll();
-        // Crear botón "Comentar"
+
         Button comentarButton = new Button("Comentar", event -> comentar());
 
-        // Estilo del botón
         comentarButton.getStyle()
                 .set("background-color", "#28a745") // verde
                 .set("color", "white")
@@ -30,16 +29,14 @@ public class VerComentariosdeYoutuber extends VerComentarios {
                 .set("padding", "10px 20px")
                 .set("font-weight", "bold");
 
-        // Layout para centrar el botón
         HorizontalLayout centrarLayout = new HorizontalLayout(comentarButton);
         centrarLayout.setJustifyContentMode(JustifyContentMode.CENTER);
         centrarLayout.setWidthFull();
 
-        // Agregar botón a la vista
         add(centrarLayout);
 
         if (comentarios.isEmpty()) {
-            // Manejar el caso de no comentarios
+
             Div noComments = new Div();
             noComments.setText("No hay comentarios disponibles.");
             add(noComments);
@@ -50,8 +47,6 @@ public class VerComentariosdeYoutuber extends VerComentarios {
             }
         }
     }
-
-    /* El id es necesario para poder comentar el video */
 
     public void comentar() {
         UI.getCurrent().navigate(Comentar.class, id);

@@ -4,7 +4,7 @@ import com.example.demo.domain.Registrado;
 
 public interface iNoLogueado extends iInicio {
 
-    Registrado Login(String username, String password);
+    Registrado Login(String login, String password);
 
     void registrar(String login, String password, String avatarUrl, String fondoUrl);
 }

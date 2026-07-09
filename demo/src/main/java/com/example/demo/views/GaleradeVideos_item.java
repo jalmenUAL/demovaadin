@@ -19,20 +19,16 @@ public class GaleradeVideos_item extends VerticalLayout {
 
     Video video;
 
-    /* Tiene como parámetro el video */
-
     public GaleradeVideos_item(Video video) {
         this.video = video;
 
-        // Título del video
         Span tituloSpan = new Span(video.getTitulo());
         tituloSpan.getStyle().set("font-weight", "bold").set("font-size", "1.2em");
         int numMeGustas = video.getLe_gusta_a().size();
         int numComentarios = video.getTiene_comentarios().size();
-        // Avatar del propietario
+
         Avatar propietarioAvatar = new Avatar(video.getEs_de().getLogin(), video.getEs_de().getFotoPerfil());
 
-        // Layout horizontal para avatar y título
         HorizontalLayout infoLayout = new HorizontalLayout(propietarioAvatar, tituloSpan);
         infoLayout.setAlignItems(Alignment.CENTER);
         infoLayout.setSpacing(true);
@@ -53,12 +49,10 @@ public class GaleradeVideos_item extends VerticalLayout {
         }
         String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
 
-        // Imagen estática del video (thumbnail)
         Image thumbnail = new Image(thumbnailUrl, "Thumbnail del video");
         thumbnail.setWidth("100%");
         thumbnail.getStyle().set("border-radius", "8px").set("cursor", "pointer");
 
-        // Al hacer clic en la imagen, navegar al video
         thumbnail.addClickListener(e -> VerVideo());
 
         add(thumbnail);

@@ -34,7 +34,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Integer>
     Video video;
     iInicio iInicio;
 
-    /* Tiene como parámetro el interfaz iInicio y el id del video en la url */
+    
 
     public VerVideo(iInicio iInicio) {
         this.iInicio = iInicio;
@@ -43,7 +43,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Integer>
 
     public void setParameter(BeforeEvent event, Integer parameter) {
 
-        removeAll(); // 🔹 Evita que se acumulen los elementos
+        removeAll();  
         video_y_relacionados.removeAll();
         frame_y_comentarios.removeAll();
         relacionados.removeAll();
@@ -54,7 +54,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Integer>
         video_y_relacionados.add(frame_y_comentarios);
         video_y_relacionados.getStyle().set("width", "100%");
 
-        // === CABECERA DEL VIDEO ===
+        
         Image avatar = new Image(video.getEs_de().getFotoPerfil(), "Avatar");
         avatar.setWidth("50px");
         avatar.setHeight("50px");
@@ -83,7 +83,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Integer>
 
         frame_y_comentarios.add(cabeceraCompleta);
 
-        // === VIDEO ===
+        
         String videoId = video.getUrl().substring(video.getUrl().lastIndexOf("/") + 1);
         if (videoId.contains("?")) {
             videoId = videoId.substring(0, videoId.indexOf("?"));
@@ -119,7 +119,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Integer>
 
     public void Videosrelacionados() {
         relacionados.removeAll();
-        List<Video> videosrelacionados = iInicio.getVideosRelacionados(video);
+        List<Video> videosrelacionados = iInicio.getVideosRelacionados(video.getId());
         _videosrelacionados = new Videosrelacionados(videosrelacionados);
         relacionados.add(_videosrelacionados);
     }

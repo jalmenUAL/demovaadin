@@ -5,7 +5,6 @@ import java.io.InputStream;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import com.example.demo.domain.Video;
 import com.example.demo.service.iYoutuber;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
@@ -39,25 +38,25 @@ public class Configuracion extends VerticalLayout {
 
     public Configuracion(iYoutuber iYoutuber) {
         _iYoutuber = iYoutuber;
-        // Estilo general centrado
+       
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         setSpacing(true);
 
-        // Cabecera
+         
         H1 heading = new H1("Configuración");
         heading.getStyle().set("color", "#2c3e50");
         add(heading);
 
-        // Layout para login y password
+         
         VerticalLayout datosLayout = new VerticalLayout();
         datosLayout.setAlignItems(Alignment.CENTER);
 
         password = new TextField("New Password");
         datosLayout.add(password);
 
-        // Layout para avatar
+         
         VerticalLayout avatarLayout = new VerticalLayout();
         avatarLayout.setAlignItems(Alignment.CENTER);
         Span avatarLabel = new Span("Avatar");
@@ -89,20 +88,20 @@ public class Configuracion extends VerticalLayout {
         });
         fondoLayout.add(fondoLabel, upload2, imagenDeFondo);
 
-        // Layout horizontal para las imágenes
+        
         HorizontalLayout imagenesLayout = new HorizontalLayout(avatarLayout, fondoLayout);
         imagenesLayout.setAlignItems(Alignment.START);
         imagenesLayout.setSpacing(true);
 
-        // Botón actualizar estilizado con icono
+        
         Button actualizar = new Button("Actualizar", new Icon(VaadinIcon.REFRESH));
         actualizar.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         actualizar.addClickListener(event -> {
 
-            actualizar(_iYoutuber);
+            actualizar();
         });
 
-        // Layout final
+       
         VerticalLayout contenido = new VerticalLayout(datosLayout, imagenesLayout, actualizar);
         contenido.setAlignItems(Alignment.CENTER);
         contenido.setSpacing(true);
@@ -111,7 +110,7 @@ public class Configuracion extends VerticalLayout {
         add(contenido);
     }
 
-    private void actualizar(iYoutuber iYoutuber) {
+    private void actualizar() {
         
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
@@ -120,8 +119,8 @@ public class Configuracion extends VerticalLayout {
 
         com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
 
-        iYoutuber.actualizarConfiguracion(usuario,password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
-        // Vuelve a la página anterior
+        _iYoutuber.actualizarConfiguracion(usuario.getLogin(), password.getValue(), avatar.getSrc(), imagenDeFondo.getSrc());
+        
         UI.getCurrent().getPage().getHistory().back();
 
     }

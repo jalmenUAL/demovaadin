@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.util.Set;
 import java.util.Vector;
 
 import org.springframework.stereotype.Service;
@@ -9,8 +8,6 @@ import com.example.demo.domain.Comentario;
 import com.example.demo.domain.RepositorioComentario;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
-
-import jakarta.transaction.Transactional;
 
 @Service
 
@@ -25,28 +22,18 @@ public class BD_Comentarios {
 
     }
 
-    public void publicarComentario(Youtuber usuario, Video video, String value) {
+    public void publicarComentario(Youtuber usuario, Video video, String contenido) {
         Comentario c = new Comentario();
         c.setEscrito_por(usuario);
-        c.setTexto(value);
+        c.setTexto(contenido);
         c.setSobre(video);
         repository.save(c);
 
     }
 
-    public void eliminarComentario(Comentario comentario) {
-        repository.delete(comentario);
-    }
+    public void eliminarComentario(Integer idComentario) {
+        repository.deleteById(idComentario);
 
-@Transactional
-    public void borrarComentariosDeVideo(Video video) {
-        // Obtener todos los comentarios del video
-        Set<Comentario> comentarios = video.getTiene_comentarios();
-
-        // Eliminar cada comentario
-        for (Comentario comentario : comentarios) {
-            repository.delete(comentario);
-        }
     }
 
 }

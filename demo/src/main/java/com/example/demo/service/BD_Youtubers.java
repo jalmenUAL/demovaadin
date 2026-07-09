@@ -3,14 +3,10 @@ package com.example.demo.service;
 import java.util.List;
 import java.util.Vector;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
-import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
 
 @Service
@@ -24,18 +20,17 @@ public class BD_Youtubers {
             PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
-      
 
     }
 
-    public Youtuber autenticar(String username, String rawPassword) {
-        return repository.findById(username)
+    public Youtuber autenticar(String login, String rawPassword) {
+        return repository.findById(login)
                 .filter(youtuber -> passwordEncoder.matches(rawPassword, youtuber.getPassword()))
                 .orElse(null);
     }
 
-    public Youtuber findYoutuberById(String id) {
-        return repository.findById(id)
+    public Youtuber findYoutuberById(String login) {
+        return repository.findById(login)
                 .orElseThrow(() -> new RuntimeException("Youtuber no encontrado"));
     }
 
@@ -50,14 +45,13 @@ public class BD_Youtubers {
         repository.save(nuevoYoutuber);
     }
 
-    public void actualizarConfiguracion(Youtuber usuario,String password, String avatar, String fondo) {
+    public void actualizarConfiguracion(String login, String password, String avatar, String fondo) {
+        Youtuber usuario = findYoutuberById(login);
         usuario.setPassword(passwordEncoder.encode(password));
         usuario.setFotoPerfil(avatar);
         usuario.setBanner(fondo);
         repository.save(usuario);
     }
-
-    
 
     public List<Youtuber> buscarDenunciados() {
         List<Youtuber> denunciados = repository.findAll();
@@ -66,62 +60,43 @@ public class BD_Youtubers {
                 .toList();
     }
 
-    public void seguirUsuario(Youtuber seguidor, Youtuber seguido) {
-        seguido.getSeguido_por().add(seguidor); // Asumiendo que hay un campo seguido_por en Youtuber
-        repository.save(seguido);
+    public void seguirUsuario(String loginSeguidor, String loginSeguido) {
+        Youtuber seguidor = findYoutuberById(loginSeguidor);
+        Youtuber seguido = findYoutuberById(loginSeguido);
+        seguido.getSeguido_por().add(seguidor);
     }
 
-    public void dejardeseguirUsuario(Youtuber seguidor, Youtuber seguido) {
-        seguido.getSeguido_por().remove(seguidor); // Asumiendo que hay un campo seguido_por en Youtuber
-        repository.save(seguido);
+    public void dejardeseguirUsuario(String loginSeguidor, String loginSeguido) {
+        Youtuber seguidor = findYoutuberById(loginSeguidor);
+        Youtuber seguido = findYoutuberById(loginSeguido);
+        seguido.getSeguido_por().remove(seguidor);
+
     }
 
-    public void bloquearUsuario(Youtuber usuario) {
-        usuario.setBloqueado(true); // Asumiendo que hay un campo bloqueado en Youtuber
+    public void bloquearUsuario(String loginYoutuber) {
+        Youtuber usuario = findYoutuberById(loginYoutuber);
+        usuario.setBloqueado(true);
         repository.save(usuario);
     }
 
-    public void desbloquearUsuario(Youtuber usuario) {
-        
-        usuario.setBloqueado(false); // Asumiendo que hay un campo bloqueado en Youtuber
+    public void desbloquearUsuario(String loginYoutuber) {
+        Youtuber usuario = findYoutuberById(loginYoutuber);
+        usuario.setBloqueado(false);
         repository.save(usuario);
     }
 
-    public void denunciarUsuario(Youtuber denunciante, Youtuber denunciado) {
+    public void denunciarUsuario(String loginDenunciante, String loginDenunciado) {
+        Youtuber denunciante = findYoutuberById(loginDenunciante);
+        Youtuber denunciado = findYoutuberById(loginDenunciado);
         denunciante.getDenunciado_por().add(denunciado);
         repository.save(denunciante);
     }
 
-    public void quitardenunciaUsuario(Youtuber denunciante, Youtuber denunciado) {
+    public void quitardenunciaUsuario(String loginDenunciante, String loginDenunciado) {
+        Youtuber denunciante = findYoutuberById(loginDenunciante);
+        Youtuber denunciado = findYoutuberById(loginDenunciado);
         denunciante.getDenunciado_por().remove(denunciado);
         repository.save(denunciante);
     }
-  
 
-        public void likeVideo(Youtuber usuario, Video video) { 
-        usuario.getLe_gusta().add(video);
-        repository.save(usuario); // 💡 guardamos el dueño, no el inverso
-    }
-
-        public void dislikeVideo(Youtuber usuario, Video video) {
-        usuario.getLe_gusta().remove(video);
-        repository.save(usuario);
-    }
-
-    @Transactional   
-    public void borrarMeGustaDeTodosLosUsuarios(Video video) {
-           repository.findAll().forEach(usuario -> {
-                if (usuario.getLe_gusta().contains(video)) {
-                    usuario.getLe_gusta().remove(video);
-                    //repository.save(usuario);
-                }
-            });
-        }
- 
-      
-
-    }
-
- 
- 
- 
+}

@@ -28,20 +28,20 @@ public class Videosrelacionados_item extends VerticalLayout {
         String propietarioFotoUrl = video.getEs_de().getFotoPerfil();
         int numMeGustas = video.getLe_gusta_a().size();
         int numComentarios = video.getTiene_comentarios().size();
-        // Título del video
+        
         Span tituloSpan = new Span(tituloVideo);
         tituloSpan.getStyle().set("font-weight", "bold").set("font-size", "1.2em");
 
-        // Avatar del propietario
+      
         Avatar propietarioAvatar = new Avatar(propietarioNombre, propietarioFotoUrl);
 
-        // Layout horizontal para avatar y título
+        
         HorizontalLayout infoLayout = new HorizontalLayout(propietarioAvatar, tituloSpan);
         infoLayout.setAlignItems(Alignment.CENTER);
         infoLayout.setSpacing(true);
         add(infoLayout);
 
-        // Estadísticas de me gustas y comentarios
+        
         Span meGustasSpan = new Span("👍 " + numMeGustas);
         Span comentariosSpan = new Span("💬 " + numComentarios);
         HorizontalLayout statsLayout = new HorizontalLayout(meGustasSpan, comentariosSpan);
@@ -57,7 +57,7 @@ public class Videosrelacionados_item extends VerticalLayout {
         }
         String thumbnailUrl = "https://img.youtube.com/vi/" + videoId + "/hqdefault.jpg";
 
-        // Imagen del thumbnail en vez de iframe
+        
         Image thumbnail = new Image(thumbnailUrl, "Miniatura del video");
         thumbnail.setWidth("100%");
         thumbnail.getStyle().set("border-radius", "8px").set("cursor", "pointer");

@@ -27,7 +27,7 @@ public class VerVideodeYoutuber extends VerVideo {
     }
 
     public void like() {
-Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
             throw new RuntimeException("Usuario no autenticado");
         }
@@ -35,8 +35,8 @@ Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
         if (likeButton.getText().equals("Me Gusta")) {
             likeButton.setText("Quitar Me Gusta");
-             
-            iYoutuber.likeVideo(usuario, video);
+
+            iYoutuber.likeVideo(usuario.getLogin(), video.getId());
             likeButton.getStyle()
                     .set("background-color", "#0d6efd") // negro
                     .set("color", "white")
@@ -46,7 +46,7 @@ Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         } else {
             likeButton.setText("Me Gusta");
-            iYoutuber.dislikeVideo(usuario, video);
+            iYoutuber.dislikeVideo(usuario.getLogin(), video.getId());
             likeButton.getStyle()
                     .set("background-color", "#0d6efd") // azul
                     .set("color", "white")
@@ -73,10 +73,9 @@ Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
-        
-        /* OJO. He tenido que recargar al usuario! */
+
         usuario = iYoutuber.findYoutuberById(usuario.getLogin());
-         
+
         legusta = usuario.getLe_gusta().stream().anyMatch(v -> ((Video) v).getId() == video.getId());
 
         if (!legusta) {
@@ -97,7 +96,6 @@ Authentication auth = SecurityContextHolder.getContext().getAuthentication();
                     .set("font-weight", "bold");
         }
 
-        // Añadir el botón a donde quieras (por ejemplo, debajo del video)
         frame_y_comentarios.add(likeButton);
 
     }

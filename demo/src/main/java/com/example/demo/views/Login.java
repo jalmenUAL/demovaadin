@@ -1,8 +1,5 @@
 package com.example.demo.views;
 
-
-
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,6 +20,7 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 @Route("login")
 @AnonymousAllowed
 public class Login extends VerticalLayout {
@@ -37,13 +35,11 @@ public class Login extends VerticalLayout {
         loginOverlay.setDescription("Inicia sesión con tus credenciales");
         loginOverlay.setOpened(true);
 
-
         loginOverlay.addLoginListener(event -> {
             try {
                 Authentication auth = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                        event.getUsername(), event.getPassword())
-                );
+                        new UsernamePasswordAuthenticationToken(
+                                event.getUsername(), event.getPassword()));
 
                 // 1) Poner el Authentication en el SecurityContext
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
@@ -51,8 +47,10 @@ public class Login extends VerticalLayout {
                 SecurityContextHolder.setContext(context);
 
                 // 2) Guardarlo en la HttpSession (para siguientes peticiones)
-                HttpServletRequest req = ((VaadinServletRequest) VaadinService.getCurrentRequest()).getHttpServletRequest();
-                HttpServletResponse res = ((VaadinServletResponse) VaadinService.getCurrentResponse()).getHttpServletResponse();
+                HttpServletRequest req = ((VaadinServletRequest) VaadinService.getCurrentRequest())
+                        .getHttpServletRequest();
+                HttpServletResponse res = ((VaadinServletResponse) VaadinService.getCurrentResponse())
+                        .getHttpServletResponse();
                 new HttpSessionSecurityContextRepository().saveContext(context, req, res);
 
                 // 3) Navega según rol o recarga la página para re-evaluar accesos
@@ -61,7 +59,6 @@ public class Login extends VerticalLayout {
                 } else {
                     UI.getCurrent().navigate(Youtuber.class);
                 }
-                 
 
             } catch (AuthenticationException e) {
                 loginOverlay.setError(true);

@@ -17,7 +17,7 @@ public class Videosrelacionados extends VerticalLayout {
     public Videosrelacionados(List<Video> videosrelacionados) {
         setWidthFull();
         setPadding(true);
-        setSpacing(false); // Usamos separadores en lugar de spacing
+        setSpacing(false);  
         H2 titulo = new H2("Videos Relacionados");
         add(titulo);
 

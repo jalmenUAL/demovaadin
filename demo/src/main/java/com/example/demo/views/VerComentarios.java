@@ -14,22 +14,19 @@ import com.vaadin.flow.router.Route;
 public class VerComentarios extends VerticalLayout {
     public VerVideo _verVideo;
     public List<VerComentarios_item> _item = new ArrayList<>();
-
-    /*
-     * Tiene como parámetro el conjunto de comentarios de un video y el id del video
-     */
+ 
 
     public VerComentarios(Set<Comentario> comentarios) {
 
         setWidthFull();
         setPadding(true);
-        setSpacing(false); // Desactivamos spacing porque usaremos separadores
+        setSpacing(false);  
         setAlignItems(Alignment.STRETCH);
 
         List<Comentario> comentarios2 = new ArrayList<>(comentarios);
 
         if (comentarios2.isEmpty()) {
-            // Manejar el caso de no comentarios
+          
             Div noComments = new Div();
             noComments.setText("No hay comentarios disponibles.");
             add(noComments);
@@ -40,7 +37,7 @@ public class VerComentarios extends VerticalLayout {
                 _item.add(comentario);
                 add(comentario);
 
-                // Añadir separador excepto después del último comentario
+             
                 if (i < comentarios.size() - 1) {
                     addSeparator();
                 }

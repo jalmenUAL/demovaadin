@@ -21,17 +21,16 @@ public class VerVideodeAdministrador extends VerVideo {
 
     public void borrar() {
 
-        iAdministrador.borrarVideo(video);
+        iAdministrador.borrarVideo(video.getId());
         UI.getCurrent().getPage().getHistory().back();
 
     }
 
     public void setParameter(BeforeEvent event, Integer parameter) {
         super.setParameter(event, parameter);
-        // Crear botón de borrar
+
         Button borrarButton = new Button("🗑️ Borrar video", event2 -> borrar());
 
-        // Estilo opcional
         borrarButton.getStyle()
                 .set("background-color", "#dc3545") // rojo
                 .set("color", "white")
@@ -39,7 +38,6 @@ public class VerVideodeAdministrador extends VerVideo {
                 .set("padding", "10px 20px")
                 .set("font-weight", "bold");
 
-        // Añadir al layout del video (por ejemplo debajo del iframe)
         frame_y_comentarios.add(borrarButton);
 
     }

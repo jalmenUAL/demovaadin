@@ -2,23 +2,20 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.domain.Comentario;
 import com.example.demo.domain.Video;
-import com.example.demo.domain.Youtuber;
 
 public interface iAdministrador extends iRegistrado {
 
- 
-    void eliminarComentario(Comentario comentario);
+    void eliminarComentario(Integer idComentario);
 
     List<com.example.demo.domain.Youtuber> buscarDenunciados();
 
     List<Video> getAllVideos();
 
-    void borrarVideo(Video video);
+    void borrarVideo(Integer idVideo);
 
-    void bloquearUsuario(Youtuber usuario);
+    void bloquearUsuario(String idYoutuber);
 
-    void desbloquearUsuario(Youtuber usuario);
+    void desbloquearUsuario(String idYoutuber);
 
 }

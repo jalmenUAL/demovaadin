@@ -18,7 +18,7 @@ public class VerComentarios_item extends VerticalLayout {
     public PerfilAjeno _perfilAjeno;
     Comentario comentario;
 
-    /* Muestra el comentario */
+   
 
     public VerComentarios_item(Comentario comentario) {
         this.comentario = comentario;
@@ -28,7 +28,7 @@ public class VerComentarios_item extends VerticalLayout {
         setWidthFull();
         setAlignItems(Alignment.START);
 
-        // Avatar
+        
         Image avatar = new Image(comentario.getEscrito_por().getFotoPerfil(), "Avatar");
         avatar.setWidth("50px");
         avatar.setHeight("50px");
@@ -55,7 +55,7 @@ public class VerComentarios_item extends VerticalLayout {
         add(avatar, nombreUsuario, comentarioLayout);
     }
 
-    /* Dependiendo del tipo de usuario envía a una vista distinta */
+    
     public void PerfilAjeno() {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

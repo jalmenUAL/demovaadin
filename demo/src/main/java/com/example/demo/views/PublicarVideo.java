@@ -22,8 +22,6 @@ public class PublicarVideo extends VerticalLayout {
     TextField introduzcaLaUrl = new TextField("URL del Video");
     TextField introduzcaEltitulo = new TextField("Título del Video");
 
-    /* Accede a la base de datos a través de iYoutuber */
-
     public PublicarVideo(iYoutuber iYoutuber) {
         iYoutuber _iYoutuber = iYoutuber;
         setWidthFull();
@@ -32,12 +30,10 @@ public class PublicarVideo extends VerticalLayout {
         setSpacing(true);
         setPadding(true);
 
-        // Título
         H2 titulo = new H2("📹 Publicar nuevo video");
         titulo.getStyle().set("color", "#2c3e50");
         add(titulo);
 
-        // Campos de texto
         introduzcaEltitulo.setPlaceholder("Ej. Cómo cocinar arroz");
         introduzcaLaUrl.setPlaceholder("Ej. https://youtube.com/...");
         introduzcaEltitulo.setWidth("60%");
@@ -45,7 +41,6 @@ public class PublicarVideo extends VerticalLayout {
 
         add(introduzcaEltitulo, introduzcaLaUrl);
 
-        // Botón
         Button button = new Button("Publicar Video");
         button.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         button.getStyle()
@@ -55,12 +50,12 @@ public class PublicarVideo extends VerticalLayout {
 
         button.addClickListener(e -> {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
-            throw new RuntimeException("Usuario no autenticado");
-        }
-        com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
-            _iYoutuber.publicarVideo(usuario, introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
-           
+            if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+                throw new RuntimeException("Usuario no autenticado");
+            }
+            com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
+            _iYoutuber.publicarVideo(usuario.getLogin(), introduzcaEltitulo.getValue(), introduzcaLaUrl.getValue());
+
             UI.getCurrent().getPage().getHistory().back();
         });
 

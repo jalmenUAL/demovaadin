@@ -22,7 +22,7 @@ public abstract class Registrado extends Inicio {
         super(iRegistrado);
         this._iRegistrado = iRegistrado;
 
-        // Botón de logout
+        
         Button logoutButton = new Button("Cerrar sesión", new Icon(VaadinIcon.SIGN_OUT));
         logoutButton.addThemeVariants(ButtonVariant.LUMO_ERROR); // Estilo rojo
         logoutButton.getStyle()
@@ -58,7 +58,7 @@ public abstract class Registrado extends Inicio {
         VaadinSession.getCurrent().close();
         VaadinSession.getCurrent().setAttribute("Registrado", null);
         getUI().ifPresent(ui -> ui.navigate("NoLogueado"));
-        /* Cierra la sesión */
+       
     }
 
 }

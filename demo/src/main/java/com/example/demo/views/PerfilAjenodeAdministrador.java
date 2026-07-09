@@ -12,23 +12,15 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
 
     iAdministrador iAdministrador;
 
-    /* Accede a la base de datos a través de iAdministrador */
-
     public PerfilAjenodeAdministrador(iAdministrador iAdministrador) {
         super(iAdministrador);
         this.iAdministrador = iAdministrador;
 
-        // Crear botón de bloquear usuario
         btnBloquear = new Button("", e -> Bloquear());
         btnBloquear.addThemeVariants(ButtonVariant.LUMO_ERROR);
         topLayout.add(btnBloquear);
 
     }
-
-    /*
-     * Con el parámetro de la url accede al usuario y comprueba si está boqueado o
-     * no
-     */
 
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
@@ -44,10 +36,10 @@ public class PerfilAjenodeAdministrador extends PerfilAjeno {
     public void Bloquear() {
         if (btnBloquear.getText().equals("Bloquear")) {
             btnBloquear.setText("Quitar Bloqueo");
-            iAdministrador.bloquearUsuario(_usuario);
+            iAdministrador.bloquearUsuario(_usuario.getLogin());
         } else {
             btnBloquear.setText("Bloquear");
-            iAdministrador.desbloquearUsuario(_usuario);
+            iAdministrador.desbloquearUsuario(_usuario.getLogin());
         }
 
     }

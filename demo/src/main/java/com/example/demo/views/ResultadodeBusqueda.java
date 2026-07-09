@@ -10,8 +10,6 @@ import com.vaadin.flow.router.Route;
 public class ResultadodeBusqueda extends GaleradeVideos {
 	public Buscar _buscar;
 
-	/* Tiene como parámetro la lista de resultados */
-
 	public ResultadodeBusqueda(List<Video> resultados) {
 		super(resultados);
 
@@ -19,7 +17,7 @@ public class ResultadodeBusqueda extends GaleradeVideos {
 
 		carrusel.removeAll();
 		if (resultados == null || resultados.isEmpty()) {
-			// Si no hay resultados, mostrar un mensaje
+
 			carrusel.add(new com.vaadin.flow.component.html.Span("No se han encontrado resultados."));
 			return;
 		}

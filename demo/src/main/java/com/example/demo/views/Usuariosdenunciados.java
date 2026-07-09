@@ -14,11 +14,8 @@ public class Usuariosdenunciados extends VerticalLayout {
     public Administrador _administrador;
     public Vector<Usuariosdenunciados_item> _item = new Vector<Usuariosdenunciados_item>();
 
-    /* Tiene como parámetro la lista de usuarios denunciados */
-
     public Usuariosdenunciados(List<com.example.demo.domain.Youtuber> youtubers) {
 
-        // Título
         Span titulo = new Span("Usuarios denunciados");
         titulo.getStyle().set("font-weight", "bold").set("font-size", "1.5em");
         add(titulo);

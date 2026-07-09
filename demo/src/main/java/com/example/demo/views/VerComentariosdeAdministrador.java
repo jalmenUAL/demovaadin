@@ -13,14 +13,14 @@ import com.vaadin.flow.router.Route;
 public class VerComentariosdeAdministrador extends VerComentarios {
     iAdministrador _iAdministrador;
 
-    /* Se añade el iAdministrador porque accede a la base de datos */
+   
 
     public VerComentariosdeAdministrador(iAdministrador iAdministrador, Set<Comentario> comentarios) {
         super(comentarios);
         this._iAdministrador = iAdministrador;
         removeAll();
         if (comentarios.isEmpty()) {
-            // Manejar el caso de no comentarios
+           
             Div noComments = new Div();
             noComments.setText("No hay comentarios disponibles.");
             add(noComments);

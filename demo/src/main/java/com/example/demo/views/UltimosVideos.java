@@ -12,7 +12,7 @@ import com.vaadin.flow.router.Route;
 public class UltimosVideos extends GaleradeVideos {
 	public Inicio _inicio;
 
-	/* Tiene como parámetro la lista de videos */
+	 
 
 	public UltimosVideos(List<Video> videos) {
 		super(videos);
@@ -28,8 +28,7 @@ public class UltimosVideos extends GaleradeVideos {
 			boolean esYoutuber = auth.getAuthorities().stream()
 					.anyMatch(a -> a.getAuthority().equals("ROLE_YOUTUBER"));
 
-			/* Dependiendo del usuario muestra unos items u otros */
-
+		 
 			if (esAdmin) {
 				for (Video video : videos) {
 					UltimosVideos_item item = new UltimosVideosdeAdministrador_item(video);

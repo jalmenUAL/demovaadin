@@ -10,8 +10,6 @@ import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
 
-import jakarta.transaction.Transactional;
-
 @Service
 
 public class BD_Videos {
@@ -20,15 +18,13 @@ public class BD_Videos {
 
     private RepositorioVideo videorepository;
 
-    /* Necesita el repositorio de videos, de youtubers y de comentarios */
-
     public BD_Videos(RepositorioVideo videorepository) {
         this.videorepository = videorepository;
 
     }
 
-    public Video findVideoById(Integer id) {
-        return videorepository.findById(id)
+    public Video findVideoById(Integer idVideo) {
+        return videorepository.findById(idVideo)
                 .orElseThrow(() -> new RuntimeException("Video no encontrado"));
     }
 
@@ -60,14 +56,12 @@ public class BD_Videos {
         return UltimosVideos;
     }
 
-    public List<Video> getVideosRelacionados(Video videob) {
-
+    public List<Video> getVideosRelacionados(Integer idVideo) {
+        Video videob = findVideoById(idVideo);
         List<String> palabras = Arrays.stream(videob.getTitulo().split("\s+"))
                 .map(String::toLowerCase)
                 .toList();
-
         List<Video> busqueda = videorepository.findAll();
-
         return busqueda.stream()
                 // Excluir el propio video
                 .filter(video -> !(video.getId() == videob.getId()))
@@ -79,12 +73,18 @@ public class BD_Videos {
                 .toList();
     }
 
-    /* Los ManyToMany hay que borrarlos manualmente como se hace aquí */
+    public void borrarVideo(Integer idVideo) {
+        videorepository.deleteById(idVideo);
+    }
 
-    @Transactional
+    public void borrarMeGustaDeTodosLosUsuarios(Integer idVideo) {
+        Video video = findVideoById(idVideo);
+        videorepository.findAll().forEach(usuario -> {
+            if (usuario.getLe_gusta_a().contains(video)) {
+                usuario.getLe_gusta_a().remove(video);
 
-    public void borrarVideo(Video video) {
-        videorepository.delete(video);
+            }
+        });
     }
 
 }

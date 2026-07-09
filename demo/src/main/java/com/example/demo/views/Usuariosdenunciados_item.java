@@ -10,7 +10,7 @@ import com.vaadin.flow.router.Route;
 public class Usuariosdenunciados_item extends VerticalLayout {
     public Usuariosdenunciados _usuariosdenunciados;
 
-    /* Muestra el usuario denunciado */
+    
 
     public Usuariosdenunciados_item(com.example.demo.domain.Youtuber youtuber) {
 
@@ -22,7 +22,7 @@ public class Usuariosdenunciados_item extends VerticalLayout {
         avatar.setHeight("50px");
         avatar.getStyle().set("border-radius", "50%");
         avatar.addClickListener(event -> {
-            // Navegar al perfil del usuario al hacer clic en el avatar
+            
             getUI().ifPresent(ui -> ui.navigate("PerfilAjenodeAdministrador/" + youtuber.getLogin()));
         });
 

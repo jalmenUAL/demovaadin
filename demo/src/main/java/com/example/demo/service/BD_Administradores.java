@@ -16,10 +16,6 @@ public class BD_Administradores {
     private RepositorioAdministrador repository;
     private PasswordEncoder passwordEncoder;
 
-    /*
-     * Le hace falta acceder al repositorio de administradores y al password encoder
-     */
-
     public BD_Administradores(RepositorioAdministrador administradoresRepository,
             PasswordEncoder passwordEncoder) {
 
@@ -27,9 +23,9 @@ public class BD_Administradores {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public Administrador autenticar(String username, String rawPassword) {
+    public Administrador autenticar(String login, String rawPassword) {
         System.out.println(rawPassword);
-        return repository.findById(username)
+        return repository.findById(login)
                 .filter(admin -> passwordEncoder.matches(rawPassword, admin.getPassword()))
                 .orElse(null);
 

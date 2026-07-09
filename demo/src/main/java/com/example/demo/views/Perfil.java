@@ -18,15 +18,12 @@ import com.vaadin.flow.router.Route;
 @Route("Perfil")
 public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
- 
     public Videosgustados _videosgustados;
     public Videospublicados _videospublicados;
 
     HorizontalLayout topLayout = new HorizontalLayout();
     com.example.demo.domain.Youtuber _usuario;
     iInicio _iInicio;
-
-    /* El usuario se obtiene a través de la url */
 
     public Perfil(iInicio iInicio) {
         this._iInicio = iInicio;
@@ -36,21 +33,16 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
         setAlignItems(Alignment.CENTER);
     }
 
-    /* Recepción del parámetro de la url */
     @Override
     public void setParameter(BeforeEvent event, String parameter) {
         _usuario = _iInicio.findYoutuberById(parameter);
 
-        /* Muestra los datos del usuario */
-        // Imagen de fondo (cabecera)
         if (_usuario.getBanner() == null || _usuario.getBanner().isEmpty()) {
             _usuario.setBanner(
                     "https://www.fcbarcelona.com/photo-resources/2025/07/21/ff83df3a-ba37-4603-a4b6-c09cc4f94470/16x9_ESCUDO_GENERIC_2025.jpg?width=1200&height=750"); // URL
                                                                                                                                                                        // de
                                                                                                                                                                        // una
-                                                                                                                                                                       // imagen
-            // por
-            // defecto
+            // imagen de fondo por defecto
         }
         Image imagenDeFondo = new Image(_usuario.getBanner(), "Imagen de fondo");
         imagenDeFondo.setWidth("100%");
@@ -59,18 +51,16 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
 
         add(imagenDeFondo);
 
-        /* Si el usuario está bloqueado lo muestra en la parta superior */
         if (_usuario.getBloqueado()) {
             H2 Bloqueado = new H2("Este Usuario ha sido Bloqueado");
             Bloqueado.getStyle().set("color", "red");
             add(Bloqueado);
         }
 
-        /* Nombre y avatar */
         String nombreUsuario = _usuario.getLogin();
         String avatarUrl = _usuario.getFotoPerfil();
         if (avatarUrl == null || avatarUrl.isEmpty()) {
-            avatarUrl = "https://via.placeholder.com/100"; // URL de un avatar por defecto
+            avatarUrl = "https://via.placeholder.com/100";
         }
         // Título debajo del fondo
         H2 titulo = new H2("Perfil del Youtuber");
@@ -87,10 +77,6 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
                 .set("font-size", "1.3em")
                 .set("margin-left", "10px");
 
-        // Botón para ver youtubers seguidos
-
-        /* Youtubers seguidos está en una vista separada */
-
         Button btnYoutubersSeguidos = new Button("Ver Youtubers Seguidos", new Icon(VaadinIcon.USER_HEART));
         btnYoutubersSeguidos.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
         btnYoutubersSeguidos.getStyle()
@@ -98,12 +84,9 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
                 .set("font-weight", "bold")
                 .set("padding", "8px 16px");
 
-        /* Youtuber seguidos también tiene un párametro url */
         btnYoutubersSeguidos.addClickListener(e -> {
             getUI().ifPresent(ui -> ui.navigate(Youtubersseguidos.class, _usuario.getLogin()));
         });
-
-        // Layout superior con avatar, nombre y botón
 
         topLayout.add(avatar, nombreSpan, btnYoutubersSeguidos);
         topLayout.setAlignItems(Alignment.CENTER);
@@ -111,12 +94,8 @@ public class Perfil extends VerticalLayout implements HasUrlParameter<String> {
         topLayout.setPadding(true);
         add(topLayout);
 
-        // Inicializar vistas de videos
-
         _videosgustados = new Videosgustados(_usuario.getLe_gusta());
         _videospublicados = new Videospublicados(_usuario.getHa_publicado());
-
-        // Layouts para videos publicados y gustados
 
         VerticalLayout publicadosLayout = new VerticalLayout();
         publicadosLayout.setWidth("45%");

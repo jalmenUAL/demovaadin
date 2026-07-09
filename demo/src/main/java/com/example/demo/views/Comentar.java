@@ -24,16 +24,12 @@ public class Comentar extends VerticalLayout implements HasUrlParameter<String> 
     public iYoutuber _iYoutuber;
     public int id;
 
-    /*
-     * Accede a la base de datos con iYoutuber. Tiene como parámetro el id del video
-     */
-
     public Comentar(iYoutuber iYoutuber) {
         this._iYoutuber = iYoutuber;
         setWidthFull();
         setPadding(true);
         setSpacing(true);
-        setAlignItems(Alignment.STRETCH); // Para que el TextField y botón ocupen todo el ancho
+        setAlignItems(Alignment.STRETCH);
 
         campoComentario = new TextField("Escribe un comentario");
         campoComentario.setWidthFull();
@@ -45,7 +41,7 @@ public class Comentar extends VerticalLayout implements HasUrlParameter<String> 
 
         btnPublicar.addClickListener(e -> {
             publicar_comentario();
-            campoComentario.clear(); // Limpia el campo tras publicar
+            campoComentario.clear();
         });
 
         add(campoComentario, btnPublicar);
@@ -57,7 +53,7 @@ public class Comentar extends VerticalLayout implements HasUrlParameter<String> 
     }
 
     private void publicar_comentario() {
-        Video video = _iYoutuber.findVideoById(id); // Asegúrate de que el video
+        Video video = _iYoutuber.findVideoById(id);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
             throw new RuntimeException("Usuario no autenticado");
@@ -65,8 +61,8 @@ public class Comentar extends VerticalLayout implements HasUrlParameter<String> 
 
         com.example.demo.domain.Youtuber usuario = (com.example.demo.domain.Youtuber) auth.getPrincipal();
 
-        _iYoutuber.publicarComentario(usuario, video, campoComentario.getValue());
-        // Vuelve a la página anterior
+        _iYoutuber.publicarComentario(usuario.getLogin(), video, campoComentario.getValue());
+
         UI.getCurrent().getPage().getHistory().back();
     }
 

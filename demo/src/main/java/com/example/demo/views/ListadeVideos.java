@@ -5,16 +5,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.Vector;
 
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.example.demo.domain.Video;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
 
 @Route("ListadeVideos")
 public class ListadeVideos extends VerticalLayout {
     public Vector<ListadeVideos_item> _item = new Vector<ListadeVideos_item>();
-
-    /* Tiene como parámetro un conjunto de videos */
 
     public ListadeVideos(Set<Video> videos) {
         int columnas = 2;

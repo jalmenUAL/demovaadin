@@ -11,10 +11,6 @@ import com.vaadin.flow.component.page.AppShellConfigurator;
 @SpringBootApplication
 @Theme("my-theme")
 
-
-
-
-
 public class DemoApplication implements AppShellConfigurator {
 
     public static void main(String[] args) {

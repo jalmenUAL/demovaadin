@@ -34,30 +34,24 @@ public class Registrar extends VerticalLayout {
     private Image imagenDeFondo;
     public iNoLogueado _iNoLogueado;
 
-    /* Accede a la base de datos a través de INologueado */
-
     public Registrar(iNoLogueado iNoLogueado) {
         _iNoLogueado = iNoLogueado;
 
-        // Estilo general centrado
         setSizeFull();
         setAlignItems(Alignment.CENTER);
         setJustifyContentMode(JustifyContentMode.CENTER);
         setSpacing(true);
 
-        // Cabecera estilizada
         H1 cabecera = new H1("Crear nueva cuenta");
         cabecera.getStyle().set("color", "#2c3e50");
         add(cabecera);
 
-        // Layout para login y password
         VerticalLayout datosLayout = new VerticalLayout();
         datosLayout.setAlignItems(Alignment.CENTER);
         login = new EmailField("Login");
         password = new TextField("Password");
         datosLayout.add(login, password);
 
-        // Layout para avatar
         VerticalLayout avatarLayout = new VerticalLayout();
         avatarLayout.setAlignItems(Alignment.CENTER);
         Label avatarLabel = new Label("Avatar");
@@ -73,7 +67,6 @@ public class Registrar extends VerticalLayout {
         });
         avatarLayout.add(avatarLabel, upload, avatar);
 
-        // Layout para imagen de fondo
         VerticalLayout fondoLayout = new VerticalLayout();
         fondoLayout.setAlignItems(Alignment.CENTER);
         Label fondoLabel = new Label("Imagen de fondo");
@@ -89,19 +82,16 @@ public class Registrar extends VerticalLayout {
         });
         fondoLayout.add(fondoLabel, upload2, imagenDeFondo);
 
-        // Layout horizontal para imágenes
         HorizontalLayout imagenesLayout = new HorizontalLayout(avatarLayout, fondoLayout);
         imagenesLayout.setAlignItems(Alignment.START);
         imagenesLayout.setSpacing(true);
 
-        // Botón de registrar con icono y color
         Button registrar = new Button("Registrar", new Icon(VaadinIcon.USER_CHECK));
         registrar.addThemeVariants(ButtonVariant.LUMO_PRIMARY, ButtonVariant.LUMO_SUCCESS);
         registrar.addClickListener(event -> {
             registrar();
         });
 
-        // Layout final agrupado
         VerticalLayout contenido = new VerticalLayout(datosLayout, imagenesLayout, registrar);
         contenido.setAlignItems(Alignment.CENTER);
         contenido.setSpacing(true);

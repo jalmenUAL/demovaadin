@@ -7,26 +7,24 @@ import com.example.demo.domain.Youtuber;
 
 public interface iYoutuber extends iRegistrado {
 
-    Video findVideoById(int id);
+    Video findVideoById(int idVideo);
 
-    void publicarVideo(com.example.demo.domain.Youtuber usuario, String titulo, String url);
+    void publicarVideo(String loginYoutuber, String titulo, String url);
 
-    void publicarComentario(com.example.demo.domain.Youtuber usuario, Video video, String value);
+    void publicarComentario(String loginYoutuber, Video video, String value);
 
-    void actualizarConfiguracion(com.example.demo.domain.Youtuber usuario,String password, String avatar, String imagenFondo);
+    void actualizarConfiguracion(String loginYoutuber, String password, String avatar, String imagenFondo);
 
-    void seguirUsuario(Youtuber seguidor, Youtuber seguido);
+    void seguirUsuario(String loginSeguidor, String loginSeguido);
 
-    void dejardeseguirUsuario(Youtuber seguidor, Youtuber seguido);
+    void dejardeseguirUsuario(String loginSeguidor, String loginSeguido);
 
-    void likeVideo(Youtuber usuario, Video video);
+    void likeVideo(String loginYoutuber, Integer idVideo);
 
-    void dislikeVideo(Youtuber usuario, Video video);
+    void dislikeVideo(String loginYoutuber, Integer idVideo);
 
-    void denunciarUsuario(Youtuber denunciante, Youtuber denunciado);
+    void denunciarUsuario(String loginDenunciante, String loginDenunciado);
 
-    void quitardenunciaUsuario(Youtuber denunciante, Youtuber denunciado);
-
-    
+    void quitardenunciaUsuario(String loginDenunciante, String loginDenunciado);
 
 }

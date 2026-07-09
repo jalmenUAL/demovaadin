@@ -18,7 +18,6 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public BD_Youtubers _youtubers;
     public BD_Administradores _administradores;
 
-    /* Imprescindible pasar las BDs a BD Principal */
     public BDPrincipal(BD_Videos videos, BD_Comentarios comentarios, BD_Youtubers youtubers,
             BD_Administradores administradores) {
         this._youtubers = youtubers;
@@ -28,12 +27,11 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-     
-    public Registrado Login(String username, String password) {
-        if (_administradores.autenticar(username, password) != null) {
-            return _administradores.autenticar(username, password);
-        } else if (_youtubers.autenticar(username, password) != null) {
-            return _youtubers.autenticar(username, password);
+    public Registrado Login(String login, String password) {
+        if (_administradores.autenticar(login, password) != null) {
+            return _administradores.autenticar(login, password);
+        } else if (_youtubers.autenticar(login, password) != null) {
+            return _youtubers.autenticar(login, password);
         }
         return null;
     }
@@ -44,13 +42,15 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public void publicarVideo(Youtuber usuario, String titulo, String url) {
+    public void publicarVideo(String login, String titulo, String url) {
+        Youtuber usuario = _youtubers.findYoutuberById(login);
         _videos.publicarVideo(usuario, titulo, url);
     }
 
     @Override
-    public void publicarComentario(Youtuber usuario, Video video, String value) {
-        _comentarios.publicarComentario(usuario, video, value);
+    public void publicarComentario(String login, Video video, String contenido) {
+        Youtuber usuario = _youtubers.findYoutuberById(login);
+        _comentarios.publicarComentario(usuario, video, contenido);
     }
 
     @Override
@@ -59,18 +59,18 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public void actualizarConfiguracion(Youtuber usuario, String password, String avatar, String imagenFondo) {
-        _youtubers.actualizarConfiguracion(usuario, password, avatar, imagenFondo);
+    public void actualizarConfiguracion(String login, String password, String avatar, String imagenFondo) {
+        _youtubers.actualizarConfiguracion(login, password, avatar, imagenFondo);
     }
 
     @Override
-    public Youtuber findYoutuberById(String username) {
-        return _youtubers.findYoutuberById(username);
+    public Youtuber findYoutuberById(String login) {
+        return _youtubers.findYoutuberById(login);
     }
 
     @Override
-    public Video findVideoById(Integer parameter) {
-        return _videos.findVideoById(parameter);
+    public Video findVideoById(Integer idVideo) {
+        return _videos.findVideoById(idVideo);
     }
 
     @Override
@@ -82,25 +82,27 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     public List<Video> getUltimosVideos() {
         return _videos.getUltimosVideos();
     }
- 
 
     @Override
-    public List<Video> getVideosRelacionados(Video videob) {
-        return _videos.getVideosRelacionados(videob);
+    public List<Video> getVideosRelacionados(Integer idVideo) {
+        return _videos.getVideosRelacionados(idVideo);
     }
 
     @Override
     @Transactional
-    public void borrarVideo(Video video) {
-        Video managed = _videos.findVideoById(video.getId());
-        _youtubers.borrarMeGustaDeTodosLosUsuarios(managed);
-        _comentarios.borrarComentariosDeVideo(managed);
-        _videos.borrarVideo(managed);
+    public void borrarVideo(Integer idVideo) {
+        Video video = _videos.findVideoById(idVideo);
+        _videos.borrarMeGustaDeTodosLosUsuarios(idVideo);
+        for (Object comentario : video.getTiene_comentarios()) {
+            _comentarios.eliminarComentario(((Comentario) comentario).getId());
+        }
+
+        _videos.borrarVideo(idVideo);
     }
 
     @Override
-    public void eliminarComentario(Comentario comentario) {
-        _comentarios.eliminarComentario(comentario);
+    public void eliminarComentario(Integer idComentario) {
+        _comentarios.eliminarComentario(idComentario);
     }
 
     @Override
@@ -109,48 +111,52 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
-    public void denunciarUsuario(Youtuber denunciante, Youtuber denunciado) {
-        _youtubers.denunciarUsuario(denunciante, denunciado);
+    public void denunciarUsuario(String loginDenunciante, String loginDenunciado) {
+        _youtubers.denunciarUsuario(loginDenunciante, loginDenunciado);
     }
 
     @Override
-    public void quitardenunciaUsuario(Youtuber denunciante, Youtuber denunciado) {
-        _youtubers.quitardenunciaUsuario(denunciante, denunciado);
+    public void quitardenunciaUsuario(String loginDenunciante, String loginDenunciado) {
+        _youtubers.quitardenunciaUsuario(loginDenunciante, loginDenunciado);
     }
 
     @Override
-    public void seguirUsuario(Youtuber seguidor, Youtuber seguido) {
-        _youtubers.seguirUsuario(seguidor, seguido);
+    public void seguirUsuario(String loginSeguidor, String loginSeguido) {
+        _youtubers.seguirUsuario(loginSeguidor, loginSeguido);
     }
 
     @Override
-    public void dejardeseguirUsuario(Youtuber seguidor, Youtuber seguido) {
-        _youtubers.dejardeseguirUsuario(seguidor, seguido);
+    public void dejardeseguirUsuario(String loginSeguidor, String loginSeguido) {
+        _youtubers.dejardeseguirUsuario(loginSeguidor, loginSeguido);
     }
 
     @Override
-    public void likeVideo(Youtuber usuario, Video video) {
-        _youtubers.likeVideo(usuario, video);
+    public void likeVideo(String loginYoutuber, Integer idVideo) {
+        Youtuber usuario = _youtubers.findYoutuberById(loginYoutuber);
+        Video video = _videos.findVideoById(idVideo);
+        usuario.getLe_gusta().add(video);
     }
 
     @Override
-    public void dislikeVideo(Youtuber usuario, Video video) {
-        _youtubers.dislikeVideo(usuario, video);
+    public void dislikeVideo(String loginYoutuber, Integer idVideo) {
+        Youtuber usuario = _youtubers.findYoutuberById(loginYoutuber);
+        Video video = _videos.findVideoById(idVideo);
+        usuario.getLe_gusta().remove(video);
     }
 
     @Override
-    public void bloquearUsuario(Youtuber usuario) {
-        _youtubers.bloquearUsuario(usuario);
+    public void bloquearUsuario(String loginYoutuber) {
+        _youtubers.bloquearUsuario(loginYoutuber);
     }
 
     @Override
-    public void desbloquearUsuario(Youtuber usuario) {
-        _youtubers.desbloquearUsuario(usuario);
+    public void desbloquearUsuario(String loginYoutuber) {
+        _youtubers.desbloquearUsuario(loginYoutuber);
     }
 
     @Override
-    public Video findVideoById(int id) {
-        return _videos.findVideoById(id);
+    public Video findVideoById(int idVideo) {
+        return _videos.findVideoById(idVideo);
     }
 
 }
