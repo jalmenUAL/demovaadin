@@ -119,7 +119,7 @@ public class VerVideo extends VerticalLayout implements HasUrlParameter<Integer>
 
     public void Videosrelacionados() {
         relacionados.removeAll();
-        List<Video> videosrelacionados = iInicio.getVideosRelacionados(video.getId());
+        List<Video> videosrelacionados = iInicio.getVideosRelacionados(video);
         _videosrelacionados = new Videosrelacionados(videosrelacionados);
         relacionados.add(_videosrelacionados);
     }

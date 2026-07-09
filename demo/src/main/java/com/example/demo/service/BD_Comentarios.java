@@ -10,6 +10,8 @@ import com.example.demo.domain.RepositorioComentario;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
 
+import jakarta.transaction.Transactional;
+
 @Service
 
 public class BD_Comentarios {
@@ -36,6 +38,7 @@ public class BD_Comentarios {
         repository.delete(comentario);
     }
 
+@Transactional
     public void borrarComentariosDeVideo(Video video) {
         // Obtener todos los comentarios del video
         Set<Comentario> comentarios = video.getTiene_comentarios();

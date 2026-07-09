@@ -6,6 +6,7 @@ import java.util.Vector;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.RepositorioVideo;
 import com.example.demo.domain.RepositorioYoutuber;
@@ -18,13 +19,12 @@ public class BD_Youtubers {
     public Vector<Youtuber> _youtubers = new Vector<Youtuber>();
     final RepositorioYoutuber repository;
     private PasswordEncoder passwordEncoder;
-    private RepositorioVideo respositoryvideo;
 
-    public BD_Youtubers(RepositorioYoutuber repository, RepositorioVideo repositoryvideo,
+    public BD_Youtubers(RepositorioYoutuber repository,
             PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
-        this.respositoryvideo = repositoryvideo;
+      
 
     }
 
@@ -108,11 +108,12 @@ public class BD_Youtubers {
         repository.save(usuario);
     }
 
-        public void borrarMeGustaDeTodosLosUsuarios(Video video) {
+    @Transactional   
+    public void borrarMeGustaDeTodosLosUsuarios(Video video) {
            repository.findAll().forEach(usuario -> {
                 if (usuario.getLe_gusta().contains(video)) {
                     usuario.getLe_gusta().remove(video);
-                    repository.save(usuario);
+                    //repository.save(usuario);
                 }
             });
         }

@@ -9,6 +9,8 @@ import com.example.demo.domain.Registrado;
 import com.example.demo.domain.Video;
 import com.example.demo.domain.Youtuber;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iRegistrado, iInicio {
     public BD_Videos _videos;
@@ -26,6 +28,7 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
+     
     public Registrado Login(String username, String password) {
         if (_administradores.autenticar(username, password) != null) {
             return _administradores.autenticar(username, password);
@@ -87,10 +90,12 @@ public class BDPrincipal implements iNoLogueado, iYoutuber, iAdministrador, iReg
     }
 
     @Override
+    @Transactional
     public void borrarVideo(Video video) {
-        _youtubers.borrarMeGustaDeTodosLosUsuarios(video);
-        _comentarios.borrarComentariosDeVideo(video);
-        _videos.borrarVideo(video);
+        Video managed = _videos.findVideoById(video.getId());
+        _youtubers.borrarMeGustaDeTodosLosUsuarios(managed);
+        _comentarios.borrarComentariosDeVideo(managed);
+        _videos.borrarVideo(managed);
     }
 
     @Override
